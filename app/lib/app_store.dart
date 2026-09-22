@@ -24,6 +24,13 @@ class ReceiptWarning {
   final String message;
 }
 
+class _StoredState {
+  const _StoredState(this.rows, this.conflicts);
+
+  final List<AppRow> rows;
+  final List<SyncConflictGroup> conflicts;
+}
+
 class AppStore extends ChangeNotifier {
   AppStore(this.cloud);
 
@@ -32,6 +39,7 @@ class AppStore extends ChangeNotifier {
   final CloudService cloud;
   final Random _random = Random.secure();
   List<AppRow> _rows = [];
+  List<SyncConflictGroup> _conflicts = [];
 
   bool loading = true;
   bool saving = false;
@@ -41,6 +49,7 @@ class AppStore extends ChangeNotifier {
   ShoppingFilter filter = ShoppingFilter.all;
 
   List<AppRow> get rows => List.unmodifiable(_rows);
+  List<SyncConflictGroup> get conflicts => List.unmodifiable(_conflicts);
   List<AppRow> get shoppingItems =>
       _rows.where((row) => !row.deleted && !row.isPurchase).toList();
   List<AppRow> get visibleShoppingItems => shoppingItems.where((row) {
@@ -75,15 +84,16 @@ class AppStore extends ChangeNotifier {
     loading = true;
     error = '';
     _rows = [];
+    _conflicts = [];
     notifyListeners();
     await _loadCurrentStorage();
   }
 
   Future<bool> hasGuestData() async {
     final prefs = await SharedPreferences.getInstance();
-    return _decodeRows(
+    return _decodeState(
       prefs.getString(_guestStorageKey) ?? prefs.getString(_legacyStorageKey),
-    ).any((row) => !row.deleted);
+    ).rows.any((row) => !row.deleted);
   }
 
   Future<void> importGuestData() async {
@@ -92,15 +102,21 @@ class AppStore extends ChangeNotifier {
       throw const FormatException('계정에 이미 기록이 있어 자동으로 합치지 않습니다.');
     }
     final prefs = await SharedPreferences.getInstance();
-    final guest = _decodeRows(
+    final guest = _decodeState(
       prefs.getString(_guestStorageKey) ?? prefs.getString(_legacyStorageKey),
-    );
+    ).rows;
     if (guest.where((row) => !row.deleted).isEmpty) {
       throw const FormatException('가져올 기기 기록이 없습니다.');
     }
     final revision = _revision();
     await _commit(
-      guest.map((row) => row.copyWith(revision: revision)).toList(),
+      guest
+          .map(
+            (row) => row
+                .copyWith(revision: revision)
+                .withSync(pending: true, baseRevision: null, group: revision),
+          )
+          .toList(),
     );
   }
 
@@ -110,7 +126,9 @@ class AppStore extends ChangeNotifier {
       final raw =
           prefs.getString(_storageKey) ??
           (cloud.user == null ? prefs.getString(_legacyStorageKey) : null);
-      _rows = _decodeRows(raw);
+      final state = _decodeState(raw);
+      _rows = state.rows;
+      _conflicts = state.conflicts;
     } catch (failure) {
       error = failure.toString().replaceFirst('FormatException: ', '');
     } finally {
@@ -119,19 +137,27 @@ class AppStore extends ChangeNotifier {
     }
   }
 
-  List<AppRow> _decodeRows(String? raw) {
-    if (raw == null) return [];
+  _StoredState _decodeState(String? raw) {
+    if (raw == null) return const _StoredState([], []);
     final decoded = jsonDecode(raw);
     if (decoded is! Map ||
         decoded['version'] != 4 ||
         decoded['rows'] is! List) {
       throw const FormatException('저장 형식을 확인해주세요.');
     }
-    return (decoded['rows'] as List)
+    final rows = (decoded['rows'] as List)
         .map(
           (value) => AppRow.fromJson(Map<String, Object?>.from(value as Map)),
         )
         .toList();
+    final conflicts = (decoded['conflicts'] as List? ?? [])
+        .map(
+          (value) => SyncConflictGroup.fromJson(
+            Map<String, Object?>.from(value as Map),
+          ),
+        )
+        .toList();
+    return _StoredState(rows, conflicts);
   }
 
   void setFilter(ShoppingFilter value) {
@@ -149,14 +175,15 @@ class AppStore extends ChangeNotifier {
       throw const FormatException('수량은 1~999개로 입력해주세요.');
     }
     final now = DateTime.now().microsecondsSinceEpoch;
+    final revision = _revision();
     final row = AppRow(
       id: '$now-${_random.nextInt(1 << 32).toRadixString(36)}',
       title: title.trim(),
       completed: false,
       quantity: quantity,
       note: note.trim(),
-      revision: _revision(),
-    );
+      revision: revision,
+    ).withSync(pending: true, baseRevision: null, group: revision);
     await _commit([row, ..._rows]);
     filter = ShoppingFilter.all;
   }
@@ -182,7 +209,7 @@ class AppStore extends ChangeNotifier {
           completed: false,
           quantity: line.quantity,
           revision: revision,
-        ),
+        ).withSync(pending: true, baseRevision: null, group: revision),
       );
     }
     await _commit([...added, ..._rows]);
@@ -200,24 +227,18 @@ class AppStore extends ChangeNotifier {
       throw const FormatException('수량은 1~999개로 입력해주세요.');
     }
     await _replace(
-      item.copyWith(
-        title: title.trim(),
-        quantity: quantity,
-        note: note.trim(),
-        revision: _revision(),
-      ),
+      item.copyWith(title: title.trim(), quantity: quantity, note: note.trim()),
     );
   }
 
-  Future<void> toggleItem(AppRow item) => _replace(
-    item.copyWith(completed: !item.completed, revision: _revision()),
-  );
+  Future<void> toggleItem(AppRow item) =>
+      _replace(item.copyWith(completed: !item.completed));
 
   Future<void> deleteItem(AppRow item) =>
-      _replace(item.copyWith(deleted: true, revision: _revision()));
+      _replace(item.copyWith(deleted: true));
 
   Future<void> restoreItem(AppRow item) =>
-      _replace(item.copyWith(deleted: false, revision: _revision()));
+      _replace(item.copyWith(deleted: false));
 
   Future<void> saveReceipt(ReceiptDraft draft) async {
     final store = draft.store.trim();
@@ -289,6 +310,13 @@ class AppStore extends ChangeNotifier {
         throw const FormatException('연결한 장보기 항목이 변경됐습니다. 다시 선택해주세요.');
       }
       final target = targetIndex < 0 ? null : next[targetIndex];
+      if (target != null &&
+          _conflicts.any(
+            (conflict) =>
+                conflict.entries.any((entry) => entry.local.id == target.id),
+          )) {
+        throw const FormatException('연결한 항목의 동기화 충돌을 먼저 해결해주세요.');
+      }
       final purchase = PurchaseData(
         receiptId: draft.id,
         itemId: target?.id ?? '',
@@ -308,10 +336,13 @@ class AppStore extends ChangeNotifier {
       }
       if (target != null) {
         final remaining = (target.quantity ?? 1) - line.quantity;
-        next[targetIndex] = target.copyWith(
-          completed: remaining <= 0,
-          quantity: remaining <= 0 ? target.quantity : remaining,
-          revision: revision,
+        next[targetIndex] = _pendingChange(
+          target,
+          target.copyWith(
+            completed: remaining <= 0,
+            quantity: remaining <= 0 ? target.quantity : remaining,
+          ),
+          revision,
         );
         if (remaining > 0) {
           next.insert(
@@ -323,7 +354,7 @@ class AppStore extends ChangeNotifier {
               quantity: line.quantity,
               note: target.note,
               revision: revision,
-            ),
+            ).withSync(pending: true, baseRevision: null, group: revision),
           );
         }
       }
@@ -335,7 +366,7 @@ class AppStore extends ChangeNotifier {
           completed: true,
           purchase: purchase,
           revision: revision,
-        ),
+        ).withSync(pending: true, baseRevision: null, group: revision),
       );
     }
     await _commit(next);
@@ -386,7 +417,7 @@ class AppStore extends ChangeNotifier {
 
   Future<void> renamePurchase(AppRow row, String title) async {
     _validateTitle(title);
-    await _replace(row.copyWith(title: title.trim(), revision: _revision()));
+    await _replace(row.copyWith(title: title.trim()));
   }
 
   Future<void> updatePurchase(
@@ -410,13 +441,7 @@ class AppStore extends ChangeNotifier {
       share: share,
       spec: spec,
     );
-    await _replace(
-      row.copyWith(
-        title: title.trim(),
-        purchase: purchase,
-        revision: _revision(),
-      ),
-    );
+    await _replace(row.copyWith(title: title.trim(), purchase: purchase));
   }
 
   Future<void> sync() async {
@@ -425,11 +450,20 @@ class AppStore extends ChangeNotifier {
     syncMessage = '동기화 중…';
     notifyListeners();
     try {
-      final synced = await cloud.exchange(_rows);
-      await _writeRows(synced);
-      _rows = synced;
-      await cloud.publishPrices(_rows);
-      syncMessage = '동기화 완료';
+      final result = await cloud.exchange(_rows);
+      final next = <String, AppRow>{for (final row in result.rows) row.id: row};
+      for (final conflict in result.conflicts) {
+        for (final entry in conflict.entries) {
+          next[entry.local.id] = entry.local;
+        }
+      }
+      await _writeState(next.values.toList(), result.conflicts);
+      _rows = next.values.toList();
+      _conflicts = result.conflicts;
+      await cloud.publishPrices(result.rows);
+      syncMessage = result.conflicts.isEmpty
+          ? '동기화 완료'
+          : '동기화 충돌 ${result.conflicts.length}건을 확인해주세요.';
     } catch (failure) {
       syncMessage = CloudService.readableError(failure);
     } finally {
@@ -438,20 +472,78 @@ class AppStore extends ChangeNotifier {
     }
   }
 
+  Future<void> resolveConflict(String group, {required bool useLocal}) async {
+    final conflict = _conflicts
+        .where((item) => item.group == group)
+        .firstOrNull;
+    if (conflict == null) {
+      throw const FormatException('충돌 내용이 바뀌었습니다. 다시 확인해주세요.');
+    }
+    final next = <String, AppRow>{for (final row in _rows) row.id: row};
+    final revision = _revision();
+    for (final entry in conflict.entries) {
+      if (useLocal) {
+        next[entry.local.id] = entry.local
+            .copyWith(revision: revision)
+            .withSync(
+              pending: true,
+              baseRevision: entry.remote?.revision,
+              group: revision,
+            );
+      } else if (entry.remote == null) {
+        next.remove(entry.local.id);
+      } else {
+        next[entry.remote!.id] = entry.remote!.withSync(
+          pending: false,
+          baseRevision: entry.remote!.revision,
+          group: entry.remote!.revision,
+        );
+      }
+    }
+    final remaining = _conflicts.where((item) => item.group != group).toList();
+    await _writeState(next.values.toList(), remaining);
+    _rows = next.values.toList();
+    _conflicts = remaining;
+    syncMessage = useLocal ? '이 기기 변경을 다시 전송할 준비가 됐습니다.' : '서버 변경을 적용했습니다.';
+    notifyListeners();
+  }
+
   Future<void> _replace(AppRow replacement) async {
     final index = _rows.indexWhere((row) => row.id == replacement.id);
     if (index < 0) throw const FormatException('다른 기기에서 삭제된 항목입니다.');
-    final next = [..._rows]..[index] = replacement;
+    if (_conflicts.any(
+      (conflict) =>
+          conflict.entries.any((entry) => entry.local.id == replacement.id),
+    )) {
+      throw const FormatException('동기화 충돌을 먼저 해결해주세요. 양쪽 변경을 보관 중입니다.');
+    }
+    final current = _rows[index];
+    final revision = _revision();
+    final next = [..._rows]
+      ..[index] = _pendingChange(current, replacement, revision);
     await _commit(next);
   }
 
+  AppRow _pendingChange(AppRow current, AppRow replacement, String revision) =>
+      replacement
+          .copyWith(revision: revision)
+          .withSync(
+            pending: true,
+            baseRevision: current.pending
+                ? current.baseRevision
+                : current.revision,
+            group: revision,
+          );
+
   Future<void> _commit(List<AppRow> next) async {
-    if (saving) throw const FormatException('저장 중입니다. 잠시 후 다시 시도해주세요.');
+    if (saving || syncing) {
+      throw const FormatException('저장 또는 동기화 중입니다. 잠시 후 다시 시도해주세요.');
+    }
     saving = true;
     error = '';
     notifyListeners();
     try {
-      await _writeRows(next);
+      await _writeState(next, _conflicts);
       _rows = next;
     } catch (failure) {
       error = failure.toString().replaceFirst('FormatException: ', '');
@@ -462,13 +554,17 @@ class AppStore extends ChangeNotifier {
     }
   }
 
-  Future<void> _writeRows(List<AppRow> rows) async {
+  Future<void> _writeState(
+    List<AppRow> rows,
+    List<SyncConflictGroup> conflicts,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
     final saved = await prefs.setString(
       _storageKey,
       jsonEncode({
         'version': 4,
         'rows': rows.map((row) => row.toJson()).toList(),
+        'conflicts': conflicts.map((conflict) => conflict.toJson()).toList(),
       }),
     );
     if (!saved) throw const FormatException('기기에 저장하지 못했습니다. 다시 시도해주세요.');

@@ -1098,6 +1098,23 @@ class _AccountSheetState extends State<_AccountSheet> {
               ),
             ] else if (user != null) ...[
               _MessageBox(message: '${user.email ?? '이메일 계정'}으로 로그인했습니다.'),
+              if (widget.store.conflicts.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                for (final conflict in widget.store.conflicts) ...[
+                  _SyncConflictCard(
+                    conflict: conflict,
+                    busy: _busy,
+                    onResolve: (useLocal) => _run(() async {
+                      await widget.store.resolveConflict(
+                        conflict.group,
+                        useLocal: useLocal,
+                      );
+                      if (useLocal) await widget.store.sync();
+                    }),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ],
               const SizedBox(height: 12),
               FilledButton.icon(
                 onPressed: _busy ? null : () => _run(widget.store.sync),
@@ -1208,6 +1225,67 @@ class _AccountSheetState extends State<_AccountSheet> {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SyncConflictCard extends StatelessWidget {
+  const _SyncConflictCard({
+    required this.conflict,
+    required this.busy,
+    required this.onResolve,
+  });
+
+  final SyncConflictGroup conflict;
+  final bool busy;
+  final ValueChanged<bool> onResolve;
+
+  @override
+  Widget build(BuildContext context) {
+    String label(AppRow? row) => row == null
+        ? '삭제됨'
+        : '${row.deleted ? '삭제 · ' : ''}${row.title}${row.quantity == null ? '' : ' ${row.quantity}개'}';
+    return Card(
+      color: AppColors.errorSurface,
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              '동기화 충돌',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: AppColors.error,
+              ),
+            ),
+            const SizedBox(height: 8),
+            for (final entry in conflict.entries)
+              Text(
+                '이 기기: ${label(entry.local)}\n서버: ${label(entry.remote)}',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: busy ? null : () => onResolve(false),
+                    child: const Text('서버 변경 사용'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: FilledButton(
+                    onPressed: busy ? null : () => onResolve(true),
+                    child: const Text('이 기기 변경 사용'),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

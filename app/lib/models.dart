@@ -166,6 +166,9 @@ class AppRow {
     this.note = '',
     this.purchase,
     this.deleted = false,
+    this.pending = false,
+    this.baseRevision,
+    this.group = '',
   });
 
   final String id;
@@ -176,6 +179,9 @@ class AppRow {
   final PurchaseData? purchase;
   final bool deleted;
   final String revision;
+  final bool pending;
+  final String? baseRevision;
+  final String group;
 
   bool get isPurchase => purchase != null;
 
@@ -187,6 +193,9 @@ class AppRow {
     PurchaseData? purchase,
     bool? deleted,
     String? revision,
+    bool? pending,
+    String? baseRevision,
+    String? group,
   }) => AppRow(
     id: id,
     title: title ?? this.title,
@@ -196,6 +205,27 @@ class AppRow {
     purchase: purchase ?? this.purchase,
     deleted: deleted ?? this.deleted,
     revision: revision ?? this.revision,
+    pending: pending ?? this.pending,
+    baseRevision: baseRevision ?? this.baseRevision,
+    group: group ?? this.group,
+  );
+
+  AppRow withSync({
+    required bool pending,
+    required String? baseRevision,
+    required String group,
+  }) => AppRow(
+    id: id,
+    title: title,
+    completed: completed,
+    quantity: quantity,
+    note: note,
+    purchase: purchase,
+    deleted: deleted,
+    revision: revision,
+    pending: pending,
+    baseRevision: baseRevision,
+    group: group,
   );
 
   Map<String, Object?> toJson() => {
@@ -207,6 +237,9 @@ class AppRow {
     if (purchase != null) 'purchase': purchase!.toJson(),
     'deleted': deleted,
     'revision': revision,
+    'pending': pending,
+    'baseRevision': baseRevision,
+    'group': group,
   };
 
   factory AppRow.fromJson(Map<String, Object?> json) {
@@ -228,6 +261,9 @@ class AppRow {
           : null,
       deleted: json['deleted'] as bool? ?? false,
       revision: json['revision'] as String? ?? '0000000000000000:legacy',
+      pending: json['pending'] as bool? ?? false,
+      baseRevision: json['baseRevision'] as String?,
+      group: json['group'] as String? ?? '',
     );
   }
 }

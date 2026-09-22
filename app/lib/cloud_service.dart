@@ -19,6 +19,104 @@ class SharedPriceRecord {
   final PurchaseData purchase;
 }
 
+class SyncConflictEntry {
+  const SyncConflictEntry({required this.local, required this.remote});
+
+  final AppRow local;
+  final AppRow? remote;
+
+  Map<String, Object?> toJson() => {
+    'local': local.toJson(),
+    'remote': remote?.toJson(),
+  };
+
+  factory SyncConflictEntry.fromJson(Map<String, Object?> json) =>
+      SyncConflictEntry(
+        local: AppRow.fromJson(
+          Map<String, Object?>.from(json['local']! as Map),
+        ),
+        remote: json['remote'] is Map
+            ? AppRow.fromJson(Map<String, Object?>.from(json['remote']! as Map))
+            : null,
+      );
+}
+
+class SyncConflictGroup {
+  const SyncConflictGroup({required this.group, required this.entries});
+
+  final String group;
+  final List<SyncConflictEntry> entries;
+
+  Map<String, Object?> toJson() => {
+    'group': group,
+    'entries': entries.map((entry) => entry.toJson()).toList(),
+  };
+
+  factory SyncConflictGroup.fromJson(Map<String, Object?> json) =>
+      SyncConflictGroup(
+        group: json['group'] as String? ?? '',
+        entries: (json['entries'] as List? ?? [])
+            .map(
+              (entry) => SyncConflictEntry.fromJson(
+                Map<String, Object?>.from(entry as Map),
+              ),
+            )
+            .toList(),
+      );
+}
+
+class SyncExchangeResult {
+  const SyncExchangeResult({required this.rows, required this.conflicts});
+
+  final List<AppRow> rows;
+  final List<SyncConflictGroup> conflicts;
+}
+
+SyncExchangeResult reconcileRows(List<AppRow> server, List<AppRow> local) {
+  final rows = <String, AppRow>{for (final row in server) row.id: _synced(row)};
+  final conflicts = <SyncConflictGroup>[];
+  final changes = local.where((row) => row.pending).toList();
+  final groups = <String, List<AppRow>>{};
+  for (final row in changes) {
+    groups
+        .putIfAbsent(row.group.isEmpty ? row.revision : row.group, () => [])
+        .add(row);
+  }
+  for (final entry in groups.entries) {
+    final collides = entry.value.any((localRow) {
+      final remoteRevision = rows[localRow.id]?.revision;
+      return remoteRevision != localRow.revision &&
+          remoteRevision != localRow.baseRevision;
+    });
+    if (collides) {
+      conflicts.add(
+        SyncConflictGroup(
+          group: entry.key,
+          entries: entry.value
+              .map(
+                (localRow) => SyncConflictEntry(
+                  local: localRow,
+                  remote: rows[localRow.id],
+                ),
+              )
+              .toList(),
+        ),
+      );
+    } else {
+      for (final row in entry.value) {
+        rows[row.id] = _synced(row);
+      }
+    }
+  }
+  return SyncExchangeResult(rows: rows.values.toList(), conflicts: conflicts);
+}
+
+AppRow _synced(AppRow row) => row.withSync(
+  pending: false,
+  baseRevision: row.revision,
+  group: row.revision,
+);
+
 abstract final class FirebaseConfig {
   static const apiKey = String.fromEnvironment('FIREBASE_API_KEY');
   static const appId = String.fromEnvironment('FIREBASE_APP_ID');
@@ -89,7 +187,7 @@ class CloudService {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
   }
 
-  Future<List<AppRow>> exchange(List<AppRow> local) async {
+  Future<SyncExchangeResult> exchange(List<AppRow> local) async {
     final currentUser = user;
     if (currentUser == null || currentUser.isAnonymous) {
       throw StateError('이메일 계정으로 로그인해주세요.');
@@ -111,27 +209,22 @@ class CloudService {
         }
       }
 
-      final merged = <String, AppRow>{
-        for (final row in remoteRows) row.id: row,
-      };
-      for (final row in local) {
-        final remote = merged[row.id];
-        if (remote == null || row.revision.compareTo(remote.revision) >= 0) {
-          merged[row.id] = row;
-        }
-      }
+      final result = reconcileRows(remoteRows, local);
       final rows = <String, Object?>{
-        for (final row in merged.values) row.id: _remoteJson(row),
+        for (final row in result.rows) row.id: _remoteJson(row),
       };
       if (jsonEncode(rows).length > 200000) {
         throw StateError('동기화 데이터가 너무 큽니다. 오래된 기록을 정리해주세요.');
       }
       transaction.set(ref, {'version': 4, 'rows': rows});
-      return merged.values.toList();
+      return result;
     }, maxAttempts: 3);
   }
 
-  Map<String, Object?> _remoteJson(AppRow row) => row.toJson();
+  Map<String, Object?> _remoteJson(AppRow row) => row.toJson()
+    ..remove('pending')
+    ..remove('baseRevision')
+    ..remove('group');
 
   Future<void> publishPrices(List<AppRow> rows) async {
     final currentUser = user;
@@ -239,6 +332,7 @@ class CloudService {
       };
     }
     if (kDebugMode) debugPrint('$error');
+    if (error is FormatException) return error.message.toString();
     return error is StateError ? error.message : '처리하지 못했습니다. 잠시 후 다시 시도해주세요.';
   }
 }

@@ -13,6 +13,7 @@ void main() {
     await store.initialize();
     await store.addItem('우유', quantity: 3);
     final item = store.shoppingItems.single;
+    expect(item.pending, isTrue);
     final draft = ReceiptDraft(
       id: 'receipt-1',
       store: '행복마트',
@@ -44,6 +45,7 @@ void main() {
     await restored.initialize();
     expect(restored.purchaseRows.single.title, '우유');
     expect(restored.shoppingItems.length, 2);
+    expect(restored.rows.every((row) => row.pending), isTrue);
   });
 
   test('존재하지 않는 구매일은 저장하지 않는다', () async {
@@ -56,7 +58,10 @@ void main() {
       lines: [ReceiptLineDraft(id: 'line-1', title: '우유', total: 2500)],
     );
 
-    await expectLater(store.saveReceipt(draft), throwsA(isA<FormatException>()));
+    await expectLater(
+      store.saveReceipt(draft),
+      throwsA(isA<FormatException>()),
+    );
     expect(store.purchaseRows, isEmpty);
   });
 }
