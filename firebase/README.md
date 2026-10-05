@@ -1,4 +1,8 @@
-# Firebase 설정
+# 이전 Firebase 설정
+
+현재 앱은 [클러스터 API](../server/README.md)를 사용합니다. 이 폴더는 이전 Firebase 구현의 참고 자료이며 현재 앱과 연결되지 않습니다.
+
+## 이전 버전 설정
 
 1. Firebase Authentication에서 이메일/비밀번호 로그인을 활성화합니다.
 2. Firestore를 생성하고 `firestore.rules`를 게시합니다.
