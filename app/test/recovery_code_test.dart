@@ -1,60 +1,24 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:how_much/cloud_service.dart';
 import 'package:how_much/recovery_code.dart';
 
-class _AuthCloud extends CloudService {
-  _AuthCloud() : super(true);
-  String? email;
-  String? password;
-  bool? create;
-
-  @override
-  Future<void> signIn(
-    String email,
-    String password, {
-    required bool create,
-  }) async {
-    this.email = email;
-    this.password = password;
-    this.create = create;
-  }
-}
+class _RealNetwork extends HttpOverrides {}
 
 void main() {
-  test('이미 발급한 코드의 인증 규칙을 유지한다', () {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUp(() => FlutterSecureStorage.setMockInitialValues({}));
+
+  test('복구 코드의 소문자·공백을 정규화하고 잘못된 입력을 거부한다', () {
     const code = '2345-6789-ABCD-EFGH-JKLM-NPQR-STUV-WXYZ';
     expect(
-      RecoveryCode.email(code),
-      'e9bdf7fdae4d297c15e04b5f81e1a93e02b9f1acd779e6af396e9993db07f48a@recovery.howmuch.invalid',
+      RecoveryCode.normalize(code.toLowerCase().replaceAll('-', ' ')),
+      '23456789ABCDEFGHJKLMNPQRSTUVWXYZ',
     );
-    expect(
-      RecoveryCode.password(code),
-      'Hmc!9a01018f9d80e6ed1820f2c003442b221073ba208763c771ba3d1b7113f64a6bb9',
-    );
-  });
-  test('발급 코드와 소문자·공백 입력이 같은 인증 정보를 만든다', () async {
-    final cloud = _AuthCloud();
-    final code = await cloud.createRecoveryAccount();
-    expect(code.split('-'), hasLength(8));
-    expect(RecoveryCode.normalize(code), hasLength(32));
-    expect(cloud.create, isTrue);
-    final email = cloud.email;
-    final password = cloud.password;
-
-    await cloud.restoreRecoveryAccount(
-      ' ${code.toLowerCase().replaceAll('-', ' ')} ',
-    );
-
-    expect(cloud.create, isFalse);
-    expect(cloud.email, email);
-    expect(cloud.password, password);
-    expect(email, isNot(contains(RecoveryCode.normalize(code))));
-    expect(password, isNot(contains(email!.split('@').first)));
-    expect(RecoveryCode.email(RecoveryCode.generate()), isNot(email));
-  });
-
-  test('잘못된 코드는 서버 인증 전에 거부한다', () async {
-    final cloud = _AuthCloud();
     for (final code in [
       '',
       'admin1234',
@@ -62,10 +26,126 @@ void main() {
       'I' * 32,
       'A' * 31,
       'A' * 33,
-      'A' * 31 + '!',
     ]) {
-      expect(() => cloud.restoreRecoveryAccount(code), throwsFormatException);
+      expect(() => RecoveryCode.normalize(code), throwsFormatException);
     }
-    expect(cloud.email, isNull);
+    expect(
+      () => CloudService(true, apiUrl: 'http://example.com'),
+      throwsArgumentError,
+    );
+  });
+
+  test('보안 저장소에는 세션만 남기고 재시작·만료·재연결·로그아웃을 처리한다', () async {
+    await HttpOverrides.runWithHttpOverrides(() async {
+      final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(() => server.close(force: true));
+      final url = 'http://127.0.0.1:${server.port}';
+      const code = '2345-6789-ABCD-EFGH-JKLM-NPQR-STUV-WXYZ';
+      var token = 'first-token';
+      var unauthorized = false;
+      var calls = 0;
+      String? restored;
+      server.listen((request) async {
+        calls++;
+        final body = await request
+            .cast<List<int>>()
+            .transform(utf8.decoder)
+            .join();
+        request.response.headers.contentType = ContentType.json;
+        if (request.uri.path == '/v1/accounts' ||
+            request.uri.path == '/v1/sessions') {
+          if (body.isNotEmpty) {
+            restored = (jsonDecode(body) as Map)['recoveryCode'] as String;
+          }
+          request.response.write(
+            jsonEncode({
+              'accountId': 'account-one',
+              'token': token,
+              'expiresAt': '2099-10-05T00:00:00+00:00',
+              'recoveryCode': code,
+            }),
+          );
+        } else if (unauthorized) {
+          request.response.statusCode = 401;
+          request.response.write('{"detail":"expired"}');
+        } else {
+          expect(request.headers.value('Authorization'), 'Bearer $token');
+          request.response.write('{"rows":[],"conflicts":[]}');
+        }
+        await request.response.close();
+      });
+      final cloud = CloudService(true, apiUrl: url);
+      expect(await cloud.createRecoveryAccount(), code);
+      final saved = await const FlutterSecureStorage().readAll();
+      expect(saved.values.single, contains('first-token'));
+      expect(saved.values.single, isNot(contains('2345-6789')));
+      final restarted = CloudService(true, apiUrl: url);
+      await restarted.initialize();
+      expect(restarted.accountId, 'account-one');
+      await restarted.exchange([]);
+      unauthorized = true;
+      await expectLater(restarted.exchange([]), throwsA(isA<ApiException>()));
+      expect(restarted.accountId, 'account-one');
+      expect(restarted.sessionExpired, isTrue);
+      token = 'second-token';
+      await restarted.restoreRecoveryAccount(
+        code.toLowerCase().replaceAll('-', ' '),
+      );
+      expect(restored, RecoveryCode.normalize(code));
+      expect(restarted.canSync, isTrue);
+      final before = calls;
+      await expectLater(
+        restarted.restoreRecoveryAccount('bad'),
+        throwsFormatException,
+      );
+      expect(calls, before);
+      final otherServer = CloudService(true, apiUrl: '$url/other');
+      await otherServer.initialize();
+      expect(otherServer.accountId, isNull);
+      await restarted.signOut();
+      expect(restarted.accountId, isNull);
+      expect(await const FlutterSecureStorage().readAll(), isEmpty);
+    }, _RealNetwork());
+  });
+
+  test('이전 세션의 늦은 401은 새 세션을 만료시키지 않는다', () async {
+    await HttpOverrides.runWithHttpOverrides(() async {
+      final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(() => server.close(force: true));
+      final waiting = Completer<HttpRequest>();
+      var token = 'old-token';
+      server.listen((request) async {
+        await request.drain<void>();
+        if (request.uri.path == '/v1/sync') {
+          waiting.complete(request);
+          return;
+        }
+        request.response.write(
+          jsonEncode({
+            'accountId': 'account-one',
+            'token': token,
+            'expiresAt': '2099-10-05T00:00:00+00:00',
+          }),
+        );
+        await request.response.close();
+      });
+      final cloud = CloudService(
+        true,
+        apiUrl: 'http://127.0.0.1:${server.port}',
+      );
+      await cloud.restoreRecoveryAccount('A' * 32);
+      final failed = expectLater(
+        cloud.exchange([]),
+        throwsA(isA<ApiException>()),
+      );
+      final request = await waiting.future;
+      token = 'new-token';
+      await cloud.restoreRecoveryAccount('A' * 32);
+      request.response.statusCode = 401;
+      request.response.write('{"detail":"expired"}');
+      await request.response.close();
+      await failed;
+      expect(cloud.canSync, isTrue);
+    }, _RealNetwork());
   });
 }

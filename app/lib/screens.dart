@@ -1129,16 +1129,12 @@ class _AccountSheet extends StatefulWidget {
 }
 
 class _AccountSheetState extends State<_AccountSheet> {
-  final _email = TextEditingController();
-  final _password = TextEditingController();
   final _recovery = TextEditingController();
   bool _busy = false;
   String _error = '';
 
   @override
   void dispose() {
-    _email.dispose();
-    _password.dispose();
     _recovery.dispose();
     super.dispose();
   }
@@ -1217,7 +1213,7 @@ class _AccountSheetState extends State<_AccountSheet> {
   @override
   Widget build(BuildContext context) {
     final cloud = widget.store.cloud;
-    final connected = cloud.canSync;
+    final connected = cloud.accountId != null;
     return PopScope(
       canPop: !_busy,
       child: Padding(
@@ -1250,7 +1246,7 @@ class _AccountSheetState extends State<_AccountSheet> {
               if (!widget.store.cloudConfigured) ...[
                 const _MessageBox(
                   message:
-                      'Firebase 설정 없이 실행 중입니다. 장보기와 구매 기록은 이 기기에 안전하게 저장됩니다.',
+                      '동기화 서버 설정 없이 실행 중입니다. 장보기와 구매 기록은 이 기기에 안전하게 저장됩니다.',
                 ),
                 const SizedBox(height: 12),
                 const Text('다른 기기로 기록을 옮기는 기능은 준비 중이에요.'),
@@ -1258,6 +1254,28 @@ class _AccountSheetState extends State<_AccountSheet> {
                 _MessageBox(
                   message: '${cloud.accountLabel}에 연결했어요. 기록은 자동으로 동기화돼요.',
                 ),
+                if (cloud.sessionExpired) ...[
+                  const SizedBox(height: 12),
+                  const Text('세션이 만료됐어요. 기록을 유지하며 복구 코드로 다시 연결해주세요.'),
+                  TextField(
+                    controller: _recovery,
+                    enabled: !_busy,
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    decoration: const InputDecoration(labelText: '보관한 복구 코드'),
+                  ),
+                  OutlinedButton(
+                    onPressed: _busy
+                        ? null
+                        : () => _run(() async {
+                            await cloud.restoreRecoveryAccount(_recovery.text);
+                            _recovery.clear();
+                            await widget.store.reloadForCurrentAccount();
+                            await widget.store.sync();
+                          }),
+                    child: const Text('복구 코드로 다시 연결'),
+                  ),
+                ],
                 if (cloud.usesRecoveryCode)
                   const Padding(
                     padding: EdgeInsets.only(top: 8),
@@ -1353,67 +1371,6 @@ class _AccountSheetState extends State<_AccountSheet> {
                           await widget.store.sync();
                         }),
                   child: const Text('기존 기록 복원'),
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  '기존 이메일 계정',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _email,
-                  enabled: !_busy,
-                  keyboardType: TextInputType.emailAddress,
-                  autofillHints: const [AutofillHints.email],
-                  decoration: const InputDecoration(labelText: '이메일'),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: _password,
-                  enabled: !_busy,
-                  obscureText: true,
-                  autofillHints: const [AutofillHints.password],
-                  decoration: const InputDecoration(labelText: '비밀번호'),
-                ),
-                const SizedBox(height: 12),
-                FilledButton(
-                  onPressed: _busy
-                      ? null
-                      : () => _run(() async {
-                          await widget.store.cloud.signIn(
-                            _email.text,
-                            _password.text,
-                            create: false,
-                          );
-                          await widget.store.reloadForCurrentAccount();
-                          await widget.store.sync();
-                          if (mounted) setState(() {});
-                        }),
-                  child: const Text('로그인'),
-                ),
-                const SizedBox(height: 8),
-                OutlinedButton(
-                  onPressed: _busy
-                      ? null
-                      : () => _run(() async {
-                          await widget.store.cloud.signIn(
-                            _email.text,
-                            _password.text,
-                            create: true,
-                          );
-                          await widget.store.reloadForCurrentAccount();
-                          await widget.store.sync();
-                          if (mounted) setState(() {});
-                        }),
-                  child: const Text('회원가입'),
-                ),
-                TextButton(
-                  onPressed: _busy
-                      ? null
-                      : () => _run(
-                          () => widget.store.cloud.resetPassword(_email.text),
-                        ),
-                  child: const Text('비밀번호 재설정 메일 보내기'),
                 ),
               ],
               if (_error.isNotEmpty) ...[
@@ -2394,10 +2351,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     showDialog<void>(
       context: context,
       builder: (_) => _SharedPriceDialog(
-        future: widget.store.cloud.sharedPrices(
-          row.purchase!,
-          widget.store.purchaseRows.map((row) => row.id).toSet(),
-        ),
+        future: widget.store.cloud.sharedPrices(row.purchase!),
         base: row.purchase!,
       ),
     );

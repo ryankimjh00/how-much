@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:crypto/crypto.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'models.dart';
 import 'recovery_code.dart';
@@ -117,222 +118,221 @@ AppRow _synced(AppRow row) => row.withSync(
   group: row.revision,
 );
 
-abstract final class FirebaseConfig {
-  static const apiKey = String.fromEnvironment('FIREBASE_API_KEY');
-  static const appId = String.fromEnvironment('FIREBASE_APP_ID');
-  static const messagingSenderId = String.fromEnvironment(
-    'FIREBASE_MESSAGING_SENDER_ID',
+abstract final class ServerConfig {
+  static const apiUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'https://howmuch.monithub.org',
   );
-  static const projectId = String.fromEnvironment('FIREBASE_PROJECT_ID');
-  static const authDomain = String.fromEnvironment('FIREBASE_AUTH_DOMAIN');
+}
 
-  static bool get isConfigured =>
-      apiKey.isNotEmpty &&
-      appId.isNotEmpty &&
-      messagingSenderId.isNotEmpty &&
-      projectId.isNotEmpty;
-
-  static Future<bool> initialize() async {
-    if (!isConfigured) return false;
-    await Firebase.initializeApp(
-      options: FirebaseOptions(
-        apiKey: apiKey,
-        appId: appId,
-        messagingSenderId: messagingSenderId,
-        projectId: projectId,
-        authDomain: authDomain.isEmpty ? null : authDomain,
-        iosBundleId: 'com.todayone.todo',
-      ),
-    );
-    return true;
-  }
+class ApiException implements Exception {
+  const ApiException(this.status, this.message);
+  final int status;
+  final String message;
 }
 
 class CloudService {
-  CloudService(this.configured);
+  CloudService(
+    this.configured, {
+    String apiUrl = ServerConfig.apiUrl,
+    FlutterSecureStorage storage = const FlutterSecureStorage(
+      iOptions: IOSOptions(
+        accessibility: KeychainAccessibility.first_unlock_this_device,
+      ),
+    ),
+  }) : _api = Uri.parse(apiUrl.replaceFirst(RegExp(r'/$'), '')),
+       _storage = storage {
+    if (configured &&
+        (_api.host.isEmpty ||
+            _api.userInfo.isNotEmpty ||
+            _api.hasQuery ||
+            _api.hasFragment ||
+            (_api.scheme != 'https' &&
+                !(_api.scheme == 'http' &&
+                    {'localhost', '127.0.0.1', '::1'}.contains(_api.host))))) {
+      throw ArgumentError('서버 주소는 HTTPS를 사용해야 합니다.');
+    }
+  }
 
   final bool configured;
+  final Uri _api;
+  final FlutterSecureStorage _storage;
+  final _changes = StreamController<String?>.broadcast();
+  String? _accountId;
+  String? _token;
+  bool _expired = false;
 
-  User? get user => configured ? FirebaseAuth.instance.currentUser : null;
+  // 서버 주소마다 세션을 분리해 다른 서버로 인증 토큰을 보내지 않는다.
+  String get _storageKey =>
+      'howmuch.session.v1.${sha256.convert(utf8.encode(_api.toString()))}';
+  String? get accountId => _accountId;
+  bool get canSync => configured && _token != null && !_expired;
+  bool get sessionExpired => _expired;
+  bool get usesRecoveryCode => _accountId != null;
+  String get accountLabel => _accountId == null ? '기기 기록' : '복구 코드 계정';
+  Stream<String?> get authChanges => _changes.stream;
 
-  String? get accountId => user?.uid;
-  bool get canSync => configured && user != null && !user!.isAnonymous;
-  bool get usesRecoveryCode =>
-      user?.email?.endsWith('@${RecoveryCode.emailDomain}') == true;
-  String get accountLabel =>
-      usesRecoveryCode ? '복구 코드 계정' : user?.email ?? '기기 기록';
+  /// 네트워크 없이 안전한 저장소의 세션만 읽어 오프라인 기록을 바로 연다.
+  Future<void> initialize() async {
+    if (!configured) return;
+    final raw = await _storage.read(key: _storageKey);
+    if (raw == null) return;
+    final value = jsonDecode(raw) as Map;
+    final id = value['accountId'];
+    final token = value['token'];
+    if (id is! String || id.isEmpty || token is! String || token.isEmpty) {
+      throw const FormatException('저장된 계정 정보를 확인할 수 없습니다.');
+    }
+    _accountId = id;
+    _token = token;
+    _expired = DateTime.parse(
+      value['expiresAt'] as String,
+    ).isBefore(DateTime.now());
+  }
 
-  /// 새 계정을 만들고 한 번만 표시할 복구 코드를 반환한다.
-  Future<String> createRecoveryAccount() async {
-    final code = RecoveryCode.generate();
-    await signIn(
-      RecoveryCode.email(code),
-      RecoveryCode.password(code),
-      create: true,
+  Future<void> _saveSession(Map<String, Object?> value) async {
+    final id = value['accountId'] as String;
+    final token = value['token'] as String;
+    // 복구 코드 원문은 제외하고, Keychain/Keystore 저장 성공 후 계정을 전환한다.
+    await _storage.write(
+      key: _storageKey,
+      value: jsonEncode({
+        'accountId': id,
+        'token': token,
+        'expiresAt': value['expiresAt'],
+      }),
     );
+    _accountId = id;
+    _token = token;
+    _expired = false;
+    _changes.add(id);
+  }
+
+  /// 서버가 발급한 코드는 한 번 표시하고 원문을 저장하지 않는다.
+  Future<String> createRecoveryAccount() async {
+    final result = await _request('POST', '/v1/accounts', authenticate: false);
+    final code = result['recoveryCode'] as String;
+    RecoveryCode.normalize(code);
+    await _saveSession(result);
     return code;
   }
 
-  /// 발급된 코드로 같은 UID에 로그인한다. 없는 코드는 새 계정을 만들지 않는다.
-  Future<void> restoreRecoveryAccount(String code) => signIn(
-    RecoveryCode.email(code),
-    RecoveryCode.password(code),
-    create: false,
-  );
-
-  Stream<User?> get authChanges => configured
-      ? FirebaseAuth.instance.authStateChanges()
-      : Stream<User?>.value(null);
-
-  Future<void> signIn(
-    String email,
-    String password, {
-    required bool create,
-  }) async {
-    if (!configured) throw StateError('Firebase 설정이 필요합니다.');
-    if (create) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.trim(),
-        password: password,
-      );
-    } else {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email.trim(),
-        password: password,
-      );
-    }
+  /// 잘못된 코드는 새 계정을 만들지 않으며 기존 기기 기록도 유지한다.
+  Future<void> restoreRecoveryAccount(String code) async {
+    final normalized = RecoveryCode.normalize(code);
+    final result = await _request(
+      'POST',
+      '/v1/sessions',
+      authenticate: false,
+      body: {'recoveryCode': normalized},
+    );
+    await _saveSession(result);
   }
 
   Future<void> signOut() async {
-    if (configured) await FirebaseAuth.instance.signOut();
+    try {
+      if (_token != null) await _request('DELETE', '/v1/session');
+    } catch (_) {
+      // 서버 폐기가 실패해도 기기의 토큰은 제거한다. 서버 세션은 만료일까지 남는다.
+    }
+    await _storage.delete(key: _storageKey);
+    _accountId = null;
+    _token = null;
+    _expired = false;
+    _changes.add(null);
   }
 
-  Future<void> resetPassword(String email) async {
-    if (!configured) throw StateError('Firebase 설정이 필요합니다.');
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
+  Future<Map<String, Object?>> _request(
+    String method,
+    String path, {
+    Object? body,
+    bool authenticate = true,
+    Map<String, String>? query,
+  }) async {
+    if (!configured) throw StateError('동기화 서버 설정이 필요합니다.');
+    final token = _token;
+    if (authenticate && token == null) throw StateError('복구 코드로 기록을 연결해주세요.');
+    final client = HttpClient()
+      ..connectionTimeout = const Duration(seconds: 10);
+    try {
+      return await (() async {
+        final uri = _api.replace(
+          path: '${_api.path}$path',
+          queryParameters: query,
+        );
+        final request = await client.openUrl(method, uri);
+        request.followRedirects = false;
+        request.headers.contentType = ContentType.json;
+        if (authenticate) {
+          request.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
+        }
+        if (body != null) request.write(jsonEncode(body));
+        final response = await request.close();
+        final text = await response.transform(utf8.decoder).join();
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          if (authenticate && response.statusCode == 401 && token == _token) {
+            // 세션 만료로 계정·미전송 기록을 지우지 않고 복구 코드 재입력을 기다린다.
+            _expired = true;
+          }
+          throw ApiException(response.statusCode, '서버 요청을 처리하지 못했습니다.');
+        }
+        return Map<String, Object?>.from(jsonDecode(text) as Map);
+      })().timeout(const Duration(seconds: 20));
+    } finally {
+      client.close(force: true);
+    }
   }
 
   Future<SyncExchangeResult> exchange(List<AppRow> local) async {
-    final currentUser = user;
-    if (currentUser == null || currentUser.isAnonymous) {
-      throw StateError('복구 코드 또는 이메일로 기록을 연결해주세요.');
-    }
-    final ref = FirebaseFirestore.instance.doc(
-      'accounts/${currentUser.uid}/state/main',
+    final result = await _request(
+      'POST',
+      '/v1/sync',
+      body: {'rows': local.map((row) => row.toJson()).toList()},
     );
-    return FirebaseFirestore.instance.runTransaction((transaction) async {
-      final snapshot = await transaction.get(ref);
-      final remoteRows = <AppRow>[];
-      if (snapshot.exists) {
-        final raw = snapshot.data()?['rows'];
-        if (raw is Map) {
-          for (final value in raw.values) {
-            if (value is Map) {
-              remoteRows.add(AppRow.fromJson(Map<String, Object?>.from(value)));
-            }
-          }
-        }
-      }
-
-      final result = reconcileRows(remoteRows, local);
-      final rows = <String, Object?>{
-        for (final row in result.rows) row.id: _remoteJson(row),
-      };
-      if (jsonEncode(rows).length > 200000) {
-        throw StateError('동기화 데이터가 너무 큽니다. 오래된 기록을 정리해주세요.');
-      }
-      final remoteRevisions = {
-        for (final row in remoteRows) row.id: row.revision,
-      };
-      // 서버 확인만 한 경우에는 같은 문서를 다시 쓰지 않는다.
-      if (!snapshot.exists ||
-          result.rows.any((row) => remoteRevisions[row.id] != row.revision)) {
-        transaction.set(ref, {'version': 4, 'rows': rows});
-      }
-      return result;
-    }, maxAttempts: 3);
+    return SyncExchangeResult(
+      rows: (result['rows'] as List)
+          .map(
+            (value) => AppRow.fromJson(Map<String, Object?>.from(value as Map)),
+          )
+          .toList(),
+      conflicts: (result['conflicts'] as List)
+          .map(
+            (value) => SyncConflictGroup.fromJson(
+              Map<String, Object?>.from(value as Map),
+            ),
+          )
+          .toList(),
+    );
   }
-
-  Map<String, Object?> _remoteJson(AppRow row) => row.toJson()
-    ..remove('pending')
-    ..remove('baseRevision')
-    ..remove('group');
 
   Future<void> publishPrices(List<AppRow> rows) async {
-    final currentUser = user;
-    if (currentUser == null || currentUser.isAnonymous) return;
-    for (final row in rows.where((row) => row.purchase != null)) {
-      final purchase = row.purchase!;
-      final ownerRef = FirebaseFirestore.instance.doc('priceOwners/${row.id}');
-      final priceRef = FirebaseFirestore.instance.doc('sharedPrices/${row.id}');
-      await FirebaseFirestore.instance.runTransaction((transaction) async {
-        final owner = await transaction.get(ownerRef);
-        final canShare =
-            !row.deleted &&
-            purchase.share &&
-            purchase.spec?.isComparable == true &&
-            purchase.registeredAt != null;
-        if (canShare) {
-          if (owner.exists && owner.data()?['uid'] != currentUser.uid) {
-            throw StateError('다른 계정의 공개 기록입니다.');
-          }
-          transaction.set(ownerRef, {'uid': currentUser.uid, 'rowId': row.id});
-          transaction.set(priceRef, {
-            'productKey': purchase.productKey,
-            'title': purchase.spec!.identity,
-            'store': purchase.store,
-            'purchasedOn': purchase.purchasedOn,
-            'registeredAt': purchase.registeredAt,
-            'quantity': purchase.quantity,
-            'total': purchase.total,
-            'condition': purchase.condition,
-            'spec': purchase.spec!.toJson(),
-          });
-        } else if (owner.exists && owner.data()?['uid'] == currentUser.uid) {
-          transaction.delete(priceRef);
-          transaction.delete(ownerRef);
-        }
-      }, maxAttempts: 3);
-    }
+    await _request(
+      'POST',
+      '/v1/prices/publish',
+      body: {'rowIds': rows.map((row) => row.id).toList()},
+    );
   }
 
-  Future<List<SharedPriceRecord>> sharedPrices(
-    PurchaseData base,
-    Set<String> ownIds,
-  ) async {
-    if (!canSync) throw StateError('복구 코드 또는 이메일로 기록을 연결해주세요.');
+  Future<List<SharedPriceRecord>> sharedPrices(PurchaseData base) async {
     if (base.productKey == 'other' || base.spec?.isComparable != true) {
       throw StateError('기준 기록의 제품·용량·할인 조건을 먼저 확인해주세요.');
     }
-    final snapshot = await FirebaseFirestore.instance
-        .collection('sharedPrices')
-        .where('productKey', isEqualTo: base.productKey)
-        .get();
+    final result = await _request(
+      'GET',
+      '/v1/prices',
+      query: {'productKey': base.productKey},
+    );
     final records = <SharedPriceRecord>[];
-    for (final doc in snapshot.docs) {
-      if (ownIds.contains(doc.id)) continue;
-      final value = doc.data();
-      if (value['spec'] is! Map) continue;
-      final purchase = PurchaseData(
-        receiptId: '',
-        itemId: '',
-        productKey: value['productKey'] as String? ?? 'other',
-        store: value['store'] as String? ?? '',
-        purchasedOn: value['purchasedOn'] as String? ?? '',
-        quantity: (value['quantity'] as num?)?.toInt() ?? 1,
-        total: (value['total'] as num?)?.toInt() ?? 0,
-        condition: value['condition'] as String? ?? '',
-        share: true,
-        spec: ProductSpec.fromJson(
-          Map<String, Object?>.from(value['spec']! as Map),
-        ),
-        registeredAt: value['registeredAt'] as String?,
+    for (final raw in result['records'] as List) {
+      final value = Map<String, Object?>.from(raw as Map);
+      final purchase = PurchaseData.fromJson(
+        Map<String, Object?>.from(value['purchase'] as Map),
       );
       if (comparePrices(base, purchase).issue.isEmpty) {
         records.add(
           SharedPriceRecord(
-            id: doc.id,
-            title: value['title'] as String? ?? '',
+            id: value['id'] as String,
+            title: value['title'] as String,
             purchase: purchase,
           ),
         );
@@ -353,25 +353,20 @@ class CloudService {
   }
 
   static String readableError(Object error) {
-    if (error is FirebaseAuthException) {
-      return switch (error.code) {
-        'invalid-credential' ||
-        'user-not-found' ||
-        'wrong-password' => '복구 코드 또는 이메일과 비밀번호를 확인해주세요.',
-        'email-already-in-use' => '이미 가입한 이메일입니다.',
-        'weak-password' => '비밀번호를 더 길게 입력해주세요.',
-        'invalid-email' => '이메일 형식을 확인해주세요.',
-        'network-request-failed' => '인터넷 연결을 확인해주세요. 기기 기록은 유지됩니다.',
-        _ => error.message ?? '계정 요청을 처리하지 못했습니다.',
-      };
-    }
-    if (error is FirebaseException) {
-      return switch (error.code) {
-        'unavailable' ||
-        'deadline-exceeded' => '인터넷 연결을 확인해주세요. 기기 기록은 유지되며 다시 동기화합니다.',
-        'permission-denied' => '기록 접근 권한을 확인해주세요.',
+    if (error is ApiException) {
+      return switch (error.status) {
+        401 => '복구 코드를 다시 확인해주세요. 기기 기록은 유지됩니다.',
+        413 => '동기화 데이터가 너무 큽니다. 기기 기록은 유지됩니다.',
+        422 => '기록의 입력 형식과 허용 범위를 확인해주세요.',
+        429 => '요청이 많습니다. 잠시 후 다시 시도해주세요.',
         _ => '서버에 연결하지 못했습니다. 기기 기록은 유지됩니다.',
       };
+    }
+    if (error is SocketException ||
+        error is TimeoutException ||
+        error is HandshakeException ||
+        error is HttpException) {
+      return '인터넷 연결을 확인해주세요. 기기 기록은 유지되며 다시 동기화합니다.';
     }
     if (error is FormatException) return error.message.toString();
     return error is StateError ? error.message : '처리하지 못했습니다. 잠시 후 다시 시도해주세요.';

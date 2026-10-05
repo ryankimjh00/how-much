@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +17,7 @@ class _AccountCloud extends CloudService {
   @override
   bool get canSync => id != null;
   @override
-  Stream<User?> get authChanges => const Stream.empty();
+  Stream<String?> get authChanges => const Stream.empty();
   @override
   String get accountLabel => '복구 코드 계정';
   @override
