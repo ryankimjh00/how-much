@@ -1,0 +1,1028 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "얼마였지 동기화 API",
+    "description": "복구 코드는 최초 한 번만 표시됩니다. Bearer 세션으로 자신의 기록만 동기화합니다.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "운영"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "tags": [
+          "운영"
+        ],
+        "summary": "Ready",
+        "operationId": "ready_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/accounts": {
+      "post": {
+        "tags": [
+          "계정"
+        ],
+        "summary": "새 복구 코드 계정 발급",
+        "operationId": "create_account_v1_accounts_post",
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatedAccount"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sessions": {
+      "post": {
+        "tags": [
+          "계정"
+        ],
+        "summary": "복구 코드로 기존 계정 복원",
+        "operationId": "login_v1_sessions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/session": {
+      "delete": {
+        "tags": [
+          "계정"
+        ],
+        "summary": "현재 기기의 세션 폐기",
+        "operationId": "logout_v1_session_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/sync": {
+      "post": {
+        "tags": [
+          "기록"
+        ],
+        "summary": "기록 교환과 충돌 확인",
+        "operationId": "sync_v1_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/prices/publish": {
+      "post": {
+        "tags": [
+          "가격"
+        ],
+        "summary": "저장된 구매 기록 공유 재시도",
+        "operationId": "publish_v1_prices_publish_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/prices": {
+      "get": {
+        "tags": [
+          "가격"
+        ],
+        "summary": "다른 계정의 익명 제품 가격 조회",
+        "operationId": "prices_v1_prices_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productKey",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500,
+              "title": "Productkey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Prices"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증 실패",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "입력 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "요청 제한",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Conflict": {
+        "properties": {
+          "group": {
+            "type": "string",
+            "title": "Group"
+          },
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/ConflictEntry"
+            },
+            "type": "array",
+            "title": "Entries"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "group",
+          "entries"
+        ],
+        "title": "Conflict"
+      },
+      "ConflictEntry": {
+        "properties": {
+          "local": {
+            "$ref": "#/components/schemas/Row"
+          },
+          "remote": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Row"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "local",
+          "remote"
+        ],
+        "title": "ConflictEntry"
+      },
+      "CreatedAccount": {
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "title": "Accountid"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "expiresAt": {
+            "type": "string",
+            "title": "Expiresat"
+          },
+          "recoveryCode": {
+            "type": "string",
+            "title": "Recoverycode"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "accountId",
+          "token",
+          "expiresAt",
+          "recoveryCode"
+        ],
+        "title": "CreatedAccount",
+        "example": {
+          "accountId": "da93dbf9-361c-4bc9-a5f1-c527f5897f54",
+          "expiresAt": "2027-10-05T00:00:00+00:00",
+          "recoveryCode": "2345-6789-ABCD-EFGH-JKLM-NPQR-STUV-WXYZ",
+          "token": "example-session-token-use-the-issued-token"
+        }
+      },
+      "LoginRequest": {
+        "properties": {
+          "recoveryCode": {
+            "type": "string",
+            "maxLength": 128,
+            "title": "Recoverycode"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "recoveryCode"
+        ],
+        "title": "LoginRequest",
+        "example": {
+          "recoveryCode": "2345-6789-ABCD-EFGH-JKLM-NPQR-STUV-WXYZ"
+        }
+      },
+      "Message": {
+        "properties": {
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "detail"
+        ],
+        "title": "Message",
+        "example": {
+          "detail": "처리했습니다."
+        }
+      },
+      "Price": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "purchase": {
+            "$ref": "#/components/schemas/Purchase"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "purchase"
+        ],
+        "title": "Price"
+      },
+      "Prices": {
+        "properties": {
+          "records": {
+            "items": {
+              "$ref": "#/components/schemas/Price"
+            },
+            "type": "array",
+            "title": "Records"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "records"
+        ],
+        "title": "Prices",
+        "example": {
+          "records": [
+            {
+              "id": "278fa5d37cd4",
+              "purchase": {
+                "condition": "",
+                "itemId": "",
+                "productKey": "v2-c11c",
+                "purchasedOn": "2026-10-05",
+                "quantity": 1,
+                "receiptId": "",
+                "registeredAt": "2026-10-05T10:00:00",
+                "share": true,
+                "spec": {
+                  "allocated": true,
+                  "conditionKnown": true,
+                  "identity": "서울우유",
+                  "packCount": 1,
+                  "unit": "ml",
+                  "volume": 1000
+                },
+                "store": "마트",
+                "total": 2500
+              },
+              "title": "서울우유"
+            }
+          ]
+        }
+      },
+      "ProductSpec": {
+        "properties": {
+          "identity": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "Identity",
+            "default": ""
+          },
+          "volume": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1000000.0,
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Volume"
+          },
+          "unit": {
+            "type": "string",
+            "maxLength": 12,
+            "title": "Unit",
+            "default": ""
+          },
+          "packCount": {
+            "type": "integer",
+            "maximum": 999.0,
+            "minimum": 1.0,
+            "title": "Packcount",
+            "default": 1
+          },
+          "conditionKnown": {
+            "type": "boolean",
+            "title": "Conditionknown",
+            "default": false
+          },
+          "allocated": {
+            "type": "boolean",
+            "title": "Allocated",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ProductSpec"
+      },
+      "PublishRequest": {
+        "properties": {
+          "rowIds": {
+            "items": {
+              "type": "string",
+              "maxLength": 200,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "title": "Rowids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rowIds"
+        ],
+        "title": "PublishRequest",
+        "example": {
+          "rowIds": [
+            "purchase-1"
+          ]
+        }
+      },
+      "Purchase": {
+        "properties": {
+          "receiptId": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Receiptid"
+          },
+          "itemId": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Itemid"
+          },
+          "productKey": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Productkey",
+            "default": "other"
+          },
+          "store": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "title": "Store"
+          },
+          "purchasedOn": {
+            "type": "string",
+            "title": "Purchasedon"
+          },
+          "quantity": {
+            "type": "integer",
+            "maximum": 999.0,
+            "minimum": 1.0,
+            "title": "Quantity"
+          },
+          "total": {
+            "type": "integer",
+            "maximum": 9999999.0,
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "condition": {
+            "type": "string",
+            "maxLength": 120,
+            "title": "Condition",
+            "default": ""
+          },
+          "share": {
+            "type": "boolean",
+            "title": "Share",
+            "default": false
+          },
+          "spec": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProductSpec"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "registeredAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registeredat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "receiptId",
+          "itemId",
+          "store",
+          "purchasedOn",
+          "quantity",
+          "total"
+        ],
+        "title": "Purchase"
+      },
+      "Row": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "title": "Title"
+          },
+          "completed": {
+            "type": "boolean",
+            "title": "Completed",
+            "default": false
+          },
+          "quantity": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 999.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quantity"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 120,
+            "title": "Note",
+            "default": ""
+          },
+          "purchase": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Purchase"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "deleted": {
+            "type": "boolean",
+            "title": "Deleted",
+            "default": false
+          },
+          "revision": {
+            "type": "string",
+            "pattern": "^\\d{16}:[a-z0-9-]{1,100}$",
+            "title": "Revision"
+          },
+          "pending": {
+            "type": "boolean",
+            "title": "Pending",
+            "default": false
+          },
+          "baseRevision": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^\\d{16}:[a-z0-9-]{1,100}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Baserevision"
+          },
+          "group": {
+            "type": "string",
+            "maxLength": 120,
+            "title": "Group",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "revision"
+        ],
+        "title": "Row"
+      },
+      "Session": {
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "title": "Accountid"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "expiresAt": {
+            "type": "string",
+            "title": "Expiresat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "accountId",
+          "token",
+          "expiresAt"
+        ],
+        "title": "Session",
+        "example": {
+          "accountId": "da93dbf9-361c-4bc9-a5f1-c527f5897f54",
+          "expiresAt": "2027-10-05T00:00:00+00:00",
+          "token": "example-session-token-use-the-issued-token"
+        }
+      },
+      "SyncRequest": {
+        "properties": {
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/Row"
+            },
+            "type": "array",
+            "maxItems": 1000,
+            "title": "Rows"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rows"
+        ],
+        "title": "SyncRequest",
+        "example": {
+          "rows": [
+            {
+              "completed": false,
+              "deleted": false,
+              "group": "1791154800000000:device1",
+              "id": "shopping-1",
+              "pending": true,
+              "quantity": 1,
+              "revision": "1791154800000000:device1",
+              "title": "우유"
+            }
+          ]
+        }
+      },
+      "SyncResult": {
+        "properties": {
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/Row"
+            },
+            "type": "array",
+            "title": "Rows"
+          },
+          "conflicts": {
+            "items": {
+              "$ref": "#/components/schemas/Conflict"
+            },
+            "type": "array",
+            "title": "Conflicts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "rows",
+          "conflicts"
+        ],
+        "title": "SyncResult",
+        "example": {
+          "conflicts": [],
+          "rows": [
+            {
+              "baseRevision": "1791154800000000:device1",
+              "completed": false,
+              "deleted": false,
+              "group": "1791154800000000:device1",
+              "id": "shopping-1",
+              "pending": false,
+              "quantity": 1,
+              "revision": "1791154800000000:device1",
+              "title": "우유"
+            }
+          ]
+        }
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

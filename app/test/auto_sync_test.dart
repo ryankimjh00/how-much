@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:how_much/app_store.dart';
@@ -11,7 +10,7 @@ import 'package:how_much/models.dart';
 class _TestCloud extends CloudService {
   _TestCloud() : super(true);
   String? id = 'account-a';
-  final changes = StreamController<User?>.broadcast();
+  final changes = StreamController<String?>.broadcast();
   final server = <String, List<AppRow>>{};
   bool offline = false;
   int calls = 0;
@@ -24,7 +23,7 @@ class _TestCloud extends CloudService {
   @override
   bool get canSync => id != null;
   @override
-  Stream<User?> get authChanges => changes.stream;
+  Stream<String?> get authChanges => changes.stream;
 
   @override
   Future<SyncExchangeResult> exchange(List<AppRow> local) async {

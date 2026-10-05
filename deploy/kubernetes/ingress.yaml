@@ -1,0 +1,48 @@
+# 인증서는 ingress 작업 부하와 같은 namespace에 둔다.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: howmuch-monithub-org-tls
+  namespace: istio-ingress
+spec:
+  secretName: howmuch-monithub-org-tls
+  dnsNames: [howmuch.monithub.org]
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-cloudflare
+  privateKey:
+    rotationPolicy: Always
+---
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: howmuch-gateway
+  namespace: istio-ingress
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https-howmuch
+        protocol: HTTPS
+      hosts: [howmuch.monithub.org]
+      tls:
+        mode: SIMPLE
+        credentialName: howmuch-monithub-org-tls
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: howmuch-api
+  namespace: howmuch
+spec:
+  hosts: [howmuch.monithub.org]
+  gateways: [istio-ingress/howmuch-gateway]
+  http:
+    - route:
+        - destination:
+            host: api.howmuch.svc.cluster.local
+            port:
+              number: 8000
+      timeout: 25s
