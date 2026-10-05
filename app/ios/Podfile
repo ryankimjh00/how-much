@@ -39,5 +39,9 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    # 앱과 플러그인의 최소 버전을 맞춰 새 Xcode의 타깃 검증을 통과한다.
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.5'
+    end
   end
 end

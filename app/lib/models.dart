@@ -47,7 +47,10 @@ class ProductSpec {
   bool get isComparable =>
       identity.trim().isNotEmpty &&
       volume != null &&
+      volume!.isFinite &&
       volume! > 0 &&
+      packCount >= 1 &&
+      packCount <= 999 &&
       unit.trim().isNotEmpty &&
       conditionKnown &&
       allocated;

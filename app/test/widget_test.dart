@@ -13,14 +13,15 @@ void main() {
     await store.initialize();
 
     await tester.pumpWidget(HowMuchApp(store: store));
-    expect(find.text('얼마였지'), findsOneWidget);
+    addTearDown(store.dispose);
+    expect(find.text('얼마였지?'), findsOneWidget);
     expect(find.text('장보기 목록이 비었어요'), findsOneWidget);
 
     await tester.enterText(find.byType(EditableText).first, '우유');
-    await tester.tap(find.text('추가'));
+    await tester.tap(find.bySemanticsLabel('추가'));
     await tester.pumpAndSettle();
 
     expect(find.text('우유'), findsOneWidget);
-    expect(find.text('1개'), findsOneWidget);
+    expect(store.shoppingItems.single.quantity, 1);
   });
 }

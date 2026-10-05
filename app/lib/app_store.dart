@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -40,12 +41,23 @@ class AppStore extends ChangeNotifier {
   final Random _random = Random.secure();
   List<AppRow> _rows = [];
   List<SyncConflictGroup> _conflicts = [];
+  final Map<String, String> _publishedRevisions = {};
+  String? _accountId;
+  int _session = 0;
+  bool _storageHealthy = true;
+  bool _active = true;
+  bool _disposed = false;
+  Timer? _syncTimer;
+  Timer? _pollTimer;
+  StreamSubscription<Object?>? _authSubscription;
+  Future<void>? _loadFuture;
 
   bool loading = true;
   bool saving = false;
   bool syncing = false;
   String error = '';
   String syncMessage = '';
+  DateTime? lastSyncedAt;
   ShoppingFilter filter = ShoppingFilter.all;
 
   List<AppRow> get rows => List.unmodifiable(_rows);
@@ -60,9 +72,17 @@ class AppStore extends ChangeNotifier {
       _rows.where((row) => !row.deleted && row.isPurchase).toList();
   int get completedCount => shoppingItems.where((row) => row.completed).length;
   bool get cloudConfigured => cloud.configured;
-  String get _storageKey => cloud.user == null
+  bool get canEdit =>
+      !_disposed &&
+      !loading &&
+      !saving &&
+      !syncing &&
+      _storageHealthy &&
+      _accountId == cloud.accountId;
+  int get pendingCount => _rows.where((row) => row.pending).length;
+  String get _storageKey => _accountId == null
       ? _guestStorageKey
-      : '@wasprice/flutter/account/${cloud.user!.uid}/v1';
+      : '@wasprice/flutter/account/$_accountId/v1';
 
   List<PurchaseGroup> get purchaseGroups {
     final groups = <String, List<AppRow>>{};
@@ -77,16 +97,81 @@ class AppStore extends ChangeNotifier {
   }
 
   Future<void> initialize() async {
+    _accountId = cloud.accountId;
     await _loadCurrentStorage();
+    _authSubscription = cloud.authChanges.listen((_) {
+      if (_accountId != cloud.accountId) {
+        unawaited(reloadForCurrentAccount());
+      }
+    });
+    // 앱이 열린 동안 서버 변경을 확인하고, 오프라인 실패도 다음 주기에 재시도한다.
+    if (cloud.configured) {
+      _pollTimer = Timer.periodic(
+        const Duration(seconds: 30),
+        (_) => requestSync(),
+      );
+    }
+    requestSync();
   }
 
   Future<void> reloadForCurrentAccount() async {
+    if (_accountId == cloud.accountId) {
+      await _loadFuture;
+      return;
+    }
+    _syncTimer?.cancel();
+    _session++;
+    _accountId = cloud.accountId;
     loading = true;
+    syncing = false;
+    lastSyncedAt = null;
+    syncMessage = '';
     error = '';
     _rows = [];
     _conflicts = [];
+    _publishedRevisions.clear();
     notifyListeners();
-    await _loadCurrentStorage();
+    _loadFuture = _loadCurrentStorage();
+    await _loadFuture;
+    requestSync();
+  }
+
+  void setActive(bool active) {
+    _active = active;
+    if (active) {
+      if (_accountId != cloud.accountId) {
+        unawaited(reloadForCurrentAccount());
+      } else {
+        requestSync();
+      }
+    } else {
+      _syncTimer?.cancel();
+    }
+  }
+
+  void requestSync() {
+    _syncTimer?.cancel();
+    if (_disposed ||
+        !_active ||
+        !cloud.canSync ||
+        loading ||
+        !_storageHealthy) {
+      return;
+    }
+    _syncTimer = Timer(
+      const Duration(milliseconds: 700),
+      () => unawaited(sync()),
+    );
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _session++;
+    _syncTimer?.cancel();
+    _pollTimer?.cancel();
+    _authSubscription?.cancel();
+    super.dispose();
   }
 
   Future<bool> hasGuestData() async {
@@ -97,10 +182,8 @@ class AppStore extends ChangeNotifier {
   }
 
   Future<void> importGuestData() async {
-    if (cloud.user == null) throw const FormatException('로그인 후 가져와주세요.');
-    if (_rows.any((row) => !row.deleted)) {
-      throw const FormatException('계정에 이미 기록이 있어 자동으로 합치지 않습니다.');
-    }
+    final session = _session;
+    if (!cloud.canSync) throw const FormatException('기록을 연결한 후 가져와주세요.');
     final prefs = await SharedPreferences.getInstance();
     final guest = _decodeState(
       prefs.getString(_guestStorageKey) ?? prefs.getString(_legacyStorageKey),
@@ -109,6 +192,13 @@ class AppStore extends ChangeNotifier {
       throw const FormatException('가져올 기기 기록이 없습니다.');
     }
     final revision = _revision();
+    if (session != _session) {
+      throw const FormatException('계정이 변경됐습니다. 다시 가져와주세요.');
+    }
+    // 읽는 동안 받은 서버 기록과 전송 대기 중인 삭제 기록도 덮어쓰지 않는다.
+    if (_rows.isNotEmpty || _conflicts.isNotEmpty) {
+      throw const FormatException('계정에 이미 기록이 있어 자동으로 합치지 않습니다.');
+    }
     await _commit(
       guest
           .map(
@@ -121,19 +211,28 @@ class AppStore extends ChangeNotifier {
   }
 
   Future<void> _loadCurrentStorage() async {
+    final session = _session;
+    final storageKey = _storageKey;
     try {
       final prefs = await SharedPreferences.getInstance();
       final raw =
-          prefs.getString(_storageKey) ??
-          (cloud.user == null ? prefs.getString(_legacyStorageKey) : null);
+          prefs.getString(storageKey) ??
+          (_accountId == null ? prefs.getString(_legacyStorageKey) : null);
       final state = _decodeState(raw);
+      if (session != _session) return;
       _rows = state.rows;
       _conflicts = state.conflicts;
+      _storageHealthy = true;
     } catch (failure) {
-      error = failure.toString().replaceFirst('FormatException: ', '');
+      if (session != _session) return;
+      // 읽지 못한 기존 파일을 빈 목록으로 덮어쓰지 않는다.
+      _storageHealthy = false;
+      error = '기기 기록을 읽지 못했습니다. 기존 기록을 보존 중입니다.';
     } finally {
-      loading = false;
-      notifyListeners();
+      if (session == _session) {
+        loading = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -237,8 +336,11 @@ class AppStore extends ChangeNotifier {
   Future<void> deleteItem(AppRow item) =>
       _replace(item.copyWith(deleted: true));
 
-  Future<void> restoreItem(AppRow item) =>
-      _replace(item.copyWith(deleted: false));
+  Future<void> restoreItem(AppRow item) async {
+    final current = _rows.where((row) => row.id == item.id).firstOrNull;
+    if (current == null) throw const FormatException('복원할 항목이 없습니다.');
+    await _replace(current.copyWith(deleted: false));
+  }
 
   Future<void> saveReceipt(ReceiptDraft draft) async {
     final store = draft.store.trim();
@@ -284,15 +386,7 @@ class AppStore extends ChangeNotifier {
         throw const FormatException('영수증 항목 번호를 다시 확인해주세요.');
       }
       final spec = line.spec;
-      if (spec != null &&
-          (spec.identity.length > 50 ||
-              spec.unit.length > 12 ||
-              spec.packCount < 1 ||
-              spec.packCount > 999 ||
-              (spec.volume != null &&
-                  (spec.volume! <= 0 || spec.volume! > 1000000)))) {
-        throw const FormatException('제품명·용량·단위·묶음 개수를 확인해주세요.');
-      }
+      if (spec != null) _validateSpec(spec);
       if (draft.share && (spec == null || !spec.isComparable)) {
         throw const FormatException('가격 공유 전 제품·용량·단위·할인 조건을 확인해주세요.');
       }
@@ -429,6 +523,7 @@ class AppStore extends ChangeNotifier {
   }) async {
     _validateTitle(title);
     if (row.purchase == null) throw const FormatException('구매 기록이 아닙니다.');
+    _validateSpec(spec);
     if (condition.length > 120) {
       throw const FormatException('할인 조건은 120자 이내로 입력해주세요.');
     }
@@ -445,34 +540,62 @@ class AppStore extends ChangeNotifier {
   }
 
   Future<void> sync() async {
-    if (!cloud.configured || cloud.user == null) return;
+    if (!cloud.canSync || !canEdit) return;
+    _syncTimer?.cancel();
+    final session = _session;
+    final accountId = _accountId;
+    final storageKey = _storageKey;
     syncing = true;
     syncMessage = '동기화 중…';
     notifyListeners();
     try {
       final result = await cloud.exchange(_rows);
+      // 이전 계정의 늦은 응답을 현재 계정 화면이나 저장소에 적용하지 않는다.
+      if (session != _session || accountId != cloud.accountId) return;
       final next = <String, AppRow>{for (final row in result.rows) row.id: row};
       for (final conflict in result.conflicts) {
         for (final entry in conflict.entries) {
           next[entry.local.id] = entry.local;
         }
       }
-      await _writeState(next.values.toList(), result.conflicts);
+      await _writeState(
+        next.values.toList(),
+        result.conflicts,
+        storageKey: storageKey,
+      );
+      if (session != _session || accountId != cloud.accountId) return;
       _rows = next.values.toList();
       _conflicts = result.conflicts;
-      await cloud.publishPrices(result.rows);
+      lastSyncedAt = DateTime.now();
+      // 같은 실행 중에는 변경된 구매 기록만 공유한다. 실패한 기록은 다음 동기화에서 재시도한다.
+      final changedPrices = result.rows
+          .where(
+            (row) =>
+                row.isPurchase && _publishedRevisions[row.id] != row.revision,
+          )
+          .toList();
+      if (changedPrices.isNotEmpty) await cloud.publishPrices(changedPrices);
+      if (session != _session || accountId != cloud.accountId) return;
+      for (final row in changedPrices) {
+        _publishedRevisions[row.id] = row.revision;
+      }
       syncMessage = result.conflicts.isEmpty
           ? '동기화 완료'
           : '동기화 충돌 ${result.conflicts.length}건을 확인해주세요.';
     } catch (failure) {
-      syncMessage = CloudService.readableError(failure);
+      if (session == _session) {
+        syncMessage = CloudService.readableError(failure);
+      }
     } finally {
-      syncing = false;
-      notifyListeners();
+      if (session == _session) {
+        syncing = false;
+        notifyListeners();
+      }
     }
   }
 
   Future<void> resolveConflict(String group, {required bool useLocal}) async {
+    if (!canEdit) throw const FormatException('저장 또는 동기화가 끝난 후 다시 시도해주세요.');
     final conflict = _conflicts
         .where((item) => item.group == group)
         .firstOrNull;
@@ -501,9 +624,7 @@ class AppStore extends ChangeNotifier {
       }
     }
     final remaining = _conflicts.where((item) => item.group != group).toList();
-    await _writeState(next.values.toList(), remaining);
-    _rows = next.values.toList();
-    _conflicts = remaining;
+    await _commit(next.values.toList(), conflicts: remaining);
     syncMessage = useLocal ? '이 기기 변경을 다시 전송할 준비가 됐습니다.' : '서버 변경을 적용했습니다.';
     notifyListeners();
   }
@@ -518,6 +639,10 @@ class AppStore extends ChangeNotifier {
       throw const FormatException('동기화 충돌을 먼저 해결해주세요. 양쪽 변경을 보관 중입니다.');
     }
     final current = _rows[index];
+    // 편집 화면을 연 뒤 다른 기기에서 바뀐 항목을 오래된 값으로 덮어쓰지 않는다.
+    if (current.revision != replacement.revision) {
+      throw const FormatException('항목이 변경됐습니다. 다시 열어 최신 내용을 확인해주세요.');
+    }
     final revision = _revision();
     final next = [..._rows]
       ..[index] = _pendingChange(current, replacement, revision);
@@ -535,32 +660,49 @@ class AppStore extends ChangeNotifier {
             group: revision,
           );
 
-  Future<void> _commit(List<AppRow> next) async {
-    if (saving || syncing) {
+  Future<void> _commit(
+    List<AppRow> next, {
+    List<SyncConflictGroup>? conflicts,
+  }) async {
+    if (!_storageHealthy) {
+      throw const FormatException('기존 기록을 읽지 못해 새 저장을 중단했습니다.');
+    }
+    if (!canEdit) {
       throw const FormatException('저장 또는 동기화 중입니다. 잠시 후 다시 시도해주세요.');
     }
     saving = true;
     error = '';
     notifyListeners();
+    final session = _session;
+    final storageKey = _storageKey;
     try {
-      await _writeState(next, _conflicts);
+      // 기기에 저장한 뒤 화면을 갱신한다. 서버 전송 실패는 로컬 저장을 취소하지 않는다.
+      await _writeState(next, conflicts ?? _conflicts, storageKey: storageKey);
+      if (session != _session) return;
       _rows = next;
+      if (conflicts != null) _conflicts = conflicts;
     } catch (failure) {
-      error = failure.toString().replaceFirst('FormatException: ', '');
+      if (session == _session) {
+        error = failure.toString().replaceFirst('FormatException: ', '');
+      }
       rethrow;
     } finally {
       saving = false;
-      notifyListeners();
+      if (!_disposed) {
+        notifyListeners();
+        requestSync();
+      }
     }
   }
 
   Future<void> _writeState(
     List<AppRow> rows,
-    List<SyncConflictGroup> conflicts,
-  ) async {
+    List<SyncConflictGroup> conflicts, {
+    String? storageKey,
+  }) async {
     final prefs = await SharedPreferences.getInstance();
     final saved = await prefs.setString(
-      _storageKey,
+      storageKey ?? _storageKey,
       jsonEncode({
         'version': 4,
         'rows': rows.map((row) => row.toJson()).toList(),
@@ -576,6 +718,18 @@ class AppStore extends ChangeNotifier {
         value.length > 50 ||
         value.contains(RegExp(r'[\r\n]'))) {
       throw const FormatException('상품명은 한 줄 1~50자로 입력해주세요.');
+    }
+  }
+
+  void _validateSpec(ProductSpec spec) {
+    final volume = spec.volume;
+    if (spec.identity.length > 50 ||
+        spec.unit.length > 12 ||
+        spec.packCount < 1 ||
+        spec.packCount > 999 ||
+        (volume != null &&
+            (!volume.isFinite || volume <= 0 || volume > 1000000))) {
+      throw const FormatException('제품명·용량·단위·묶음 개수를 확인해주세요.');
     }
   }
 

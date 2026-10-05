@@ -23,7 +23,11 @@ class OcrService {
       maxWidth: 2400,
     );
     if (image == null) return null;
-    final lines = parseMemoText(await _recognizeText(image.path));
+    return recognizeMemoPath(image.path);
+  }
+
+  Future<List<MemoLineDraft>> recognizeMemoPath(String path) async {
+    final lines = parseMemoText(await _recognizeText(path));
     if (lines.isEmpty) {
       throw const FormatException('메모에서 상품을 찾지 못했어요. 다시 촬영하거나 직접 입력해주세요.');
     }

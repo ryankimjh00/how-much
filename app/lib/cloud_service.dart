@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 
 import 'models.dart';
+import 'recovery_code.dart';
 
 class SharedPriceRecord {
   const SharedPriceRecord({
@@ -155,6 +155,31 @@ class CloudService {
 
   User? get user => configured ? FirebaseAuth.instance.currentUser : null;
 
+  String? get accountId => user?.uid;
+  bool get canSync => configured && user != null && !user!.isAnonymous;
+  bool get usesRecoveryCode =>
+      user?.email?.endsWith('@${RecoveryCode.emailDomain}') == true;
+  String get accountLabel =>
+      usesRecoveryCode ? '복구 코드 계정' : user?.email ?? '기기 기록';
+
+  /// 새 계정을 만들고 한 번만 표시할 복구 코드를 반환한다.
+  Future<String> createRecoveryAccount() async {
+    final code = RecoveryCode.generate();
+    await signIn(
+      RecoveryCode.email(code),
+      RecoveryCode.password(code),
+      create: true,
+    );
+    return code;
+  }
+
+  /// 발급된 코드로 같은 UID에 로그인한다. 없는 코드는 새 계정을 만들지 않는다.
+  Future<void> restoreRecoveryAccount(String code) => signIn(
+    RecoveryCode.email(code),
+    RecoveryCode.password(code),
+    create: false,
+  );
+
   Stream<User?> get authChanges => configured
       ? FirebaseAuth.instance.authStateChanges()
       : Stream<User?>.value(null);
@@ -190,7 +215,7 @@ class CloudService {
   Future<SyncExchangeResult> exchange(List<AppRow> local) async {
     final currentUser = user;
     if (currentUser == null || currentUser.isAnonymous) {
-      throw StateError('이메일 계정으로 로그인해주세요.');
+      throw StateError('복구 코드 또는 이메일로 기록을 연결해주세요.');
     }
     final ref = FirebaseFirestore.instance.doc(
       'accounts/${currentUser.uid}/state/main',
@@ -216,7 +241,14 @@ class CloudService {
       if (jsonEncode(rows).length > 200000) {
         throw StateError('동기화 데이터가 너무 큽니다. 오래된 기록을 정리해주세요.');
       }
-      transaction.set(ref, {'version': 4, 'rows': rows});
+      final remoteRevisions = {
+        for (final row in remoteRows) row.id: row.revision,
+      };
+      // 서버 확인만 한 경우에는 같은 문서를 다시 쓰지 않는다.
+      if (!snapshot.exists ||
+          result.rows.any((row) => remoteRevisions[row.id] != row.revision)) {
+        transaction.set(ref, {'version': 4, 'rows': rows});
+      }
       return result;
     }, maxAttempts: 3);
   }
@@ -268,7 +300,7 @@ class CloudService {
     PurchaseData base,
     Set<String> ownIds,
   ) async {
-    if (!configured || user == null) throw StateError('이메일 계정으로 로그인해주세요.');
+    if (!canSync) throw StateError('복구 코드 또는 이메일로 기록을 연결해주세요.');
     if (base.productKey == 'other' || base.spec?.isComparable != true) {
       throw StateError('기준 기록의 제품·용량·할인 조건을 먼저 확인해주세요.');
     }
@@ -323,7 +355,9 @@ class CloudService {
   static String readableError(Object error) {
     if (error is FirebaseAuthException) {
       return switch (error.code) {
-        'invalid-credential' => '이메일과 비밀번호를 확인해주세요.',
+        'invalid-credential' ||
+        'user-not-found' ||
+        'wrong-password' => '복구 코드 또는 이메일과 비밀번호를 확인해주세요.',
         'email-already-in-use' => '이미 가입한 이메일입니다.',
         'weak-password' => '비밀번호를 더 길게 입력해주세요.',
         'invalid-email' => '이메일 형식을 확인해주세요.',
@@ -331,7 +365,14 @@ class CloudService {
         _ => error.message ?? '계정 요청을 처리하지 못했습니다.',
       };
     }
-    if (kDebugMode) debugPrint('$error');
+    if (error is FirebaseException) {
+      return switch (error.code) {
+        'unavailable' ||
+        'deadline-exceeded' => '인터넷 연결을 확인해주세요. 기기 기록은 유지되며 다시 동기화합니다.',
+        'permission-denied' => '기록 접근 권한을 확인해주세요.',
+        _ => '서버에 연결하지 못했습니다. 기기 기록은 유지됩니다.',
+      };
+    }
     if (error is FormatException) return error.message.toString();
     return error is StateError ? error.message : '처리하지 못했습니다. 잠시 후 다시 시도해주세요.';
   }
