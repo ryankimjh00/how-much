@@ -1,0 +1,76 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: database-isolation
+  namespace: howmuch
+spec:
+  podSelector:
+    matchLabels:
+      app: howmuch-postgres
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: howmuch-api
+      ports:
+        - protocol: TCP
+          port: 5432
+  egress: []
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-isolation
+  namespace: howmuch
+spec:
+  podSelector:
+    matchLabels:
+      app: howmuch-api
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: istio-ingress
+          podSelector:
+            matchLabels:
+              istio: ingressgateway
+      ports:
+        - protocol: TCP
+          port: 8000
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: howmuch-postgres
+      ports:
+        - protocol: TCP
+          port: 5432
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+---
+# hostNetwork 게이트웨이 트래픽은 Cilium에서 remote-node로 식별된다.
+# 신뢰하는 클러스터 노드의 API 포트만 허용하며 DB 포트는 열지 않는다.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: api-hostnetwork-gateway
+  namespace: howmuch
+spec:
+  endpointSelector:
+    matchLabels:
+      app: howmuch-api
+  ingress:
+    - fromEntities: [remote-node]
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP

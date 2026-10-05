@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  namespace: howmuch
+spec:
+  selector:
+    app: howmuch-api
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: howmuch
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: howmuch-api
+  template:
+    metadata:
+      labels:
+        app: howmuch-api
+    spec:
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: registry-credentials
+      securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: api
+          image: registry.monithub.org/howmuch/api@sha256:04f27d4e2670e942b5c5ac5b3383905fdec714ca93e8b09dd5fd2f2464f8850f
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: url
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8000
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            periodSeconds: 20
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            periodSeconds: 5
+            failureThreshold: 30
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 16Mi
