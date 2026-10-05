@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  static const background = Color(0xFFF5F6F3);
-  static const surface = Color(0xFFFFFFFF);
-  static const primary = Color(0xFF238A3B);
-  static const checked = Color(0xFF50CF3A);
-  static const secondary = Color(0xFFDDF5DF);
-  static const ink = Color(0xFF17251B);
-  static const body = Color(0xFF34453A);
-  static const muted = Color(0xFF748078);
-  static const border = Color(0xFFD1DDD3);
-  static const coral = Color(0xFFEA6338);
+  static const background = Color(0xFFFFF9EF);
+  static const surface = Color(0xFFFFFDF8);
+  static const primary = Color(0xFFF57C00);
+  static const checked = primary;
+  static const secondary = Color(0xFFFFE8CC);
+  static const ink = Color(0xFF30251F);
+  static const body = Color(0xFF5A4A42);
+  static const muted = Color(0xFF88796F);
+  static const border = Color(0xFFE8DED1);
+  static const coral = Color(0xFFB95000);
+  static const note = Color(0xFFFFF2C7);
+  static const noteBorder = Color(0xFFE8CF86);
+  static const camera = Color(0xFF3B2118);
   static const error = Color(0xFFB13A2A);
   static const errorSurface = Color(0xFFFFE9E1);
 }
@@ -27,19 +30,22 @@ ThemeData buildAppTheme() {
 
   return ThemeData(
     useMaterial3: true,
+    fontFamily: 'NotoSansKR',
     colorScheme: scheme,
     scaffoldBackgroundColor: AppColors.background,
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
+        fontFamily: 'Jua',
         fontSize: 30,
         height: 1.3,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w400,
         color: AppColors.ink,
       ),
       headlineSmall: TextStyle(
+        fontFamily: 'Jua',
         fontSize: 20,
         height: 1.4,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w400,
         color: AppColors.ink,
       ),
       titleMedium: TextStyle(
@@ -51,7 +57,11 @@ ThemeData buildAppTheme() {
       bodyLarge: TextStyle(fontSize: 16, height: 1.5, color: AppColors.body),
       bodyMedium: TextStyle(fontSize: 14, height: 1.55, color: AppColors.body),
       bodySmall: TextStyle(fontSize: 12, height: 1.4, color: AppColors.muted),
-      labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+      labelLarge: TextStyle(
+        fontFamily: 'NotoSansKR',
+        fontSize: 14,
+        fontWeight: FontWeight.w700,
+      ),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.background,
@@ -60,8 +70,8 @@ ThemeData buildAppTheme() {
       elevation: 0,
       centerTitle: false,
       titleTextStyle: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w800,
+        fontFamily: 'Jua',
+        fontSize: 23,
         color: AppColors.ink,
       ),
     ),
@@ -92,15 +102,22 @@ ThemeData buildAppTheme() {
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        minimumSize: const Size(48, 48),
+        minimumSize: const Size(48, 52),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        textStyle: const TextStyle(fontWeight: FontWeight.w700),
+        textStyle: const TextStyle(
+          fontFamily: 'NotoSansKR',
+          fontWeight: FontWeight.w700,
+        ),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         minimumSize: const Size(48, 48),
         foregroundColor: AppColors.primary,
+        textStyle: const TextStyle(
+          fontFamily: 'NotoSansKR',
+          fontWeight: FontWeight.w500,
+        ),
         side: const BorderSide(color: AppColors.border),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
@@ -116,6 +133,10 @@ ThemeData buildAppTheme() {
       ),
     ),
     dividerTheme: const DividerThemeData(color: AppColors.border, thickness: 1),
+    checkboxTheme: CheckboxThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+      side: const BorderSide(color: AppColors.border),
+    ),
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.ink,
       contentTextStyle: TextStyle(color: Colors.white),
