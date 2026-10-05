@@ -64,4 +64,38 @@ void main() {
     );
     expect(store.purchaseRows, isEmpty);
   });
+
+  test('구매 기록 수정 시 0개 묶음을 거부하고 원래 가격을 보존한다', () async {
+    final store = AppStore(CloudService(false));
+    addTearDown(store.dispose);
+    await store.initialize();
+    await store.saveReceipt(
+      ReceiptDraft(
+        id: 'spec-check',
+        store: '마트',
+        purchasedOn: '2026-09-20',
+        lines: [ReceiptLineDraft(id: 'milk', title: '우유', total: 3200)],
+      ),
+    );
+    const spec = ProductSpec(
+      identity: '우유',
+      volume: 1000,
+      unit: 'mL',
+      packCount: 0,
+      conditionKnown: true,
+    );
+    expect(spec.isComparable, isFalse);
+    await expectLater(
+      store.updatePurchase(
+        store.purchaseRows.single,
+        title: '우유',
+        spec: spec,
+        condition: '',
+        share: false,
+      ),
+      throwsFormatException,
+    );
+    expect(store.purchaseRows.single.purchase!.total, 3200);
+    expect(store.purchaseRows.single.purchase!.spec, isNull);
+  });
 }
