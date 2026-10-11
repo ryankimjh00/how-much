@@ -49,6 +49,8 @@ class Purchase(Model):
     share: bool = False
     spec: ProductSpec | None = None
     registeredAt: str | None = Field(default=None, max_length=40)
+    # [OCR 추가] 같은 영수증 기준 구매 기록 ID를 JSON 저장·동기화에서 보존한다.
+    setParentId: str = Field(default="", max_length=200)
 
     @field_validator("purchasedOn")
     @classmethod

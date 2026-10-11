@@ -1,0 +1,19 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_accumulation_test.dart
+00:00 +0: 같은 상품명 열 행이 덮는 프리즘 조각은 합쳐 실제 수량 열을 재사용한다
+00:00 +0 -1: 같은 상품명 열 행이 덮는 프리즘 조각은 합쳐 실제 수량 열을 재사용한다 [E]
+  Expected: an object with length of <2>
+    Actual: [
+              Instance of 'ReceiptLineDraft',
+              Instance of 'ReceiptLineDraft',
+              Instance of 'ReceiptLineDraft'
+            ]
+     Which: has length of <3>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_accumulation_test.dart 28:5            main.<fn>
+  
+00:00 +0 -1: Some tests failed.
+
+Failing tests:
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_accumulation_test.dart: 같은 상품명 열 행이 덮는 프리즘 조각은 합쳐 실제 수량 열을 재사용한다

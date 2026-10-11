@@ -810,6 +810,12 @@
               }
             ],
             "title": "Registeredat"
+          },
+          "setParentId": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Setparentid",
+            "default": ""
           }
         },
         "additionalProperties": false,

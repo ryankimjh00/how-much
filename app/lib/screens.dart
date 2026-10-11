@@ -1,3 +1,9 @@
+import 'receipt_region_retry.dart'; // [OCR 추가]
+import 'receipt_perspective_screen.dart'; // [OCR 추가]
+import 'dart:io'; // [OCR 추가]
+import 'receipt_pages.dart'; // [OCR 추가]
+import 'receipt_region_screen.dart'; // [OCR 추가]
+import 'receipt_ocr.dart'; // [OCR 추가]
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +17,8 @@ import 'models.dart';
 import 'ocr_service.dart';
 import 'design_widgets.dart';
 import 'price_screen.dart';
+import 'receipt_review_photo.dart'; // [OCR 추가]
+import 'receipt_selection_screen.dart'; // [OCR 추가]
 
 final _won = NumberFormat.decimalPattern('ko_KR');
 
@@ -737,6 +745,19 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   bool _busy = false;
   bool _torch = false;
   String _cameraError = '';
+  String get _busyLabel {
+    // [OCR 추가]
+    if (_collectingPhotos) return '사진을 추가하고 있어요'; // [OCR 추가]
+    if (widget.memo) return '메모를 읽고 있어요'; // [OCR 추가]
+    return '영수증을 읽고 있어요'; // [OCR 추가]
+  } // [OCR 추가]
+
+  bool _collectingPhotos = false; // [OCR 추가]
+  final _recognizedPages = <ReceiptPhotoPage, ReceiptDraft>{}; // [OCR 추가]
+  bool _multiReceipt = false; // [OCR 추가]
+  int _multiSession = 0; // [OCR 추가]
+  final _pageSelections = <ReceiptPhotoPage, ReceiptDraft>{}; // [OCR 추가]
+  final _receiptParts = <ReceiptPhotoPage>[]; // [OCR 추가]
 
   @override
   void initState() {
@@ -749,6 +770,7 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _cameraSession++;
+    _multiSession++; // [OCR 추가] 화면 종료 뒤 도착한 인식 결과를 버린다.
     _camera?.dispose();
     super.dispose();
   }
@@ -797,6 +819,18 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   Future<void> _capture() async {
     final camera = _camera;
     if (camera == null || !camera.value.isInitialized || _busy) return;
+    if (_multiReceipt) {
+      // [OCR 추가]
+      // [OCR 추가]
+      await _collectParts(
+        // [OCR 추가]
+        () async => [
+          // [OCR 추가]
+          ReceiptPhotoPage(path: (await camera.takePicture()).path), // [OCR 추가]
+        ], // [OCR 추가]
+      ); // [OCR 추가]
+      return; // [OCR 추가]
+    } // [OCR 추가]
     if (widget.memo) {
       await _recognizeMemo(
         () async => _ocr.recognizeMemoPath((await camera.takePicture()).path),
@@ -804,7 +838,9 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
       return;
     }
     await _recognize(
-      () async => _ocr.recognizePath((await camera.takePicture()).path),
+      () async => _recognizeCorrectedReceipt(
+        (await camera.takePicture()).path,
+      ), // [OCR 수정]
     );
   }
 
@@ -813,8 +849,295 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
       await _recognizeMemo(() => _ocr.pickMemo(ImageSource.gallery));
       return;
     }
-    await _recognize(_ocr.pickFromGallery);
+    // [OCR 수정] 앨범에서 한 장만 선택하면 즉시 처리하고, 여러 장은 모은 뒤 장별로 처리한다.
+    await _collectParts(
+      () => _ocr.pickReceiptPages(limit: 10 - _receiptParts.length),
+      allowSingleReceipt: true, // [OCR 추가]
+    ); // [OCR 수정]
   }
+
+  // [OCR 추가] 촬영을 모두 마친 뒤에만 보정한다. 계정 전환·화면 종료 후의 결과는 폐기한다.
+  Future<Uint8List?> _correctReceiptPhoto(Uint8List original) async {
+    // [OCR 추가]
+    if (!mounted) return null; // [OCR 추가]
+    final account = widget.store.cloud.accountId; // [OCR 추가]
+    final corrected = await Navigator.push<Uint8List>(
+      context,
+      MaterialPageRoute(
+        // [OCR 추가]
+        builder: (_) => ReceiptPerspectiveScreen(bytes: original), // [OCR 추가]
+      ),
+    ); // [OCR 추가]
+    if (!mounted || account != widget.store.cloud.accountId) {
+      // [OCR 추가]
+      return null; // [OCR 추가]
+    } // [OCR 추가]
+    return corrected; // [OCR 추가]
+  } // [OCR 추가]
+
+  Future<ReceiptDraft?> _recognizeCorrectedReceipt(String path) async {
+    // [OCR 추가]
+    final bytes = await _correctReceiptPhoto(
+      await File(path).readAsBytes(),
+    ); // [OCR 추가]
+    if (bytes == null) return null; // [OCR 추가]
+    return _ocr.recognizePath(
+      path,
+      allowManualRegions: true,
+      photoBytes: bytes,
+    ); // [OCR 추가]
+  } // [OCR 추가]
+
+  Future<void> _collectParts(
+    // [OCR 추가]
+    Future<List<ReceiptPhotoPage>> Function() action, { // [OCR 수정]
+    bool allowSingleReceipt = false, // [OCR 추가]
+  }) async {
+    // [OCR 추가]
+    // [OCR 추가]
+    if (_busy || _receiptParts.length >= 10) return; // [OCR 추가]
+    final session = _multiSession; // [OCR 추가]
+    final account = widget.store.cloud.accountId; // [OCR 추가]
+    setState(() {
+      // [OCR 추가]
+      _busy = true; // [OCR 추가]
+      _collectingPhotos = true; // [OCR 추가]
+    }); // [OCR 추가]
+    try {
+      // [OCR 추가]
+      final parts = await action(); // [OCR 추가]
+      if (!mounted || // [OCR 추가]
+          session != _multiSession || // [OCR 추가]
+          account != widget.store.cloud.accountId) {
+        // [OCR 추가]
+        return; // [OCR 추가]
+      } // [OCR 추가]
+      if (parts.isEmpty) return; // [OCR 추가] 앨범 취소 시 기존 사진과 촬영 모드를 유지한다.
+      // [OCR 수정] 여러 장 모드에서만 이어 모으고 한 장 모드의 사진은 별도로 처리한다.
+      if (allowSingleReceipt &&
+          !_multiReceipt &&
+          _receiptParts.isEmpty &&
+          parts.length == 1) {
+        setState(() => _collectingPhotos = false); // [OCR 추가]
+        await _recognize(
+          () => _recognizeCorrectedReceipt(parts.single.path),
+        ); // [OCR 추가] 기존 한 장 보정·선택·검토와 취소·계정 전환 보호를 재사용한다.
+        return; // [OCR 추가]
+      }
+      setState(() {
+        _multiReceipt = true; // [OCR 추가] 사진이 추가된 뒤에만 장별 처리 화면으로 전환한다.
+        _receiptParts.addAll(
+          parts.take(10 - _receiptParts.length),
+        ); // [OCR 수정] 선택기에서 제한을 지원하지 않아도 합계 10장을 넘기지 않는다.
+      }); // [OCR 수정]
+    } catch (error) {
+      // [OCR 추가]
+      if (mounted && session == _multiSession) {
+        _showError(context, error); // [OCR 추가]
+      }
+    } finally {
+      // [OCR 추가]
+      if (mounted && session == _multiSession) {
+        setState(() {
+          // [OCR 추가]
+          _busy = false; // [OCR 추가]
+          _collectingPhotos = false; // [OCR 추가]
+        }); // [OCR 추가]
+      }
+    } // [OCR 추가]
+  } // [OCR 추가]
+
+  Future<void> _finishParts() async {
+    // [OCR 추가]
+    // [OCR 추가]
+    if (_busy || _receiptParts.isEmpty) return; // [OCR 추가]
+    final session = _multiSession; // [OCR 추가]
+    final account = widget.store.cloud.accountId; // [OCR 추가]
+    setState(() => _busy = true); // [OCR 추가]
+    try {
+      // [OCR 추가]
+      final draft = await selectReceiptPages(
+        // [OCR 추가]
+        context, // [OCR 추가]
+        List.unmodifiable(_receiptParts), // [OCR 추가]
+        selections: _pageSelections, // [OCR 추가]
+        recognizedPages: _recognizedPages, // [OCR 추가]
+        recognize:
+            (page) => // [OCR 추가]
+                _recognizeCorrectedReceipt(page.path), // [OCR 수정]
+        isCurrent:
+            () => // [OCR 추가]
+                mounted && // [OCR 추가]
+                session == _multiSession && // [OCR 추가]
+                account == widget.store.cloud.accountId, // [OCR 추가]
+      ); // [OCR 수정]
+      if (draft == null || // [OCR 추가]
+          !mounted || // [OCR 추가]
+          session != _multiSession || // [OCR 추가]
+          account != widget.store.cloud.accountId) {
+        // [OCR 추가]
+        return; // [OCR 추가]
+      }
+      final saved = await Navigator.push<bool>(
+        // [OCR 추가]
+        context, // [OCR 추가]
+        MaterialPageRoute(
+          builder:
+              (_) => // [OCR 추가]
+              ReceiptReviewScreen(
+                store: widget.store,
+                draft: draft,
+              ), // [OCR 추가]
+        ), // [OCR 추가]
+      ); // [OCR 수정] 모든 장의 선택이 끝난 뒤에만 한 번 검토하고 저장한다.
+      if (saved == true && mounted) Navigator.pop(context); // [OCR 추가]
+    } catch (error) {
+      // [OCR 추가]
+      if (mounted && session == _multiSession) {
+        _showError(context, error); // [OCR 추가]
+      }
+    } finally {
+      // [OCR 추가]
+      if (mounted && session == _multiSession) {
+        setState(() => _busy = false); // [OCR 추가]
+      }
+    } // [OCR 추가]
+  } // [OCR 추가]
+
+  void _startReceipt({required bool multi}) {
+    // [OCR 추가] 새 영수증·모드 전환은 사진과 OCR/선택 캐시를 함께 비워 이전 장이 섞이지 않게 한다.
+    if (_busy) return;
+    setState(() {
+      _multiSession++; // [OCR 추가] 이전 영수증의 늦은 결과도 적용하지 않는다.
+      _multiReceipt = multi;
+      _receiptParts.clear();
+      _recognizedPages.clear();
+      _pageSelections.clear();
+    });
+  }
+
+  void _movePart(int index, int direction) {
+    // [OCR 추가]
+    // [OCR 추가]
+    final target = index + direction; // [OCR 추가]
+    if (_busy || target < 0 || target >= _receiptParts.length) {
+      return; // [OCR 추가]
+    }
+    setState(
+      () => _receiptParts.insert(target, _receiptParts.removeAt(index)),
+    ); // [OCR 추가]
+  } // [OCR 추가]
+
+  Widget _partControls() => Column(
+    // [OCR 추가]
+    // [OCR 추가]
+    children: [
+      // [OCR 추가]
+      if (_receiptParts.isNotEmpty) // [OCR 추가]
+        SizedBox(
+          // [OCR 추가]
+          height: 90, // [OCR 추가]
+          child: ListView(
+            // [OCR 추가]
+            scrollDirection: Axis.horizontal, // [OCR 추가]
+            children: [
+              // [OCR 추가]
+              for (var i = 0; i < _receiptParts.length; i++) // [OCR 추가]
+                SizedBox(
+                  // [OCR 추가]
+                  width: 110, // [OCR 추가]
+                  child: Column(
+                    // [OCR 추가]
+                    children: [
+                      // [OCR 추가]
+                      Expanded(
+                        // [OCR 추가]
+                        child: Image.file(
+                          // [OCR 추가]
+                          // [OCR 추가]
+                          File(
+                            // [OCR 추가]
+                            _receiptParts[i].path, // [OCR 추가]
+                          ), // [OCR 수정] 촬영 원본을 미리보기만 한다.
+                          errorBuilder: (_, _, _) => const Icon(
+                            // [OCR 추가]
+                            Icons.broken_image_outlined, // [OCR 추가]
+                          ), // [OCR 추가] 미리보기 실패가 모아둔 사진을 제거하지 않는다.
+                          cacheWidth: 160, // [OCR 추가] 여러 장의 미리보기는 작은 크기로 디코딩한다.
+                          fit: BoxFit.contain, // [OCR 추가]
+                        ), // [OCR 추가]
+                      ), // [OCR 추가]
+                      Row(
+                        // [OCR 추가]
+                        mainAxisAlignment: MainAxisAlignment.center, // [OCR 추가]
+                        children: [
+                          // [OCR 추가]
+                          IconButton(
+                            // [OCR 추가]
+                            tooltip: '앞으로 이동', // [OCR 추가]
+                            onPressed:
+                                _busy ||
+                                    i ==
+                                        0 // [OCR 추가]
+                                ? null // [OCR 추가]
+                                : () => _movePart(i, -1), // [OCR 추가]
+                            icon: const Icon(Icons.chevron_left), // [OCR 추가]
+                            visualDensity: VisualDensity.compact, // [OCR 추가]
+                          ), // [OCR 추가]
+                          Text(
+                            // [OCR 추가]
+                            '${i + 1}', // [OCR 추가]
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ), // [OCR 추가]
+                          ), // [OCR 추가]
+                          IconButton(
+                            // [OCR 추가]
+                            tooltip: '사진 제거', // [OCR 추가]
+                            onPressed:
+                                _busy // [OCR 추가]
+                                ? null // [OCR 추가]
+                                : () => // [OCR 추가]
+                                  setState(() {
+                                    // [OCR 추가]
+                                    _pageSelections.remove(
+                                      _receiptParts[i], // [OCR 추가]
+                                    ); // [OCR 추가]
+                                    _recognizedPages.remove(
+                                      // [OCR 추가]
+                                      _receiptParts[i],
+                                    ); // [OCR 추가]
+                                    _receiptParts.removeAt(i); // [OCR 추가]
+                                  }), // [OCR 추가]
+                            icon: const Icon(Icons.close), // [OCR 추가]
+                            visualDensity: VisualDensity.compact, // [OCR 추가]
+                          ), // [OCR 추가]
+                        ], // [OCR 추가]
+                      ), // [OCR 추가]
+                    ], // [OCR 추가]
+                  ), // [OCR 추가]
+                ), // [OCR 추가]
+            ], // [OCR 추가]
+          ), // [OCR 추가]
+        ), // [OCR 추가]
+      TextButton(
+        // [OCR 추가] 같은 여러 장 모드에서도 다른 영수증을 새로 시작할 수 있다.
+        key: const ValueKey('receipt-start-new'),
+        onPressed: _busy || _receiptParts.isEmpty
+            ? null
+            : () => _startReceipt(multi: true),
+        child: const Text('새 영수증'),
+      ),
+      TextButton(
+        // [OCR 추가]
+        key: const ValueKey('receipt-finish-parts'), // [OCR 추가]
+        onPressed: _busy || _receiptParts.isEmpty
+            ? null
+            : _finishParts, // [OCR 추가]
+        child: Text('촬영 완료 (${_receiptParts.length}장)'), // [OCR 추가]
+      ), // [OCR 추가]
+    ], // [OCR 추가]
+  ); // [OCR 추가]
 
   Future<void> _recognizeMemo(
     Future<List<MemoLineDraft>?> Function() action,
@@ -839,10 +1162,15 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   }
 
   Future<void> _recognize(Future<ReceiptDraft?> Function() action) async {
+    final account =
+        widget.store.cloud.accountId; // [OCR 추가] 보정·인식 도중 계정이 바뀌면 초안을 열지 않는다.
     setState(() => _busy = true);
     try {
       final draft = await action();
-      if (draft != null && mounted) await _openReview(draft);
+      if (draft != null && mounted && account == widget.store.cloud.accountId) {
+        // [OCR 수정]
+        await _openReview(draft); // [OCR 수정]
+      } // [OCR 수정]
     } catch (error) {
       if (mounted) _showError(context, error);
     } finally {
@@ -851,9 +1179,25 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   }
 
   Future<void> _openReview(ReceiptDraft draft) async {
+    var reviewDraft = draft; // [OCR 추가]
+    if (draft.ocrResult != null) {
+      // [OCR 추가]
+      // [OCR 추가] 선택 취소는 파서 초안이나 저장 기록을 바꾸지 않는다. 직접 입력은 기존 화면으로 보낸다.
+      final selected = await Navigator.of(context).push<ReceiptDraft>(
+        // [OCR 추가]
+        MaterialPageRoute(
+          builder: (_) => ReceiptSelectionScreen(draft: draft),
+        ), // [OCR 추가]
+      ); // [OCR 추가]
+      if (!mounted || selected == null) return; // [OCR 추가]
+      reviewDraft = selected; // [OCR 추가]
+    } // [OCR 추가]
     final saved = await Navigator.of(context).push<bool>(
       MaterialPageRoute(
-        builder: (_) => ReceiptReviewScreen(store: widget.store, draft: draft),
+        builder: (_) => ReceiptReviewScreen(
+          store: widget.store,
+          draft: reviewDraft,
+        ), // [OCR 수정]
       ),
     );
     if (saved == true && mounted) Navigator.pop(context);
@@ -915,6 +1259,50 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
                     ],
                   ),
                 ),
+                if (!widget.memo) // [OCR 추가]
+                  Padding(
+                    // [OCR 추가]
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ), // [OCR 추가]
+                    child: Row(
+                      // [OCR 추가]
+                      children: [
+                        // [OCR 추가]
+                        for (final multi in [false, true]) // [OCR 추가]
+                          Expanded(
+                            // [OCR 추가]
+                            child: OutlinedButton(
+                              // [OCR 추가]
+                              onPressed:
+                                  _busy // [OCR 추가]
+                                  ? null // [OCR 추가]
+                                  : () {
+                                      // [OCR 수정] 이미 선택한 모드를 다시 누르면 현재 촬영 목록을 유지한다.
+                                      if (_multiReceipt != multi) {
+                                        _startReceipt(multi: multi);
+                                      }
+                                    }, // [OCR 수정]
+                              style: OutlinedButton.styleFrom(
+                                // [OCR 추가]
+                                backgroundColor:
+                                    _multiReceipt ==
+                                        multi // [OCR 추가]
+                                    ? AppColors
+                                          .primary // [OCR 추가]
+                                    : null, // [OCR 추가]
+                                foregroundColor: Colors.white, // [OCR 추가]
+                              ), // [OCR 추가]
+                              child: Text(
+                                // [OCR 추가]
+                                multi ? '여러 장 찍기' : '한 장', // [OCR 추가]
+                              ), // [OCR 추가]
+                            ), // [OCR 추가]
+                          ), // [OCR 추가]
+                      ], // [OCR 추가]
+                    ), // [OCR 추가]
+                  ), // [OCR 추가]
+                if (_multiReceipt) _partControls(), // [OCR 추가]
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
@@ -991,7 +1379,12 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
                             iconName: 'IconGallery',
                             screen: screen,
                             label: '앨범',
-                            onTap: _busy ? null : _gallery,
+                            onTap:
+                                _busy ||
+                                    (_multiReceipt &&
+                                        _receiptParts.length >= 10) // [OCR 추가]
+                                ? null // [OCR 추가]
+                                : _gallery, // [OCR 수정] 연결 가능한 최대 장수를 넘겨 선택하지 않는다.
                           ),
                           Semantics(
                             button: true,
@@ -1000,6 +1393,9 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
                               customBorder: const CircleBorder(),
                               onTap:
                                   _busy ||
+                                      (_multiReceipt &&
+                                          _receiptParts.length >=
+                                              10) || // [OCR 추가]
                                       camera == null ||
                                       !camera.value.isInitialized
                                   ? null
@@ -1042,7 +1438,7 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
                         const CircularProgressIndicator(),
                         const SizedBox(height: 18),
                         Text(
-                          widget.memo ? '메모를 읽고 있어요' : '영수증을 읽고 있어요',
+                          _busyLabel, // [OCR 수정]
                           style: const TextStyle(
                             fontFamily: 'Jua',
                             fontSize: 23,
@@ -1684,6 +2080,45 @@ class _ReceiptReviewScreenState extends State<ReceiptReviewScreen> {
   late final TextEditingController _store;
   late final TextEditingController _date;
   late final TextEditingController _condition;
+  final _receiptScroll = ScrollController(); // [OCR 추가]
+  bool _photoInteracting = false; // [OCR 추가]
+  // [OCR 추가] fresh처럼 사진 조작 시작 시 진행 중인 목록 스크롤을 멈추고 마지막 접점 종료 후 해제한다.
+  void _photoInteractionChanged(bool active) {
+    // [OCR 추가]
+    // [OCR 추가]
+    if (active && _receiptScroll.hasClients) {
+      // [OCR 추가]
+      _receiptScroll.jumpTo(_receiptScroll.offset); // [OCR 추가]
+    } // [OCR 추가]
+    setState(() => _photoInteracting = active); // [OCR 추가]
+  } // [OCR 추가]
+
+  final _dateRegions =
+      <int, ReceiptRegionValue>{}; // [OCR 추가] 장마다 마지막으로 적용한 날짜 영역을 복원한다.
+  int _photoIndex = 0; // [OCR 추가]
+  // [OCR 추가] 사진 전환과 상품 목록에서 같은 장을 같은 이름으로 표시한다.
+  String _receiptPageLabel(int index) {
+    const labels = [
+      '첫째 장', // [OCR 수정] 순서 표현과 의존 명사인 장을 띄어 쓴다.
+      '둘째 장', // [OCR 수정]
+      '셋째 장', // [OCR 수정]
+      '넷째 장', // [OCR 수정]
+      '다섯째 장', // [OCR 수정]
+      '여섯째 장', // [OCR 수정]
+      '일곱째 장', // [OCR 수정]
+      '여덟째 장', // [OCR 수정]
+      '아홉째 장', // [OCR 수정]
+      '열째 장', // [OCR 수정]
+    ];
+    return index < labels.length
+        ? labels[index]
+        : '${index + 1}번째 장'; // [OCR 수정]
+  }
+
+  ReceiptOcrResult? get _activePhoto => // [OCR 추가]
+      widget.draft.ocrForPage(_photoIndex); // [OCR 추가]
+  ReceiptOcrResult? _photoForLine(ReceiptLineDraft line) => // [OCR 추가]
+      widget.draft.ocrForPage(line.receiptPhotoIndex); // [OCR 추가]
   bool _saving = false;
 
   @override
@@ -1696,6 +2131,7 @@ class _ReceiptReviewScreenState extends State<ReceiptReviewScreen> {
 
   @override
   void dispose() {
+    _receiptScroll.dispose(); // [OCR 추가]
     _store.dispose();
     _date.dispose();
     _condition.dispose();
@@ -1715,16 +2151,131 @@ class _ReceiptReviewScreenState extends State<ReceiptReviewScreen> {
     }
   }
 
-  void _addLine() {
-    setState(
-      () => widget.draft.lines.add(
-        ReceiptLineDraft(
-          id: 'manual-${DateTime.now().microsecondsSinceEpoch}',
-          title: '',
+  Future<void> _editDateRegion() async {
+    // [OCR 추가] 결과를 적용하기 전에는 날짜와 이전 영역을 변경하지 않는다.
+    final photo = _activePhoto; // [OCR 추가]
+    if (photo == null) return; // [OCR 추가]
+    final page = _photoIndex; // [OCR 추가]
+    final previous = _dateRegions[page]; // [OCR 추가]
+    Rect? initialBounds = previous?.bounds; // [OCR 추가]
+    if (initialBounds == null) {
+      for (final row in photo.rows) {
+        if (receiptRegionDate(row.text) != null) {
+          initialBounds = row.bounds; // [OCR 추가] 전체 OCR의 날짜 줄을 시작 영역으로 제시한다.
+          break; // [OCR 추가]
+        }
+      }
+    } // [OCR 추가]
+    final result = await Navigator.push<ReceiptRegionValue>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ReceiptRegionScreen(
+          photoPath: photo.photoPath, // [OCR 추가]
+          photoBytes: photo.photoBytes, // [OCR 추가]
+          label: '구매일', // [OCR 추가]
+          date: true, // [OCR 추가]
+          initialBounds: initialBounds, // [OCR 추가]
+          initialText: _date.text, // [OCR 추가]
         ),
       ),
-    );
-  }
+    ); // [OCR 추가]
+    if (!mounted || result == null) return; // [OCR 추가]
+    setState(() {
+      _date.text = result.text; // [OCR 추가]
+      _dateRegions[page] = result; // [OCR 추가]
+    }); // [OCR 추가]
+  } // [OCR 추가]
+
+  Future<void> _addLine() async {
+    // [OCR 수정]
+    // [OCR 추가]
+    final line = ReceiptLineDraft(
+      // [OCR 수정]
+      id: 'manual-${DateTime.now().microsecondsSinceEpoch}', // [OCR 수정]
+      title: '', // [OCR 수정]
+      receiptPhotoIndex: _photoIndex, // [OCR 추가]
+    ); // [OCR 추가]
+    await _editLine(line, widget.draft.lines.length); // [OCR 추가]
+    if (!mounted || line.title.trim().isEmpty) return; // [OCR 추가]
+    setState(() => widget.draft.lines.add(line)); // [OCR 추가]
+  } // [OCR 추가]
+
+  // [OCR 추가] OCR에서 돌아온 결과만 적용하므로 취소 시 항목과 기존 박스를 모두 유지한다.
+  Future<void> _selectFromReceipt([ReceiptLineDraft? existing]) async {
+    // [OCR 수정]
+    // [OCR 추가]
+    final photoIndex = existing?.receiptPhotoIndex ?? _photoIndex; // [OCR 추가]
+    final photo = widget.draft.ocrForPage(photoIndex); // [OCR 추가]
+    if (photo == null) return; // [OCR 추가]
+    setState(() => _photoIndex = photoIndex); // [OCR 추가]
+    final pageDraft = ReceiptDraft(
+      // [OCR 추가]
+      id: widget.draft.id, // [OCR 추가]
+      store: widget.draft.store, // [OCR 추가]
+      purchasedOn: widget.draft.purchasedOn, // [OCR 추가]
+      lines: [], // [OCR 추가]
+      condition: widget.draft.condition, // [OCR 추가]
+      share: widget.draft.share, // [OCR 추가]
+      ocrResult: photo, // [OCR 추가]
+    ); // [OCR 추가] 수정 대상 장만 후보로 제공한다.
+    final selected = await Navigator.push<ReceiptDraft>(
+      // [OCR 수정]
+      context, // [OCR 수정]
+      MaterialPageRoute(
+        // [OCR 수정]
+        // [OCR 추가]
+        builder: (_) => ReceiptSelectionScreen(
+          // [OCR 수정]
+          draft: pageDraft, // [OCR 수정]
+          editLine: existing, // [OCR 수정]
+        ), // [OCR 추가]
+      ),
+    ); // [OCR 추가]
+    if (!mounted || selected == null) return; // [OCR 추가]
+    setState(() {
+      // [OCR 수정]
+      // [OCR 추가]
+      if (existing == null) {
+        // [OCR 수정]
+        // [OCR 추가]
+        for (final line in selected.lines) {
+          // [OCR 수정]
+          // [OCR 추가]
+          widget.draft.lines.add(
+            // [OCR 수정]
+            ReceiptLineDraft(
+              // [OCR 수정]
+              // [OCR 추가]
+              id: 'receipt-${DateTime.now().microsecondsSinceEpoch}-${widget.draft.lines.length}', // [OCR 추가]
+              title: line.title, // [OCR 수정]
+              quantity: line.quantity, // [OCR 수정]
+              total: line.total, // [OCR 추가]
+              ocrProduct: line.ocrProduct, // [OCR 수정]
+              ocrAmount: line.ocrAmount, // [OCR 추가]
+              ocrQuantity: line.ocrQuantity, // [OCR 추가]
+              ocrAmountIsUnitPrice: line.ocrAmountIsUnitPrice, // [OCR 추가]
+              ocrInputAmount: line.ocrInputAmount, // [OCR 추가]
+              selected: line.selected, // [OCR 추가]
+              ocrNotice: line.ocrNotice, // [OCR 추가]
+              receiptPhotoIndex: photoIndex, // [OCR 추가]
+            ), // [OCR 수정]
+          ); // [OCR 추가]
+        } // [OCR 추가]
+      } else {
+        // [OCR 수정]
+        // [OCR 추가]
+        final line = selected.lines.single; // [OCR 추가]
+        existing.quantity = line.quantity; // [OCR 추가]
+        existing.total = line.total; // [OCR 추가]
+        existing.ocrProduct = line.ocrProduct; // [OCR 추가]
+        existing.ocrAmount = line.ocrAmount; // [OCR 추가]
+        existing.ocrQuantity = line.ocrQuantity; // [OCR 추가]
+        existing.ocrAmountIsUnitPrice = line.ocrAmountIsUnitPrice; // [OCR 추가]
+        existing.ocrInputAmount = line.ocrInputAmount; // [OCR 추가]
+        existing.ocrNotice = ''; // [OCR 추가]
+      } // [OCR 추가]
+    }); // [OCR 추가]
+  } // [OCR 추가]
 
   Future<void> _editSpec(ReceiptLineDraft line) async {
     final current = line.spec ?? ProductSpec(identity: line.title);
@@ -1866,48 +2417,326 @@ class _ReceiptReviewScreenState extends State<ReceiptReviewScreen> {
     }
   }
 
+  Future<void> _editNameRegion(ReceiptLineDraft edited) async {
+    // [OCR 추가]
+    // [OCR 추가]
+    final result = await Navigator.push<ReceiptRegionValue>(
+      // [OCR 추가]
+      context, // [OCR 추가]
+      MaterialPageRoute(
+        // [OCR 추가]
+        builder: (_) => ReceiptRegionScreen(
+          // [OCR 추가]
+          // [OCR 추가]
+          photoPath: _photoForLine(edited)!.photoPath, // [OCR 수정]
+          photoBytes: _photoForLine(edited)!.photoBytes, // [OCR 수정]
+          label: '상품명', // [OCR 추가]
+          initialBounds: edited.ocrProduct?.bounds, // [OCR 추가]
+          initialText: edited.title, // [OCR 추가]
+        ), // [OCR 추가]
+      ), // [OCR 추가]
+    ); // [OCR 추가]
+    if (!mounted || result == null) return; // [OCR 추가]
+    edited.title = result.text; // [OCR 추가]
+    edited.ocrProduct = ReceiptOcrCandidate(
+      // [OCR 추가]
+      id: // [OCR 추가]
+          edited.ocrProduct?.id ?? // [OCR 추가]
+          'region-${DateTime.now().microsecondsSinceEpoch}', // [OCR 추가]
+      text: result.text, // [OCR 추가]
+      bounds: result.bounds, // [OCR 추가]
+    ); // [OCR 추가]
+  } // [OCR 추가]
+
   Future<void> _editLine(ReceiptLineDraft line, int index) async {
-    final items = widget.store.shoppingItems
-        .where((item) => !item.completed)
-        .toList();
-    await showModalBottomSheet<void>(
-      context: context,
-      useSafeArea: true,
-      isScrollControlled: true,
-      builder: (context) => Padding(
-        padding: EdgeInsets.fromLTRB(
-          20,
-          20,
-          20,
-          20 + MediaQuery.viewInsetsOf(context).bottom,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _ReceiptLineCard(
-                line: line,
-                items: items,
-                index: index,
-                onChanged: () => setState(() {}),
-                onEditSpec: () => _editSpec(line),
-                onDelete: () {
-                  setState(() => widget.draft.lines.remove(line));
-                  Navigator.pop(context);
-                },
-              ),
-              const SizedBox(height: 12),
-              FilledButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('확인했어요'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-    if (mounted) setState(() {});
-  }
+    // [OCR 수정]
+    // [OCR 수정]
+    final items = widget
+        .store
+        .shoppingItems // [OCR 수정]
+        .where((item) => !item.completed) // [OCR 수정]
+        .toList(); // [OCR 수정]
+    // [OCR 수정] 이유: 키보드 입력은 사본에만 반영하고 확인 없이 닫으면 기존 수량·금액을 유지한다.
+    final edited = ReceiptLineDraft(
+      // [OCR 수정]
+      id: line.id, // [OCR 수정]
+      title: line.title, // [OCR 수정]
+      quantity: line.quantity, // [OCR 수정]
+      total: line.total, // [OCR 수정]
+      selected: line.selected, // [OCR 수정]
+      itemId: line.itemId, // [OCR 수정]
+      spec: line.spec, // [OCR 수정]
+      ocrProduct: line.ocrProduct, // [OCR 추가]
+      ocrAmount: line.ocrAmount, // [OCR 추가]
+      ocrQuantity: line.ocrQuantity, // [OCR 추가]
+      ocrAmountIsUnitPrice: line.ocrAmountIsUnitPrice, // [OCR 추가]
+      ocrInputAmount: line.ocrInputAmount, // [OCR 추가]
+      receiptPhotoIndex: line.receiptPhotoIndex, // [OCR 추가] 사본에서도 원래 사진을 참조한다.
+    ); // [OCR 수정]
+    final confirmed = await showModalBottomSheet<bool>(
+      // [OCR 수정]
+      context: context, // [OCR 수정]
+      useSafeArea: true, // [OCR 수정]
+      isScrollControlled: true, // [OCR 수정]
+      builder: (sheetContext) => StatefulBuilder(
+        // [OCR 수정]
+        builder: (sheetContext, setSheetState) => Padding(
+          // [OCR 수정]
+          // [OCR 수정]
+          padding: EdgeInsets.fromLTRB(
+            // [OCR 수정]
+            20, // [OCR 수정]
+            20, // [OCR 수정]
+            20, // [OCR 수정]
+            20 + MediaQuery.viewInsetsOf(sheetContext).bottom, // [OCR 수정]
+          ), // [OCR 수정]
+          child: SingleChildScrollView(
+            // [OCR 수정]
+            child: Column(
+              // [OCR 수정]
+              mainAxisSize: MainAxisSize.min, // [OCR 수정]
+              children: [
+                // [OCR 수정]
+                // [OCR 수정]
+                _ReceiptLineCard(
+                  // [OCR 수정]
+                  line: edited, // [OCR 수정]
+                  items: items, // [OCR 수정]
+                  index: index, // [OCR 수정]
+                  onChanged: () => setSheetState(() {}), // [OCR 수정]
+                  onEditSpec: () async {
+                    // [OCR 수정]
+                    await _editSpec(edited); // [OCR 수정]
+                    if (sheetContext.mounted) setSheetState(() {}); // [OCR 수정]
+                  }, // [OCR 수정]
+                  onDelete: () {
+                    // [OCR 수정]
+                    setState(
+                      () => _removeReceiptLine(line),
+                    ); // [OCR 수정] // [OCR 수정]
+                    Navigator.pop(sheetContext, false); // [OCR 수정]
+                  }, // [OCR 수정]
+                ), // [OCR 수정]
+                if (_photoForLine(edited) != null) // [OCR 추가]
+                  TextButton(
+                    // [OCR 추가]
+                    onPressed: () async {
+                      // [OCR 추가]
+                      await _editNameRegion(edited); // [OCR 추가]
+                      if (sheetContext.mounted) {
+                        // [OCR 수정]
+                        setSheetState(() {}); // [OCR 추가]
+                      } // [OCR 수정]
+                    }, // [OCR 추가]
+                    child: const Text('상품명 영역 수정'), // [OCR 추가]
+                  ), // [OCR 추가]
+                const SizedBox(height: 12), // [OCR 수정]
+                Row(
+                  // [OCR 수정]
+                  children: [
+                    // [OCR 수정]
+                    // [OCR 수정]
+                    TextButton(
+                      // [OCR 수정]
+                      onPressed: () =>
+                          Navigator.pop(sheetContext, false), // [OCR 수정]
+                      child: const Text('취소'), // [OCR 수정]
+                    ), // [OCR 수정]
+                    const SizedBox(width: 12), // [OCR 수정]
+                    Expanded(
+                      // [OCR 수정]
+                      child: FilledButton(
+                        // [OCR 수정]
+                        onPressed: () {
+                          // [OCR 수정]
+                          // [OCR 수정]
+                          if (edited.title.trim().isEmpty || // [OCR 수정]
+                              edited.title.trim().length > 50 || // [OCR 수정]
+                              edited.quantity < 1 || // [OCR 수정]
+                              edited.quantity > 999 || // [OCR 수정]
+                              edited.total < 0 || // [OCR 수정]
+                              edited.total > 9999999) {
+                            // [OCR 수정]
+                            // [OCR 수정]
+                            _showError(
+                              // [OCR 수정]
+                              sheetContext, // [OCR 수정]
+                              const FormatException(
+                                // [OCR 수정]
+                                '상품명·수량(1~999개)·결제금액을 확인해주세요.', // [OCR 수정]
+                              ), // [OCR 수정]
+                            ); // [OCR 수정]
+                            return; // [OCR 수정]
+                          } // [OCR 수정]
+                          edited.selected =
+                              true; // [OCR 추가] 유효한 수정 확인은 해당 항목도 선택한다.
+                          Navigator.pop(sheetContext, true); // [OCR 수정]
+                        }, // [OCR 수정]
+                        child: const Text('확인했어요'), // [OCR 수정]
+                      ), // [OCR 수정]
+                    ), // [OCR 수정]
+                  ], // [OCR 수정]
+                ), // [OCR 수정]
+              ], // [OCR 수정]
+            ), // [OCR 수정]
+          ), // [OCR 수정]
+        ), // [OCR 수정]
+      ), // [OCR 수정]
+    ); // [OCR 수정]
+    if (!mounted || confirmed != true) return; // [OCR 수정]
+    setState(() {
+      // [OCR 수정]
+      // [OCR 수정]
+      line.ocrProduct = edited.ocrProduct; // [OCR 추가]
+      // [OCR 수정] 이유: 수량 변경은 단가 입력 상태를 유지하고, 총액 직접 수정만 총액 입력으로 전환한다. 취소한 사본은 적용하지 않는다.
+      line.ocrAmountIsUnitPrice = edited.ocrAmountIsUnitPrice; // [OCR 수정]
+      line.ocrInputAmount = edited.ocrInputAmount; // [OCR 수정]
+      line.ocrNotice = ''; // [OCR 추가]
+      line.title = edited.title; // [OCR 추가]
+      line.quantity = edited.quantity; // [OCR 수정]
+      line.total = edited.total; // [OCR 수정]
+      line.selected = edited.selected; // [OCR 수정]
+      line.itemId = edited.itemId; // [OCR 수정]
+      line.spec = edited.spec; // [OCR 수정]
+    }); // [OCR 수정]
+  } // [OCR 수정]
+
+  bool _canJoinSet(ReceiptLineDraft source, ReceiptLineDraft target) {
+    // [OCR 추가]
+    if (_saving || source == target || target.setParentId.isNotEmpty) {
+      // [OCR 수정]
+      return false; // [OCR 추가]
+    } // [OCR 수정]
+    // [OCR 추가] 세트 중첩·순환을 만들거나 이미 묶인 구성품을 잃지 않는다.
+    return !widget.draft.lines.any(
+      (line) => line.setParentId == source.id,
+    ); // [OCR 추가]
+  } // [OCR 추가]
+
+  void _joinSet(ReceiptLineDraft source, ReceiptLineDraft target) {
+    // [OCR 추가]
+    if (!_canJoinSet(source, target)) return; // [OCR 추가]
+    setState(() {
+      // [OCR 추가]
+      source.setParentId = target.id; // [OCR 추가]
+      source.selected = target.selected; // [OCR 추가]
+      final lines = widget.draft.lines; // [OCR 추가]
+      lines.remove(source); // [OCR 추가]
+      var index = lines.indexOf(target) + 1; // [OCR 추가]
+      while (index < lines.length && lines[index].setParentId == target.id) {
+        // [OCR 추가]
+        index++; // [OCR 추가]
+      } // [OCR 추가]
+      lines.insert(index, source); // [OCR 추가]
+    }); // [OCR 추가]
+  } // [OCR 추가]
+
+  void _removeReceiptLine(ReceiptLineDraft line) {
+    // [OCR 추가]
+    // [OCR 추가] 기준 상품 삭제는 구성품을 삭제하지 않고 독립 항목으로 돌린다.
+    for (final child in widget.draft.lines.where(
+      (child) => child.setParentId == line.id,
+    )) {
+      // [OCR 추가]
+      child.setParentId = ''; // [OCR 추가]
+    } // [OCR 추가]
+    widget.draft.lines.remove(line); // [OCR 추가]
+  } // [OCR 추가]
+
+  void _selectSetLine(ReceiptLineDraft line, bool selected) {
+    // [OCR 추가]
+    line.selected = selected; // [OCR 추가]
+    for (final child in widget.draft.lines.where(
+      (child) => child.setParentId == line.id,
+    )) {
+      // [OCR 추가]
+      child.selected = selected; // [OCR 추가]
+    } // [OCR 추가]
+    if (selected && line.setParentId.isNotEmpty) {
+      // [OCR 추가]
+      widget.draft.lines
+              .firstWhere((parent) => parent.id == line.setParentId)
+              .selected =
+          true; // [OCR 추가]
+    } // [OCR 추가]
+  } // [OCR 추가]
+
+  Widget _setReceiptTile(ReceiptLineDraft line, Widget tile) {
+    // [OCR 추가]
+    return DragTarget<ReceiptLineDraft>(
+      // [OCR 추가]
+      key: ValueKey('ocr-set-target-${line.id}'), // [OCR 추가]
+      onWillAcceptWithDetails: (details) =>
+          _canJoinSet(details.data, line), // [OCR 추가]
+      onAcceptWithDetails: (details) =>
+          _joinSet(details.data, line), // [OCR 추가]
+      builder: (context, candidates, rejected) => Material(
+        // [OCR 추가]
+        color: candidates.isEmpty
+            ? Colors.transparent
+            : AppColors.secondary, // [OCR 추가]
+        child: Padding(
+          // [OCR 수정] 드롭 강조도 Material에서 그려 기존 터치 효과를 가리지 않는다.
+          padding: EdgeInsets.only(
+            left: line.setParentId.isEmpty ? 0 : 16,
+          ), // [OCR 추가]
+          child: LongPressDraggable<ReceiptLineDraft>(
+            // [OCR 추가]
+            key: ValueKey('ocr-set-drag-${line.id}'), // [OCR 추가]
+            data: line, // [OCR 추가]
+            maxSimultaneousDrags: _saving ? 0 : 1, // [OCR 추가]
+            feedback: Material(
+              // [OCR 추가]
+              color: AppColors.surface, // [OCR 추가]
+              elevation: 4, // [OCR 추가]
+              borderRadius: BorderRadius.circular(12), // [OCR 추가]
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(line.title),
+              ), // [OCR 추가]
+            ), // [OCR 추가]
+            childWhenDragging: Opacity(opacity: .35, child: tile), // [OCR 추가]
+            child: Column(
+              // [OCR 추가]
+              children: [
+                // [OCR 추가]
+                tile, // [OCR 추가]
+                if (line.setParentId.isNotEmpty) // [OCR 추가]
+                  TextButton(
+                    // [OCR 추가]
+                    key: ValueKey('ocr-set-unlink-${line.id}'), // [OCR 추가]
+                    onPressed: _saving
+                        ? null
+                        : () =>
+                              setState(() => line.setParentId = ''), // [OCR 추가]
+                    child: const Text('세트 해제'), // [OCR 추가]
+                  ), // [OCR 추가]
+              ], // [OCR 추가]
+            ), // [OCR 추가]
+          ), // [OCR 추가]
+        ), // [OCR 추가]
+      ), // [OCR 추가]
+    ); // [OCR 추가]
+  } // [OCR 추가]
+
+  String _reviewSubtitle(ReceiptLineDraft line) {
+    // [OCR 추가]
+    // [OCR 추가]
+    final price =
+        line.unitPrice ==
+            null // [OCR 추가]
+        ? '수량·금액을 확인해주세요' // [OCR 추가]
+        : '개당 ${_formatWon(line.unitPrice!)} · ${line.quantity}개'; // [OCR 추가]
+    if (line.setParentId.isNotEmpty) {
+      // [OCR 추가]
+      final parent = widget.draft.lines.firstWhere(
+        (parent) => parent.id == line.setParentId,
+      ); // [OCR 추가]
+      return '${parent.title} 세트 구성품\n$price'; // [OCR 추가]
+    } // [OCR 추가]
+    if (line.ocrNotice.isEmpty) return price; // [OCR 추가]
+    return '${line.ocrNotice}\n$price'; // [OCR 추가]
+  } // [OCR 추가]
 
   @override
   Widget build(BuildContext context) {
@@ -1928,151 +2757,415 @@ class _ReceiptReviewScreenState extends State<ReceiptReviewScreen> {
         onPressed: _saving || count == 0 ? null : _save,
       ),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(20),
-          children: [
-            Text(
-              '가격만 한번 확인해 주세요',
-              style: Theme.of(
-                context,
-              ).textTheme.headlineLarge?.copyWith(fontSize: 25),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              '다르면 해당 금액만 톡 눌러 고치면 돼요.',
-              style: TextStyle(color: AppColors.muted),
-            ),
-            const SizedBox(height: 24),
-            const Text('어디서 샀나요?'),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _store,
-              maxLength: 50,
-              decoration: const InputDecoration(
-                counterText: '',
-                prefixIcon: Padding(
-                  padding: EdgeInsets.all(14),
-                  child: DesignIcon('IconStore', screen: '34-248'),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text('언제 샀나요?'),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _date,
-              readOnly: true,
-              onTap: _pickDate,
-              decoration: const InputDecoration(
-                prefixIcon: Padding(
-                  padding: EdgeInsets.all(14),
-                  child: DesignIcon('IconCalendar', screen: '34-248'),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    '산 품목',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-                Text('$count개', style: const TextStyle(color: AppColors.muted)),
-              ],
-            ),
-            const SizedBox(height: 12),
-            PaperCard(
-              child: Column(
-                children: [
-                  for (var index = 0; index < lines.length; index++) ...[
-                    if (index > 0)
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider(height: 1),
-                      ),
-                    ListTile(
-                      onTap: _saving
-                          ? null
-                          : () => _editLine(lines[index], index),
-                      title: Text(
-                        lines[index].title.isEmpty
-                            ? '상품명을 입력해주세요'
-                            : lines[index].title,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: lines[index].selected
-                              ? AppColors.ink
-                              : AppColors.muted,
+        child: LayoutBuilder(
+          // [OCR 수정]
+          builder: (context, constraints) => Column(
+            // [OCR 수정]
+            children: [
+              // [OCR 수정]
+              // [OCR 수정]
+              if (widget.draft.ocrPages.length > 1) // [OCR 추가]
+                Row(
+                  // [OCR 추가]
+                  mainAxisAlignment: MainAxisAlignment.center, // [OCR 추가]
+                  children: [
+                    // [OCR 추가]
+                    IconButton(
+                      // [OCR 추가]
+                      key: const ValueKey('receipt-previous-photo'), // [OCR 추가]
+                      tooltip: '이전 사진', // [OCR 추가]
+                      onPressed:
+                          _saving ||
+                              _photoIndex ==
+                                  0 // [OCR 추가]
+                          ? null // [OCR 추가]
+                          : () => setState(() {
+                              // [OCR 추가]
+                              _photoIndex--; // [OCR 추가]
+                              _photoInteracting = false; // [OCR 추가]
+                            }), // [OCR 추가]
+                      icon: const Icon(Icons.chevron_left), // [OCR 추가]
+                    ), // [OCR 추가]
+                    Text(
+                      // [OCR 추가]
+                      '${_receiptPageLabel(_photoIndex)} / 총 ${widget.draft.ocrPages.length}장', // [OCR 수정]
+                    ), // [OCR 추가]
+                    IconButton(
+                      // [OCR 추가]
+                      key: const ValueKey('receipt-next-photo'), // [OCR 추가]
+                      tooltip: '다음 사진', // [OCR 추가]
+                      onPressed: // [OCR 추가]
+                          _saving || // [OCR 추가]
+                              _photoIndex ==
+                                  widget.draft.ocrPages.length -
+                                      1 // [OCR 추가]
+                          ? null // [OCR 추가]
+                          : () => setState(() {
+                              // [OCR 추가]
+                              _photoIndex++; // [OCR 추가]
+                              _photoInteracting = false; // [OCR 추가]
+                            }), // [OCR 추가]
+                      icon: const Icon(Icons.chevron_right), // [OCR 추가]
+                    ), // [OCR 추가]
+                  ], // [OCR 추가]
+                ), // [OCR 추가]
+              if (_activePhoto != null) // [OCR 추가]
+                SizedBox(
+                  // [OCR 수정]
+                  height: (constraints.maxHeight * .35).clamp(
+                    // [OCR 수정]
+                    0.0, // [OCR 수정]
+                    240.0, // [OCR 수정]
+                  ), // [OCR 추가]
+                  child: ReceiptReviewPhoto(
+                    onInteractionChanged: _photoInteractionChanged, // [OCR 추가]
+                    // [OCR 수정]
+                    key: ValueKey(
+                      // [OCR 추가]
+                      'receipt-review-photo-$_photoIndex', // [OCR 추가]
+                    ), // [OCR 추가] 장 전환 시 확대 상태를 초기화한다.
+                    path: _activePhoto!.photoPath, // [OCR 수정]
+                    photoBytes: _activePhoto!.photoBytes, // [OCR 수정]
+                    regions: [
+                      // [OCR 수정]
+                      // [OCR 추가]
+                      for (final line in lines.where(
+                        // [OCR 수정]
+                        (line) => // [OCR 추가]
+                            line.selected && // [OCR 추가]
+                            line.receiptPhotoIndex == _photoIndex, // [OCR 수정]
+                      )) ...[
+                        // [OCR 수정]
+                        // [OCR 추가]
+                        if (line.ocrProduct != null) // [OCR 수정]
+                          line.ocrProduct!, // [OCR 추가]
+                        if (line.ocrAmount != null) line.ocrAmount!, // [OCR 추가]
+                      ], // [OCR 추가]
+                    ], // [OCR 수정]
+                  ), // [OCR 추가]
+                ), // [OCR 추가]
+              Expanded(
+                // [OCR 수정]
+                child: ListView(
+                  controller: _receiptScroll, // [OCR 추가]
+                  physics:
+                      _photoInteracting // [OCR 추가]
+                      ? const NeverScrollableScrollPhysics() // [OCR 추가]
+                      : null, // [OCR 추가]
+                  // [OCR 수정]
+                  // [OCR 수정]
+                  padding: const EdgeInsets.all(20), // [OCR 수정]
+                  children: [
+                    Text(
+                      // [OCR 수정]
+                      '가격만 한번 확인해 주세요', // [OCR 수정]
+                      style:
+                          Theme.of(
+                            // [OCR 수정]
+                            context, // [OCR 수정]
+                          ).textTheme.headlineLarge?.copyWith(
+                            fontSize: 25,
+                          ), // [OCR 수정]
+                    ), // [OCR 수정]
+                    const SizedBox(height: 4), // [OCR 수정]
+                    const Text(
+                      // [OCR 수정]
+                      '다르면 해당 금액만 톡 눌러 고치면 돼요.', // [OCR 수정]
+                      style: TextStyle(color: AppColors.muted), // [OCR 수정]
+                    ), // [OCR 수정]
+                    const SizedBox(height: 24), // [OCR 수정]
+                    const Text('어디서 샀나요?'), // [OCR 수정]
+                    const SizedBox(height: 8), // [OCR 수정]
+                    TextField(
+                      // [OCR 수정]
+                      controller: _store, // [OCR 수정]
+                      maxLength: 50, // [OCR 수정]
+                      decoration: const InputDecoration(
+                        // [OCR 수정]
+                        counterText: '', // [OCR 수정]
+                        prefixIcon: Padding(
+                          // [OCR 수정]
+                          padding: EdgeInsets.all(14), // [OCR 수정]
+                          child: DesignIcon(
+                            'IconStore',
+                            screen: '34-248',
+                          ), // [OCR 수정]
+                        ), // [OCR 수정]
+                      ), // [OCR 수정]
+                    ), // [OCR 수정]
+                    const SizedBox(height: 20), // [OCR 수정]
+                    Row(
+                      children: [
+                        const Expanded(child: Text('언제 샀나요?')), // [OCR 수정]
+                        if (_activePhoto != null)
+                          TextButton(
+                            key: const ValueKey(
+                              'receipt-date-region',
+                            ), // [OCR 추가]
+                            onPressed: _saving
+                                ? null
+                                : _editDateRegion, // [OCR 추가]
+                            child: const Text('영수증에서 날짜 수정'), // [OCR 추가]
+                          ), // [OCR 추가]
+                      ],
+                    ), // [OCR 수정]
+                    const SizedBox(height: 8), // [OCR 수정]
+                    TextField(
+                      // [OCR 수정]
+                      controller: _date, // [OCR 수정]
+                      readOnly: true, // [OCR 수정]
+                      onTap: _pickDate, // [OCR 수정]
+                      decoration: const InputDecoration(
+                        // [OCR 수정]
+                        prefixIcon: Padding(
+                          // [OCR 수정]
+                          padding: EdgeInsets.all(14), // [OCR 수정]
+                          child: DesignIcon(
+                            'IconCalendar',
+                            screen: '34-248',
+                          ), // [OCR 수정]
+                        ), // [OCR 수정]
+                      ), // [OCR 수정]
+                    ), // [OCR 수정]
+                    const SizedBox(height: 24), // [OCR 수정]
+                    Row(
+                      // [OCR 수정]
+                      children: [
+                        // [OCR 수정]
+                        Expanded(
+                          // [OCR 수정]
+                          child: Text(
+                            // [OCR 수정]
+                            '산 품목', // [OCR 수정]
+                            style: Theme.of(
+                              context,
+                            ).textTheme.headlineSmall, // [OCR 수정]
+                          ),
+                        ),
+                        Text(
+                          // [OCR 수정]
+                          '$count개', // [OCR 수정]
+                          style: const TextStyle(
+                            color: AppColors.muted,
+                          ), // [OCR 수정]
+                        ), // [OCR 수정]
+                      ], // [OCR 수정]
+                    ), // [OCR 수정]
+                    const SizedBox(height: 12), // [OCR 수정]
+                    PaperCard(
+                      // [OCR 수정]
+                      child: Material(
+                        // [OCR 수정]
+                        // [OCR 추가]
+                        // [OCR 추가] 기존 카드 장식을 유지하면서 ListTile와 터치 효과의 Material 조상을 제공한다.
+                        type: MaterialType.transparency, // [OCR 추가]
+                        child: Column(
+                          // [OCR 수정]
+                          children: [
+                            // [OCR 수정]
+                            for (
+                              // [OCR 수정]
+                              var index = 0; // [OCR 수정]
+                              index < lines.length; // [OCR 수정]
+                              index++ // [OCR 수정]
+                            ) ...[
+                              // [OCR 수정]
+                              if (index > 0) // [OCR 수정]
+                                const Padding(
+                                  // [OCR 수정]
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ), // [OCR 수정]
+                                  child: Divider(height: 1), // [OCR 수정]
+                                ), // [OCR 수정]
+                              _setReceiptTile(
+                                lines[index],
+                                ListTile(
+                                  // [OCR 수정]
+                                  leading: Checkbox(
+                                    // [OCR 수정]
+                                    value: lines[index].selected, // [OCR 수정]
+                                    onChanged:
+                                        _saving // [OCR 수정]
+                                        ? null // [OCR 수정]
+                                        : (value) => setState(
+                                            // [OCR 수정]
+                                            () => _selectSetLine(
+                                              lines[index],
+                                              value ?? false,
+                                            ), // [OCR 수정]
+                                          ), // [OCR 수정]
+                                  ), // [OCR 추가]
+                                  onTap:
+                                      _saving // [OCR 수정]
+                                      ? null // [OCR 수정]
+                                      : () => _editLine(
+                                          lines[index],
+                                          index,
+                                        ), // [OCR 수정]
+                                  title: Text(
+                                    // [OCR 수정]
+                                    lines[index]
+                                            .title
+                                            .isEmpty // [OCR 수정]
+                                        ? '상품명을 입력해주세요' // [OCR 수정]
+                                        : lines[index].title, // [OCR 수정]
+                                    style: TextStyle(
+                                      // [OCR 수정]
+                                      fontSize: 14, // [OCR 수정]
+                                      color:
+                                          lines[index]
+                                              .selected // [OCR 수정]
+                                          ? AppColors
+                                                .ink // [OCR 수정]
+                                          : AppColors.muted, // [OCR 수정]
+                                    ), // [OCR 수정]
+                                  ), // [OCR 수정]
+                                  subtitle: Text(
+                                    widget.draft.ocrPages.length >
+                                            1 // [OCR 추가]
+                                        ? '${_receiptPageLabel(lines[index].receiptPhotoIndex)} · ${_reviewSubtitle(lines[index])}' // [OCR 수정]
+                                        : _reviewSubtitle(
+                                            // [OCR 추가]
+                                            lines[index], // [OCR 추가]
+                                          ), // [OCR 수정]
+                                  ), // [OCR 수정]
+                                  trailing: Row(
+                                    // [OCR 수정]
+                                    mainAxisSize: MainAxisSize.min, // [OCR 수정]
+                                    children: [
+                                      // [OCR 수정]
+                                      Text(
+                                        // [OCR 수정]
+                                        lines[index]
+                                                .selected // [OCR 수정]
+                                            ? _formatWon(
+                                                lines[index].total,
+                                              ) // [OCR 수정]
+                                            : '제외', // [OCR 수정]
+                                        style: const TextStyle(
+                                          // [OCR 수정]
+                                          fontWeight:
+                                              FontWeight.w700, // [OCR 수정]
+                                        ), // [OCR 수정]
+                                      ), // [OCR 수정]
+                                      const SizedBox(width: 8), // [OCR 수정]
+                                      const DesignIcon(
+                                        // [OCR 수정]
+                                        'IconEdit', // [OCR 수정]
+                                        screen: '34-248', // [OCR 수정]
+                                      ), // [OCR 수정]
+                                    ], // [OCR 수정]
+                                  ), // [OCR 수정]
+                                ),
+                              ), // [OCR 수정]
+                              if (_photoForLine(lines[index]) != // [OCR 추가]
+                                      null && // [OCR 수정]
+                                  lines[index].ocrProduct != null) // [OCR 추가]
+                                TextButton(
+                                  // [OCR 수정]
+                                  onPressed:
+                                      _saving // [OCR 수정]
+                                      ? null // [OCR 수정]
+                                      : () => _selectFromReceipt(
+                                          lines[index],
+                                        ), // [OCR 수정]
+                                  child: const Text('영수증에서 수정'), // [OCR 수정]
+                                ), // [OCR 추가]
+                            ], // [OCR 수정]
+                          ], // [OCR 수정]
+                        ), // [OCR 수정]
+                      ), // [OCR 추가]
+                    ), // [OCR 수정]
+                    const SizedBox(height: 20), // [OCR 수정]
+                    PaperCard(
+                      // [OCR 수정]
+                      color: AppColors.note, // [OCR 수정]
+                      child: Padding(
+                        // [OCR 수정]
+                        padding: const EdgeInsets.all(16), // [OCR 수정]
+                        child: Row(
+                          // [OCR 수정]
+                          children: [
+                            const Expanded(
+                              // [OCR 수정]
+                              child: Text(
+                                // [OCR 수정]
+                                '모두 합쳐', // [OCR 수정]
+                                style: TextStyle(fontSize: 13), // [OCR 수정]
+                              ),
+                            ),
+                            Text(
+                              // [OCR 수정]
+                              _formatWon(total), // [OCR 수정]
+                              style: const TextStyle(
+                                // [OCR 수정]
+                                fontFamily: 'Jua', // [OCR 수정]
+                                fontSize: 23, // [OCR 수정]
+                                color: AppColors.coral, // [OCR 수정]
+                              ), // [OCR 수정]
+                            ), // [OCR 수정]
+                          ],
                         ),
                       ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            lines[index].selected
-                                ? _formatWon(lines[index].total)
-                                : '제외',
-                            style: const TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                          const SizedBox(width: 8),
-                          const DesignIcon('IconEdit', screen: '34-248'),
-                        ],
-                      ),
-                    ),
+                    ), // [OCR 수정]
+                    TextButton.icon(
+                      // [OCR 수정]
+                      onPressed: _saving ? null : _addLine, // [OCR 수정]
+                      icon: const Icon(Icons.add), // [OCR 수정]
+                      label: const Text('품목 추가'), // [OCR 수정]
+                    ), // [OCR 수정]
+                    if (_activePhoto != null) // [OCR 추가]
+                      TextButton.icon(
+                        // [OCR 수정]
+                        onPressed: _saving
+                            ? null
+                            : () => _selectFromReceipt(), // [OCR 수정]
+                        icon: const Icon(Icons.receipt_long), // [OCR 수정]
+                        label: const Text('영수증에서 항목 추가'), // [OCR 수정]
+                      ), // [OCR 추가]
+                    ExpansionTile(
+                      // [OCR 수정]
+                      title: const Text(
+                        // [OCR 수정]
+                        '가격 비교·공유 설정', // [OCR 수정]
+                        style: TextStyle(fontSize: 14), // [OCR 수정]
+                      ), // [OCR 수정]
+                      children: [
+                        // [OCR 수정]
+                        TextField(
+                          // [OCR 수정]
+                          controller: _condition, // [OCR 수정]
+                          maxLength: 120, // [OCR 수정]
+                          decoration: const InputDecoration(
+                            // [OCR 수정]
+                            labelText: '할인 조건 (선택)', // [OCR 수정]
+                          ), // [OCR 수정]
+                        ), // [OCR 수정]
+                        SwitchListTile(
+                          // [OCR 수정]
+                          contentPadding: EdgeInsets.zero, // [OCR 수정]
+                          value: widget.draft.share, // [OCR 수정]
+                          onChanged:
+                              _saving // [OCR 수정]
+                              ? null // [OCR 수정]
+                              : (value) => // [OCR 수정]
+                                setState(
+                                  () => widget.draft.share = value,
+                                ), // [OCR 수정]
+                          title: const Text('비교 가능한 가격을 익명 공개'), // [OCR 수정]
+                          subtitle: const Text(
+                            '계정 정보와 원본 사진은 공개하지 않아요.',
+                          ), // [OCR 수정]
+                        ), // [OCR 수정]
+                      ], // [OCR 수정]
+                    ), // [OCR 수정]
                   ],
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            PaperCard(
-              color: AppColors.note,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: Text('모두 합쳐', style: TextStyle(fontSize: 13)),
-                    ),
-                    Text(
-                      _formatWon(total),
-                      style: const TextStyle(
-                        fontFamily: 'Jua',
-                        fontSize: 23,
-                        color: AppColors.coral,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            TextButton.icon(
-              onPressed: _saving ? null : _addLine,
-              icon: const Icon(Icons.add),
-              label: const Text('품목 추가'),
-            ),
-            ExpansionTile(
-              title: const Text('가격 비교·공유 설정', style: TextStyle(fontSize: 14)),
-              children: [
-                TextField(
-                  controller: _condition,
-                  maxLength: 120,
-                  decoration: const InputDecoration(labelText: '할인 조건 (선택)'),
-                ),
-                SwitchListTile(
-                  contentPadding: EdgeInsets.zero,
-                  value: widget.draft.share,
-                  onChanged: _saving
-                      ? null
-                      : (value) => setState(() => widget.draft.share = value),
-                  title: const Text('비교 가능한 가격을 익명 공개'),
-                  subtitle: const Text('계정 정보와 원본 사진은 공개하지 않아요.'),
-                ),
-              ],
-            ),
-          ],
-        ),
+                ), // [OCR 수정]
+              ), // [OCR 수정]
+            ], // [OCR 수정]
+          ), // [OCR 수정]
+        ), // [OCR 수정]
       ),
     );
   }
@@ -2135,31 +3228,53 @@ class _ReceiptLineCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TextFormField(
-                    key: ValueKey('receipt-quantity-${line.id}'),
-                    initialValue: '${line.quantity}',
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    decoration: const InputDecoration(labelText: '수량'),
-                    onChanged: (value) =>
-                        line.quantity = int.tryParse(value) ?? 0,
+                  child: _ReceiptQuantityEditor(
+                    // [OCR 수정]
+                    lineId: line.id, // [OCR 추가]
+                    quantity: line.quantity, // [OCR 추가]
+                    onChanged: (value) {
+                      // [OCR 수정]
+                      line.quantity = value; // [OCR 수정]
+                      // [OCR 수정] 단가 입력은 수량을 바꿔도 단가를 유지하고 결제금액을 계산한다.
+                      if (line.ocrAmountIsUnitPrice &&
+                          line.ocrInputAmount != null) {
+                        line.total =
+                            line.ocrInputAmount! * line.quantity; // [OCR 수정]
+                      }
+                      onChanged();
+                    },
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextFormField(
-                    key: ValueKey('receipt-total-${line.id}'),
+                    // [OCR 수정] 이유: 수량 변경으로 계산한 총액을 입력칸에도 반영하되 총액을 타이핑할 때는 필드를 다시 만들지 않는다.
+                    key: ValueKey(
+                      // [OCR 수정]
+                      'receipt-total-${line.id}-${line.quantity}', // [OCR 수정]
+                    ), // [OCR 수정]
                     initialValue: '${line.total}',
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: const InputDecoration(labelText: '상품 결제금액'),
-                    onChanged: (value) =>
-                        line.total = int.tryParse(value) ?? -1,
+                    onChanged: (value) {
+                      line.total = int.tryParse(value) ?? -1; // [OCR 수정]
+                      // [OCR 추가] 이유: 총액 직접 수정 뒤에는 수량을 바꿔도 총액을 유지하며 개당 가격을 계산한다.
+                      line.ocrAmountIsUnitPrice = false; // [OCR 추가]
+                      line.ocrInputAmount = line.total; // [OCR 추가]
+                      onChanged();
+                    }, // [OCR 수정]
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
+            Text(
+              line.unitPrice == null
+                  ? '개당 가격: 수량·금액을 확인해주세요'
+                  : '개당 가격: ${_formatWon(line.unitPrice!)}',
+            ), // [OCR 수정]
+            const SizedBox(height: 8), // [OCR 수정]
             DropdownButtonFormField<String>(
               initialValue: items.any((item) => item.id == line.itemId)
                   ? line.itemId
@@ -2192,6 +3307,102 @@ class _ReceiptLineCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+// [OCR 추가] 입력 중인 글자를 유지하며 버튼으로 바꾼 수량도 같은 입력칸에 반영한다.
+class _ReceiptQuantityEditor extends StatefulWidget {
+  const _ReceiptQuantityEditor({
+    required this.lineId,
+    required this.quantity,
+    required this.onChanged,
+  });
+  final String lineId;
+  final int quantity;
+  final ValueChanged<int> onChanged;
+
+  @override
+  State<_ReceiptQuantityEditor> createState() => _ReceiptQuantityEditorState();
+}
+
+class _ReceiptQuantityEditorState extends State<_ReceiptQuantityEditor> {
+  late final TextEditingController _quantity = TextEditingController(
+    text: '${widget.quantity}',
+  );
+
+  @override
+  void didUpdateWidget(covariant _ReceiptQuantityEditor oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // [OCR 추가] 빈 직접 입력은 검증까지 유지하고 버튼 변경 때만 표시를 갱신한다.
+    if (widget.quantity != (int.tryParse(_quantity.text) ?? 0)) {
+      _quantity.text = '${widget.quantity}';
+    }
+  }
+
+  @override
+  void dispose() {
+    _quantity.dispose();
+    super.dispose();
+  }
+
+  void _changeQuantity(int delta) {
+    // [OCR 추가] 인식 실패의0에서 늘리면1이 되지만 확인 전 원본 항목에는 적용하지 않는다.
+    final next = (widget.quantity + delta).clamp(1, 999);
+    _quantity.text = '$next';
+    widget.onChanged(next);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final arrowStyle = IconButton.styleFrom(
+      // [OCR 추가] 기존 OCR 버튼 색상·터치 크기를 사용한다.
+      backgroundColor: AppColors.secondary,
+      foregroundColor: AppColors.primary,
+      disabledBackgroundColor: AppColors.surface,
+      disabledForegroundColor: AppColors.muted,
+      minimumSize: const Size(48, 48),
+      side: const BorderSide(color: AppColors.border),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    );
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            key: ValueKey('receipt-quantity-${widget.lineId}'),
+            controller: _quantity,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: const InputDecoration(labelText: '수량'),
+            onChanged: (value) => widget.onChanged(int.tryParse(value) ?? 0),
+          ),
+        ),
+        const SizedBox(width: 4),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              key: ValueKey('receipt-quantity-up-${widget.lineId}'),
+              tooltip: '수량 늘리기',
+              style: arrowStyle,
+              onPressed: widget.quantity >= 999
+                  ? null
+                  : () => _changeQuantity(1),
+              icon: const Icon(Icons.arrow_drop_up),
+            ),
+            const SizedBox(height: 4),
+            IconButton(
+              key: ValueKey('receipt-quantity-down-${widget.lineId}'),
+              tooltip: '수량 줄이기',
+              style: arrowStyle,
+              onPressed: widget.quantity <= 1
+                  ? null
+                  : () => _changeQuantity(-1),
+              icon: const Icon(Icons.arrow_drop_down),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -2659,7 +3870,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   contentPadding: EdgeInsets.zero,
                   title: Text(row.title),
                   subtitle: Text(
-                    '${row.purchase!.quantity}개 · ${_formatWon(row.purchase!.total)}',
+                    '${row.purchase!.setParentId.isEmpty ? '' : '세트 구성품 · '}${row.purchase!.quantity}개 · ${_formatWon(row.purchase!.total)}', // [OCR 수정]
                   ),
                   onTap: () {
                     Navigator.pop(context);

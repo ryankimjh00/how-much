@@ -1,0 +1,44 @@
+{
+  "device": "Samsung SM-A336N",
+  "abi": "arm64-v8a",
+  "apk_sha256": "53bbf4397dd17626112cf20d224f6fcbf63b40affa2ce6b757a6c8fbd6bc59d4",
+  "source": "현재 실기기의 실제 ML Kit 후보 화면 접근성 좌표. ML Kit 원본 좌표를 직접 추출한 자료가 아니다.",
+  "quantity_boxes": [
+    {
+      "text": "1",
+      "display_bounds": [
+        691,
+        868,
+        724,
+        927
+      ]
+    },
+    {
+      "text": "1",
+      "display_bounds": [
+        683,
+        873,
+        712,
+        922
+      ]
+    }
+  ],
+  "physical_padding_per_side": 11.25,
+  "padding_reason": "기존 표시 코드의 4dp × 실기기 2.8125배. 화면 확대 없이 사진을 세로 이동했다.",
+  "inferred_unpadded_bounds": [
+    [
+      702.25,
+      879.25,
+      712.75,
+      915.75
+    ],
+    [
+      694.25,
+      884.25,
+      700.75,
+      910.75
+    ]
+  ],
+  "horizontal_gap_pixels": 1.5,
+  "rounding_note": "접근성 좌표는 정수 반올림을 포함하므로 추정한 좌표·틈에는 약 1px 오차가 있을 수 있다."
+}

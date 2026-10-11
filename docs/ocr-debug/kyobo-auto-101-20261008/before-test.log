@@ -1,0 +1,27 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_full_ocr_test.dart
+00:00 +0: 교보101 중복 수량: 첫 기준0에서도 이미 읽힌 수량·금액을 재사용한다
+00:00 +0 -1: 교보101 중복 수량: 첫 기준0에서도 이미 읽힌 수량·금액을 재사용한다 [E]
+  Expected: [1, 1, 1]
+    Actual: MappedListIterable<ReceiptLineDraft, int>:[1, 0, 1]
+     Which: at location [1] is <0> instead of <1>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_automatic_full_ocr_test.dart 33:7      main.<fn>
+  
+00:00 +0 -1: 교보101 중복 수량: 첫 기준1에서도 이미 읽힌 수량·금액을 재사용한다
+00:00 +1 -1: 숫자 열의 같은 글자 중복은 하나로 연결하고 다른 행·값은 유지한다
+00:00 +1 -2: 숫자 열의 같은 글자 중복은 하나로 연결하고 다른 행·값은 유지한다 [E]
+  Expected: 'first'
+    Actual: <null>
+     Which: not an <Instance of 'String'>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_automatic_full_ocr_test.dart 53:5      main.<fn>
+  
+00:00 +1 -2: Some tests failed.
+
+Failing tests:
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_full_ocr_test.dart: 교보101 중복 수량: 첫 기준0에서도 이미 읽힌 수량·금액을 재사용한다
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_full_ocr_test.dart: 숫자 열의 같은 글자 중복은 하나로 연결하고 다른 행·값은 유지한다

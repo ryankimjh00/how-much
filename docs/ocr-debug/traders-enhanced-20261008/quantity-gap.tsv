@@ -1,0 +1,22 @@
+SOURCE	34	59	Size(941.0, 1672.0)
+SEED	파실 딥클린 파워젤	Rect.fromLTRB(94.0, 456.0, 406.0, 494.0)	Rect.fromLTRB(668.0, 461.0, 690.0, 493.0)	Rect.fromLTRB(771.0, 464.0, 868.0, 493.0)
+SCAN	Rect.fromLTRB(75.0, 430.0, 425.0, 1123.3)	파실 딥클린 파워젤:Rect.fromLTRB(96.0, 458.0, 407.0, 495.0) | 포인트카드:Rect.fromLTRB(176.0, 498.0, 341.0, 528.0) | 달콤한 베지밀B 검은:Rect.fromLTRB(84.0, 534.0, 416.0, 565.0) | 스너글 섬유유연제 블:Rect.fromLTRB(108.0, 570.0, 417.0, 601.0) | 닥터물알티케어칫:Rect.fromLTRB(108.0, 605.0, 416.0, 636.0) | 낙지젓1kg:Rect.fromLTRB(74.0, 639.0, 259.0, 675.0) | 국내산냉동옛날삼겹습:Rect.fromLTRB(107.0, 695.0, 416.0, 733.0) | 해표 식용유 1.9L*2£:Rect.fromLTRB(107.0, 735.0, 417.0, 766.0) | 포인트카드:Rect.fromLTRB(176.0, 772.0, 339.0, 802.0) | TS 뽑아쓰는 키친타:Rect.fromLTRB(94.0, 806.0, 416.0, 841.0) | 설탕대신 스타비아 1:Rect.fromLTRB(108.0, 845.0, 416.0, 876.0) | TS 고칼술 저지방:Rect.fromLTRB(106.0, 880.0, 373.0, 915.0) | 유한락스 레귤러:Rect.fromLTRB(94.0, 935.0, 356.0, 971.0) | 슈가버블 레몬크러쉬:Rect.fromLTRB(108.0, 975.0, 416.0, 1005.0) | 코디 더 부드러운 룰:Rect.fromLTRB(95.0, 1008.0, 416.0, 1047.0) | 어기지즈 1단계 850g:Rect.fromLTRB(108.0, 1049.0, 416.0, 1083.0) | 마미손 고무장갑 6입:Rect.fromLTRB(109.0, 1086.0, 416.0, 1117.0)
+ACCUMULATED	34	59	103
+LINE	파실 딥클린 파워젤	3	80940	true		Rect.fromLTRB(668.0, 461.0, 690.0, 493.0)	Rect.fromLTRB(771.0, 464.0, 868.0, 493.0)
+LINE	포인트카드	0	0	false	구매 상품인지 확인해주세요.		
+LINE	달콤한 베지밀B 검은	2	33760	true		Rect.fromLTRB(663.2, 532.0, 694.8, 564.0)	Rect.fromLTRB(766.0, 532.0, 871.0, 565.0)
+LINE	스너글 섬유유연제 블	2	37960	true		Rect.fromLTRB(663.7, 569.0, 695.3, 601.0)	Rect.fromLTRB(765.0, 569.0, 871.0, 602.0)
+LINE	닥터벼를알티케어칫솔	1	12980	true		Rect.fromLTRB(662.2, 604.0, 693.8, 636.0)	Rect.fromLTRB(767.4, 604.0, 870.6, 635.0)
+LINE	낙지젓1kg	1	17980	true		Rect.fromLTRB(662.2, 641.0, 693.8, 673.0)	Rect.fromLTRB(768.5, 644.0, 872.5, 674.0)
+LINE	국내산냉동옛날삼겹살	1	36980	true		Rect.fromLTRB(662.2, 698.5, 693.8, 730.5)	Rect.fromLTRB(766.4, 700.0, 872.6, 731.0)
+LINE	해표 식용유 1.9L*2입	1	13980	true		Rect.fromLTRB(662.2, 734.0, 693.8, 766.0)	Rect.fromLTRB(768.0, 735.0, 871.0, 768.0)
+LINE	포인트카드	0	0	false	구매 상품인지 확인해주세요.		
+LINE	TS 뽑아쓰는 키친타월	1	13480	true		Rect.fromLTRB(662.2, 807.5, 693.8, 839.5)	Rect.fromLTRB(768.5, 811.0, 872.5, 841.0)
+LINE	설탕대신 스타비아	1	11980	true		Rect.fromLTRB(662.2, 844.0, 693.8, 876.0)	Rect.fromLTRB(768.2, 844.0, 870.8, 876.0)
+LINE	TS 고칼솥 저지방	2	11760	true		Rect.fromLTRB(664.2, 882.0, 695.8, 914.0)	Rect.fromLTRB(768.4, 884.0, 872.6, 915.0)
+LINE	유한락스 레귤러 5.8L	1	8880	true		Rect.fromLTRB(662.2, 937.0, 693.8, 969.0)	Rect.fromLTRB(795.0, 938.0, 873.0, 971.0)
+LINE	슈가버블 레몬크러쉬	1	12980	true		Rect.fromLTRB(662.2, 974.5, 693.8, 1006.5)	Rect.fromLTRB(768.5, 977.0, 872.5, 1007.0)
+LINE	코디 더 부드러운 룰	1	14980	true		Rect.fromLTRB(662.2, 1011.5, 693.8, 1043.5)	Rect.fromLTRB(768.0, 1012.0, 871.0, 1045.0)
+LINE	어기지즈 1단계 850g	1	19980	true		Rect.fromLTRB(662.7, 1048.0, 694.3, 1080.0)	Rect.fromLTRB(768.4, 1051.0, 872.6, 1082.0)
+LINE	마미손 고무장갑 6입	1	9980	true		Rect.fromLTRB(662.2, 1085.5, 693.8, 1117.5)	Rect.fromLTRB(783.4, 1088.0, 872.6, 1119.0)
+COUNTS	1	0	7429

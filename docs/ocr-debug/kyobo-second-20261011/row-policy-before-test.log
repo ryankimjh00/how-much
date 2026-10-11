@@ -1,0 +1,19 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_accumulation_test.dart
+00:00 +0: 첫 상품명과 수량·금액이 같은 행이면 열 전체 이름으로 병합하지 않는다
+00:00 +0 -1: 첫 상품명과 수량·금액이 같은 행이면 열 전체 이름으로 병합하지 않는다 [E]
+  Expected: [
+              Instance of 'ReceiptOcrCandidate',
+              Instance of 'ReceiptOcrCandidate',
+              Instance of 'ReceiptOcrCandidate'
+            ]
+    Actual: [Instance of 'ReceiptOcrCandidate', Instance of 'ReceiptOcrCandidate']
+     Which: at location [1] is <Instance of 'ReceiptOcrCandidate'> instead of <Instance of 'ReceiptOcrCandidate'>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_accumulation_test.dart 81:5            main.<fn>
+  
+00:00 +0 -1: Some tests failed.
+
+Failing tests:
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_accumulation_test.dart: 첫 상품명과 수량·금액이 같은 행이면 열 전체 이름으로 병합하지 않는다

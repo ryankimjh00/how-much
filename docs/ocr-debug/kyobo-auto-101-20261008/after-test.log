@@ -1,0 +1,37 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_full_ocr_test.dart
+00:00 +0: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_full_ocr_test.dart: 교보101 중복 수량: 첫 기준0에서도 이미 읽힌 수량·금액을 재사용한다
+00:00 +1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_full_ocr_test.dart: 교보101 중복 수량: 첫 기준1에서도 이미 읽힌 수량·금액을 재사용한다
+00:00 +2: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_full_ocr_test.dart: 숫자 열의 같은 글자 중복은 하나로 연결하고 다른 행·값은 유지한다
+00:00 +3: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 병렬 금액 처리 중 첫 수량 열 성공값을 재인식 없이 사용한다
+00:00 +4: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 수량을 실제 첫 성공으로 보존하고 추가 열 확인을 생략한다: stable
+00:00 +5: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 수량을 실제 첫 성공으로 보존하고 추가 열 확인을 생략한다: missing
+00:00 +6: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 수량을 실제 첫 성공으로 보존하고 추가 열 확인을 생략한다: conflict
+00:00 +7: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 수량을 실제 첫 성공으로 보존하고 추가 열 확인을 생략한다: partial-conflict
+00:00 +8: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 수량을 실제 첫 성공으로 보존하고 추가 열 확인을 생략한다: cancel
+00:00 +9: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 작게 읽힌 기존 숫자를 재사용해도 첫 수량·금액 높이를 유지한다: false
+00:00 +10: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 작게 읽힌 기존 숫자를 재사용해도 첫 수량·금액 높이를 유지한다: true
+00:00 +11: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 첫 수량 박스의 수정한 크기를 열 탐색과 각 상품 재인식에 그대로 사용한다: false
+00:00 +12: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 첫 수량 박스의 수정한 크기를 열 탐색과 각 상품 재인식에 그대로 사용한다: true
+00:00 +13: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 크롭의 분리 콤마·음수와 행 좌표를 사진 좌표로 복원한다
+00:00 +14: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 같은 값의 서로 다른 행 위치를 보관하고 가까운 행이 유일할 때만 고른다
+00:00 +15: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 탐색은 세 열을 순서대로 읽고 실패한 열만 빈 결과로 유지한다
+00:00 +16: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 열 탐색 중 취소하면 늦은 결과를 버리고 나머지 열은 호출하지 않는다
+00:00 +17: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 자동 선택은 가까운 탐색 행에서만 반복하며 실패해도 옛 숫자를 복원하지 않는다: false
+00:00 +18: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 자동 선택은 가까운 탐색 행에서만 반복하며 실패해도 옛 숫자를 복원하지 않는다: true
+00:00 +19: /home/jhshin/mobile/how-much-ocr/app/test/receipt_column_scan_test.dart: 상품명 열의 새 행을 보완하고 기존 이름과 첫 기준을 중복시키지 않는다
+00:00 +20: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 실기기 표시 좌표 재생: 가로 틈이 작은 두 1은 표시만 합친다
+00:00 +21: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +22: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +23: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +24: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +25: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +26: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +27: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +28: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:00 +29: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 가로 틈이 있는 중복 1도 초기 박스와 수량 버튼은 하나다
+00:01 +30: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:02 +31: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 표시 중복 제거는 원래 객체·다른 값·다른 행·용량·기호를 보존한다
+00:02 +32: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 실제 좌표 재생: original 8개 유지·중복 수량·열 금액 재사용
+00:02 +33: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 실제 좌표 재생: corrected 8개 유지·중복 수량·열 금액 재사용
+00:02 +34: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 검증된 숫자 열도 다음 상품 행이나 서로 다른 값은 임의로 선택하지 않는다
+00:02 +35: All tests passed!

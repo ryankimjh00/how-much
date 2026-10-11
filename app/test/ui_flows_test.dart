@@ -96,7 +96,7 @@ void main() {
     await tester.tap(find.text('서울우유'));
     await tester.pumpAndSettle();
     await tester.enterText(
-      find.byKey(const ValueKey('receipt-total-milk')),
+      find.byKey(const ValueKey('receipt-total-milk-1')), // [OCR 수정]
       '3000',
     );
     await tester.tap(find.text('확인했어요'));

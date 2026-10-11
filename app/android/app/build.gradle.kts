@@ -42,3 +42,8 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // Dart에서 한국어 인식을 요청하므로 기본 라틴어 모델 외에 한국어 모델도 포함한다.
+    implementation("com.google.mlkit:text-recognition-korean:16.0.1")
+}

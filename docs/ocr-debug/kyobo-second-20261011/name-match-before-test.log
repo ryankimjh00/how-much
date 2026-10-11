@@ -1,0 +1,27 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_accumulation_test.dart
+00:00 +0: 상품명 열 글자가 정상 상태여도 좌표로 조각을 합쳐 실제 수량을 재사용한다
+00:00 +1: 상품명 열 글자가 글자 차이 상태여도 좌표로 조각을 합쳐 실제 수량을 재사용한다
+00:00 +1 -1: 상품명 열 글자가 글자 차이 상태여도 좌표로 조각을 합쳐 실제 수량을 재사용한다 [E]
+  Expected: '프리즘 라인 밴드 노트/크림'
+    Actual: '프리즘'
+     Which: is different. Both strings start the same, but the actual value is missing the following trailing characters:  라인 밴드 노트/ ...
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_accumulation_test.dart 57:5            main.<fn>
+  
+00:00 +1 -1: 상품명 열 글자가 문자열 잘림 상태여도 좌표로 조각을 합쳐 실제 수량을 재사용한다
+00:00 +1 -2: 상품명 열 글자가 문자열 잘림 상태여도 좌표로 조각을 합쳐 실제 수량을 재사용한다 [E]
+  Expected: '프리즘 라인 밴드 노트/크림'
+    Actual: '프리즘'
+     Which: is different. Both strings start the same, but the actual value is missing the following trailing characters:  라인 밴드 노트/ ...
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_accumulation_test.dart 57:5            main.<fn>
+  
+00:00 +1 -2: Some tests failed.
+
+Failing tests:
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_accumulation_test.dart: 상품명 열 글자가 글자 차이 상태여도 좌표로 조각을 합쳐 실제 수량을 재사용한다
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_accumulation_test.dart: 상품명 열 글자가 문자열 잘림 상태여도 좌표로 조각을 합쳐 실제 수량을 재사용한다

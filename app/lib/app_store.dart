@@ -375,6 +375,20 @@ class AppStore extends ChangeNotifier {
       throw const FormatException('이미 저장한 영수증입니다.');
     }
 
+    // [OCR 추가] 선택에서 빠진 기준 항목·순환·중첩 세트는 저장 전에 차단한다.
+    for (final line in selected.where((line) => line.setParentId.isNotEmpty)) {
+      // [OCR 추가]
+      final parent = selected
+          .where((candidate) => candidate.id == line.setParentId)
+          .firstOrNull; // [OCR 추가]
+      if (parent == null ||
+          parent.id == line.id ||
+          parent.setParentId.isNotEmpty) {
+        // [OCR 추가]
+        throw const FormatException('세트의 기준 상품과 구성품 선택을 확인해주세요.'); // [OCR 추가]
+      } // [OCR 추가]
+    } // [OCR 추가]
+
     final revision = _revision();
     final registeredAt = DateTime.now().toIso8601String();
     final next = [..._rows];
@@ -423,6 +437,9 @@ class AppStore extends ChangeNotifier {
         share: draft.share,
         spec: spec,
         registeredAt: registeredAt,
+        setParentId: line.setParentId.isEmpty
+            ? ''
+            : 'purchase-${draft.id}-${line.setParentId}', // [OCR 추가]
       );
       final purchaseId = 'purchase-${draft.id}-${line.id}';
       if (next.any((row) => row.id == purchaseId)) {
@@ -501,7 +518,11 @@ class AppStore extends ChangeNotifier {
   List<AppRow> pricesFor(String title) {
     final key = normalizedProduct(title);
     final result = purchaseRows
-        .where((row) => normalizedProduct(row.title) == key)
+        .where(
+          (row) =>
+              row.purchase!.setParentId.isEmpty &&
+              normalizedProduct(row.title) == key,
+        ) // [OCR 수정] 구성품은 단독 가격 이력에서 제외한다.
         .toList();
     result.sort(
       (a, b) => b.purchase!.purchasedOn.compareTo(a.purchase!.purchasedOn),
