@@ -55,23 +55,24 @@ void main() {
         });
         ReceiptRegionSession? endedSession; // [OCR 추가]
         try {
-          final work = OcrService().withReceiptRegionSession(bytes, (
-            session,
-          ) async {
-            endedSession = session; // [OCR 추가]
-            await session.recognizeRegion(firstBounds); // [OCR 추가]
-            final rows = await session.recognizeRegionRows(
-              secondBounds,
-            ); // [OCR 추가]
-            expect(rows, isNotEmpty); // [OCR 추가]
-            expect(
-              rows.first.bounds.left,
-              50,
-            ); // [OCR 추가] 크롭 왼쪽10+응답 왼쪽40으로 원본 좌표를 복원한다.
-            expect(rows.first.bounds.top, 70); // [OCR 추가]
-            expect(closes, 0); // [OCR 추가]
-            return outcome == 'cancel' ? null : rows;
-          });
+          final work = OcrService(engine: 'mlkit').withReceiptRegionSession(
+            bytes,
+            (session) async {
+              endedSession = session; // [OCR 추가]
+              await session.recognizeRegion(firstBounds); // [OCR 추가]
+              final rows = await session.recognizeRegionRows(
+                secondBounds,
+              ); // [OCR 추가]
+              expect(rows, isNotEmpty); // [OCR 추가]
+              expect(
+                rows.first.bounds.left,
+                50,
+              ); // [OCR 추가] 크롭 왼쪽10+응답 왼쪽40으로 원본 좌표를 복원한다.
+              expect(rows.first.bounds.top, 70); // [OCR 추가]
+              expect(closes, 0); // [OCR 추가]
+              return outcome == 'cancel' ? null : rows;
+            },
+          );
           if (outcome == 'error') {
             await expectLater(
               work,
@@ -161,11 +162,14 @@ void main() {
         }); // [OCR 추가]
         try {
           // [OCR 추가]
-          final value = await OcrService().withReceiptRegionSession(
-            bytes,
-            (session) =>
-                session.recognizeQuantityRegion(bounds, horizontalContext: 100),
-          ); // [OCR 추가]
+          final value = await OcrService(engine: 'mlkit')
+              .withReceiptRegionSession(
+                bytes,
+                (session) => session.recognizeQuantityRegion(
+                  bounds,
+                  horizontalContext: 100,
+                ),
+              ); // [OCR 추가]
           expect(
             value,
             quantities.isNotEmpty && quantities.every((v) => v == '1')
@@ -203,20 +207,22 @@ void main() {
         return await release.future;
       });
       try {
-        final work = OcrService().withReceiptRegionSession(bytes, (
-          session,
-        ) async {
-          pending.add(
-            session.recognizeRegion(const ui.Rect.fromLTWH(0, 0, 200, 200)),
-          );
-          pending.add(
-            session.quantitySession!.recognizeRegion(
-              const ui.Rect.fromLTWH(0, 0, 100, 100),
-            ),
-          );
-          await started.future;
-          return null; // [OCR 추가] 인식 진행 중 화면에서 취소한 상태를 재현한다.
-        }, parallelQuantity: true);
+        final work = OcrService(engine: 'mlkit').withReceiptRegionSession(
+          bytes,
+          (session) async {
+            pending.add(
+              session.recognizeRegion(const ui.Rect.fromLTWH(0, 0, 200, 200)),
+            );
+            pending.add(
+              session.quantitySession!.recognizeRegion(
+                const ui.Rect.fromLTWH(0, 0, 100, 100),
+              ),
+            );
+            await started.future;
+            return null; // [OCR 추가] 인식 진행 중 화면에서 취소한 상태를 재현한다.
+          },
+          parallelQuantity: true,
+        );
         await started.future.timeout(const Duration(seconds: 2));
         expect(ids.toSet(), hasLength(2));
         expect(paths.toSet(), hasLength(2));
@@ -254,19 +260,20 @@ void main() {
       });
       try {
         late Future<String> pending; // [OCR 추가]
-        final work = OcrService().withReceiptRegionSession(bytes, (
-          session,
-        ) async {
-          pending = session.recognizeRegion(
-            const ui.Rect.fromLTWH(0, 0, 200, 200),
-          ); // [OCR 추가]
-          await started.future; // [OCR 추가]
-          await expectLater(
-            session.recognizeRegion(const ui.Rect.fromLTWH(0, 0, 30, 30)),
-            throwsStateError,
-          ); // [OCR 추가]
-          return null; // [OCR 추가] 화면 취소로 먼저 반환해도 진행 중인 인식은 정리 전 기다린다.
-        });
+        final work = OcrService(engine: 'mlkit').withReceiptRegionSession(
+          bytes,
+          (session) async {
+            pending = session.recognizeRegion(
+              const ui.Rect.fromLTWH(0, 0, 200, 200),
+            ); // [OCR 추가]
+            await started.future; // [OCR 추가]
+            await expectLater(
+              session.recognizeRegion(const ui.Rect.fromLTWH(0, 0, 30, 30)),
+              throwsStateError,
+            ); // [OCR 추가]
+            return null; // [OCR 추가] 화면 취소로 먼저 반환해도 진행 중인 인식은 정리 전 기다린다.
+          },
+        );
         await started.future; // [OCR 추가]
         expect(closes, 0); // [OCR 추가]
         expect(await File(temporaryPath!).exists(), isTrue); // [OCR 추가]

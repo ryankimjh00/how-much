@@ -89,6 +89,9 @@ List<ReceiptOcrCandidate> _automaticProducts(
   // [OCR 수정]
   // [OCR 수정] 원문은 보존한다. 자동 입력은 이름 길이가 아니라 왼쪽 시작점으로 상품명 열을 좁힌다.
   final names = products.where((name) {
+    if (name.id == seed.product.id) {
+      return true; // [OCR 수정] 사용자가 확정한 기준은 자동 경계로 제외하지 않는다.
+    }
     if (endBefore != null && name.bounds.bottom > endBefore) {
       return false; // [OCR 추가]
     }
@@ -114,6 +117,9 @@ List<ReceiptOcrCandidate> _automaticProducts(
         (name.bounds.left - seed.product.bounds.left).abs() <=
             characterTolerance; // [OCR 수정]
   }).toList(); // [OCR 수정]
+  // [OCR 추가] 후보 병합·필터 결과와 무관하게 첫 상품의 수정된 이름·좌표를 그대로 보존한다.
+  names.removeWhere((name) => name.id == seed.product.id);
+  names.add(seed.product);
   names.sort((a, b) {
     // [OCR 수정]
     final row = a.bounds.top.compareTo(b.bounds.top); // [OCR 수정]
@@ -122,7 +128,9 @@ List<ReceiptOcrCandidate> _automaticProducts(
   if (startBelow != null) {
     // [OCR 추가] 선택한 상품은 위치 관계의 기준이며, 머리글 아래의 앞선 상품도 누락하지 않는다.
     return names
-        .where((name) => name.bounds.top >= startBelow)
+        .where(
+          (name) => name.id == seed.product.id || name.bounds.top >= startBelow,
+        ) // [OCR 수정]
         .toList(); // [OCR 추가]
   } // [OCR 추가]
   final first = names.indexWhere(
@@ -253,6 +261,40 @@ double _receiptTextHeight(ReceiptOcrResult source, ReceiptAutomaticSeed seed) {
       : heights[heights.length ~/ 2];
 }
 
+// [OCR 추가] 사람이 확정한 첫 상품은 다른 후보의 행·경계·중복·구매 판정과 분리한다.
+ReceiptLineDraft _confirmedReceiptSeedLine(ReceiptAutomaticSeed seed) {
+  final amountValue = seed.amount.number; // [OCR 추가]
+  if (amountValue == null || amountValue < 0 || amountValue > 9999999) {
+    // [OCR 추가]
+    throw const FormatException('첫 금액 영역을 확인해주세요.'); // [OCR 추가]
+  } // [OCR 추가]
+  if (seed.needsQuantity && // [OCR 추가]
+      (seed.quantity?.number == null || // [OCR 추가]
+          seed.quantity!.number! < 1 || // [OCR 추가]
+          seed.quantity!.number! > 999)) {
+    // [OCR 추가]
+    throw const FormatException('첫 수량 영역을 선택해주세요.'); // [OCR 추가]
+  } // [OCR 추가]
+  if (seed.needsQuantity && seed.quantity!.id == seed.amount.id) {
+    // [OCR 추가]
+    // [OCR 추가]
+    throw const FormatException('수량과 금액은 서로 다른 영역을 선택해주세요.'); // [OCR 추가]
+  } // [OCR 추가]
+  final line = receiptLineFromAmount(
+    id: 'automatic-seed-${seed.product.id}',
+    title: seed.product.text,
+    amount: amountValue,
+    isUnitPrice: seed.isUnitPrice,
+    quantity: seed.needsQuantity ? seed.quantity!.number : 1,
+  );
+  line.ocrProduct = seed.product;
+  line.ocrAmount = seed.amount;
+  line.ocrQuantity = seed.quantity;
+  line.ocrAmountIsUnitPrice = seed.isUnitPrice;
+  line.ocrInputAmount = amountValue;
+  return line;
+}
+
 /// [OCR 수정] 상품명부터 얻고 각 이름에서 수량·금액의 상대 위치를 직접 확인한다. 누락·모호한 항목은 체크 해제로 남긴다.
 List<ReceiptLineDraft> automaticReceiptLines(
   // [OCR 추가]
@@ -265,38 +307,9 @@ List<ReceiptLineDraft> automaticReceiptLines(
 }) {
   // [OCR 추가]
   // [OCR 추가]
-  final amountValue = seed.amount.number; // [OCR 추가]
-  if (amountValue == null || amountValue < 0 || amountValue > 9999999) {
-    // [OCR 추가]
-    throw const FormatException('첫 금액 영역을 확인해주세요.'); // [OCR 추가]
-  } // [OCR 추가]
-  final height = _receiptTextHeight(source, seed); // [OCR 수정]
-  final rowTolerance = height * .65; // [OCR 추가]
-  if (seed.needsQuantity && // [OCR 추가]
-      (seed.quantity?.number == null || // [OCR 추가]
-          seed.quantity!.number! < 1 || // [OCR 추가]
-          seed.quantity!.number! > 999)) {
-    // [OCR 추가]
-    throw const FormatException('첫 수량 영역을 선택해주세요.'); // [OCR 추가]
-  } // [OCR 추가]
-  // [OCR 수정] 기준 수량과 금액은 다른 줄에 있어도 된다. 각각 첫 상품의 시작~다음 상품 경계에 속하는지 검사한다.
-  final nextProductTop = _nextReceiptProductTop(
-    products ?? source.products,
-    seed.product,
-  );
-  final firstFields = [seed.amount, if (seed.needsQuantity) seed.quantity!];
-  if (firstFields.any(
-    (field) =>
-        field.bounds.center.dy < seed.product.bounds.center.dy - rowTolerance ||
-        field.bounds.center.dy >= nextProductTop,
-  )) {
-    throw const FormatException('첫 상품에 속한 수량·금액 영역인지 확인해주세요.');
-  } // [OCR 수정]
-  if (seed.needsQuantity && seed.quantity!.id == seed.amount.id) {
-    // [OCR 추가]
-    // [OCR 추가]
-    throw const FormatException('수량과 금액은 서로 다른 영역을 선택해주세요.'); // [OCR 추가]
-  } // [OCR 추가]
+  final confirmedSeed = _confirmedReceiptSeedLine(seed); // [OCR 수정]
+  final height = _receiptTextHeight(source, seed);
+  final rowTolerance = height * .65;
   final names = _automaticProducts(
     products ?? source.products,
     seed,
@@ -367,7 +380,10 @@ List<ReceiptLineDraft> automaticReceiptLines(
   for (final name in names) {
     // [OCR 추가]
     // [OCR 추가]
-    final first = name.id == seed.product.id; // [OCR 추가]
+    if (name.id == seed.product.id) {
+      lines.add(confirmedSeed); // [OCR 수정] 자동 판정이나 재인식으로 첫 항목을 다시 만들지 않는다.
+      continue;
+    }
     final amount = matches[name.id]; // [OCR 추가]
     ReceiptOcrCandidate? quantity; // [OCR 추가]
     var notice = ''; // [OCR 추가]
@@ -381,64 +397,54 @@ List<ReceiptLineDraft> automaticReceiptLines(
     } // [OCR 추가]
     if (seed.needsQuantity) {
       // [OCR 수정]
-      if (first) {
+      final expected = _automaticAnchor(name, seed, quantity: true); // [OCR 수정]
+      final candidates = numbers.where((number) {
         // [OCR 수정]
-        quantity = seed.quantity; // [OCR 수정]
-      } else {
-        // [OCR 수정]
-        final expected = _automaticAnchor(
-          name,
-          seed,
-          quantity: true,
-        ); // [OCR 수정]
-        final candidates = numbers.where((number) {
+        if (number.id == amount?.id ||
+            number.number == null || // [OCR 수정]
+            number.number! < 1 ||
+            number.number! > 999) {
           // [OCR 수정]
-          if (number.id == amount?.id ||
-              number.number == null || // [OCR 수정]
-              number.number! < 1 ||
-              number.number! > 999) {
+          return false; // [OCR 수정]
+        } // [OCR 수정]
+        // [OCR 수정] 수량도 해당 상품명과의 가로/세로 상대 거리를 직접 검사한다.
+        if ((number.bounds.center.dx - expected.dx).abs() >
+                height * 1.5 || // [OCR 수정]
+            (number.bounds.center.dy - expected.dy).abs() > rowTolerance) {
+          // [OCR 수정]
+          return false; // [OCR 수정]
+        } // [OCR 수정]
+        if (!_belongsToAutomaticProduct(number, name, names, seed)) {
+          // [OCR 수정]
+          return false; // [OCR 수정]
+        } // [OCR 수정]
+        if (amount != null) {
+          // [OCR 수정]
+          // [OCR 수정] 이름과 각각 맞아도 수량·금액끼리 다른 행/열이면 연결하지 않는다.
+          final expectedX =
+              seed.quantity!.bounds.center.dx -
+              seed.amount.bounds.right; // [OCR 수정]
+          final expectedY =
+              seed.quantity!.bounds.center.dy -
+              seed.amount.bounds.center.dy; // [OCR 수정]
+          if ((number.bounds.center.dx - amount.bounds.right - expectedX)
+                      .abs() >
+                  height * 1.25 || // [OCR 수정]
+              (number.bounds.center.dy - amount.bounds.center.dy - expectedY)
+                      .abs() >
+                  rowTolerance || // [OCR 수정]
+              (number.bounds.center.dy - amount.bounds.center.dy).abs() >
+                  rowTolerance) {
             // [OCR 수정]
             return false; // [OCR 수정]
           } // [OCR 수정]
-          // [OCR 수정] 수량도 해당 상품명과의 가로/세로 상대 거리를 직접 검사한다.
-          if ((number.bounds.center.dx - expected.dx).abs() >
-                  height * 1.5 || // [OCR 수정]
-              (number.bounds.center.dy - expected.dy).abs() > rowTolerance) {
-            // [OCR 수정]
-            return false; // [OCR 수정]
-          } // [OCR 수정]
-          if (!_belongsToAutomaticProduct(number, name, names, seed)) {
-            // [OCR 수정]
-            return false; // [OCR 수정]
-          } // [OCR 수정]
-          if (amount != null) {
-            // [OCR 수정]
-            // [OCR 수정] 이름과 각각 맞아도 수량·금액끼리 다른 행/열이면 연결하지 않는다.
-            final expectedX =
-                seed.quantity!.bounds.center.dx -
-                seed.amount.bounds.right; // [OCR 수정]
-            final expectedY =
-                seed.quantity!.bounds.center.dy -
-                seed.amount.bounds.center.dy; // [OCR 수정]
-            if ((number.bounds.center.dx - amount.bounds.right - expectedX)
-                        .abs() >
-                    height * 1.25 || // [OCR 수정]
-                (number.bounds.center.dy - amount.bounds.center.dy - expectedY)
-                        .abs() >
-                    rowTolerance || // [OCR 수정]
-                (number.bounds.center.dy - amount.bounds.center.dy).abs() >
-                    rowTolerance) {
-              // [OCR 수정]
-              return false; // [OCR 수정]
-            } // [OCR 수정]
-          } // [OCR 수정]
-          return true; // [OCR 수정]
-        }).toList(); // [OCR 수정]
-        if (candidates.length == 1) quantity = candidates.single; // [OCR 수정]
-      } // [OCR 수정]
+        } // [OCR 수정]
+        return true; // [OCR 수정]
+      }).toList(); // [OCR 수정]
+      if (candidates.length == 1) quantity = candidates.single; // [OCR 수정]
       if (quantity == null) notice = '같은 상품 행의 수량을 확인해주세요.'; // [OCR 수정]
     } // [OCR 수정]
-    if (_receiptMetadata.hasMatch(name.text) || // [OCR 추가]
+    if (_receiptMetadata.hasMatch(name.text) || // [OCR 수정]
         name.text.trim().isEmpty || // [OCR 추가]
         name.text.trim().length > 50) {
       // [OCR 추가]

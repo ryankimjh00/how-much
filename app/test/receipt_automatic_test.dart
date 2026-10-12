@@ -200,7 +200,7 @@ void main() {
     expect(many.map((line) => line.quantity), [3, 2]); // [OCR 추가]
     expect(many.map((line) => line.total), [80940, 33760]); // [OCR 추가]
   }); // [OCR 추가]
-  test('첫 수량이 다음 상품 행이면 거부하고 모호한 수량·가격은 확정하지 않는다', () {
+  test('사람이 선택한 첫 수량은 다른 행이어도 적용하고 나머지 모호한 수량·가격은 확정하지 않는다', () {
     // [OCR 추가]
     // [OCR 추가]
     final names = [
@@ -217,21 +217,18 @@ void main() {
       number('p2', 33760, 50), // [OCR 추가]
     ]; // [OCR 추가]
     final result = source(names, numbers); // [OCR 추가]
-    expect(
-      // [OCR 추가]
-      () => automaticReceiptLines(
-        // [OCR 추가]
-        result, // [OCR 추가]
-        ReceiptAutomaticSeed(
-          // [OCR 추가]
-          product: names.first, // [OCR 추가]
-          amount: numbers[1], // [OCR 추가]
-          quantity: numbers[2], // [OCR 추가]
-          isUnitPrice: false, // [OCR 추가]
-        ), // [OCR 추가]
-      ), // [OCR 추가]
-      throwsFormatException, // [OCR 추가]
-    ); // [OCR 추가]
+    final confirmed = automaticReceiptLines(
+      result,
+      ReceiptAutomaticSeed(
+        product: names.first,
+        amount: numbers[1],
+        quantity: numbers[2],
+        isUnitPrice: false,
+      ),
+    ).first; // [OCR 수정] 다른 상품 행 후보가 있어도 사람의 선택을 자동으로 거부하지 않는다.
+    expect(confirmed.quantity, 1);
+    expect(confirmed.total, 80940);
+    expect(confirmed.selected, isTrue);
     final lines = automaticReceiptLines(
       // [OCR 추가]
       result, // [OCR 추가]

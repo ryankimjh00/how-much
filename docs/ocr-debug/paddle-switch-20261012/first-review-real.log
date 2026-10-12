@@ -1,0 +1,9 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/integration_test/ocr_paddle_compatibility_test.dart
+Running Gradle task 'assembleDebug'...                             34.5s
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+Installing build/app/outputs/flutter-apk/app-debug.apk...        1,506ms
+00:00 +0: 기본 Paddle 전체 영수증·영역 재인식·동시 수량 세션
+PADDLE_FIRST_REVIEW {"title":"포스트잇/670-5AN-5/알뜰팩","quantity":1,"total":9600,"checked":true,"review_items":5}
+PADDLE_APP_SERVICE {"whole_products":8,"whole_numbers":24,"quantity":"1","session_values":["1","1"]}
+00:06 +1: (tearDownAll)
+00:07 +1: All tests passed!

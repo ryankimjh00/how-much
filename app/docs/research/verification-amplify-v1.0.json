@@ -1,0 +1,18 @@
+{
+  "title": "얼마였지 AWS Amplify 집중 조사 보고서",
+  "pages": 14,
+  "paper": "A4",
+  "bytes": 258084,
+  "sha256": "e00e0dd080f26cf9ebcd7d4a3da656d32b6532f833267b5310a9e05f0356afa1",
+  "korean_text_extraction": true,
+  "all_26_reference_numbers_present": true,
+  "external_links": 70,
+  "content_overflow": [],
+  "other_backend_comparison_present": false,
+  "all_pages_visually_reviewed": true,
+  "fonts_embedded": true,
+  "app_tests_run": false,
+  "sdk_examples_executed": false,
+  "aws_resources_deployed": false,
+  "technology_adoption_decided": false
+}

@@ -1,0 +1,45 @@
+{
+  "android_default_engine": "paddle",
+  "ios_default_engine": "mlkit",
+  "android_min_sdk": 24,
+  "ios_minimum": "15.5",
+  "android_emulator_service_tests": [
+    {
+      "api": 24,
+      "whole_products": 8,
+      "whole_numbers": 24,
+      "region_quantity": "1",
+      "session_values": [
+        "1",
+        "1"
+      ]
+    },
+    {
+      "api": 35,
+      "whole_products": 8,
+      "whole_numbers": 24,
+      "region_quantity": "1",
+      "session_values": [
+        "1",
+        "1"
+      ]
+    }
+  ],
+  "flutter_tests_passed": 280,
+  "flutter_tests_skipped": 1,
+  "new_analyzer_issues": 0,
+  "existing_warning": "screens.dart:806",
+  "android_library_lint": "passed",
+  "default_build": "passed",
+  "default_package": "com.todayone.todo",
+  "comparison_photos_or_tesseract_in_default": false,
+  "verified_native_file_hashes": 12,
+  "apk_sha256": "1024f32752dc1e43612097e233655802b20af02a38af76344c80d4f4959b7206",
+  "pub_get": false,
+  "lock_changed": false,
+  "installed_on_primary_emulator": true,
+  "committed": false,
+  "pushed": false,
+  "primary_emulator_update": "adb install -r Success",
+  "primary_emulator_launch": "Status: ok"
+}

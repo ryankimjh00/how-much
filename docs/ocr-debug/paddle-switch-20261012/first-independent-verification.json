@@ -1,0 +1,20 @@
+{
+  "first_item_policy": "human-confirmed independent line; remaining products only automatically classified",
+  "full_tests_passed": 284,
+  "skipped": 1,
+  "existing_analyze_warning": "screens.dart:806",
+  "actual_paddle_first_review": {
+    "title": "포스트잇/670-5AN-5/알뜰팩",
+    "quantity": 1,
+    "total": 9600,
+    "checked": true
+  },
+  "actual_source_products": 8,
+  "actual_review_items": 5,
+  "remaining_candidate_omissions": 3,
+  "apk_sha256": "4c7cacbaffa97c361a5d4b901cdaa76459bd0127783322f1fffff347cc8e67f7",
+  "update_install": "emulator-5554 Success",
+  "android_min_sdk": 24,
+  "committed": false,
+  "pushed": false
+}

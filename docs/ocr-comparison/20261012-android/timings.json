@@ -1,0 +1,66 @@
+[
+  {
+    "run": "mlkit-base-psm3",
+    "count": 217,
+    "errors": 45,
+    "first_seconds": 3.407598,
+    "median_seconds": 0.053836,
+    "total_seconds": 31.125690999999996
+  },
+  {
+    "run": "mlkit-padding-psm3",
+    "count": 45,
+    "errors": 0,
+    "first_seconds": 0.962106,
+    "median_seconds": 0.058901,
+    "total_seconds": 7.062063
+  },
+  {
+    "run": "paddle-base-psm3",
+    "count": 217,
+    "errors": 0,
+    "first_seconds": 2.08497,
+    "median_seconds": 0.030602,
+    "total_seconds": 16.397659000000015
+  },
+  {
+    "run": "paddle-padding-psm3",
+    "count": 45,
+    "errors": 0,
+    "first_seconds": 0.497754,
+    "median_seconds": 0.031804,
+    "total_seconds": 2.3511110000000004
+  },
+  {
+    "run": "tesseract-base-psm10",
+    "count": 63,
+    "errors": 0,
+    "first_seconds": 0.793684,
+    "median_seconds": 0.010451,
+    "total_seconds": 1.5803670000000003
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "count": 217,
+    "errors": 0,
+    "first_seconds": 4.990578,
+    "median_seconds": 0.009634,
+    "total_seconds": 23.616307000000006
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "count": 210,
+    "errors": 0,
+    "first_seconds": 0.230417,
+    "median_seconds": 0.018656,
+    "total_seconds": 8.798906000000006
+  },
+  {
+    "run": "tesseract-padding-psm3",
+    "count": 45,
+    "errors": 0,
+    "first_seconds": 0.218563,
+    "median_seconds": 0.009957,
+    "total_seconds": 1.103636
+  }
+]

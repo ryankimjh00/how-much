@@ -24,3 +24,7 @@ plugins {
 }
 
 include(":app")
+
+// [OCR 수정] 비교에서 검증한 SDK를 Android 기본 Paddle 인식에도 재사용한다.
+include(":ocr-compare-paddle")
+project(":ocr-compare-paddle").projectDir = file("ocr_compare/paddle")

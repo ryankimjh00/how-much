@@ -1,0 +1,33 @@
+{
+  "android_runs": 8,
+  "android_cases": 1059,
+  "input_hashes_verified": true,
+  "flutter_tests": {
+    "passed": 278,
+    "skipped": 1
+  },
+  "analyze": {
+    "existing_warning": "lib/screens.dart:806 unawaited_return_in_try_block",
+    "new_issues": 0
+  },
+  "builds": [
+    "comparison integration target",
+    "comparison Paddle app main target",
+    "default app main target"
+  ],
+  "default_package": "com.todayone.todo",
+  "default_min_sdk": 24,
+  "default_comparison_assets_or_libraries": 0,
+  "comparison_package": "com.todayone.todo.ocrcompare2",
+  "comparison_min_sdk": 26,
+  "pub_get": false,
+  "pubspec_lock_changed": false,
+  "analysis_options_changed": false,
+  "pdf_pages": 20,
+  "source_links": 24,
+  "windows_pdf_sha256": "3624fbdf82d2600f02f0e240ab2d0462d9366b754fad4765ce565f999103bd63",
+  "original_release_reinstalled_sha256": "d482b2ef58bd6883b700db7f6405b33da934cc705bb571627b6d29225cc7d05b",
+  "local_records_restored": false,
+  "committed": false,
+  "pushed": false
+}

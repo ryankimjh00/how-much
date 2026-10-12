@@ -1,0 +1,17 @@
+{
+  "title": "얼마였지 백엔드 서비스 조사 보고서",
+  "pages": 13,
+  "paper": "A4",
+  "bytes": 264028,
+  "sha256": "af8c0cf13ce6890dafff9114612fd0c4c473835153c64713a45e888d1fcce1ab",
+  "korean_text_extraction": true,
+  "all_23_reference_numbers_present": true,
+  "external_links": 71,
+  "content_overflow": [],
+  "out_of_scope_technology_comparison_present": false,
+  "all_pages_visually_reviewed": true,
+  "fonts_embedded": true,
+  "app_tests_run": false,
+  "sdk_examples_executed": false,
+  "technology_adoption_decided": false
+}

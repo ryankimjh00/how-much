@@ -1,0 +1,15 @@
+{
+  "pages": 18,
+  "paper": "A4",
+  "bytes": 288801,
+  "sha256": "883df5ecc6d89af7fff2af819d38e305a9639103aa88f0fd5ecb7b05dd2885bc",
+  "korean_text_extraction": true,
+  "all_40_reference_numbers_present": true,
+  "external_links": 106,
+  "content_overflow": [],
+  "all_pages_visually_reviewed": true,
+  "fonts_embedded": true,
+  "app_tests_run": false,
+  "sdk_examples_executed": false,
+  "technology_adoption_decided": false
+}

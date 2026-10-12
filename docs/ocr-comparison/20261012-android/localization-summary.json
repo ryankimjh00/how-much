@@ -1,0 +1,722 @@
+[
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 6,
+    "total": 8
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 6,
+    "total": 8
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 8,
+    "total": 8
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 7,
+    "total": 8
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 8,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 9,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 9,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 10,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 2
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 2
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 1,
+    "total": 2
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 8,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 7,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 9,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 7,
+    "total": 15
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "run": "mlkit-base-psm3",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "amount",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 5,
+    "total": 8
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 8,
+    "total": 8
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 8,
+    "total": 8
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 8,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 10,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 9,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 10,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 8,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "run": "paddle-base-psm3",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "amount",
+    "correct": 1,
+    "total": 1
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 3,
+    "total": 8
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 1,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 12,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 14,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 10,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 1,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "run": "tesseract-base-psm3",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "amount",
+    "correct": 1,
+    "total": 1
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 3,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 5,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "run": "tesseract-base-psm7",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 1,
+    "total": 15
+  }
+]

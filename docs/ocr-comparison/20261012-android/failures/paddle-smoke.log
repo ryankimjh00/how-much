@@ -1,0 +1,10 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/integration_test/ocr_android_comparison_test.dart
+Running Gradle task 'assembleDebug'...                             22.7s
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+Installing build/app/outputs/flutter-apk/app-debug.apk...        1,949ms
+00:00 +0: Android paddle 동일 사진 독립 비교 / base / PSM 3
+ANDROID_OCR_COMPARE {"id":"kyobo-first-original","engine":"paddle-android","suite":"base","sha256":"9f19468305dc7dfb322c47a1ecc22df3a5651c77f677ce8209dac90bb5f3e3f4","psm":3,"text":"","error":"PlatformException(ocr_failed, OpenCV 초기화에 실패했습니다., null, null)","seconds":0.02713}
+ANDROID_OCR_COMPARE {"id":"kyobo-first-original-quantity-00","engine":"paddle-android","suite":"base","sha256":"c4ed81754ee3731a4fc1bf0055ae8ab9182bcbfa5f155185f6218615de5762b1","psm":3,"text":"","error":"PlatformException(ocr_failed, OpenCV 초기화에 실패했습니다., null, null)","seconds":0.00721}
+ANDROID_OCR_OUTPUT /data/user/0/com.todayone.todo.ocrcompare2/code_cache/ocr-android-paddle-base-psm3.jsonl 2
+00:00 +1: (tearDownAll)
+00:01 +1: All tests passed!

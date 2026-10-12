@@ -118,13 +118,13 @@ void main() {
             // [OCR 추가]
             await expectLater(
               // [OCR 추가]
-              OcrService().recognizePath(path), // [OCR 추가]
+              OcrService(engine: 'mlkit').recognizePath(path), // [OCR 추가]
               throwsA(isA<PlatformException>()), // [OCR 추가]
             ); // [OCR 추가]
           } else {
             // [OCR 추가]
             // [OCR 추가]
-            final result = (await OcrService().recognizePath(
+            final result = (await OcrService(engine: 'mlkit').recognizePath(
               // [OCR 추가]
               path, // [OCR 추가]
             )).ocrResult!; // [OCR 추가]

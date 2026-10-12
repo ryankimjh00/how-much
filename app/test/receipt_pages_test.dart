@@ -17,6 +17,33 @@ import 'receipt_selection_test.dart' show reveal; // [OCR 추가]
 import 'receipt_region_test.dart' show loadRegion, regionPhoto; // [OCR 추가]
 import 'receipt_tilt_test.dart' show response; // [OCR 추가]
 import 'package:how_much/ocr_service.dart'; // [OCR 추가]
+import 'package:how_much/receipt_text_recognizer.dart'; // [OCR 추가]
+
+// [OCR 추가] 화면 흐름 시험용 Paddle 응답이다. 실제 사진 인식 성적과 구분한다.
+Map<String, dynamic> paddlePageResponse() {
+  final lines = <Map<String, dynamic>>[];
+  for (var index = 0; index < 3; index++) {
+    final text = ['퍼실', '3', '80,940'][index];
+    final top = 50.0 + index * 50;
+    final value = <String, dynamic>{
+      'text': text,
+      'bounds': [40.0, top, 160.0, top + 30],
+      'points': [
+        [40, top],
+        [160, top],
+        [160, top + 30],
+        [40, top + 30],
+      ],
+      'confidence': 0.9,
+      'angle': 0.0,
+    };
+    lines.add({
+      ...value,
+      'elements': [value],
+    });
+  }
+  return {'text': '퍼실\n3\n80,940', 'lines': lines};
+}
 
 final preparedPages = // [OCR 추가]
     <ReceiptPhotoPage, ReceiptDraft>{}; // [OCR 추가] 모의 OCR은 촬영과 분리한다.
@@ -156,14 +183,15 @@ void main() {
         final store = AppStore(CloudService(false));
         addTearDown(store.dispose);
         mockReceiptGallery(tester, () async => [path]);
-        const channel = MethodChannel('google_mlkit_text_recognizer');
+        const channel = ReceiptTextRecognizer
+            .channel; // [OCR 수정] 기본 Paddle 경로의 화면 흐름을 검증한다.
         var reads = 0;
         tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
           channel,
           (call) async {
-            if (call.method == 'vision#closeTextRecognizer') return null;
+            if (call.method == 'close') return null; // [OCR 수정]
             reads++;
-            return response(corrected: true);
+            return paddlePageResponse(); // [OCR 수정]
           },
         ); // [OCR 추가]
         addTearDown(
@@ -293,7 +321,8 @@ void main() {
     ]; // [OCR 추가]
     var picks = 0; // [OCR 추가]
     mockReceiptGallery(tester, () async => batches[picks++]);
-    const ocr = MethodChannel('google_mlkit_text_recognizer');
+    const ocr =
+        ReceiptTextRecognizer.channel; // [OCR 수정] 사진 수집 중 Paddle도 호출하지 않는다.
     var reads = 0;
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(ocr, (
       _,
@@ -445,7 +474,9 @@ void main() {
       messenger.setMockMethodCallHandler(ocr, null);
       messenger.setMockMessageHandler(pigeon, null);
     }); // [OCR 추가]
-    final photos = await OcrService().pickReceiptPages(limit: 10); // [OCR 추가]
+    final photos = await OcrService(
+      engine: 'mlkit',
+    ).pickReceiptPages(limit: 10); // [OCR 추가]
     expect(photos.map((photo) => photo.path), paths); // [OCR 추가]
     expect(reads, 0); // [OCR 추가]
   }); // [OCR 추가]
@@ -571,7 +602,7 @@ void main() {
     ); // [OCR 추가]
     await tester.runAsync(() async {
       // [OCR 추가]
-      final draft = await OcrService().recognizePath(
+      final draft = await OcrService(engine: 'mlkit').recognizePath(
         // [OCR 추가]
         path, // [OCR 추가]
         allowManualRegions: true, // [OCR 추가]

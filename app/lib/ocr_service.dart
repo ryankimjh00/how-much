@@ -1,3 +1,4 @@
+import 'receipt_text_recognizer.dart'; // [OCR 추가]
 import 'receipt_pages.dart'; // [OCR 추가]
 import 'receipt_product_regions.dart'; // [OCR 추가]
 import 'dart:io'; // [OCR 추가]
@@ -12,6 +13,9 @@ import 'receipt_ocr.dart'; // [OCR 추가]
 import 'receipt_column_scan.dart'; // [OCR 추가]
 
 class OcrService {
+  /// [OCR 추가] engine을 생략하면 플랫폼 기본값을 쓰며, 독립 비교·회귀 시험은 엔진을 명시한다.
+  OcrService({String? engine}) : _engine = engine;
+  final String? _engine;
   final ImagePicker _picker = ImagePicker();
 
   Future<ReceiptDraft?> pickFromGallery({
@@ -211,12 +215,18 @@ class OcrService {
         'receipt-session-',
       ); // [OCR 추가]
       final quantitySession = parallelQuantity
-          ? ReceiptRegionSession._(photo, directory, fileName: 'quantity.png')
+          ? ReceiptRegionSession._(
+              photo,
+              directory,
+              fileName: 'quantity.png',
+              engine: _engine,
+            )
           : null; // [OCR 추가]
       session = ReceiptRegionSession._(
         photo,
         directory,
         quantitySession: quantitySession,
+        engine: _engine, // [OCR 추가] 수량·금액 세션에도 동일 엔진을 전달한다.
       ); // [OCR 수정]
       return await work(session); // [OCR 추가]
     } finally {
@@ -282,7 +292,9 @@ class OcrService {
   } // [OCR 추가]
 
   Future<RecognizedText> _recognize(String path) async {
-    final recognizer = TextRecognizer(script: TextRecognitionScript.korean);
+    final recognizer = ReceiptTextRecognizer(
+      engine: _engine,
+    ); // [OCR 수정] 전체·부분 OCR에 같은 선택 엔진을 쓴다.
     try {
       final result = await recognizer.processImage(
         InputImage.fromFilePath(path),
@@ -301,15 +313,15 @@ class ReceiptRegionSession {
     this._directory, {
     String fileName = 'region.png',
     this.quantitySession,
-  }) : _fileName = fileName; // [OCR 수정]
+    String? engine, // [OCR 추가]
+  }) : _fileName = fileName,
+       _recognizer = ReceiptTextRecognizer(engine: engine); // [OCR 수정]
   /// [OCR 추가] 같은 사진을 공유하는 별도 수량 작업자다. 각 작업자 내부는 순차 호출한다.
   final ReceiptRegionSession? quantitySession; // [OCR 추가]
   final String _fileName; // [OCR 추가]
   final ui.Image _photo; // [OCR 추가]
   final Directory _directory; // [OCR 추가]
-  final TextRecognizer _recognizer = TextRecognizer(
-    script: TextRecognitionScript.korean,
-  ); // [OCR 추가]
+  final ReceiptTextRecognizer _recognizer; // [OCR 수정]
   Future<RecognizedText>? _pending; // [OCR 추가]
   bool _closed = false; // [OCR 추가]
 

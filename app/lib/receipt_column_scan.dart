@@ -273,6 +273,8 @@ void _mergeColumnNameFragments(
   }).toList()..sort((a, b) => a.bounds.left.compareTo(b.bounds.left));
   if (covered.length < 2) return;
   final anchor = covered.first;
+  // [OCR 추가] 첫 상품이 병합 행의 오른쪽 조각이어도 ID·확정 이름·선택 박스를 바꾸지 않는다.
+  final containsSeed = covered.any((name) => name.id == first.id);
   final tolerance = math.max(first.bounds.height, anchor.bounds.height);
   if ((anchor.bounds.left - first.bounds.left).abs() > tolerance) return;
   // [OCR 수정] 문자열 비교는 표시할 이름을 고르는 데만 쓴다. 다르게 읽혀도 병합은 진행하고 기존 조각을 보존한다.
@@ -284,12 +286,14 @@ void _mergeColumnNameFragments(
   final bounds = covered
       .map((name) => name.bounds)
       .reduce((a, b) => a.expandToInclude(b));
-  final merged = ReceiptOcrCandidate(
-    id: anchor.id,
-    text: text, // [OCR 수정]
-    bounds: bounds,
-    isMergedName: true,
-  );
+  final merged = containsSeed
+      ? first
+      : ReceiptOcrCandidate(
+          id: anchor.id,
+          text: text, // [OCR 수정]
+          bounds: bounds,
+          isMergedName: true,
+        );
   final position = products.indexOf(anchor);
   products.removeWhere(covered.contains);
   products.insert(math.min(position, products.length), merged);

@@ -1,0 +1,22 @@
+{
+  "det": "PP-OCRv5_mobile_det",
+  "rec": "korean_PP-OCRv5_mobile_rec",
+  "conversion": "paddle2onnx 2.1.0 / opset 17",
+  "files": [
+    {
+      "path": "models/det/inference.onnx",
+      "sha256": "c8d9b07063420ce5365c74e42532de48238feeeedcdb7a330b195708bc38a93f",
+      "bytes": 4766440
+    },
+    {
+      "path": "models/rec/inference.yml",
+      "sha256": "f757fa1c40e99edcf27e9cce879b93eb2a51fa46f5ef39095689b8c37dd75998",
+      "bytes": 96039
+    },
+    {
+      "path": "models/rec/inference.onnx",
+      "sha256": "48f0554ea902f18d2c7735abe4a15595d340064680fae4e9dd6decaa640538bb",
+      "bytes": 13413875
+    }
+  ]
+}

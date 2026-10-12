@@ -55,6 +55,152 @@ Future<List<ReceiptLineDraft>?> read(
 ); // [OCR 추가]
 
 void main() {
+  test('주변 후보를 없애거나 첫 숫자 행에 잘못 추가해도 사람의 첫 상품은 독립적으로 확정한다', () {
+    final product = fixture.name('human-product', '카드케이스', 10);
+    final quantity = fixture.number('human-quantity', 3, 70, quantity: true);
+    final amount = fixture.number('human-amount', 80940, 70);
+    final seed = ReceiptAutomaticSeed(
+      product: product,
+      quantity: quantity,
+      amount: amount,
+      isUnitPrice: false,
+    );
+    for (final surrounding in <List<ReceiptOcrCandidate>>[
+      [],
+      [fixture.name('false-next', '다른 상품으로 잘못 읽힌 후보', 50)],
+      [fixture.name('same-row', '같은 금액에 겹친 후보', 10)],
+    ]) {
+      final lines = automaticReceiptLines(
+        fixture.source(surrounding, [quantity, amount]),
+        seed,
+      );
+      final human = lines.singleWhere(
+        (line) => line.ocrProduct!.id == product.id,
+      );
+      expect(human.title, '카드케이스');
+      expect(human.quantity, 3);
+      expect(human.total, 80940);
+      expect(human.selected, isTrue);
+      expect(human.ocrNotice, isEmpty);
+      expect(human.ocrQuantity, same(quantity));
+      expect(human.ocrAmount, same(amount));
+    }
+  }); // [OCR 추가] 다른 후보의 행·구매 안내 판정·중복 금액이 첫 상품에 영향을 주지 못한다.
+
+  for (final boundary in ['header', 'end']) {
+    test('확정한 첫 품목은 자동 $boundary 경계 밖이어도 이름·수량·금액을 유지한다', () {
+      final first = fixture.name('seed', '원래 이름', 60);
+      final selected = ReceiptOcrCandidate(
+        id: first.id,
+        text: '수정한 첫 품목',
+        bounds: first.bounds,
+      );
+      final quantity = fixture.number('q1', 3, 60, quantity: true);
+      final amount = fixture.number('p1', 80940, 60);
+      final base = fixture.source(
+        [first, fixture.name('next', '베지밀', 140)],
+        [quantity, amount],
+      );
+      final data = ReceiptOcrResult(
+        text: base.text,
+        photoPath: base.photoPath,
+        products: base.products,
+        numbers: base.numbers,
+        rows: [
+          ...base.rows,
+          ReceiptOcrRow(
+            id: 'header',
+            text: '단가 수량',
+            bounds: const Rect.fromLTWH(10, 90, 330, 20),
+            tokens: const [],
+          ),
+        ],
+      );
+      final lines = automaticReceiptLines(
+        data,
+        ReceiptAutomaticSeed(
+          product: selected,
+          quantity: quantity,
+          amount: amount,
+          isUnitPrice: false,
+        ),
+        endBefore: boundary == 'end' ? 50 : null,
+      );
+      final seedLine = lines.singleWhere(
+        (line) => line.ocrProduct!.id == selected.id,
+      );
+      expect(seedLine.title, '수정한 첫 품목');
+      expect(seedLine.quantity, 3);
+      expect(seedLine.total, 80940);
+      expect(seedLine.selected, isTrue);
+      expect(seedLine.ocrProduct, same(selected));
+      expect(seedLine.ocrQuantity, same(quantity));
+      expect(seedLine.ocrAmount, same(amount));
+    }); // [OCR 추가] OCR 경계 추정으로 사람이 확인한 기준 항목을 버리는 실패를 재현한다.
+  }
+
+  test('첫 품목이 상품명 행의 오른쪽 조각이면 병합 후에도 확정 항목 하나를 유지한다', () async {
+    final left = ReceiptOcrCandidate(
+      id: 'left-piece',
+      text: '앞 조각',
+      bounds: const Rect.fromLTWH(10, 10, 20, 20),
+    );
+    final seedName = ReceiptOcrCandidate(
+      id: 'seed-piece',
+      text: '확정한 상품명',
+      bounds: const Rect.fromLTWH(25, 10, 90, 20),
+    );
+    final quantity = fixture.number('q1', 3, 40, quantity: true);
+    final amount = fixture.number('p1', 80940, 40);
+    final base = fixture.source([left, seedName], [quantity, amount]);
+    final data = ReceiptOcrResult(
+      text: base.text,
+      photoPath: base.photoPath,
+      products: base.products,
+      numbers: base.numbers,
+      rows: [
+        ...base.rows,
+        ReceiptOcrRow(
+          id: 'whole-name-row',
+          text: '앞 조각 확정한 상품명',
+          bounds: const Rect.fromLTWH(10, 10, 105, 20),
+          tokens: [
+            for (final name in [left, seedName])
+              ReceiptOcrToken(
+                id: name.id,
+                text: name.text,
+                bounds: name.bounds,
+              ),
+          ],
+        ),
+      ],
+    );
+    var reads = 0;
+    final lines = await readAutomaticReceiptLines(
+      source: data,
+      seed: ReceiptAutomaticSeed(
+        product: seedName,
+        quantity: quantity,
+        amount: amount,
+        isUnitPrice: false,
+      ),
+      photoBytes: Uint8List(0),
+      photoSize: const Size(400, 600),
+      isCurrent: () => true,
+      recognize: (_, _) async {
+        reads++;
+        return '잘못된 재인식';
+      },
+    );
+    expect(lines, hasLength(1));
+    expect(lines!.single.title, '확정한 상품명');
+    expect(lines.single.ocrProduct, same(seedName));
+    expect(lines.single.quantity, 3);
+    expect(lines.single.total, 80940);
+    expect(lines.single.selected, isTrue);
+    expect(reads, 0);
+  }); // [OCR 추가] 병합 앵커가 바뀌어 첫 ID를 잃고 숫자를 다시 찾는 회귀를 확인한다.
+
   for (final cancelled in [false, true]) {
     test('별도 작업자의 수량·금액은 동시 시작하고 각 첫 성공에서 종료한다: $cancelled', () async {
       // [OCR 추가] 두 모의 호출을 동시에 대기시켜 병렬 실행과 취소 결과 유실 방지를 검사한다.

@@ -1,0 +1,105 @@
+
+Welcome to Gradle 8.14!
+
+Here are the highlights of this release:
+ - Java 24 support
+ - GraalVM Native Image toolchain selection
+ - Enhancements to test reporting
+ - Build Authoring improvements
+
+For more details see https://docs.gradle.org/8.14/release-notes.html
+
+
+> Configure project :gradle
+WARNING: Unsupported Kotlin plugin version.
+The `embedded-kotlin` and `kotlin-dsl` plugins rely on features of Kotlin `2.0.21` that might work differently than in the requested version `2.2.20`.
+
+> Task :gradle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle:compileKotlin UP-TO-DATE
+> Task :gradle:compileJava NO-SOURCE
+> Task :gradle:compileGroovy NO-SOURCE
+> Task :gradle:pluginDescriptors UP-TO-DATE
+> Task :gradle:processResources UP-TO-DATE
+> Task :gradle:classes UP-TO-DATE
+> Task :gradle:jar UP-TO-DATE
+
+> Configure project :app
+Warning: Flutter support for your project's Gradle version (8.14.0) will soon be dropped. Please upgrade your Gradle version to a version of at least 9.1.0 soon.
+Alternatively, use the flag "--android-skip-build-dependency-validation" to bypass this check.
+
+Potential fix: Your project's gradle version is typically defined in the gradle wrapper file. By default, this can be found at /home/jhshin/mobile/how-much-ocr/app/android/gradle/wrapper/gradle-wrapper.properties. 
+For more information, see https://docs.gradle.org/current/userguide/gradle_wrapper.html.
+
+Warning: Flutter support for your project's Android Gradle Plugin version (Android Gradle Plugin version 8.11.1) will soon be dropped. Please upgrade your Android Gradle Plugin version to a version of at least Android Gradle Plugin version 9.0.1 soon.
+Alternatively, use the flag "--android-skip-build-dependency-validation" to bypass this check.
+
+Potential fix: Your project's AGP version is typically defined in the plugins block of the `settings.gradle` file (/home/jhshin/mobile/how-much-ocr/app/android/settings.gradle), by a plugin with the id of com.android.application. 
+If you don't see a plugins block, your project was likely created with an older template version. In this case it is most likely defined in the top-level build.gradle file (/home/jhshin/mobile/how-much-ocr/app/android/build.gradle) by the following line in the dependencies block of the buildscript: "classpath 'com.android.tools.build:gradle:<version>'".
+
+Warning: Flutter support for your project's Kotlin version (2.2.20) will soon be dropped. Please upgrade your Kotlin version to a version of at least 2.3.20 soon.
+Alternatively, use the flag "--android-skip-build-dependency-validation" to bypass this check.
+
+Potential fix: Your project's KGP version is typically defined in the plugins block of the `settings.gradle` file (/home/jhshin/mobile/how-much-ocr/app/android/settings.gradle), by a plugin with the id of org.jetbrains.kotlin.android. 
+If you don't see a plugins block, your project was likely created with an older template version, in which case it is most likely defined in the top-level build.gradle file (/home/jhshin/mobile/how-much-ocr/app/android/build.gradle) by the ext.kotlin_version property.
+
+
+> Task :ocr-compare-paddle:preBuild UP-TO-DATE
+> Task :ocr-compare-paddle:preDebugBuild UP-TO-DATE
+> Task :ocr-compare-paddle:mergeDebugJniLibFolders UP-TO-DATE
+> Task :ocr-compare-paddle:mergeDebugNativeLibs NO-SOURCE
+> Task :ocr-compare-paddle:stripDebugDebugSymbols NO-SOURCE
+> Task :ocr-compare-paddle:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :ocr-compare-paddle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :ocr-compare-paddle:generateDebugResValues UP-TO-DATE
+> Task :ocr-compare-paddle:generateDebugResources UP-TO-DATE
+> Task :ocr-compare-paddle:packageDebugResources UP-TO-DATE
+> Task :ocr-compare-paddle:parseDebugLocalResources UP-TO-DATE
+> Task :ocr-compare-paddle:generateDebugRFile UP-TO-DATE
+> Task :ocr-compare-paddle:compileDebugKotlin UP-TO-DATE
+> Task :ocr-compare-paddle:extractDebugAnnotations UP-TO-DATE
+> Task :ocr-compare-paddle:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :ocr-compare-paddle:mergeDebugShaders UP-TO-DATE
+> Task :ocr-compare-paddle:compileDebugShaders NO-SOURCE
+> Task :ocr-compare-paddle:generateDebugAssets UP-TO-DATE
+> Task :ocr-compare-paddle:mergeDebugAssets UP-TO-DATE
+> Task :ocr-compare-paddle:javaPreCompileDebug UP-TO-DATE
+> Task :ocr-compare-paddle:compileDebugJavaWithJavac NO-SOURCE
+> Task :ocr-compare-paddle:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :ocr-compare-paddle:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :ocr-compare-paddle:prepareDebugArtProfile UP-TO-DATE
+> Task :ocr-compare-paddle:prepareLintJarForPublish UP-TO-DATE
+> Task :ocr-compare-paddle:processDebugManifest UP-TO-DATE
+> Task :ocr-compare-paddle:processDebugJavaRes UP-TO-DATE
+> Task :ocr-compare-paddle:mergeDebugJavaResource UP-TO-DATE
+> Task :ocr-compare-paddle:syncDebugLibJars UP-TO-DATE
+> Task :ocr-compare-paddle:writeDebugAarMetadata UP-TO-DATE
+> Task :ocr-compare-paddle:bundleDebugLocalLintAar
+> Task :ocr-compare-paddle:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :ocr-compare-paddle:createFullJarDebug
+> Task :ocr-compare-paddle:preDebugAndroidTestBuild UP-TO-DATE
+> Task :ocr-compare-paddle:generateDebugAndroidTestResValues
+> Task :ocr-compare-paddle:writeDebugLintModelMetadata
+> Task :ocr-compare-paddle:extractProguardFiles
+> Task :ocr-compare-paddle:generateDebugAndroidTestLintModel
+> Task :ocr-compare-paddle:generateDebugLintReportModel
+> Task :ocr-compare-paddle:preDebugUnitTestBuild UP-TO-DATE
+> Task :ocr-compare-paddle:generateDebugUnitTestLintModel
+> Task :ocr-compare-paddle:lintAnalyzeDebugUnitTest
+> Task :ocr-compare-paddle:lintAnalyzeDebugAndroidTest
+> Task :ocr-compare-paddle:lintAnalyzeDebug
+
+> Task :ocr-compare-paddle:lintReportDebug
+Wrote HTML report to file:///home/jhshin/mobile/how-much-ocr/app/build/ocr-compare-paddle/reports/lint-results-debug.html
+
+> Task :ocr-compare-paddle:lintDebug
+
+[Incubating] Problems report is available at: file:///home/jhshin/mobile/how-much-ocr/app/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 17s
+40 actionable tasks: 13 executed, 27 up-to-date
