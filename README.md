@@ -22,6 +22,8 @@ flutter pub get
 flutter run
 ```
 
+iOS는 `UIScene`으로 화면을 시작하고 엔진 초기화 후 플러그인을 등록합니다. Xcode 27 / iOS 27 SDK로 빌드할 때도 이 설정을 유지해야 합니다. 실제 아이폰에 업데이트할 때는 `flutter build ios --release`로 빌드하고, 기존 앱을 삭제하지 않고 설치합니다. [iOS 호환성·검증 상태](docs/features/ios-27-compatibility.md)를 확인합니다.
+
 기본 서버는 `https://howmuch.monithub.org`입니다. 다른 서버는 `--dart-define=API_BASE_URL=https://...`로 지정합니다. 로컬 기능만 사용할 때는 `--dart-define=API_BASE_URL=`로 실행합니다. HTTP는 localhost 테스트만 허용합니다.
 
 홈 우측 계정 버튼에서 **복구 코드 만들고 기록 연결**을 누르면 기기 기록을 새 계정으로 복사합니다. 코드는 한 번만 표시하므로 안전하게 보관해주세요. 다른 기기에서는 **기존 기록 복원**에 코드를 입력합니다. 코드를 아는 사람은 기록에 접근할 수 있습니다.
@@ -45,4 +47,4 @@ flutter drive --driver=test_driver/integration_test.dart \
 
 기존 Flutter guest 기록 저장 키와 v4 형식은 유지합니다. Firebase SDK·이메일 로그인은 클러스터의 복구 코드 인증으로 교체했습니다. 이전 Firebase 계정과 Firestore 기록의 자동 이관은 포함하지 않으며 `firebase/`는 이전 구현 참고 자료입니다. React Native AsyncStorage도 자동 변환하지 않습니다.
 
-패키지명은 기존과 같은 `com.todayone.todo`, 버전은 1.5.1(18)입니다. Android release는 아직 debug 서명을 사용하므로 스토어 배포 전 운영 키가 필요합니다. 클러스터는 단일 DB·단일 볼륨 복제이며 자동 백업은 후속 작업입니다.
+패키지명은 기존과 같은 `com.todayone.todo`, 버전은 1.5.2(19)입니다. Android release는 아직 debug 서명을 사용하므로 스토어 배포 전 운영 키가 필요합니다. 클러스터는 단일 DB·단일 볼륨 복제이며 자동 백업은 후속 작업입니다.
