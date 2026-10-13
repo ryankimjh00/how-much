@@ -274,7 +274,7 @@ void main() {
           path, // [OCR 추가]
         )).ocrResult!; // [OCR 추가]
         expect(calls, 2); // [OCR 추가]
-        expect(closes, 2); // [OCR 추가]
+        expect(closes, 1); // [OCR 수정] 보정 재인식도 같은 인식기를 사용한다. // [OCR 추가]
         expect(
           // [OCR 추가]
           await Directory(

@@ -83,11 +83,33 @@ class OcrService {
     bool allowManualRegions = false, // [OCR 추가]
     Uint8List? photoBytes, // [OCR 추가]
   }) async {
-    // [OCR 추가]
-    // [OCR 수정]
+    // [OCR 수정] 한 장의 전체·보정·병합 OCR은 같은 인식기를 사용한다.
+    // 호출 지역 변수로 소유하여 다른 사진의 동시 인식과 종료가 서로 간섭하지 않는다.
+    final recognizer = ReceiptTextRecognizer(engine: _engine);
+    try {
+      return await _recognizeReceiptDraft(
+        path,
+        photoBytes: photoBytes,
+        allowManualRegions: allowManualRegions,
+        recognizer: recognizer,
+      );
+    } finally {
+      // [OCR 추가] 원문 실패·보정 실패·빈 결과에서도 모델을 한 번만 해제한다.
+      await recognizer.close();
+    }
+  }
+
+  // [OCR 추가] 인식기의 수명은 호출자가 관리하고 사진·좌표의 기존 처리 순서는 유지한다.
+  Future<ReceiptDraft> _recognizeReceiptDraft(
+    String path, {
+    required Uint8List? photoBytes,
+    required bool allowManualRegions,
+    required ReceiptTextRecognizer recognizer,
+  }) async {
     final photo = await _recognizeReceiptPhoto(
       path,
       photoBytes,
+      recognizer,
     ); // [OCR 수정] // [OCR 추가]
     final recognized = photo.recognized; // [OCR 수정]
     final draft = parseReceiptText(
@@ -121,7 +143,11 @@ class OcrService {
         draft.ocrResult = await rereadMergedProductNames(
           // [OCR 추가]
           result, // [OCR 추가]
-          (bounds) => recognizeRegion(bytes, bounds), // [OCR 추가]
+          (bounds) => _recognizeRegion(
+            bytes,
+            bounds,
+            recognizer: recognizer,
+          ), // [OCR 추가]
         ); // [OCR 추가]
       } on FileSystemException {
         // [OCR 추가]
@@ -137,12 +163,16 @@ class OcrService {
     // [OCR 수정]
     String path, // [OCR 수정]
     Uint8List? photoBytes, // [OCR 추가]
+    ReceiptTextRecognizer recognizer, // [OCR 추가]
   ) async {
     // [OCR 수정]
     // [OCR 수정]
     final original = photoBytes ?? await File(path).readAsBytes(); // [OCR 수정]
     final firstPhoto = await prepareReceiptPhoto(original); // [OCR 수정]
-    final firstResult = await _recognizePhoto(firstPhoto.bytes); // [OCR 수정]
+    final firstResult = await _recognizePhoto(
+      firstPhoto.bytes,
+      recognizer: recognizer,
+    ); // [OCR 수정]
     final angle = estimateReceiptTilt([
       // [OCR 수정]
       for (final block in firstResult.blocks) // [OCR 수정]
@@ -164,7 +194,10 @@ class OcrService {
           original, // [OCR 수정]
           angle: angle, // [OCR 수정]
         ); // [OCR 수정]
-        final recognized = await _recognizePhoto(corrected.bytes); // [OCR 수정]
+        final recognized = await _recognizePhoto(
+          corrected.bytes,
+          recognizer: recognizer,
+        ); // [OCR 수정]
         if (recognized.text.trim().isNotEmpty) {
           // [OCR 수정]
           // [OCR 수정]
@@ -180,7 +213,10 @@ class OcrService {
   } // [OCR 수정]
 
   // 호출별 임시 사진은 첫 인식과 재인식의 성공·실패 모두 정리한다. // [OCR 수정]
-  Future<RecognizedText> _recognizePhoto(Uint8List bytes) async {
+  Future<RecognizedText> _recognizePhoto(
+    Uint8List bytes, {
+    ReceiptTextRecognizer? recognizer, // [OCR 추가] 사진별 호출자가 소유하는 인식기를 사용한다.
+  }) async {
     // [OCR 수정]
     // [OCR 수정]
     final directory = await Directory.systemTemp.createTemp(
@@ -191,7 +227,7 @@ class OcrService {
       // [OCR 수정]
       final file = File('${directory.path}/photo.png'); // [OCR 수정]
       await file.writeAsBytes(bytes, flush: true); // [OCR 수정]
-      return await _recognize(file.path); // [OCR 수정]
+      return await _recognize(file.path, recognizer: recognizer); // [OCR 수정]
     } finally {
       // [OCR 수정]
       // [OCR 수정]
@@ -242,7 +278,16 @@ class OcrService {
   } // [OCR 추가]
 
   /// [OCR 수정] 표시 사진 좌표의 부분만 인식하고 임시 파일과 인식기를 완료·실패 모두 정리한다.
-  Future<String> recognizeRegion(Uint8List bytes, ui.Rect bounds) async {
+  Future<String> recognizeRegion(Uint8List bytes, ui.Rect bounds) {
+    return _recognizeRegion(bytes, bounds); // [OCR 수정]
+  }
+
+  // [OCR 추가] 사진 초안 안에서만 인식기를 공유하며 독립 영역 인식의 종료 계약은 유지한다.
+  Future<String> _recognizeRegion(
+    Uint8List bytes,
+    ui.Rect bounds, {
+    ReceiptTextRecognizer? recognizer,
+  }) async {
     // [OCR 추가]
     // [OCR 추가]
     final cropped = await cropReceiptRegion(bytes, bounds); // [OCR 추가]
@@ -256,7 +301,10 @@ class OcrService {
       final image = File('${directory.path}/region.png'); // [OCR 추가]
       await image.writeAsBytes(cropped, flush: true); // [OCR 추가]
       // [OCR 수정] 이유: 부분 재인식도 세로 글씨를 후보에 다시 넣지 않도록 동일한 방향 기준을 적용한다.
-      final recognized = await _recognize(image.path); // [OCR 추가]
+      final recognized = await _recognize(
+        image.path,
+        recognizer: recognizer,
+      ); // [OCR 수정] // [OCR 추가]
       return receiptHorizontalText(
         // [OCR 추가]
         receiptOcrFromRecognizedText(recognized, image.path), // [OCR 추가]
@@ -291,17 +339,24 @@ class OcrService {
     return (await _recognize(path)).text; // [OCR 수정]
   } // [OCR 추가]
 
-  Future<RecognizedText> _recognize(String path) async {
-    final recognizer = ReceiptTextRecognizer(
+  Future<RecognizedText> _recognize(
+    String path, {
+    ReceiptTextRecognizer? recognizer,
+  }) async {
+    // [OCR 추가] 공유 인식기는 소유자가 마지막 OCR 후 해제한다.
+    if (recognizer != null) {
+      return recognizer.processImage(InputImage.fromFilePath(path));
+    }
+    final ownedRecognizer = ReceiptTextRecognizer(
       engine: _engine,
     ); // [OCR 수정] 전체·부분 OCR에 같은 선택 엔진을 쓴다.
     try {
-      final result = await recognizer.processImage(
+      final result = await ownedRecognizer.processImage(
         InputImage.fromFilePath(path),
       );
       return result; // [OCR 수정]
     } finally {
-      await recognizer.close();
+      await ownedRecognizer.close();
     }
   }
 }

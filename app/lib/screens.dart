@@ -744,6 +744,8 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   CameraController? _camera;
   bool _busy = false;
   bool _torch = false;
+  bool _previewPausedForReceipt =
+      false; // [OCR 추가] 보정·OCR·선택·검토 동안 촬영 미리보기를 멈춘다.
   String _cameraError = '';
   String get _busyLabel {
     // [OCR 추가]
@@ -809,10 +811,33 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
         _camera = controller;
         _cameraError = '';
       });
+      if (_previewPausedForReceipt) {
+        await _setReceiptPreviewPaused(
+          true,
+        ); // [OCR 추가] 앨범 복귀 후 늦게 준비된 카메라도 멈춘다.
+      }
     } catch (_) {
       if (mounted && session == _cameraSession) {
         setState(() => _cameraError = '카메라 권한이 필요해요. 설정에서 허용하거나 앨범에서 선택해주세요.');
       }
+    }
+  }
+
+  // [OCR 추가] 숨은 미리보기가 OCR과 CPU·렌더링 자원을 경쟁하지 않게 한다.
+  // 이미 촬영한 뒤에만 정지하고, 취소·실패로 촬영 화면에 돌아오면 다시 재생한다.
+  Future<void> _setReceiptPreviewPaused(bool paused) async {
+    _previewPausedForReceipt = paused;
+    final camera = _camera;
+    if (camera == null || !camera.value.isInitialized) return;
+    try {
+      if (paused) {
+        await camera.pausePreview();
+      } else {
+        await camera.resumePreview();
+      }
+    } on CameraException {
+      // 카메라가 수명 주기 전환 중 종료되어도 읽힌 사진과 OCR 결과를 버리지 않는다.
+      if (!paused && mounted) await _initializeCamera();
     }
   }
 
@@ -876,7 +901,8 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   } // [OCR 추가]
 
   Future<ReceiptDraft?> _recognizeCorrectedReceipt(String path) async {
-    // [OCR 추가]
+    // [OCR 추가] 사진 촬영이 끝난 뒤, 사진 디코딩과 보정 화면을 열기 전에 정지한다.
+    await _setReceiptPreviewPaused(true);
     final bytes = await _correctReceiptPhoto(
       await File(path).readAsBytes(),
     ); // [OCR 추가]
@@ -955,7 +981,12 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
     final account = widget.store.cloud.accountId; // [OCR 추가]
     setState(() => _busy = true); // [OCR 추가]
     try {
-      // [OCR 추가]
+      await _setReceiptPreviewPaused(true); // [OCR 추가] 캐시된 장을 선택할 때도 미리보기는 멈춘다.
+      if (!mounted ||
+          session != _multiSession ||
+          account != widget.store.cloud.accountId) {
+        return; // [OCR 추가] 미리보기 정지 중 화면 종료·계정 변경을 확인한다.
+      }
       final draft = await selectReceiptPages(
         // [OCR 추가]
         context, // [OCR 추가]
@@ -999,7 +1030,12 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
     } finally {
       // [OCR 추가]
       if (mounted && session == _multiSession) {
-        setState(() => _busy = false); // [OCR 추가]
+        await _setReceiptPreviewPaused(
+          false,
+        ); // [OCR 추가] 여러 장 처리 취소·실패 후 촬영을 재개한다.
+        if (mounted && session == _multiSession) {
+          setState(() => _busy = false); // [OCR 추가]
+        }
       }
     } // [OCR 추가]
   } // [OCR 추가]
@@ -1174,7 +1210,12 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
     } catch (error) {
       if (mounted) _showError(context, error);
     } finally {
-      if (mounted) setState(() => _busy = false);
+      if (mounted) {
+        await _setReceiptPreviewPaused(
+          false,
+        ); // [OCR 추가] 보정·선택·검토 취소와 OCR 실패 모두 촬영 화면을 복구한다.
+        if (mounted) setState(() => _busy = false);
+      }
     }
   }
 

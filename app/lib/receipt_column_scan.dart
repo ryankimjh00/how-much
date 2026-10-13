@@ -9,10 +9,13 @@ double receiptAutomaticHorizontalPadding(double height) =>
 
 /// [OCR 추가] 수량 행의 중앙값 간격보다3배 이상 빈 구간이 있으면 마지막 수량 행 아래까지만 반환한다.
 /// 세 행 이상 비어 있는 사진 끝도 같은 기준을 쓴다. 수량이3행 미만이면 경계를 추측하지 않는다.
+/// [OCR 수정] 공백 안에 알려진 상품 행이 있으면 수량 인식 누락이므로 종료하지 않는다.
 double? receiptQuantityGapEnd(
   List<ReceiptOcrCandidate> rows,
-  double photoBottom,
-) {
+  double photoBottom, {
+  List<Rect> productRows =
+      const [], // [OCR 추가] 상품명 후보는 종료 판단에만 쓰며 수량 값으로 대체하지 않는다.
+}) {
   final quantities =
       rows.where((row) {
         final value =
@@ -50,12 +53,23 @@ double? receiptQuantityGapEnd(
     photoBottom,
     row.bottom + spacing * .25,
   ); // [OCR 추가] 같은 행의 이름·금액이 조금 더 높아도 마지막 상품은 남긴다.
+  // [OCR 추가] 수량이 없어도 읽힌 상품명 행을 공백으로 취급해 버리지 않는다.
+  bool hasProductBetween(double top, double bottom) => productRows.any(
+    (row) =>
+        row.isFinite &&
+        !row.isEmpty &&
+        row.center.dy > top &&
+        row.center.dy < bottom,
+  );
   for (var i = 1; i < bands.length; i++) {
-    if (bands[i].center.dy - bands[i - 1].center.dy >= spacing * 3) {
+    if (bands[i].center.dy - bands[i - 1].center.dy >= spacing * 3 &&
+        !hasProductBetween(bands[i - 1].bottom, bands[i].top)) {
       return endOf(bands[i - 1]); // [OCR 추가] 세 행 이상 끊긴 뒤의 숫자는 다음 상품으로 탐색하지 않는다.
     }
   }
-  if (photoBottom.isFinite && photoBottom - bands.last.bottom >= spacing * 3) {
+  if (photoBottom.isFinite &&
+      photoBottom - bands.last.bottom >= spacing * 3 &&
+      !hasProductBetween(bands.last.bottom, photoBottom)) {
     return endOf(bands.last); // [OCR 추가] 하단에 수량이 더 없어도 세 행 공백을 확인하면 멈춘다.
   }
   return null; // [OCR 추가]
@@ -124,6 +138,8 @@ Future<ReceiptColumnScan?> scanReceiptColumns({
   required bool Function() isCurrent, // [OCR 추가]
   double? startBelow, // [OCR 추가]
   double? endBefore, // [OCR 추가] 수량 열에서 큰 행 간격을 찾았으면 그 위까지만 읽는다.
+  List<Rect> knownProductRows =
+      const [], // [OCR 추가] 열 재검사도 기존 상품명 행을 공백으로 오인하지 않는다.
   bool Function(String field, List<ReceiptOcrCandidate> productRows)?
   shouldScan, // [OCR 추가] 이름 보완 이후에도 숫자가 부족한 열만 읽는다.
   void Function(String field, Rect bounds)? onScan, // [OCR 추가]
@@ -207,6 +223,7 @@ Future<ReceiptColumnScan?> scanReceiptColumns({
         final quantityEnd = receiptQuantityGapEnd(
           found[entry.key]!,
           photoSize.height,
+          productRows: knownProductRows, // [OCR 추가]
         ); // [OCR 추가]
         if (quantityEnd != null) {
           activeEnd = math.min(

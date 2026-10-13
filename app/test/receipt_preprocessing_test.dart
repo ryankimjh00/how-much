@@ -180,7 +180,7 @@ void main() {
                 ? 1
                 : 2, // [OCR 추가]
           ); // [OCR 추가]
-          expect(closes, inputs.length); // [OCR 추가]
+          expect(closes, 1); // [OCR 수정] 성공·복구·첫 실패 모두 한 번 해제한다. // [OCR 추가]
           for (final temporaryPath in temporaryPaths) {
             // [OCR 추가]
             expect(

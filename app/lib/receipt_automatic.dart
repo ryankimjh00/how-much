@@ -208,6 +208,30 @@ bool _belongsToAutomaticProduct(
   return true; // [OCR 수정]
 } // [OCR 수정]
 
+// [OCR 추가] 상품명 열의 알려진 구매 후보로 수량 누락 구간을 보호한다.
+// 결제·할인·숫자 코드와 세금 요약 아래는 빈 구간을 메우는 근거로 쓰지 않는다.
+List<Rect> _knownAutomaticProductRows(
+  ReceiptOcrResult source,
+  ReceiptAutomaticSeed seed,
+) {
+  final taxEnd = receiptProductEndAboveTax(source.rows);
+  return _automaticProducts(
+        source.products,
+        seed,
+        startBelow: receiptProductStartBelowHeader(source.rows),
+        endBefore: taxEnd,
+      )
+      .where(
+        (name) =>
+            !_receiptMetadata.hasMatch(name.text) &&
+            !receiptIsNumericCode(name.text) &&
+            RegExp(r'[가-힣A-Za-z]').hasMatch(name.text) &&
+            name.text.trim().length <= 50,
+      )
+      .map((name) => name.bounds)
+      .toList();
+}
+
 // [OCR 추가] 전체 OCR의 수량 열만 재사용해 간격을 잰다. 상품 코드나 금액 열의 숫자는 섞지 않는다.
 double? _quantityGapEnd(
   ReceiptOcrResult source,
@@ -231,6 +255,7 @@ double? _quantityGapEnd(
         )
         .toList(),
     photoBottom,
+    productRows: _knownAutomaticProductRows(source, seed), // [OCR 추가]
   ); // [OCR 추가]
 }
 
@@ -687,6 +712,10 @@ Future<List<ReceiptLineDraft>?> readAutomaticReceiptLines({
           isCurrent: isCurrent, // [OCR 추가]
           startBelow: productStart, // [OCR 추가]
           endBefore: initialEnd, // [OCR 추가]
+          knownProductRows: _knownAutomaticProductRows(
+            source,
+            seed,
+          ), // [OCR 추가]
           shouldScan: shouldScan, // [OCR 추가]
           onScan: (field, bounds) =>
               onProgress?.call(0, 0, '$field 열 탐색', 1, 0, bounds), // [OCR 추가]

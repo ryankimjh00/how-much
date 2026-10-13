@@ -19,6 +19,39 @@ void main() {
       120,
     ); // [OCR 추가]
   });
+  // [OCR 추가] 알려진 상품명은 수량 OCR 누락을 설명한다. 실제 공백의 종료 규칙은 유지한다.
+  test('수량 공백 안에 상품명 행이 있으면 뒤 상품을 버리지 않는다', () {
+    final rows = [
+      for (final top in [10.0, 50.0, 90.0, 250.0, 290.0]) quantity(top),
+    ];
+    expect(
+      receiptQuantityGapEnd(
+        rows,
+        320,
+        productRows: [fixture.name('missing', '수량 누락 상품', 170).bounds],
+      ),
+      isNull,
+    );
+    expect(
+      receiptQuantityGapEnd(
+        rows,
+        320,
+        productRows: [fixture.name('before-gap', '기존 상품', 90).bounds],
+      ),
+      120,
+    );
+  });
+  test('마지막 수량 아래 상품명이 남아 있으면 사진 끝 공백을 확정하지 않는다', () {
+    final rows = [quantity(10), quantity(50), quantity(90)];
+    expect(
+      receiptQuantityGapEnd(
+        rows,
+        600,
+        productRows: [fixture.name('last', '마지막 수량 누락', 130).bounds],
+      ),
+      isNull,
+    );
+  });
   test('두 행 간격이나 마지막 수량 아래 짧은 여백은 끊김으로 확정하지 않는다', () {
     expect(
       receiptQuantityGapEnd([
