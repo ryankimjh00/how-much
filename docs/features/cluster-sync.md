@@ -42,7 +42,7 @@ FastAPI, PostgreSQL, Flutter 인증 교체, 전용 namespace와 PVC 2Gi 배포. 
 ## 9. 결정된 사항
 - PostgreSQL 한 인스턴스, `longhorn-kr-single` PVC 2Gi.
 - `https://howmuch.monithub.org`와 전용 Gateway·인증서. 기존 공용 Gateway는 유지한다.
-- 해시만 서버에 보관하고, 기기 세션은 Keychain/Keystore에 저장한다.
+- 해시만 서버에 보관하고, 기기의 세션과 복구 코드는 Keychain/Keystore에 저장한다. [다시 보기·기존 계정 제약](sync-recovery.md)을 따른다.
 - 세션 만료·서버 실패·충돌 때도 로컬 기록을 보존한다.
 - Harbor는 비공개 `howmuch` 프로젝트와 전용 pull robot을 사용한다.
 - 계약과 예제: [서버·Swagger 문서](../../server/README.md). 운영 절차: [배포 문서](../../deploy/README.md).

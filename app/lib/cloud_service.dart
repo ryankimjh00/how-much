@@ -172,7 +172,7 @@ class CloudService {
   String get accountLabel => _accountId == null ? '기기 기록' : '복구 코드 계정';
   Stream<String?> get authChanges => _changes.stream;
 
-  /// 네트워크 없이 안전한 저장소의 세션만 읽어 오프라인 기록을 바로 연다.
+  /// 네트워크 없이 보안 저장소의 세션을 읽어 오프라인 기록을 바로 연다.
   Future<void> initialize() async {
     if (!configured) return;
     final raw = await _storage.read(key: _storageKey);
@@ -190,16 +190,20 @@ class CloudService {
     ).isBefore(DateTime.now());
   }
 
-  Future<void> _saveSession(Map<String, Object?> value) async {
+  Future<void> _saveSession(
+    Map<String, Object?> value, {
+    required String recoveryCode,
+  }) async {
     final id = value['accountId'] as String;
     final token = value['token'] as String;
-    // 복구 코드 원문은 제외하고, Keychain/Keystore 저장 성공 후 계정을 전환한다.
+    // 코드와 세션을 함께 보안 저장한 뒤 계정을 전환해 서로 다른 계정의 비밀이 섞이지 않게 한다.
     await _storage.write(
       key: _storageKey,
       value: jsonEncode({
         'accountId': id,
         'token': token,
         'expiresAt': value['expiresAt'],
+        'recoveryCode': RecoveryCode.format(recoveryCode),
       }),
     );
     _accountId = id;
@@ -208,17 +212,20 @@ class CloudService {
     _changes.add(id);
   }
 
-  /// 서버가 발급한 코드는 한 번 표시하고 원문을 저장하지 않는다.
+  /// 서버가 발급한 코드를 세션과 함께 보안 저장하고 반환한다.
   Future<String> createRecoveryAccount() async {
     final result = await _request('POST', '/v1/accounts', authenticate: false);
     final code = result['recoveryCode'] as String;
-    RecoveryCode.normalize(code);
-    await _saveSession(result);
+    await _saveSession(result, recoveryCode: code);
     return code;
   }
 
   /// 잘못된 코드는 새 계정을 만들지 않으며 기존 기기 기록도 유지한다.
-  Future<void> restoreRecoveryAccount(String code) async {
+  /// expectedAccountId를 지정하면 그 계정과 일치할 때만 세션·코드를 교체한다.
+  Future<void> restoreRecoveryAccount(
+    String code, {
+    String? expectedAccountId,
+  }) async {
     final normalized = RecoveryCode.normalize(code);
     final result = await _request(
       'POST',
@@ -226,7 +233,33 @@ class CloudService {
       authenticate: false,
       body: {'recoveryCode': normalized},
     );
-    await _saveSession(result);
+    if (expectedAccountId != null &&
+        (result['accountId'] != expectedAccountId ||
+            _accountId != expectedAccountId)) {
+      throw const FormatException('현재 계정의 복구 코드를 입력해주세요. 기기 기록은 유지됩니다.');
+    }
+    await _saveSession(result, recoveryCode: normalized);
+  }
+
+  /// 현재 계정의 보관한 코드를 오프라인에서도 읽는다. 이전 버전의 세션에는 코드가 없을 수 있다.
+  Future<String?> readRecoveryCode() async {
+    final account = _accountId;
+    final token = _token;
+    if (account == null || token == null) return null;
+    final raw = await _storage.read(key: _storageKey);
+    if (account != _accountId || token != _token) {
+      throw const FormatException('계정이 변경됐습니다. 다시 확인해주세요.');
+    }
+    if (raw == null) return null;
+    try {
+      final value = jsonDecode(raw);
+      if (value is! Map) throw const FormatException();
+      if (value['accountId'] != account || value['token'] != token) return null;
+      final code = value['recoveryCode'];
+      return code is String ? RecoveryCode.format(code) : null;
+    } on FormatException {
+      throw const FormatException('보관한 복구 코드를 읽지 못했어요. 다시 연결해주세요.');
+    }
   }
 
   Future<void> signOut() async {
