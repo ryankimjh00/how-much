@@ -221,7 +221,17 @@ void main() {
           expect(reads, 0);
         } else {
           await tester.tap(find.text('원본 사용'));
-          await loadRegion(tester);
+          // 실제 사진 전처리가 끝난 화면을 기다려 실행 부하에 따른 고정 대기 실패를 막는다.
+          for (var attempt = 0; attempt < 100; attempt++) {
+            await tester.runAsync(
+              () => Future<void>.delayed(const Duration(milliseconds: 20)),
+            );
+            await tester.pump();
+            if (find.byType(ReceiptSelectionScreen).evaluate().isNotEmpty) {
+              break;
+            }
+          }
+          await tester.pumpAndSettle();
           expect(find.byType(ReceiptSelectionScreen), findsOneWidget);
           expect(reads, greaterThan(0));
           await tester.tap(find.byTooltip('뒤로'));
