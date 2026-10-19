@@ -1568,6 +1568,7 @@ class _AccountSheet extends StatefulWidget {
 class _AccountSheetState extends State<_AccountSheet> {
   final _recovery = TextEditingController();
   bool _busy = false;
+  bool _needsRecoveryCode = false;
   String _error = '';
 
   @override
@@ -1576,8 +1577,14 @@ class _AccountSheetState extends State<_AccountSheet> {
     super.dispose();
   }
 
-  Future<void> _run(Future<void> Function() action) async {
-    if (_busy || widget.store.saving || widget.store.syncing) return;
+  Future<void> _run(
+    Future<void> Function() action, {
+    bool requiresIdleStore = true,
+  }) async {
+    if (_busy ||
+        (requiresIdleStore && (widget.store.saving || widget.store.syncing))) {
+      return;
+    }
     setState(() {
       _busy = true;
       _error = '';
@@ -1593,21 +1600,54 @@ class _AccountSheetState extends State<_AccountSheet> {
 
   Future<void> _createRecoveryAccount() async {
     final code = await widget.store.cloud.createRecoveryAccount();
-    // 화면을 닫아 코드를 놓치지 않도록 보관 확인을 먼저 받는다.
+    if (mounted) await _showRecoveryCode(code, newlyCreated: true);
+    await widget.store.reloadForCurrentAccount();
+    if (await widget.store.hasGuestData()) await widget.store.importGuestData();
+    await widget.store.sync();
+  }
+
+  Future<void> _viewRecoveryCode() async {
+    final code = await widget.store.cloud.readRecoveryCode();
+    if (!mounted) return;
+    if (code == null) {
+      setState(() => _needsRecoveryCode = true);
+      return;
+    }
+    await _showRecoveryCode(code);
+  }
+
+  Future<void> _restoreRecoveryAccount() async {
+    final cloud = widget.store.cloud;
+    await cloud.restoreRecoveryAccount(
+      _recovery.text,
+      expectedAccountId: cloud.accountId,
+    );
+    if (mounted) {
+      _recovery.clear();
+      setState(() => _needsRecoveryCode = false);
+    }
+    await widget.store.reloadForCurrentAccount();
+    await widget.store.sync();
+  }
+
+  Future<void> _showRecoveryCode(
+    String code, {
+    bool newlyCreated = false,
+  }) async {
     if (mounted) {
       await showDialog<void>(
         context: context,
-        barrierDismissible: false,
+        barrierDismissible: !newlyCreated,
         builder: (context) => PopScope(
-          canPop: false,
+          canPop: !newlyCreated,
           child: AlertDialog(
-            title: const Text('복구 코드를 보관해주세요'),
+            title: Text(newlyCreated ? '복구 코드를 보관해주세요' : '복구 코드'),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('다른 기기에서 같은 기록을 열 때 필요해요. 이 코드는 한 번만 표시돼요.'),
+                  const Text('다른 기기에서 같은 기록을 열 때 필요해요. 계정 메뉴에서 다시 확인할 수 있어요.'),
                   const SizedBox(height: 16),
                   SelectableText(
                     code,
@@ -1635,16 +1675,13 @@ class _AccountSheetState extends State<_AccountSheet> {
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('코드를 보관했어요'),
+                child: Text(newlyCreated ? '코드를 보관했어요' : '닫기'),
               ),
             ],
           ),
         ),
       );
     }
-    await widget.store.reloadForCurrentAccount();
-    if (await widget.store.hasGuestData()) await widget.store.importGuestData();
-    await widget.store.sync();
   }
 
   @override
@@ -1691,25 +1728,36 @@ class _AccountSheetState extends State<_AccountSheet> {
                 _MessageBox(
                   message: '${cloud.accountLabel}에 연결했어요. 기록은 자동으로 동기화돼요.',
                 ),
-                if (cloud.sessionExpired) ...[
+                if (cloud.usesRecoveryCode) ...[
+                  const SizedBox(height: 8),
+                  OutlinedButton.icon(
+                    onPressed: _busy
+                        ? null
+                        : () =>
+                              _run(_viewRecoveryCode, requiresIdleStore: false),
+                    icon: const Icon(Icons.key),
+                    label: const Text('복구 코드 다시 보기'),
+                  ),
+                ],
+                if (cloud.sessionExpired || _needsRecoveryCode) ...[
                   const SizedBox(height: 12),
-                  const Text('세션이 만료됐어요. 기록을 유지하며 복구 코드로 다시 연결해주세요.'),
+                  Text(
+                    cloud.sessionExpired
+                        ? '세션이 만료됐어요. 기록을 유지하며 복구 코드로 다시 연결해주세요.'
+                        : '이 기기에 보관한 복구 코드가 없어요. 보관한 코드를 입력해 다시 연결하면 다음부터 확인할 수 있어요. 코드를 잃어버렸다면 로그아웃하지 마세요.',
+                  ),
                   TextField(
                     controller: _recovery,
                     enabled: !_busy,
                     autocorrect: false,
                     enableSuggestions: false,
+                    textCapitalization: TextCapitalization.characters,
                     decoration: const InputDecoration(labelText: '보관한 복구 코드'),
                   ),
                   OutlinedButton(
                     onPressed: _busy
                         ? null
-                        : () => _run(() async {
-                            await cloud.restoreRecoveryAccount(_recovery.text);
-                            _recovery.clear();
-                            await widget.store.reloadForCurrentAccount();
-                            await widget.store.sync();
-                          }),
+                        : () => _run(_restoreRecoveryAccount),
                     child: const Text('복구 코드로 다시 연결'),
                   ),
                 ],
@@ -1717,7 +1765,7 @@ class _AccountSheetState extends State<_AccountSheet> {
                   const Padding(
                     padding: EdgeInsets.only(top: 8),
                     child: Text(
-                      '새 기기에서는 보관한 복구 코드를 입력해주세요. 코드를 잃어버리면 로그아웃하지 마세요.',
+                      '새 기기에서는 복구 코드를 입력해주세요. 로그아웃하면 이 기기에 보관한 코드도 지워져요.',
                     ),
                   ),
                 if (widget.store.conflicts.isNotEmpty) ...[
@@ -1774,7 +1822,10 @@ class _AccountSheetState extends State<_AccountSheet> {
                       : () => _run(() async {
                           await widget.store.cloud.signOut();
                           await widget.store.reloadForCurrentAccount();
-                          if (mounted) setState(() {});
+                          if (mounted) {
+                            _recovery.clear();
+                            setState(() => _needsRecoveryCode = false);
+                          }
                         }),
                   child: const Text('로그아웃'),
                 ),
@@ -1799,14 +1850,7 @@ class _AccountSheetState extends State<_AccountSheet> {
                 ),
                 const SizedBox(height: 8),
                 OutlinedButton(
-                  onPressed: _busy
-                      ? null
-                      : () => _run(() async {
-                          await cloud.restoreRecoveryAccount(_recovery.text);
-                          _recovery.clear();
-                          await widget.store.reloadForCurrentAccount();
-                          await widget.store.sync();
-                        }),
+                  onPressed: _busy ? null : () => _run(_restoreRecoveryAccount),
                   child: const Text('기존 기록 복원'),
                 ),
               ],
