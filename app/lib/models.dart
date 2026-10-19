@@ -453,15 +453,23 @@ class MemoLineDraft {
   bool selected;
 }
 
+/// 메모 인식문에서 검토할 상품과 표시된 수량을 추출하며 항목은 선택하지 않는다.
 List<MemoLineDraft> parseMemoText(String text) {
   final result = <MemoLineDraft>[];
+  final quantityWithUnit = RegExp(
+    r'\s*(?:x|×)?\s*(\d+)\s*개\s*$',
+    caseSensitive: false,
+  );
+  final separatedQuantity = RegExp(
+    r'(?:\s+(?:x|×)?\s*|(?:x|×)\s*)(\d+)\s*$',
+    caseSensitive: false,
+  );
   for (var raw in const LineSplitter().convert(text)) {
     var line = raw.trim().replaceFirst(RegExp(r'^[\-•*✓☐☑\s]+'), '').trim();
     if (line.isEmpty) continue;
-    final match = RegExp(
-      r'\s*(?:x|×)?\s*(\d{1,3})\s*(?:개)?\s*$',
-      caseSensitive: false,
-    ).firstMatch(line);
+    // 제품명의 B12 같은 숫자를 수량으로 떼지 않고, 표시가 있는 수량만 분리한다.
+    final match =
+        quantityWithUnit.firstMatch(line) ?? separatedQuantity.firstMatch(line);
     var quantity = 1;
     if (match != null) {
       final parsed = int.tryParse(match.group(1)!);
@@ -472,7 +480,7 @@ List<MemoLineDraft> parseMemoText(String text) {
     }
     if (line.isNotEmpty &&
         line.length <= 50 &&
-        RegExp(r'[가-힣A-Za-z0-9]').hasMatch(line)) {
+        RegExp(r'[가-힣A-Za-z]').hasMatch(line)) {
       result.add(MemoLineDraft(title: line, quantity: quantity));
     }
     if (result.length == 50) break;

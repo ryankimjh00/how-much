@@ -33,6 +33,10 @@ flutter run
 긴 영수증은 촬영 화면의 **여러 장 찍기**에서 나눠 촬영하거나 **앨범**에서 바로 여러 장을 선택합니다. 두 장 이상을 고르면 미리보기 목록에 모으며 앨범을 다시 열거나 촬영해 사진을 더 추가할 수 있습니다. **촬영 완료 → 장마다 첫 상품명·수량·금액 선택 → 모든 장을 마친 뒤 전체 검토**로 진행합니다. 사진을 모으는 동안은 OCR을 실행하지 않고, 촬영 완료 후 각 장을 선택할 때 읽습니다. 각 장에서 수동 다중 상품 선택도 사용할 수 있습니다. 사진을 이어붙이거나 장 사이 중복을 자동으로 제거하지 않으며, 겹친 상품은 사용자가 최종 검토에서 제외합니다. 선택을 취소하면 완료한 앞 장은 유지하며, 불필요한 장은 건너뛸 수 있습니다. 검토에서는 사진을 넘겨 보고 각 항목을 원래 장의 사진에서 수정합니다. 최대 10장이고 기존 장별 확대·기울기 보정과 메모의 한 장 흐름은 유지합니다.
 iOS는 `UIScene`으로 화면을 시작하고 엔진 초기화 후 플러그인을 등록합니다. Xcode 27 / iOS 27 SDK로 빌드할 때도 이 설정을 유지해야 합니다. 실제 아이폰에 업데이트할 때는 `flutter build ios --release`로 빌드하고, 기존 앱을 삭제하지 않고 설치합니다. [iOS 호환성·검증 상태](docs/features/ios-27-compatibility.md)를 확인합니다.
 
+사진은 iOS에서 ML Kit Text Recognition v2 한국어 모델, Android에서 Paddle로 기기 내 처리합니다. 손글씨는 필체·조명에 따라 오인식할 수 있으므로 검토 화면에서 확인·수정한 뒤 저장합니다. [한국어 OCR 설정·검증](docs/features/korean-ocr.md)을 확인합니다.
+
+메모에서 숫자·기호만 읽힌 줄은 상품 후보에서 제외합니다. 수량은 `우유2개`, `계란 x3`, `두부 2`처럼 단위나 구분이 있을 때 분리하고 `비타민 B12`의 숫자는 상품명에 남깁니다.
+
 기본 서버는 `https://howmuch.monithub.org`입니다. 다른 서버는 `--dart-define=API_BASE_URL=https://...`로 지정합니다. 로컬 기능만 사용할 때는 `--dart-define=API_BASE_URL=`로 실행합니다. HTTP는 localhost 테스트만 허용합니다.
 
 홈 우측 계정 버튼에서 **복구 코드 만들고 기록 연결**을 누르면 기기 기록을 새 계정으로 복사합니다. 발급·복원한 코드는 기기 보안 저장소에 보관하며 **계정 · 동기화 → 복구 코드 다시 보기**에서 확인·복사할 수 있습니다. 다른 기기에서는 **기존 기록 복원**에 코드를 입력합니다. 코드를 아는 사람은 기록에 접근할 수 있으므로 안전하게 보관해주세요.
@@ -43,23 +47,27 @@ iOS는 `UIScene`으로 화면을 시작하고 엔진 초기화 후 플러그인�
 
 ## 검사와 빌드
 
+저장소 루트에서 아래 명령으로 의존성 설치·포맷 확인·정적 분석·테스트를 실행합니다. 패키지와 Gradle 캐시는 내장 디스크에 저장하므로 `Brain` 볼륨이나 `~/.pub-cache` 연결이 필요하지 않습니다. 최초 실행에는 인터넷이 필요합니다.
+
 ```sh
-cd app
-flutter analyze
-flutter test
-flutter build apk --debug
-flutter build apk --release
-flutter build ios --release
+./scripts/app-local.sh
+./scripts/app-local.sh flutter build apk --debug
+./scripts/app-local.sh flutter build apk --release
+./scripts/check-ios.sh
 # USB로 연결한 실제 기기 Keychain·HTTPS 테스트. 일반 앱 기록과 분리된 저장 영역을 사용합니다.
-flutter drive --driver=test_driver/integration_test.dart \
+./scripts/app-local.sh flutter drive --driver=test_driver/integration_test.dart \
   --target=integration_test/cluster_sync_test.dart -d <기기-ID>
 ```
+
+이 스크립트는 명령을 `app/`에서 실행하고, macOS에서는 `~/Library/Caches/how-much/`, 다른 환경에서는 `${XDG_CACHE_HOME:-~/.cache}/how-much/`를 사용합니다. 직접 지정한 `PUB_CACHE`·`GRADLE_USER_HOME`은 유지합니다. 일반 실행도 `./scripts/app-local.sh flutter run`으로 할 수 있습니다. 기존 전역 캐시 설정은 변경하지 않습니다.
+
+`check-ios.sh`는 iOS 앱과 손글씨 OCR 테스트를 무서명으로 컴파일하고 Xcode 캐시를 `app/build/ios-local/`에 저장합니다. 실제 OCR 테스트 실행에는 연결된 아이폰이 필요합니다. 설치된 시뮬레이터가 있으면 지원 모델·아키텍처를 먼저 확인합니다. 검사용 무서명 빌드는 기기에 설치할 수 없으며 업데이트용 서명 빌드는 별도로 만듭니다.
 
 [서버·Swagger·테스트](server/README.md), [배포·백업·재시작 검증](deploy/README.md), [기능 상태](docs/features/cluster-sync.md), [Figma UI](docs/features/figma-ui.md), [개발·한국어 주석 기준](AGENTS.md)을 확인합니다.
 
 기존 Flutter guest 기록 저장 키와 v4 형식은 유지합니다. Firebase SDK·이메일 로그인은 클러스터의 복구 코드 인증으로 교체했습니다. 이전 Firebase 계정과 Firestore 기록의 자동 이관은 포함하지 않으며 `firebase/`는 이전 구현 참고 자료입니다. React Native AsyncStorage도 자동 변환하지 않습니다.
 
-패키지명은 기존과 같은 `com.todayone.todo`, 버전은 1.5.1(18)입니다. Android release는 아직 debug 서명을 사용하므로 스토어 배포 전 운영 키가 필요합니다. 클러스터는 단일 DB·단일 볼륨 복제이며 자동 백업은 후속 작업입니다.
+패키지명은 기존과 같은 `com.todayone.todo`, 버전은 1.5.3(20)입니다. Android release는 아직 debug 서명을 사용하므로 스토어 배포 전 운영 키가 필요합니다. 클러스터는 단일 DB·단일 볼륨 복제이며 자동 백업은 후속 작업입니다.
 
 Android 릴리스 최적화는 `app/android/app/proguard-rules.pro`에서 미포함 ML Kit 선택 언어 모듈(중국어·데바나가리·일본어)의 옵션 클래스 경고만 제외합니다. 한국어·기본 모델과 기존 최적화 설정은 유지합니다.
 
@@ -178,5 +186,3 @@ ML Kit·PaddleOCR·Tesseract를 같은 실제 사진과 영역으로 각각 시�
 에뮬레이터 항목 선택 화면 뒤에서 카메라 미리보기가 계속 실행됨을 코드와 실행 스레드로 확인했다. 보정·OCR·선택·검토 동안 미리보기를 정지하고, 취소·실패로 촬영 화면에 돌아오면 재개한다. 여러 장의 캐시된 결과 선택에도 적용하며 앱 복귀 후 늦게 준비된 카메라도 처리 중에는 정지한다. 기존 인식기 재사용·사진 보정·OCR 결과는 유지한다.
 
 진단 당시 에뮬레이터의 카메라/그래픽 프로세스가 지속적으로 CPU를 사용하고 게스트 스왑 약700MiB가 관측됐다. 빌드 후 Gradle 데몬 정지로 호스트 사용 메모리는9.6GiB에서6.6GiB, 스왑은2.9GiB에서505MiB로 줄었다. 이는 호스트 자원 관측으로 OCR 시간 개선량을 뜻하지 않는다. 실행 앱을 직접 평가해 미리보기를 정지하는 시험은 컴파일 서비스가 없어 실행되지 않았으며 새 APK의 실제 속도 개선량은 별도 확인해야 한다. 패키지 준비·플랫폼 설정·모델 변경은 하지 않는다.
-
-패키지명은 기존과 같은 `com.todayone.todo`, 버전은 1.5.2(19)입니다. Android release는 아직 debug 서명을 사용하므로 스토어 배포 전 운영 키가 필요합니다. 클러스터는 단일 DB·단일 볼륨 복제이며 자동 백업은 후속 작업입니다.

@@ -30,7 +30,7 @@ flutter_ios_podfile_setup
 target 'Runner' do
   use_frameworks!
 
-  # 한국어 인식 옵션을 사용하려면 한국어 네이티브 인식기도 앱에 포함해야 한다.
+  # 한국어 모델이 없으면 플러그인이 영문 모델로 조용히 대체한다.
   pod 'GoogleMLKit/TextRecognitionKorean', '~> 9.0.0'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
