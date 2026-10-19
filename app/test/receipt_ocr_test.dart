@@ -391,7 +391,7 @@ void main() {
     await tester.runAsync(() async {
       // [OCR 수정]
       // [OCR 추가]
-      final service = OcrService(engine: 'mlkit'); // [OCR 추가]
+      final service = OcrService(); // [OCR 추가]
       final draft = await service.recognizePath(path); // [OCR 추가]
       expect(
         // [OCR 수정]
@@ -472,7 +472,7 @@ void main() {
     await tester.runAsync(() async {
       // [OCR 수정]
       // [OCR 추가]
-      final service = OcrService(engine: 'mlkit'); // [OCR 수정]
+      final service = OcrService(); // [OCR 수정]
       final draft = await service.recognizePath(path); // [OCR 수정]
       expect(draft.lines, isEmpty); // [OCR 수정]
       expect(draft.ocrResult!.products.single.text, '카드케이스'); // [OCR 수정]

@@ -1,6 +1,5 @@
-import 'dart:io'; // [OCR 추가]
+import 'receipt_image.dart'; // [OCR 추가]
 import 'dart:typed_data'; // [OCR 추가]
-import 'dart:ui' as ui; // [OCR 추가]
 import 'package:flutter/gestures.dart'; // [OCR 추가]
 import 'package:flutter/material.dart'; // [OCR 추가]
 import 'receipt_ocr.dart'; // [OCR 추가]
@@ -75,26 +74,16 @@ class _ReceiptReviewPhotoState extends State<ReceiptReviewPhoto> {
     try {
       // [OCR 추가]
       // [OCR 추가]
-      final bytes = // [OCR 추가]
-          widget.photoBytes ?? // [OCR 추가]
-          await File(widget.path).readAsBytes(); // [OCR 수정]
-      final codec = await ui.instantiateImageCodec(bytes); // [OCR 추가]
-      late final Size size; // [OCR 추가]
-      try {
-        // [OCR 추가]
-        // [OCR 추가]
-        final frame = await codec.getNextFrame(); // [OCR 추가]
-        size = Size(
-          // [OCR 추가]
-          frame.image.width.toDouble(), // [OCR 추가]
-          frame.image.height.toDouble(), // [OCR 추가]
-        ); // [OCR 추가]
-        frame.image.dispose(); // [OCR 추가]
-      } finally {
-        // [OCR 추가]
-        codec.dispose(); // [OCR 추가]
-      } // [OCR 추가]
+      // [OCR 수정] 인식에 사용한 사진 바이트를 우선 읽어 초록 박스와 사진의 좌표 기준을 맞춘다.
+      // 사진을 못 읽어도 목록은 수정할 수 있도록 오류 안내는 이 위젯에서 따로 처리한다.
+      final photo = await loadReceiptPhoto(
+        // [OCR 수정]
+        widget.path,
+        photoBytes: widget.photoBytes,
+      );
       if (!mounted) return; // [OCR 추가]
+      final bytes = photo.bytes; // [OCR 수정]
+      final size = photo.size; // [OCR 수정]
       setState(() {
         // [OCR 추가]
         _bytes = bytes; // [OCR 추가]

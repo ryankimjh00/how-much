@@ -68,6 +68,28 @@ Future<void> loadRegion(WidgetTester tester) async {
 } // [OCR 추가]
 
 void main() {
+  testWidgets('공통 사진 읽기는 바이트를 우선하고 파일·손상 오류를 숨기지 않는다', (tester) async {
+    // [OCR 추가] 보정 사진 바이트가 있으면 원본 파일을 다시 읽거나 크기를 바꾸지 않아야 한다.
+    final path = await regionPhoto(tester, width: 320, height: 700);
+    await tester.runAsync(() async {
+      final bytes = await File(path).readAsBytes();
+      final fromFile = await loadReceiptPhoto(path);
+      expect(fromFile.bytes, bytes);
+      expect(fromFile.size, const Size(320, 700));
+      // [OCR 추가] 파일을 일부러 손상시켜도 전달된 사진 바이트가 우선인지 확인한다.
+      // 바이트가 없으면 손상·파일 없음 오류를 숨기지 않아야 화면이 실패를 안내할 수 있다.
+      await File(path).writeAsBytes([0, 1, 2]);
+      final fromBytes = await loadReceiptPhoto(path, photoBytes: bytes);
+      expect(fromBytes.bytes, same(bytes));
+      expect(fromBytes.size, fromFile.size);
+      await expectLater(loadReceiptPhoto(path), throwsA(isA<Exception>()));
+      await File(path).delete();
+      await expectLater(
+        loadReceiptPhoto(path),
+        throwsA(isA<FileSystemException>()),
+      );
+    });
+  });
   // [OCR 추가]
   // [OCR 추가]
   testWidgets('재인식 실패는 이전 숫자를 비우고 영역 이동 중 늦은 응답을 무시한다', (tester) async {

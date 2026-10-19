@@ -262,7 +262,7 @@ void main() {
     await tester.runAsync(() async {
       // [OCR 추가]
       // [OCR 추가]
-      final service = OcrService(engine: 'mlkit'); // [OCR 추가]
+      final service = OcrService(); // [OCR 추가]
       final result = await service.recognizePath(path); // [OCR 추가]
       expect(result.ocrResult!.text, '할인\n2'); // [OCR 추가]
       expect(result.ocrResult!.products, isEmpty); // [OCR 추가]

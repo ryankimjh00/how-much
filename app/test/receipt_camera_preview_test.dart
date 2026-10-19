@@ -9,9 +9,8 @@ import 'package:camera_platform_interface/camera_platform_interface.dart';
 import 'package:how_much/app_store.dart';
 import 'package:how_much/cloud_service.dart';
 import 'package:how_much/screens.dart';
-import 'package:how_much/receipt_text_recognizer.dart';
 import 'package:how_much/receipt_selection_screen.dart';
-import 'receipt_pages_test.dart' show mockReceiptGallery, paddlePageResponse;
+import 'receipt_pages_test.dart' show mockReceiptGallery, receiptPageResponse;
 import 'receipt_region_test.dart' show regionPhoto;
 
 class PreviewCamera extends CameraPlatform {
@@ -103,21 +102,21 @@ void main() {
       });
       mockReceiptGallery(tester, () async => [path]);
       tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-        ReceiptTextRecognizer.channel,
+        const MethodChannel('google_mlkit_text_recognizer'),
         (call) async {
-          if (call.method == 'close') return null;
+          if (call.method == 'vision#closeTextRecognizer') return null;
           expect(camera.calls, [
             'pause',
           ]); // [OCR 추가] 실제 인식 전 정지하고 선택 취소까지 재생하지 않는다.
           if (outcome == 'ocr-error') {
             throw PlatformException(code: 'ocr-failed');
           }
-          return paddlePageResponse();
+          return receiptPageResponse();
         },
       );
       addTearDown(
         () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-          ReceiptTextRecognizer.channel,
+          const MethodChannel('google_mlkit_text_recognizer'),
           null,
         ),
       );

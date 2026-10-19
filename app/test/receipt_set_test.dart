@@ -116,6 +116,77 @@ void main() {
     }); // [OCR 추가]
   } // [OCR 추가]
 
+  // [OCR 추가] 기준 상품이 체크된 경우와 아닌 경우를 모두 확인한다.
+  // 구성품 수정의 취소는 원본을 유지하고 확정은 해당 구성품만 독립시키는 것이 이 테스트의 목적이다.
+  for (final parentSelected in [false, true]) {
+    testWidgets('구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: $parentSelected', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(480, 1400);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final store = AppStore(CloudService(false));
+      addTearDown(store.dispose);
+      await store.initialize();
+      final draft = setDraft();
+      final parent = draft.lines[0]..selected = parentSelected;
+      final component = draft.lines[1]
+        ..setParentId = parent.id
+        ..selected = false;
+      // [OCR 추가] 다른 구성품의 관계와 선택은 개별 수정으로 바뀌지 않아야 한다.
+      final sibling = draft.lines[2]
+        ..setParentId = parent.id
+        ..selected = parentSelected;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ReceiptReviewScreen(store: store, draft: draft),
+        ),
+      );
+      Future<void> tap(Finder finder) async {
+        await tester.ensureVisible(finder);
+        await tester.tap(finder);
+        await tester.pumpAndSettle();
+      }
+
+      final up = find.byKey(const ValueKey('receipt-quantity-up-component'));
+      await tap(find.text(component.title));
+      await tap(up);
+      await tap(find.text('취소'));
+      // [OCR 추가] 편집 중 올린 수량과 세트 관계의 변경이 취소된 원본에 반영되면 안 된다.
+      expect(component.quantity, 2);
+      expect(component.setParentId, parent.id);
+      expect(component.selected, isFalse);
+      expect(parent.selected, parentSelected);
+
+      await tap(find.text(component.title));
+      await tap(up);
+      await tap(find.text('확인했어요'));
+      // [OCR 추가] 구성품만 수량 3의 독립 항목이 되고 원래 기준 상품·다른 구성품은 그대로여야 한다.
+      expect(component.quantity, 3);
+      expect(component.total, 0);
+      expect(component.setParentId, isEmpty);
+      expect(component.selected, isTrue);
+      expect(parent.selected, parentSelected);
+      expect(sibling.setParentId, parent.id);
+      expect(sibling.selected, parentSelected);
+      expect(tester.takeException(), isNull);
+
+      // [OCR 추가] 기준 상품이 미선택이어도 저장되고, 복원 후에도 독립 항목이어야 한다.
+      await store.saveReceipt(draft);
+      final restored = AppStore(CloudService(false));
+      addTearDown(restored.dispose);
+      await restored.initialize();
+      final saved = restored.purchaseRows.singleWhere(
+        (row) => row.title == component.title,
+      );
+      expect(saved.purchase!.setParentId, isEmpty);
+      expect(saved.purchase!.quantity, 3);
+      expect(saved.purchase!.total, 0);
+      expect(restored.purchaseRows, hasLength(parentSelected ? 3 : 1));
+    });
+  }
+
   testWidgets('길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다', (tester) async {
     tester.view.physicalSize = const Size(480, 1400); // [OCR 추가]
     tester.view.devicePixelRatio = 1; // [OCR 추가]
