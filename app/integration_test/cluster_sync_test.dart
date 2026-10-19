@@ -19,10 +19,12 @@ void main() {
     );
     final first = CloudService(true, storage: storage);
     final code = await first.createRecoveryAccount();
+    expect(await first.readRecoveryCode(), code);
     final account = first.accountId;
     final restarted = CloudService(true, storage: storage);
     await restarted.initialize();
     expect(restarted.accountId, account);
+    expect(await restarted.readRecoveryCode(), code);
     const row = AppRow(
       id: 'integration-shopping',
       title: '실기기 검증 우유',
@@ -36,6 +38,7 @@ void main() {
       code.toLowerCase().replaceAll('-', ' '),
     );
     expect(restarted.accountId, account);
+    expect(await restarted.readRecoveryCode(), code);
     final fetched = (await restarted.exchange([])).rows.single;
     final edited = fetched
         .copyWith(title: '두 번째 기기 수정', revision: '1791154800000001:integration')
@@ -67,6 +70,7 @@ void main() {
     final signedOut = CloudService(true, storage: storage);
     await signedOut.initialize();
     expect(signedOut.accountId, isNull);
+    expect(await signedOut.readRecoveryCode(), isNull);
     await first.signOut();
     await tester.pumpWidget(
       const MaterialApp(home: Scaffold(body: Text('동기화 검증 완료'))),
