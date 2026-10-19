@@ -290,6 +290,7 @@ def refresh_prices(conn, account_id, rows: list[Row]):
             row.deleted
             or purchase is None
             or not purchase.share
+            or purchase.setParentId  # [OCR 추가] 세트 구성품을 단독 공유 가격으로 공개하지 않는다.
             or not purchase.registeredAt
             or purchase.spec is None
             or not purchase.spec.comparable()

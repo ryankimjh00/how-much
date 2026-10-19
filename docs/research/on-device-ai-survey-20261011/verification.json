@@ -1,0 +1,11 @@
+{
+  "pages": 20,
+  "unique_source_links": 24,
+  "scope": "앱 OCR 요구사항·기술 조사·Android 독립 모델 비교",
+  "examples_executed": false,
+  "android_engines_executed": [
+    "mlkit",
+    "paddle",
+    "tesseract"
+  ]
+}

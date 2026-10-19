@@ -1,0 +1,5 @@
+Analyzing app...                                                
+
+warning • Returning a 'Future' without 'await' inside a try block. Try adding an 'await' • lib/screens.dart:806:50 • unawaited_return_in_try_block
+
+1 issue found. (ran in 2.8s)

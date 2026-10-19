@@ -1,0 +1,8 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/integration_test/ocr_paddle_compatibility_test.dart
+Running Gradle task 'assembleDebug'...                             20.4s
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+Installing build/app/outputs/flutter-apk/app-debug.apk...           3.0s
+00:00 +0: 기본 Paddle 전체 영수증·영역 재인식·동시 수량 세션
+PADDLE_APP_SERVICE {"whole_products":8,"whole_numbers":24,"quantity":"1","session_values":["1","1"]}
+00:04 +1: (tearDownAll)
+00:05 +1: All tests passed!

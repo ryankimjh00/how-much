@@ -54,3 +54,66 @@ uv export --locked --no-dev --no-hashes --no-emit-project --output-file requirem
 ```
 
 의존성은 `uv.lock`과 `requirements.txt`로 고정한다. Docker 이미지와 Kubernetes 이미지도 검증한 digest로 고정한다.
+
+## 영수증 세트 관계
+
+[OCR 추가] `purchase.setParentId`는 같은 영수증의 기준 구매 기록 ID다. 기본값은 빈 문자열이며 기존 구매 기록은 그대로 읽는다. 구성품의 상품명·수량·금액은 각각 보존하고 세트 가격을 임의 배분하지 않는다. 구성품은 단독 공유 가격으로 공개하지 않는다. DB의 기존 JSON 기록과 동기화 트랜잭션을 사용하므로 테이블 변경은 없다.
+
+기준 기록 `purchase-receipt-set-parent`가 이미 동기화되어 있을 때 구성품 전송 요청(`POST /v1/sync`) 예:
+
+```json
+{
+  "rows": [
+    {
+      "id": "purchase-receipt-set-component",
+      "title": "증정 세제",
+      "completed": true,
+      "revision": "1791154800000000:device1",
+      "pending": true,
+      "baseRevision": null,
+      "group": "1791154800000000:device1",
+      "purchase": {
+        "receiptId": "receipt-set",
+        "itemId": "",
+        "store": "마트",
+        "purchasedOn": "2026-10-01",
+        "quantity": 2,
+        "total": 0,
+        "setParentId": "purchase-receipt-set-parent"
+      }
+    }
+  ]
+}
+```
+
+정상 응답 예(다른 기존 행은 생략):
+
+```json
+{
+  "rows": [
+    {
+      "id": "purchase-receipt-set-component",
+      "title": "증정 세제",
+      "completed": true,
+      "revision": "1791154800000000:device1",
+      "pending": false,
+      "baseRevision": "1791154800000000:device1",
+      "group": "1791154800000000:device1",
+      "purchase": {
+        "receiptId": "receipt-set",
+        "itemId": "",
+        "store": "마트",
+        "purchasedOn": "2026-10-01",
+        "quantity": 2,
+        "total": 0,
+        "setParentId": "purchase-receipt-set-parent"
+      }
+    }
+  ],
+  "conflicts": []
+}
+```
+
+새 세트 필드를 전송하기 전에 이 서버 버전을 배포해야 한다. 이전 서버는 알 수 없는 필드를 거부한다. 실패한 전송은 앱의 로컬 미전송 기록을 유지한다. 이전 앱으로 세트 기록을 편집하면 관계 필드가 유실될 수 있으므로 세트 사용 기기에는 새 앱을 사용한다.
+
+새 서버 단위 검증은 프로젝트 Python 환경에서 `python -m unittest test_receipt_sets -v`로 실행한다. DB가 없는 직렬화·계약·공유 필터 검증이며 PostgreSQL 통합 테스트와 구분한다.

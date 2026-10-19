@@ -1,0 +1,14 @@
+{
+  "lib/arm64-v8a/libc++_shared.so": "4397241b4bd20a8e579bfb41d21107857e12985f6a01ca0c2a5f83380d1270b4",
+  "lib/arm64-v8a/libonnxruntime.so": "67465b2bcf0ad501d389cc2c0f7f04278fb26fcf32e50c16a74deb4472c99706",
+  "lib/arm64-v8a/libonnxruntime4j_jni.so": "bf631163d6350e904e59503eaa8c5a351f4655e7fa582a1878841c312dfea78b",
+  "lib/arm64-v8a/libopencv_java4.so": "144bbc9ad0b0bac4ba58f7d53198aead64379e5314f68200968c703d2c1c14ab",
+  "lib/armeabi-v7a/libc++_shared.so": "91b49f121b3120538faff020fcf535ade1d945e65ccd793fc0b815b5799bbdf0",
+  "lib/armeabi-v7a/libonnxruntime.so": "9908c373f58d68311f082067e715d0209516f81c8e946119ccd047c164c5b887",
+  "lib/armeabi-v7a/libonnxruntime4j_jni.so": "f6c7a537d2e0af19b780aa5e2b13ee018f539439b158ddd85bf4507c10bd0406",
+  "lib/armeabi-v7a/libopencv_java4.so": "933fe7879c07fe603ce5e0f6a04298fa4b07e553c6dc83744a2779161d47e773",
+  "lib/x86_64/libc++_shared.so": "db9609240e60ca18b816a5e95a6bbc784e799261efbd5b30c8e2e03b540b3fa8",
+  "lib/x86_64/libonnxruntime.so": "682d98a97bd5b3fb87f1f4616fd9dd0afb35c12749856cbf396fc76bc024a60e",
+  "lib/x86_64/libonnxruntime4j_jni.so": "29507ca4ff9a97f5d0533d01b91649dd02e271d64107b2b965e8199d51b2ab71",
+  "lib/x86_64/libopencv_java4.so": "373e5a25a92bf6a683fecf4d9c73adaf478c04efad10171d865dcf78b242709a"
+}

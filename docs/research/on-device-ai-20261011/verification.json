@@ -1,0 +1,83 @@
+{
+  "file": "얼마였지_온디바이스AI_조사구현검증보고서_20261011.pdf",
+  "sha256": "36dbc30ae731d246b68d4649e675e23a3065413bf9c2c031fe5390012f3cd450",
+  "pages": 11,
+  "pages_detail": [
+    {
+      "page": 1,
+      "chars": 703,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 2,
+      "chars": 821,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 3,
+      "chars": 1030,
+      "outside": [],
+      "links": 11
+    },
+    {
+      "page": 4,
+      "chars": 1188,
+      "outside": [],
+      "links": 2
+    },
+    {
+      "page": 5,
+      "chars": 1128,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 6,
+      "chars": 1171,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 7,
+      "chars": 1075,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 8,
+      "chars": 806,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 9,
+      "chars": 837,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 10,
+      "chars": 1197,
+      "outside": [],
+      "links": 0
+    },
+    {
+      "page": 11,
+      "chars": 1161,
+      "outside": [],
+      "links": 12
+    }
+  ],
+  "fonts": [
+    "IKCJUC+DejaVu-Sans-Mono",
+    "JRHETW+ReportKR",
+    "MTUDNQ+ReportKR-Bold"
+  ],
+  "links": 25,
+  "unique_sources": 12,
+  "visual_review": "전체 11쪽 배치와 비교 표·그림·참고문헌을 렌더링하여 확인",
+  "actual_padding_test": "세 엔진 각각 45건, 입력 해시 확인, 실행 예외 0건",
+  "production_config": "pubspec.yaml·applicationId 원래 바이트로 복원"
+}

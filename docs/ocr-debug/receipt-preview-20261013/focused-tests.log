@@ -1,0 +1,5 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_camera_preview_test.dart
+00:00 +0: 보정·OCR 미리보기 정지와 촬영 복귀: correction-cancel
+00:13 +1: 보정·OCR 미리보기 정지와 촬영 복귀: selection-cancel
+00:22 +2: 보정·OCR 미리보기 정지와 촬영 복귀: ocr-error
+00:28 +3: All tests passed!

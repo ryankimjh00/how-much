@@ -1,0 +1,875 @@
+engine,context,photo,kind,id,expected,selected,correct
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.68359375}, {""text"": ""1"", ""confidence"": 0.671875}]",False
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.4609375}, {""text"": ""1"", ""confidence"": 0.71484375}]",False
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-00,9600,"[{""text"": ""9.600"", ""confidence"": 0.765625}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-00,9600,"[{""text"": ""9.600"", ""confidence"": 0.6968749761581421}]",True
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.73046875}, {""text"": ""1"", ""confidence"": 0.8515625}]",False
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.80078125}]",True
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-01,1300,"[{""text"": ""1,300"", ""confidence"": 0.7671874761581421}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-01,1300,"[{""text"": ""1,300"", ""confidence"": 0.7906249761581421}]",True
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.75}]",True
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.75}]",True
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-02,1300,"[{""text"": ""1.300"", ""confidence"": 0.616406261920929}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-02,1300,"[{""text"": ""1.300"", ""confidence"": 0.6265624761581421}]",True
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.71875}]",True
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.734375}]",True
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-03,1300,"[{""text"": ""1,300"", ""confidence"": 0.6812499761581421}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-03,1300,"[{""text"": ""1,300"", ""confidence"": 0.7640625238418579}]",True
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.43359375}]",True
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.5859375}]",True
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-04,1300,"[{""text"": ""1.300"", ""confidence"": 0.68359375}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-04,1300,"[{""text"": ""1.300"", ""confidence"": 0.739062488079071}]",True
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.4296875}]",True
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.62109375}]",True
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-05,3500,"[{""text"": ""3,500"", ""confidence"": 0.7835937738418579}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-05,3500,"[{""text"": ""3,500"", ""confidence"": 0.788281261920929}]",True
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.62890625}]",True
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.4453125}]",True
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-06,3500,"[{""text"": ""3,500"", ""confidence"": 0.8257812261581421}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-06,3500,"[{""text"": ""3,500"", ""confidence"": 0.789843738079071}]",True
+mlkit,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.6015625}]",True
+mlkit,row,kyobo-first-original,quantity,kyobo-first-original-quantity-07,1,[],False
+mlkit,whole,kyobo-first-original,amount,kyobo-first-original-amount-07,3500,"[{""text"": ""3,500"", ""confidence"": 0.768750011920929}]",True
+mlkit,row,kyobo-first-original,amount,kyobo-first-original-amount-07,3500,"[{""text"": ""13,500"", ""confidence"": 0.662109375}]",False
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-00,1,[],False
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.61328125}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-00,4000,"[{""text"": ""4.000"", ""confidence"": 0.7875000238418579}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-00,4000,"[{""text"": ""4.000"", ""confidence"": 0.7601562738418579}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.76171875}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.75}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.7484375238418579}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.807812511920929}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.68359375}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.72265625}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.839062511920929}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.8125}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.5546875}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.7421875}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-03,2500,"[{""text"": ""2,500"", ""confidence"": 0.788281261920929}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-03,2500,"[{""text"": ""2,500"", ""confidence"": 0.77734375}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.5}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-04,1,[],False
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-04,2500,"[{""text"": ""2.500"", ""confidence"": 0.800000011920929}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-04,2500,"[{""text"": ""2.500"", ""confidence"": 0.80859375}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.74609375}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.859375}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-05,2500,"[{""text"": ""2.500"", ""confidence"": 0.8187500238418579}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-05,2500,"[{""text"": ""2.500"", ""confidence"": 0.7710937261581421}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.6015625}, {""text"": ""1"", ""confidence"": 0.72265625}]",False
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.81640625}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.813281238079071}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.819531261920929}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.5390625}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.6796875}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-07,4900,"[{""text"": ""4.900"", ""confidence"": 0.801562488079071}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-07,4900,"[{""text"": ""4.900"", ""confidence"": 0.84375}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-08,1,[],False
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-08,1,[],False
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-08,2500,"[{""text"": ""2.500"", ""confidence"": 0.77734375}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-08,2500,"[{""text"": ""2.500"", ""confidence"": 0.782031238079071}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-09,1,"[{""text"": ""1"", ""confidence"": 0.546875}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-09,1,"[{""text"": ""1"", ""confidence"": 0.67578125}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-09,2500,"[{""text"": ""2.500"", ""confidence"": 0.77734375}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-09,2500,"[{""text"": ""2,500"", ""confidence"": 0.7796875238418579}]",True
+mlkit,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.76953125}]",True
+mlkit,row,kyobo-second-original,quantity,kyobo-second-original-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.78515625}]",True
+mlkit,whole,kyobo-second-original,amount,kyobo-second-original-amount-10,16800,"[{""text"": ""16.800"", ""confidence"": 0.7571614384651184}]",True
+mlkit,row,kyobo-second-original,amount,kyobo-second-original-amount-10,16800,"[{""text"": ""16.800"", ""confidence"": 0.8014323115348816}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.60546875}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.69140625}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-00,4000,"[{""text"": ""4,000"", ""confidence"": 0.8460937738418579}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-00,4000,"[{""text"": ""4,000"", ""confidence"": 0.7890625}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.78515625}, {""text"": ""1"", ""confidence"": 0.7109375}]",False
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.4453125}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-01,3100,"[{""text"": ""3.100"", ""confidence"": 0.77734375}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.788281261920929}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.66796875}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.84375}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.8570312261581421}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.835156261920929}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.765625}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.765625}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-03,2500,"[{""text"": ""2.500"", ""confidence"": 0.8023437261581421}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-03,2500,"[{""text"": ""2,500"", ""confidence"": 0.776562511920929}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.55859375}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.8046875}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-04,2500,"[{""text"": ""2.500"", ""confidence"": 0.8226562738418579}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-04,2500,"[{""text"": ""2.500"", ""confidence"": 0.817187488079071}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-05,1,[],False
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.89453125}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-05,2500,"[{""text"": ""2,500"", ""confidence"": 0.7984374761581421}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-05,2500,"[{""text"": ""2,500"", ""confidence"": 0.7867187261581421}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.5234375}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.86328125}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.803906261920929}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.80078125}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.69921875}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.7109375}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-07,4900,"[{""text"": ""4.900"", ""confidence"": 0.766406238079071}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-07,4900,"[{""text"": ""4.900"", ""confidence"": 0.8125}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.39453125}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.546875}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-08,2500,"[{""text"": ""2.500"", ""confidence"": 0.82421875}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-08,2500,"[{""text"": ""2.500"", ""confidence"": 0.696093738079071}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-09,1,"[{""text"": ""1"", ""confidence"": 0.6328125}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-09,1,"[{""text"": ""1"", ""confidence"": 0.76953125}, {""text"": ""1"", ""confidence"": 0.46484375}]",False
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-09,2500,"[{""text"": ""2.500"", ""confidence"": 0.7679687738418579}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-09,2500,"[{""text"": ""2.500"", ""confidence"": 0.7437499761581421}]",True
+mlkit,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.765625}]",True
+mlkit,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.62109375}]",True
+mlkit,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-10,16800,"[{""text"": ""16,800"", ""confidence"": 0.7903645634651184}]",True
+mlkit,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-10,16800,"[{""text"": ""16.800"", ""confidence"": 0.7337239384651184}]",True
+mlkit,whole,samseon-original,quantity,samseon-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.44140625}]",True
+mlkit,row,samseon-original,quantity,samseon-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.5390625}]",True
+mlkit,whole,samseon-original,amount,samseon-original-amount-00,12000,"[{""text"": ""12,"", ""confidence"": 0.8619791865348816}, {""text"": ""000"", ""confidence"": 0.8684895634651184}]",False
+mlkit,row,samseon-original,amount,samseon-original-amount-00,12000,"[{""text"": ""12."", ""confidence"": 0.73046875}, {""text"": ""000"", ""confidence"": 0.8359375}]",False
+mlkit,whole,samseon-original,quantity,samseon-original-quantity-01,1,[],False
+mlkit,row,samseon-original,quantity,samseon-original-quantity-01,1,[],False
+mlkit,whole,samseon-original,amount,samseon-original-amount-01,2000,"[{""text"": ""2,"", ""confidence"": 0.765625}, {""text"": ""000"", ""confidence"": 0.8098958134651184}]",False
+mlkit,row,samseon-original,amount,samseon-original-amount-01,2000,"[{""text"": ""2,000"", ""confidence"": 0.758593738079071}]",True
+mlkit,whole,traders-original,quantity,traders-original-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.81640625}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-00,3,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-00,80940,"[{""text"": ""80,940"", ""confidence"": 0.7825520634651184}]",True
+mlkit,row,traders-original,amount,traders-original-amount-00,80940,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-01,2,[],False
+mlkit,row,traders-original,quantity,traders-original-quantity-01,2,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-01,33760,"[{""text"": ""33,"", ""confidence"": 0.8372395634651184}, {""text"": ""760"", ""confidence"": 0.7838541865348816}]",False
+mlkit,row,traders-original,amount,traders-original-amount-01,33760,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-02,2,[],False
+mlkit,row,traders-original,quantity,traders-original-quantity-02,2,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-02,37960,"[{""text"": ""37,960"", ""confidence"": 0.8235676884651184}]",True
+mlkit,row,traders-original,amount,traders-original-amount-02,37960,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.48828125}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-03,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-03,12980,"[{""text"": ""12,980"", ""confidence"": 0.8893229365348816}]",True
+mlkit,row,traders-original,amount,traders-original-amount-03,12980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-04,1,[],False
+mlkit,row,traders-original,quantity,traders-original-quantity-04,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-04,17980,"[{""text"": ""17,"", ""confidence"": 0.8502604365348816}, {""text"": ""980"", ""confidence"": 0.7721354365348816}]",False
+mlkit,row,traders-original,amount,traders-original-amount-04,17980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.234375}, {""text"": ""1"", ""confidence"": 0.5234375}]",False
+mlkit,row,traders-original,quantity,traders-original-quantity-05,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-05,36980,"[{""text"": ""36,980"", ""confidence"": 0.814453125}, {""text"": ""13,980"", ""confidence"": 0.7584635615348816}]",False
+mlkit,row,traders-original,amount,traders-original-amount-05,36980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.5234375}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-06,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-06,13980,"[{""text"": ""13,980"", ""confidence"": 0.7584635615348816}, {""text"": ""-1,500"", ""confidence"": 0.779296875}]",False
+mlkit,row,traders-original,amount,traders-original-amount-06,13980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.5234375}, {""text"": ""1"", ""confidence"": 0.703125}]",False
+mlkit,row,traders-original,quantity,traders-original-quantity-07,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-07,13480,"[{""text"": ""13,480"", ""confidence"": 0.8984375}, {""text"": ""11,980"", ""confidence"": 0.82421875}]",False
+mlkit,row,traders-original,amount,traders-original-amount-07,13480,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.703125}, {""text"": ""2"", ""confidence"": 0.7265625}]",False
+mlkit,row,traders-original,quantity,traders-original-quantity-08,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-08,11980,"[{""text"": ""11,980"", ""confidence"": 0.82421875}]",True
+mlkit,row,traders-original,amount,traders-original-amount-08,11980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.7265625}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-09,2,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-09,11760,"[{""text"": ""11,760"", ""confidence"": 0.810546875}]",True
+mlkit,row,traders-original,amount,traders-original-amount-09,11760,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.73046875}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-10,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-10,8880,"[{""text"": ""8,"", ""confidence"": 0.904296875}, {""text"": ""880"", ""confidence"": 0.8463541865348816}, {""text"": ""12.980"", ""confidence"": 0.7389323115348816}]",False
+mlkit,row,traders-original,amount,traders-original-amount-10,8880,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-11,1,[],False
+mlkit,row,traders-original,quantity,traders-original-quantity-11,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-11,12980,"[{""text"": ""12.980"", ""confidence"": 0.7389323115348816}]",True
+mlkit,row,traders-original,amount,traders-original-amount-11,12980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.6484375}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-12,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-12,14980,"[{""text"": ""14,980"", ""confidence"": 0.8196614384651184}]",True
+mlkit,row,traders-original,amount,traders-original-amount-12,14980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.765625}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-13,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-13,19980,"[{""text"": ""19,"", ""confidence"": 0.78515625}, {""text"": ""980"", ""confidence"": 0.8489583134651184}]",False
+mlkit,row,traders-original,amount,traders-original-amount-13,19980,[],False
+mlkit,whole,traders-original,quantity,traders-original-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.72265625}]",True
+mlkit,row,traders-original,quantity,traders-original-quantity-14,1,[],False
+mlkit,whole,traders-original,amount,traders-original-amount-14,9980,"[{""text"": ""9,"", ""confidence"": 0.765625}, {""text"": ""980"", ""confidence"": 0.8763020634651184}]",False
+mlkit,row,traders-original,amount,traders-original-amount-14,9980,[],False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.75390625}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.828125}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-00,80940,"[{""text"": ""80,940"", ""confidence"": 0.869140625}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-00,80940,"[{""text"": ""80,940"", ""confidence"": 0.8893229365348816}]",True
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.859375}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.796875}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-01,33760,"[{""text"": ""33,"", ""confidence"": 0.86328125}, {""text"": ""760"", ""confidence"": 0.92578125}]",False
+mlkit,row,traders-recreated,amount,traders-recreated-amount-01,33760,"[{""text"": ""33,"", ""confidence"": 0.8046875}, {""text"": ""760"", ""confidence"": 0.8880208134651184}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-02,2,"[{""text"": ""2"", ""confidence"": 0.81640625}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-02,2,"[{""text"": ""2"", ""confidence"": 0.765625}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-02,37960,"[{""text"": ""37,960"", ""confidence"": 0.9264323115348816}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-02,37960,"[{""text"": ""37,"", ""confidence"": 0.9244791865348816}, {""text"": ""960"", ""confidence"": 0.9127604365348816}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.6484375}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.703125}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-03,12980,"[{""text"": ""12,980"", ""confidence"": 0.8177083134651184}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-03,12980,"[{""text"": ""12,"", ""confidence"": 0.8815104365348816}, {""text"": ""980"", ""confidence"": 0.8645833134651184}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.87109375}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.69140625}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-04,17980,"[{""text"": ""17,"", ""confidence"": 0.8919270634651184}, {""text"": ""980"", ""confidence"": 0.91796875}]",False
+mlkit,row,traders-recreated,amount,traders-recreated-amount-04,17980,"[{""text"": ""17,"", ""confidence"": 0.8854166865348816}, {""text"": ""980"", ""confidence"": 0.890625}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.44140625}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.62890625}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-05,36980,"[{""text"": ""36,"", ""confidence"": 0.8997395634651184}, {""text"": ""980"", ""confidence"": 0.8776041865348816}]",False
+mlkit,row,traders-recreated,amount,traders-recreated-amount-05,36980,"[{""text"": ""36,980"", ""confidence"": 0.9069010615348816}]",True
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.59375}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.58203125}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-06,13980,"[{""text"": ""13,980"", ""confidence"": 0.8815104365348816}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-06,13980,"[{""text"": ""13,980"", ""confidence"": 0.8600260615348816}]",True
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.71875}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.6875}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-07,13480,"[{""text"": ""13,"", ""confidence"": 0.8763020634651184}, {""text"": ""480"", ""confidence"": 0.8736979365348816}]",False
+mlkit,row,traders-recreated,amount,traders-recreated-amount-07,13480,"[{""text"": ""13,"", ""confidence"": 0.859375}, {""text"": ""480"", ""confidence"": 0.9166666865348816}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.609375}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.8046875}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-08,11980,"[{""text"": ""11,980"", ""confidence"": 0.8404948115348816}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-08,11980,"[{""text"": ""11,980"", ""confidence"": 0.8834635615348816}]",True
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.83984375}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.8515625}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-09,11760,"[{""text"": ""11,760"", ""confidence"": 0.8515625}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-09,11760,"[{""text"": ""11,"", ""confidence"": 0.8046875}, {""text"": ""760"", ""confidence"": 0.9049479365348816}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.66015625}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.6640625}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-10,8880,"[{""text"": ""8,"", ""confidence"": 0.841796875}, {""text"": ""880"", ""confidence"": 0.91796875}]",False
+mlkit,row,traders-recreated,amount,traders-recreated-amount-10,8880,"[{""text"": ""8,880"", ""confidence"": 0.883593738079071}]",True
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-11,1,"[{""text"": ""1"", ""confidence"": 0.515625}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-11,1,"[{""text"": ""1"", ""confidence"": 0.67578125}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-11,12980,"[{""text"": ""12,"", ""confidence"": 0.8606770634651184}, {""text"": ""980"", ""confidence"": 0.86328125}]",False
+mlkit,row,traders-recreated,amount,traders-recreated-amount-11,12980,"[{""text"": ""12,980"", ""confidence"": 0.8658854365348816}]",True
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.59765625}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.640625}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-12,14980,"[{""text"": ""14,980"", ""confidence"": 0.8821614384651184}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-12,14980,"[{""text"": ""14,"", ""confidence"": 0.87890625}, {""text"": ""980"", ""confidence"": 0.8802083134651184}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.47265625}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.6640625}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-13,19980,"[{""text"": ""19,980"", ""confidence"": 0.873046875}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-13,19980,"[{""text"": ""19,"", ""confidence"": 0.875}, {""text"": ""980"", ""confidence"": 0.859375}]",False
+mlkit,whole,traders-recreated,quantity,traders-recreated-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.5078125}]",True
+mlkit,row,traders-recreated,quantity,traders-recreated-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.73828125}]",True
+mlkit,whole,traders-recreated,amount,traders-recreated-amount-14,9980,"[{""text"": ""9,980"", ""confidence"": 0.796875}]",True
+mlkit,row,traders-recreated,amount,traders-recreated-amount-14,9980,"[{""text"": ""9,980"", ""confidence"": 0.7953125238418579}]",True
+mlkit,whole,samseon-pepsi-saved-row,quantity,samseon-pepsi-saved-row-quantity-00,1,[],False
+mlkit,whole,samseon-pepsi-saved-row,amount,samseon-pepsi-saved-row-amount-00,2000,"[{""text"": ""2,"", ""confidence"": 0.771484375}, {""text"": ""000"", ""confidence"": 0.8723958134651184}]",False
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-00,1,[],False
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-00,1,[],False
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-00,9600,"[{""text"": ""9,600"", ""confidence"": 0.9987133741378784}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-00,9600,"[{""text"": ""9,600"", ""confidence"": 0.9976266026496887}]",True
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-01,1,"[{""text"": ""-"", ""confidence"": 0.6023915410041809}]",False
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-01,1,[],False
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-01,1300,"[{""text"": ""1,300"", ""confidence"": 0.9996015429496765}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-01,1300,"[{""text"": ""1,300"", ""confidence"": 0.9997550845146179}]",True
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-02,1,[],False
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-02,1,[],False
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-02,1300,"[{""text"": ""1,300"", ""confidence"": 0.9974809885025024}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-02,1300,"[{""text"": ""1,300"", ""confidence"": 0.9947905540466309}]",True
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-03,1,[],False
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-03,1,[],False
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-03,1300,"[{""text"": ""1,300"", ""confidence"": 0.9633777737617493}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-03,1300,"[{""text"": ""1,300"", ""confidence"": 0.9759372472763062}]",True
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.9997668862342834}]",True
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.999683141708374}]",True
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-04,1300,"[{""text"": ""1,300"", ""confidence"": 0.9916400909423828}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-04,1300,"[{""text"": ""1,300"", ""confidence"": 0.9925177693367004}]",True
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.9996523857116699}]",True
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-05,1,[],False
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-05,3500,"[{""text"": ""3,500"", ""confidence"": 0.9526928067207336}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-05,3500,"[{""text"": ""3,500"", ""confidence"": 0.9719661474227905}]",True
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-06,1,[],False
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-06,1,[],False
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-06,3500,"[{""text"": ""3,500"", ""confidence"": 0.9860593676567078}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-06,3500,"[{""text"": ""3,500"", ""confidence"": 0.9400267601013184}]",True
+paddle,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-07,1,[],False
+paddle,row,kyobo-first-original,quantity,kyobo-first-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.9996528625488281}]",True
+paddle,whole,kyobo-first-original,amount,kyobo-first-original-amount-07,3500,"[{""text"": ""3,500"", ""confidence"": 0.9903818368911743}]",True
+paddle,row,kyobo-first-original,amount,kyobo-first-original-amount-07,3500,"[{""text"": ""3,500"", ""confidence"": 0.9887507557868958}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-00,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-00,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-00,4000,"[{""text"": ""4,000"", ""confidence"": 0.9929388165473938}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-00,4000,"[{""text"": ""4,000"", ""confidence"": 0.9873268008232117}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-01,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.9998589754104614}]",True
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.9992705583572388}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.9990782737731934}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-02,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-02,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.999322235584259}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.9995818138122559}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-03,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-03,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-03,2500,"[{""text"": ""2,500"", ""confidence"": 0.9994160532951355}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-03,2500,"[{""text"": ""2,500"", ""confidence"": 0.9996551275253296}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-04,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-04,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-04,2500,"[{""text"": ""2,500"", ""confidence"": 0.9992523193359375}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-04,2500,"[{""text"": ""2,500"", ""confidence"": 0.9983779191970825}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.9997864365577698}]",True
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-05,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-05,2500,"[{""text"": ""2,500"", ""confidence"": 0.9995797872543335}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-05,2500,"[{""text"": ""2,500"", ""confidence"": 0.9995443224906921}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.9981429576873779}]",True
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-06,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.999139130115509}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.9993230104446411}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.9992380142211914}]",True
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-07,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-07,4900,"[{""text"": ""4,900"", ""confidence"": 0.9974821209907532}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-07,4900,"[{""text"": ""4,900"", ""confidence"": 0.9973308444023132}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-08,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-08,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-08,2500,"[{""text"": ""2,500"", ""confidence"": 0.9854153394699097}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-08,2500,"[{""text"": ""2,500"", ""confidence"": 0.9961816072463989}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-09,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-09,1,[],False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-09,2500,"[{""text"": ""2,500"", ""confidence"": 0.9973068237304688}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-09,2500,"[{""text"": ""2,500"", ""confidence"": 0.9977186322212219}]",True
+paddle,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-10,1,[],False
+paddle,row,kyobo-second-original,quantity,kyobo-second-original-quantity-10,1,"[{""text"": ""7"", ""confidence"": 0.7531750798225403}]",False
+paddle,whole,kyobo-second-original,amount,kyobo-second-original-amount-10,16800,"[{""text"": ""16,800"", ""confidence"": 0.9910019040107727}]",True
+paddle,row,kyobo-second-original,amount,kyobo-second-original-amount-10,16800,"[{""text"": ""16,800"", ""confidence"": 0.9914976954460144}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-00,1,[],False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.9999443292617798}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-00,4000,"[{""text"": ""4,000"", ""confidence"": 0.9977404475212097}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-00,4000,"[{""text"": ""4,000"", ""confidence"": 0.9981433749198914}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-01,1,[],False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.9954688549041748}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.9989504814147949}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.9994136691093445}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-02,1,[],False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.999546229839325}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.9997385740280151}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-02,3100,"[{""text"": ""3,100"", ""confidence"": 0.9993377923965454}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-03,1,[],False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.9984806180000305}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-03,2500,"[{""text"": ""2,500"", ""confidence"": 0.9992839694023132}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-03,2500,"[{""text"": ""2,500"", ""confidence"": 0.9991554021835327}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-04,1,"[{""text"": ""/1"", ""confidence"": 0.714367151260376}]",False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.9763085246086121}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-04,2500,"[{""text"": ""2,500"", ""confidence"": 0.9987965822219849}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-04,2500,"[{""text"": ""2,500"", ""confidence"": 0.9991520047187805}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.9998281002044678}]",True
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.9990308284759521}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-05,2500,"[{""text"": ""2,500"", ""confidence"": 0.9997174143791199}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-05,2500,"[{""text"": ""2,500"", ""confidence"": 0.9993184208869934}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.9958198070526123}]",True
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.9995200634002686}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.9993823170661926}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-06,4900,"[{""text"": ""4,900"", ""confidence"": 0.9990741610527039}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-07,1,[],False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.999889612197876}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-07,4900,"[{""text"": ""4,900"", ""confidence"": 0.9983418583869934}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-07,4900,"[{""text"": ""4,900"", ""confidence"": 0.9983875155448914}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-08,1,[],False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.9689077138900757}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-08,2500,"[{""text"": ""2,500"", ""confidence"": 0.9880176782608032}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-08,2500,"[{""text"": ""2,500"", ""confidence"": 0.9948196411132812}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-09,1,[],False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-09,1,"[{""text"": ""1"", ""confidence"": 0.9827357530593872}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-09,2500,"[{""text"": ""2,500"", ""confidence"": 0.9856480360031128}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-09,2500,"[{""text"": ""2,500"", ""confidence"": 0.9982935786247253}]",True
+paddle,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-10,1,"[{""text"": ""11"", ""confidence"": 0.7529489994049072}]",False
+paddle,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.9999679327011108}]",True
+paddle,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-10,16800,"[{""text"": ""16,800"", ""confidence"": 0.9915204048156738}]",True
+paddle,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-10,16800,"[{""text"": ""16,800"", ""confidence"": 0.9971745014190674}]",True
+paddle,whole,samseon-original,quantity,samseon-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.9853224754333496}]",True
+paddle,row,samseon-original,quantity,samseon-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.9991494417190552}]",True
+paddle,whole,samseon-original,amount,samseon-original-amount-00,12000,"[{""text"": ""12,000"", ""confidence"": 0.9504716992378235}]",True
+paddle,row,samseon-original,amount,samseon-original-amount-00,12000,"[{""text"": ""12,000"", ""confidence"": 0.9995402693748474}]",True
+paddle,whole,samseon-original,quantity,samseon-original-quantity-01,1,"[{""text"": ""1"", ""confidence"": 0.9960779547691345}]",True
+paddle,row,samseon-original,quantity,samseon-original-quantity-01,1,[],False
+paddle,whole,samseon-original,amount,samseon-original-amount-01,2000,"[{""text"": ""2,000"", ""confidence"": 0.9318346977233887}]",True
+paddle,row,samseon-original,amount,samseon-original-amount-01,2000,"[{""text"": ""2,000"", ""confidence"": 0.9435176849365234}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.9995641112327576}]",True
+paddle,row,traders-original,quantity,traders-original-quantity-00,3,[],False
+paddle,whole,traders-original,amount,traders-original-amount-00,80940,[],False
+paddle,row,traders-original,amount,traders-original-amount-00,80940,"[{""text"": ""80,940"", ""confidence"": 0.9990456700325012}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-01,2,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.8270750045776367}]",True
+paddle,whole,traders-original,amount,traders-original-amount-01,33760,"[{""text"": """", ""confidence"": 0.0}, {""text"": ""6"", ""confidence"": 0.3770998418331146}]",False
+paddle,row,traders-original,amount,traders-original-amount-01,33760,"[{""text"": ""33,760"", ""confidence"": 0.9986823201179504}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-02,2,"[{""text"": ""VNr"", ""confidence"": 0.28443482518196106}]",False
+paddle,row,traders-original,quantity,traders-original-quantity-02,2,[],False
+paddle,whole,traders-original,amount,traders-original-amount-02,37960,[],False
+paddle,row,traders-original,amount,traders-original-amount-02,37960,"[{""text"": ""37,960"", ""confidence"": 0.9979069232940674}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-03,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-03,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-03,12980,"[{""text"": ""98"", ""confidence"": 0.9876030683517456}]",False
+paddle,row,traders-original,amount,traders-original-amount-03,12980,"[{""text"": ""12,980"", ""confidence"": 0.9934327602386475}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-04,1,"[{""text"": ""i"", ""confidence"": 0.5474605560302734}]",False
+paddle,row,traders-original,quantity,traders-original-quantity-04,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-04,17980,"[{""text"": ""98"", ""confidence"": 0.9876030683517456}]",False
+paddle,row,traders-original,amount,traders-original-amount-04,17980,"[{""text"": ""17,980"", ""confidence"": 0.9936688542366028}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.9986647367477417}, {""text"": ""^"", ""confidence"": 0.4016494154930115}]",False
+paddle,row,traders-original,quantity,traders-original-quantity-05,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-05,36980,"[{""text"": "".80"", ""confidence"": 0.4673837125301361}]",False
+paddle,row,traders-original,amount,traders-original-amount-05,36980,[],False
+paddle,whole,traders-original,quantity,traders-original-quantity-06,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-06,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-06,13980,"[{""text"": ""7"", ""confidence"": 0.5464439988136292}, {""text"": ""500"", ""confidence"": 0.9982914328575134}]",False
+paddle,row,traders-original,amount,traders-original-amount-06,13980,[],False
+paddle,whole,traders-original,quantity,traders-original-quantity-07,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-07,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-07,13480,"[{""text"": """", ""confidence"": 0.0}, {""text"": ""480"", ""confidence"": 0.9938729405403137}]",False
+paddle,row,traders-original,amount,traders-original-amount-07,13480,[],False
+paddle,whole,traders-original,quantity,traders-original-quantity-08,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-08,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-08,11980,"[{""text"": """", ""confidence"": 0.0}]",False
+paddle,row,traders-original,amount,traders-original-amount-08,11980,[],False
+paddle,whole,traders-original,quantity,traders-original-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.992168128490448}]",True
+paddle,row,traders-original,quantity,traders-original-quantity-09,2,[],False
+paddle,whole,traders-original,amount,traders-original-amount-09,11760,[],False
+paddle,row,traders-original,amount,traders-original-amount-09,11760,"[{""text"": ""11,760"", ""confidence"": 0.9268699288368225}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-10,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-10,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-10,8880,[],False
+paddle,row,traders-original,amount,traders-original-amount-10,8880,"[{""text"": ""2."", ""confidence"": 0.4481146037578583}, {""text"": ""880"", ""confidence"": 0.9994850754737854}]",False
+paddle,whole,traders-original,quantity,traders-original-quantity-11,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-11,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-11,12980,"[{""text"": ""8"", ""confidence"": 0.35382893681526184}]",False
+paddle,row,traders-original,amount,traders-original-amount-11,12980,"[{""text"": ""12,980"", ""confidence"": 0.9983344674110413}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-12,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-12,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-12,14980,"[{""text"": """", ""confidence"": 0.0}]",False
+paddle,row,traders-original,amount,traders-original-amount-12,14980,"[{""text"": ""14,980"", ""confidence"": 0.9985148906707764}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-13,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-13,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-13,19980,[],False
+paddle,row,traders-original,amount,traders-original-amount-13,19980,"[{""text"": ""19,980"", ""confidence"": 0.9979021549224854}]",True
+paddle,whole,traders-original,quantity,traders-original-quantity-14,1,[],False
+paddle,row,traders-original,quantity,traders-original-quantity-14,1,[],False
+paddle,whole,traders-original,amount,traders-original-amount-14,9980,[],False
+paddle,row,traders-original,amount,traders-original-amount-14,9980,"[{""text"": ""9,980"", ""confidence"": 0.997952938079834}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.9997351765632629}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.9997438788414001}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-00,80940,"[{""text"": ""80, 940"", ""confidence"": 0.9447678327560425}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-00,80940,"[{""text"": ""80, 940"", ""confidence"": 0.9513026475906372}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-01,2,[],False
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.9997970461845398}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-01,33760,"[{""text"": ""33,760"", ""confidence"": 0.9982690215110779}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-01,33760,"[{""text"": ""33,760"", ""confidence"": 0.9986543655395508}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-02,2,"[{""text"": ""221"", ""confidence"": 0.8251246809959412}]",False
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-02,2,"[{""text"": ""2"", ""confidence"": 0.9998010993003845}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-02,37960,"[{""text"": ""37, 960"", ""confidence"": 0.9325626492500305}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-02,37960,"[{""text"": ""37, 960"", ""confidence"": 0.9302409887313843}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-03,1,[],False
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.9989187717437744}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-03,12980,"[{""text"": ""12,980"", ""confidence"": 0.9980282187461853}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-03,12980,"[{""text"": ""12,980"", ""confidence"": 0.998415470123291}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.9998019337654114}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.9972559809684753}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-04,17980,"[{""text"": ""17,980"", ""confidence"": 0.9975945353507996}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-04,17980,"[{""text"": ""17, 980"", ""confidence"": 0.9243685603141785}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.9998157620429993}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.9996029734611511}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-05,36980,"[{""text"": ""36, 980"", ""confidence"": 0.9685959219932556}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-05,36980,"[{""text"": ""36, 980"", ""confidence"": 0.9531769752502441}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.9993777275085449}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.9996035695075989}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-06,13980,"[{""text"": ""13,980"", ""confidence"": 0.9148570895195007}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-06,13980,"[{""text"": ""13, 980"", ""confidence"": 0.9231038093566895}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.9997813105583191}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.997474730014801}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-07,13480,"[{""text"": ""13,480"", ""confidence"": 0.9967160224914551}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-07,13480,"[{""text"": ""13,480"", ""confidence"": 0.9971704483032227}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.999329686164856}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.9997275471687317}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-08,11980,"[{""text"": ""11, 980"", ""confidence"": 0.9309619665145874}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-08,11980,"[{""text"": ""11,980"", ""confidence"": 0.9986301064491272}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.999711811542511}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.999705970287323}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-09,11760,"[{""text"": ""11,760"", ""confidence"": 0.9987240433692932}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-09,11760,"[{""text"": ""11,760"", ""confidence"": 0.9989698529243469}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.9997836947441101}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.9998123049736023}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-10,8880,"[{""text"": ""8,880"", ""confidence"": 0.9981687664985657}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-10,8880,"[{""text"": ""8,880"", ""confidence"": 0.9952284097671509}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-11,1,"[{""text"": ""1"", ""confidence"": 0.9991214871406555}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-11,1,"[{""text"": ""1"", ""confidence"": 0.9997110962867737}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-11,12980,"[{""text"": ""12,980"", ""confidence"": 0.9969483017921448}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-11,12980,"[{""text"": ""12,980"", ""confidence"": 0.9965739250183105}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.9987738728523254}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.9996364116668701}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-12,14980,"[{""text"": ""14,980"", ""confidence"": 0.9979546666145325}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-12,14980,"[{""text"": ""14,980"", ""confidence"": 0.9966342449188232}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.9998189806938171}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.998881995677948}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-13,19980,"[{""text"": ""19, 980"", ""confidence"": 0.9348259568214417}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-13,19980,"[{""text"": ""19, 980"", ""confidence"": 0.9523972272872925}]",True
+paddle,whole,traders-recreated,quantity,traders-recreated-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.99933260679245}]",True
+paddle,row,traders-recreated,quantity,traders-recreated-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.9997599720954895}]",True
+paddle,whole,traders-recreated,amount,traders-recreated-amount-14,9980,"[{""text"": ""9,980"", ""confidence"": 0.9918128252029419}]",True
+paddle,row,traders-recreated,amount,traders-recreated-amount-14,9980,"[{""text"": ""9, 980"", ""confidence"": 0.9136412143707275}]",True
+paddle,whole,samseon-pepsi-saved-row,quantity,samseon-pepsi-saved-row-quantity-00,1,[],False
+paddle,whole,samseon-pepsi-saved-row,amount,samseon-pepsi-saved-row-amount-00,2000,"[{""text"": ""2,000"", ""confidence"": 0.9997621774673462}]",True
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-00,1,"[{""text"": ""을"", ""confidence"": 0.71}, {""text"": ""|"", ""confidence"": 0.74}]",False
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-00,1,[],False
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-00,9600,"[{""text"": ""0080"", ""confidence"": 0.5}]",False
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-00,9600,"[{""text"": ""ee"", ""confidence"": 0.12}]",False
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-01,1,"[{""text"": ""|"", ""confidence"": 0.46}]",False
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-01,1,"[{""text"": ""1.900"", ""confidence"": 0.73}, {""text"": ""ㅣ"", ""confidence"": 0.38}]",False
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-01,1300,"[{""text"": ""0"", ""confidence"": 0.28}]",False
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-01,1300,"[{""text"": ""840"", ""confidence"": 0.56}]",False
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-02,1,"[{""text"": ""1"", ""confidence"": 0.0}]",True
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-02,1,[],False
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-02,1300,"[{""text"": ""지"", ""confidence"": 0.5}]",False
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-02,1300,[],False
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-03,1,[],False
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-03,1,[],False
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-03,1300,"[{""text"": ""1,300"", ""confidence"": 0.84}]",True
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-03,1300,[],False
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-04,1,[],False
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.59}]",True
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-04,1300,"[{""text"": ""1.500"", ""confidence"": 0.77}]",False
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-04,1300,"[{""text"": ""1.300"", ""confidence"": 0.74}]",True
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-05,1,"[{""text"": ""고"", ""confidence"": 0.72}]",False
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-05,1,[],False
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-05,3500,"[{""text"": ""3500"", ""confidence"": 0.55}]",True
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-05,3500,[],False
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-06,1,[],False
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-06,1,[],False
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-06,3500,[],False
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-06,3500,"[{""text"": ""5,500"", ""confidence"": 0.52}]",False
+tesseract-auto,whole,kyobo-first-original,quantity,kyobo-first-original-quantity-07,1,[],False
+tesseract-auto,row,kyobo-first-original,quantity,kyobo-first-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.62}]",True
+tesseract-auto,whole,kyobo-first-original,amount,kyobo-first-original-amount-07,3500,[],False
+tesseract-auto,row,kyobo-first-original,amount,kyobo-first-original-amount-07,3500,"[{""text"": ""3500"", ""confidence"": 0.26}]",True
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-00,1,"[{""text"": ""|"", ""confidence"": 0.28}]",False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-00,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-00,4000,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-00,4000,"[{""text"": ""4,000)"", ""confidence"": 0.87}]",False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-01,1,[],False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-01,1,"[{""text"": ""|"", ""confidence"": 0.86}]",False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-01,3100,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-01,3100,"[{""text"": ""5."", ""confidence"": 0.72}, {""text"": ""100"", ""confidence"": 0.37}]",False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-02,1,"[{""text"": ""al"", ""confidence"": 0.42}]",False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-02,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-02,3100,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-02,3100,[],False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-03,1,"[{""text"": ""Sam)"", ""confidence"": 0.08}]",False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-03,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-03,2500,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-03,2500,[],False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-04,1,[],False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-04,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-04,2500,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-04,2500,[],False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-05,1,[],False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-05,1,"[{""text"": ""2500"", ""confidence"": 0.54}]",False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-05,2500,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-05,2500,"[{""text"": ""2"", ""confidence"": 0.65}, {""text"": ""00"", ""confidence"": 0.33}]",False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-06,1,[],False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-06,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-06,4900,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-06,4900,[],False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-07,1,"[{""text"": ""|"", ""confidence"": 0.76}]",False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-07,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-07,4900,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-07,4900,[],False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-08,1,[],False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-08,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-08,2500,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-08,2500,"[{""text"": ""2,900"", ""confidence"": 0.59}]",False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-09,1,[],False
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-09,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-09,2500,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-09,2500,[],False
+tesseract-auto,whole,kyobo-second-original,quantity,kyobo-second-original-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.54}]",True
+tesseract-auto,row,kyobo-second-original,quantity,kyobo-second-original-quantity-10,1,[],False
+tesseract-auto,whole,kyobo-second-original,amount,kyobo-second-original-amount-10,16800,[],False
+tesseract-auto,row,kyobo-second-original,amount,kyobo-second-original-amount-10,16800,"[{""text"": ""_16.800"", ""confidence"": 0.36}]",False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-00,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-00,1,"[{""text"": ""건"", ""confidence"": 0.25}]",False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-00,4000,[],False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-00,4000,"[{""text"": ""4,000)"", ""confidence"": 0.74}]",False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-01,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-01,1,[],False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-01,3100,[],False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-01,3100,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-02,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-02,1,"[{""text"": ""1,"", ""confidence"": 0.45}]",False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-02,3100,[],False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-02,3100,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-03,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-03,1,[],False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-03,2500,"[{""text"": ""으"", ""confidence"": 0.1}, {""text"": ""40"", ""confidence"": 0.0}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-03,2500,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-04,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-04,1,[],False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-04,2500,"[{""text"": ""20000"", ""confidence"": 0.46}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-04,2500,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-05,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-05,1,[],False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-05,2500,"[{""text"": ""220"", ""confidence"": 0.0}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-05,2500,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-06,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-06,1,[],False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-06,4900,"[{""text"": ""4"", ""confidence"": 0.88}, {""text"": ""대"", ""confidence"": 0.02}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-06,4900,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-07,1,[],False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-07,1,[],False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-07,4900,"[{""text"": ""4"", ""confidence"": 0.08}, {""text"": ""2"", ""confidence"": 0.5}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-07,4900,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-08,1,"[{""text"": ""해"", ""confidence"": 0.65}]",False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-08,1,"[{""text"": ""|"", ""confidence"": 0.76}]",False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-08,2500,"[{""text"": ""e"", ""confidence"": 0.35}, {""text"": "","", ""confidence"": 0.35}, {""text"": ""01)"", ""confidence"": 0.51}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-08,2500,"[{""text"": ""2,900)"", ""confidence"": 0.7}]",False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-09,1,"[{""text"": ""a"", ""confidence"": 0.3}]",False
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-09,1,"[{""text"": ""1"", ""confidence"": 0.89}]",True
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-09,2500,"[{""text"": ""2.500)"", ""confidence"": 0.08}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-09,2500,[],False
+tesseract-auto,whole,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.64}]",True
+tesseract-auto,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-10,1,"[{""text"": ""|"", ""confidence"": 0.51}]",False
+tesseract-auto,whole,kyobo-second-corrected,amount,kyobo-second-corrected-amount-10,16800,"[{""text"": ""16606"", ""confidence"": 0.67}]",False
+tesseract-auto,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-10,16800,"[{""text"": ""16,800)"", ""confidence"": 0.85}]",False
+tesseract-auto,whole,samseon-original,quantity,samseon-original-quantity-00,1,[],False
+tesseract-auto,row,samseon-original,quantity,samseon-original-quantity-00,1,"[{""text"": ""ae"", ""confidence"": 0.16}]",False
+tesseract-auto,whole,samseon-original,amount,samseon-original-amount-00,12000,[],False
+tesseract-auto,row,samseon-original,amount,samseon-original-amount-00,12000,"[{""text"": ""12,000"", ""confidence"": 0.47}]",True
+tesseract-auto,whole,samseon-original,quantity,samseon-original-quantity-01,1,[],False
+tesseract-auto,row,samseon-original,quantity,samseon-original-quantity-01,1,[],False
+tesseract-auto,whole,samseon-original,amount,samseon-original-amount-01,2000,[],False
+tesseract-auto,row,samseon-original,amount,samseon-original-amount-01,2000,"[{""text"": ""2.000"", ""confidence"": 0.81}]",True
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-00,3,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.36}]",True
+tesseract-auto,whole,traders-original,amount,traders-original-amount-00,80940,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-00,80940,"[{""text"": ""80,940"", ""confidence"": 0.61}]",True
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-01,2,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-01,2,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-01,33760,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-01,33760,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-02,2,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-02,2,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-02,37960,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-02,37960,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-03,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-03,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-03,12980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-03,12980,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-04,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.8}]",True
+tesseract-auto,whole,traders-original,amount,traders-original-amount-04,17980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-04,17980,"[{""text"": ""#1«17,980"", ""confidence"": 0.0}]",False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-05,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-05,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-05,36980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-05,36980,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-06,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-06,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-06,13980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-06,13980,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-07,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-07,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-07,13480,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-07,13480,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-08,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-08,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-08,11980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-08,11980,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-09,2,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-09,2,"[{""text"": ""oe"", ""confidence"": 0.09}]",False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-09,11760,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-09,11760,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-10,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-10,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-10,8880,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-10,8880,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-11,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-11,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-11,12980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-11,12980,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-12,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-12,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-12,14980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-12,14980,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-13,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-13,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-13,19980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-13,19980,[],False
+tesseract-auto,whole,traders-original,quantity,traders-original-quantity-14,1,[],False
+tesseract-auto,row,traders-original,quantity,traders-original-quantity-14,1,[],False
+tesseract-auto,whole,traders-original,amount,traders-original-amount-14,9980,[],False
+tesseract-auto,row,traders-original,amount,traders-original-amount-14,9980,[],False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.85}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.91}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-00,80940,"[{""text"": ""80,940"", ""confidence"": 0.62}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-00,80940,"[{""text"": ""80,"", ""confidence"": 0.95}, {""text"": ""940"", ""confidence"": 0.95}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.89}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.95}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-01,33760,"[{""text"": ""33,760"", ""confidence"": 0.89}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-01,33760,"[{""text"": ""33,"", ""confidence"": 0.96}, {""text"": ""760"", ""confidence"": 0.95}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-02,2,"[{""text"": ""2"", ""confidence"": 0.79}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-02,2,"[{""text"": ""2"", ""confidence"": 0.91}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-02,37960,"[{""text"": ""37,960"", ""confidence"": 0.73}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-02,37960,"[{""text"": ""37,"", ""confidence"": 0.94}, {""text"": ""960"", ""confidence"": 0.94}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-03,1,[],False
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.86}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-03,12980,"[{""text"": ""12,"", ""confidence"": 0.93}, {""text"": ""980"", ""confidence"": 0.95}]",False
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-03,12980,"[{""text"": ""12,"", ""confidence"": 0.9}, {""text"": ""980"", ""confidence"": 0.9}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-04,1,[],False
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.88}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-04,17980,"[{""text"": ""17,"", ""confidence"": 0.92}, {""text"": ""980"", ""confidence"": 0.92}]",False
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-04,17980,"[{""text"": ""17,"", ""confidence"": 0.92}, {""text"": ""980"", ""confidence"": 0.92}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-05,1,[],False
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.89}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-05,36980,"[{""text"": ""36,"", ""confidence"": 0.96}, {""text"": ""980"", ""confidence"": 0.96}]",False
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-05,36980,"[{""text"": ""36,"", ""confidence"": 0.95}, {""text"": ""980"", ""confidence"": 0.95}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.78}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.85}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-06,13980,"[{""text"": "" 13,980"", ""confidence"": 0.57}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-06,13980,"[{""text"": ""13,"", ""confidence"": 0.94}, {""text"": ""980"", ""confidence"": 0.95}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.76}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.96}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-07,13480,"[{""text"": "" 13,480"", ""confidence"": 0.67}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-07,13480,"[{""text"": ""13,"", ""confidence"": 0.95}, {""text"": ""480"", ""confidence"": 0.96}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.77}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-08,1,[],False
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-08,11980,"[{""text"": "" 11,980"", ""confidence"": 0.43}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-08,11980,[],False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.89}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.96}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-09,11760,"[{""text"": ""11,760"", ""confidence"": 0.89}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-09,11760,"[{""text"": ""11,"", ""confidence"": 0.95}, {""text"": ""760"", ""confidence"": 0.95}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-10,1,[],False
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.96}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-10,8880,"[{""text"": ""8,"", ""confidence"": 0.96}, {""text"": ""880"", ""confidence"": 0.96}]",False
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-10,8880,"[{""text"": ""8,"", ""confidence"": 0.89}, {""text"": ""880"", ""confidence"": 0.89}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-11,1,"[{""text"": ""1"", ""confidence"": 0.66}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-11,1,"[{""text"": ""1"", ""confidence"": 0.86}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-11,12980,"[{""text"": "" 12,980"", ""confidence"": 0.66}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-11,12980,"[{""text"": ""12,"", ""confidence"": 0.92}, {""text"": ""980"", ""confidence"": 0.92}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.92}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.77}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-12,14980,"[{""text"": ""14,980"", ""confidence"": 0.92}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-12,14980,"[{""text"": ""14,"", ""confidence"": 0.96}, {""text"": ""980"", ""confidence"": 0.96}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.81}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.89}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-13,19980,"[{""text"": "" 19,980"", ""confidence"": 0.63}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-13,19980,"[{""text"": ""19,"", ""confidence"": 0.88}, {""text"": ""980"", ""confidence"": 0.93}]",False
+tesseract-auto,whole,traders-recreated,quantity,traders-recreated-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.78}]",True
+tesseract-auto,row,traders-recreated,quantity,traders-recreated-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.86}]",True
+tesseract-auto,whole,traders-recreated,amount,traders-recreated-amount-14,9980,"[{""text"": ""9,980"", ""confidence"": 0.87}]",True
+tesseract-auto,row,traders-recreated,amount,traders-recreated-amount-14,9980,"[{""text"": ""9,"", ""confidence"": 0.9}, {""text"": ""980"", ""confidence"": 0.9}]",False
+tesseract-auto,whole,samseon-pepsi-saved-row,quantity,samseon-pepsi-saved-row-quantity-00,1,[],False
+tesseract-auto,whole,samseon-pepsi-saved-row,amount,samseon-pepsi-saved-row-amount-00,2000,"[{""text"": ""2.000"", ""confidence"": 0.87}]",True
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-00,1,"[{""text"": ""1"", ""confidence"": 0.82}]",True
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-00,9600,"[{""text"": ""9,600"", ""confidence"": 0.37}]",True
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-01,1,"[{""text"": ""_1.300"", ""confidence"": 0.11}]",False
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-01,1300,"[{""text"": ""00"", ""confidence"": 0.21}]",False
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-02,1,[],False
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-02,1300,[],False
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-03,1,[],False
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-03,1300,[],False
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.59}]",True
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-04,1300,"[{""text"": ""1.300"", ""confidence"": 0.74}]",True
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-05,1,"[{""text"": ""1."", ""confidence"": 0.62}]",False
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-05,3500,"[{""text"": ""3.500"", ""confidence"": 0.62}]",True
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.54}]",True
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-06,3500,"[{""text"": ""«3.500"", ""confidence"": 0.33}]",False
+tesseract-line,row,kyobo-first-original,quantity,kyobo-first-original-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.62}]",True
+tesseract-line,row,kyobo-first-original,amount,kyobo-first-original-amount-07,3500,"[{""text"": ""3500"", ""confidence"": 0.26}]",True
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-00,1,"[{""text"": ""기"", ""confidence"": 0.59}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-00,4000,"[{""text"": ""4,000"", ""confidence"": 0.88}]",True
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-01,1,[],False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-01,3100,"[{""text"": ""3,100"", ""confidence"": 0.86}]",True
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-02,1,"[{""text"": ""해"", ""confidence"": 0.0}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-02,3100,"[{""text"": ""ee"", ""confidence"": 0.22}, {""text"": ""Ue"", ""confidence"": 0.33}]",False
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-03,1,"[{""text"": ""다"", ""confidence"": 0.17}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-03,2500,"[{""text"": ""290"", ""confidence"": 0.43}]",False
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-04,1,"[{""text"": ""1."", ""confidence"": 0.55}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-04,2500,"[{""text"": ""2500"", ""confidence"": 0.64}]",True
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-05,1,"[{""text"": ""2500"", ""confidence"": 0.58}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-05,2500,"[{""text"": ""P2500"", ""confidence"": 0.19}]",False
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-06,1,"[{""text"": ""4,900"", ""confidence"": 0.41}, {""text"": ""ㅣ"", ""confidence"": 0.36}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-06,4900,"[{""text"": ""1"", ""confidence"": 0.57}]",False
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-07,1,[],False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-07,4900,"[{""text"": ""ee"", ""confidence"": 0.2}]",False
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-08,1,"[{""text"": ""의"", ""confidence"": 0.0}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-08,2500,"[{""text"": ""0020"", ""confidence"": 0.38}]",False
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-09,1,"[{""text"": ""|."", ""confidence"": 0.79}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-09,2500,"[{""text"": ""<"", ""confidence"": 0.23}]",False
+tesseract-line,row,kyobo-second-original,quantity,kyobo-second-original-quantity-10,1,"[{""text"": ""12"", ""confidence"": 0.56}]",False
+tesseract-line,row,kyobo-second-original,amount,kyobo-second-original-amount-10,16800,"[{""text"": "" 16.8"", ""confidence"": 0.72}, {""text"": ""00"", ""confidence"": 0.52}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-00,1,"[{""text"": ""건"", ""confidence"": 0.25}]",False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-00,4000,"[{""text"": ""4,000)"", ""confidence"": 0.74}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-01,1,[],False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-01,3100,"[{""text"": ""4,"", ""confidence"": 0.27}, {""text"": ""100)"", ""confidence"": 0.73}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-02,1,[],False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-02,3100,"[{""text"": ""04."", ""confidence"": 0.38}, {""text"": "","", ""confidence"": 0.47}, {""text"": ""5"", ""confidence"": 0.88}, {""text"": ""[에"", ""confidence"": 0.0}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-03,1,"[{""text"": ""그"", ""confidence"": 0.43}]",False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-03,2500,"[{""text"": ""ce"", ""confidence"": 0.07}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-04,1,[],False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-04,2500,"[{""text"": ""230"", ""confidence"": 0.0}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-05,1,[],False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-05,2500,"[{""text"": ""eee"", ""confidence"": 0.39}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-06,1,[],False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-06,4900,"[{""text"": ""ON"", ""confidence"": 0.31}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-07,1,[],False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-07,4900,[],False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-08,1,"[{""text"": ""효"", ""confidence"": 0.0}]",False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-08,2500,"[{""text"": ""2,900)"", ""confidence"": 0.7}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-09,1,"[{""text"": ""al"", ""confidence"": 0.38}]",False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-09,2500,"[{""text"": ""2,500)"", ""confidence"": 0.75}]",False
+tesseract-line,row,kyobo-second-corrected,quantity,kyobo-second-corrected-quantity-10,1,"[{""text"": ""|"", ""confidence"": 0.51}]",False
+tesseract-line,row,kyobo-second-corrected,amount,kyobo-second-corrected-amount-10,16800,"[{""text"": ""16,800)"", ""confidence"": 0.85}]",False
+tesseract-line,row,samseon-original,quantity,samseon-original-quantity-00,1,[],False
+tesseract-line,row,samseon-original,amount,samseon-original-amount-00,12000,"[{""text"": ""12,000"", ""confidence"": 0.47}]",True
+tesseract-line,row,samseon-original,quantity,samseon-original-quantity-01,1,[],False
+tesseract-line,row,samseon-original,amount,samseon-original-amount-01,2000,"[{""text"": ""2.000"", ""confidence"": 0.88}]",True
+tesseract-line,row,traders-original,quantity,traders-original-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.6}]",True
+tesseract-line,row,traders-original,amount,traders-original-amount-00,80940,"[{""text"": ""80.940"", ""confidence"": 0.32}]",True
+tesseract-line,row,traders-original,quantity,traders-original-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.68}]",True
+tesseract-line,row,traders-original,amount,traders-original-amount-01,33760,"[{""text"": ""33,760"", ""confidence"": 0.68}]",True
+tesseract-line,row,traders-original,quantity,traders-original-quantity-02,2,"[{""text"": ""2"", ""confidence"": 0.84}]",True
+tesseract-line,row,traders-original,amount,traders-original-amount-02,37960,"[{""text"": ""37,960"", ""confidence"": 0.84}]",True
+tesseract-line,row,traders-original,quantity,traders-original-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.87}]",True
+tesseract-line,row,traders-original,amount,traders-original-amount-03,12980,"[{""text"": ""£12,980"", ""confidence"": 0.52}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.8}]",True
+tesseract-line,row,traders-original,amount,traders-original-amount-04,17980,"[{""text"": ""#1«17,980"", ""confidence"": 0.0}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-05,1,"[{""text"": ""fF"", ""confidence"": 0.09}]",False
+tesseract-line,row,traders-original,amount,traders-original-amount-05,36980,"[{""text"": ""20,.900"", ""confidence"": 0.4}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-06,1,[],False
+tesseract-line,row,traders-original,amount,traders-original-amount-06,13980,"[{""text"": ""FS,"", ""confidence"": 0.21}, {""text"": ""SU"", ""confidence"": 0.58}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-07,1,[],False
+tesseract-line,row,traders-original,amount,traders-original-amount-07,13480,"[{""text"": ""ROU"", ""confidence"": 0.12}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-08,1,[],False
+tesseract-line,row,traders-original,amount,traders-original-amount-08,11980,"[{""text"": ""OU"", ""confidence"": 0.4}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-09,2,[],False
+tesseract-line,row,traders-original,amount,traders-original-amount-09,11760,"[{""text"": ""tT,"", ""confidence"": 0.24}, {""text"": ""(OU"", ""confidence"": 0.33}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-10,1,"[{""text"": ""00!"", ""confidence"": 0.48}]",False
+tesseract-line,row,traders-original,amount,traders-original-amount-10,8880,"[{""text"": ""0,880"", ""confidence"": 0.32}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-11,1,"[{""text"": ""I"", ""confidence"": 0.25}]",False
+tesseract-line,row,traders-original,amount,traders-original-amount-11,12980,"[{""text"": ""(12,980"", ""confidence"": 0.37}]",False
+tesseract-line,row,traders-original,quantity,traders-original-quantity-12,1,"[{""text"": ""0!"", ""confidence"": 0.21}]",False
+tesseract-line,row,traders-original,amount,traders-original-amount-12,14980,"[{""text"": ""14,980"", ""confidence"": 0.74}]",True
+tesseract-line,row,traders-original,quantity,traders-original-quantity-13,1,"[{""text"": ""ㅣ"", ""confidence"": 0.54}]",False
+tesseract-line,row,traders-original,amount,traders-original-amount-13,19980,"[{""text"": ""19,980"", ""confidence"": 0.39}]",True
+tesseract-line,row,traders-original,quantity,traders-original-quantity-14,1,"[{""text"": ""ㅣ"", ""confidence"": 0.54}]",False
+tesseract-line,row,traders-original,amount,traders-original-amount-14,9980,"[{""text"": ""00"", ""confidence"": 0.49}, {""text"": ""9,980"", ""confidence"": 0.47}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-00,3,"[{""text"": ""3"", ""confidence"": 0.91}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-00,80940,"[{""text"": ""80,"", ""confidence"": 0.95}, {""text"": ""940"", ""confidence"": 0.95}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-01,2,"[{""text"": ""2"", ""confidence"": 0.95}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-01,33760,"[{""text"": ""33,"", ""confidence"": 0.96}, {""text"": ""760"", ""confidence"": 0.95}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-02,2,"[{""text"": ""2"", ""confidence"": 0.91}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-02,37960,"[{""text"": ""37,"", ""confidence"": 0.94}, {""text"": ""960"", ""confidence"": 0.94}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-03,1,"[{""text"": ""1"", ""confidence"": 0.86}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-03,12980,"[{""text"": ""12,"", ""confidence"": 0.9}, {""text"": ""980"", ""confidence"": 0.9}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-04,1,"[{""text"": ""1"", ""confidence"": 0.88}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-04,17980,"[{""text"": ""17,"", ""confidence"": 0.92}, {""text"": ""980"", ""confidence"": 0.92}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-05,1,"[{""text"": ""1"", ""confidence"": 0.89}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-05,36980,"[{""text"": ""36,"", ""confidence"": 0.95}, {""text"": ""980"", ""confidence"": 0.95}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-06,1,"[{""text"": ""1"", ""confidence"": 0.85}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-06,13980,"[{""text"": ""13,"", ""confidence"": 0.94}, {""text"": ""980"", ""confidence"": 0.95}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-07,1,"[{""text"": ""1"", ""confidence"": 0.85}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-07,13480,"[{""text"": ""13,"", ""confidence"": 0.96}, {""text"": ""480"", ""confidence"": 0.96}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-08,1,"[{""text"": ""1"", ""confidence"": 0.91}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-08,11980,"[{""text"": ""11,980"", ""confidence"": 0.81}]",True
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-09,2,"[{""text"": ""2"", ""confidence"": 0.96}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-09,11760,"[{""text"": ""11,"", ""confidence"": 0.95}, {""text"": ""760"", ""confidence"": 0.95}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-10,1,"[{""text"": ""1"", ""confidence"": 0.87}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-10,8880,"[{""text"": ""8,"", ""confidence"": 0.89}, {""text"": ""880"", ""confidence"": 0.89}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-11,1,"[{""text"": ""1"", ""confidence"": 0.86}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-11,12980,"[{""text"": ""12,"", ""confidence"": 0.92}, {""text"": ""980"", ""confidence"": 0.92}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-12,1,"[{""text"": ""1"", ""confidence"": 0.77}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-12,14980,"[{""text"": ""14,"", ""confidence"": 0.96}, {""text"": ""980"", ""confidence"": 0.96}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-13,1,"[{""text"": ""1"", ""confidence"": 0.89}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-13,19980,"[{""text"": ""19,"", ""confidence"": 0.88}, {""text"": ""980"", ""confidence"": 0.93}]",False
+tesseract-line,row,traders-recreated,quantity,traders-recreated-quantity-14,1,"[{""text"": ""1"", ""confidence"": 0.86}]",True
+tesseract-line,row,traders-recreated,amount,traders-recreated-amount-14,9980,"[{""text"": ""9,"", ""confidence"": 0.9}, {""text"": ""980"", ""confidence"": 0.9}]",False

@@ -1,0 +1,15 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart
+00:00 +0: 교보 보정 실측 좌표: 마지막 두 금액은 전체 OCR 후보를 재사용한다
+00:00 +0 -1: 교보 보정 실측 좌표: 마지막 두 금액은 전체 OCR 후보를 재사용한다 [E]
+  Expected: 'block-30-line-0-element-0'
+    Actual: <null>
+     Which: not an <Instance of 'String'>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_kyobo_accumulation_test.dart 301:7     main.<fn>
+  
+00:00 +0 -1: Some tests failed.
+
+Failing tests:
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 보정 실측 좌표: 마지막 두 금액은 전체 OCR 후보를 재사용한다

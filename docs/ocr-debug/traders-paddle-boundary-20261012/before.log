@@ -1,0 +1,25 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/receipt_traders_paddle_test.dart
+00:00 +0: 트레이더스 Paddle 전체 수량 누락이 다음 상품명을 버리지 않는다
+00:00 +0 -1: 트레이더스 Paddle 전체 수량 누락이 다음 상품명을 버리지 않는다 [E]
+  Expected: true
+    Actual: <false>
+
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_traders_paddle_test.dart 52:5          main.<fn>
+
+00:00 +0 -1: 수량 열도 같은 상품명 사이 누락을 종료 경계로 다시 적용하지 않는다
+00:01 +0 -2: 수량 열도 같은 상품명 사이 누락을 종료 경계로 다시 적용하지 않는다 [E]
+  Expected: an object with length of <1>
+    Actual: []
+     Which: has length of <0>
+
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/receipt_traders_paddle_test.dart 83:5          main.<fn>
+
+00:01 +0 -2: Some tests failed.
+
+Failing tests:
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_traders_paddle_test.dart: 수량 열도 같은 상품명 사이 누락을 종료 경계로 다시 적용하지 않는다
+  /home/jhshin/mobile/how-much-ocr/app/test/receipt_traders_paddle_test.dart: 트레이더스 Paddle 전체 수량 누락이 다음 상품명을 버리지 않는다

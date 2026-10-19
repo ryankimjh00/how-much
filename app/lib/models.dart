@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'receipt_ocr.dart'; // [OCR 추가]
+
 enum ShoppingFilter { all, active, completed }
 
 int positiveInteger(String text, {int max = 999}) {
@@ -93,6 +95,7 @@ class PurchaseData {
     this.share = false,
     this.spec,
     this.registeredAt,
+    this.setParentId = '', // [OCR 추가]
   });
 
   final String receiptId;
@@ -106,6 +109,9 @@ class PurchaseData {
   final bool share;
   final ProductSpec? spec;
   final String? registeredAt;
+
+  /// [OCR 추가] 같은 영수증의 기준 구매 기록 ID. 구성품의 가격·수량은 별도로 보존한다.
+  final String setParentId;
 
   double get unitPrice => total / (quantity * (spec?.packCount ?? 1));
 
@@ -126,6 +132,7 @@ class PurchaseData {
     share: share ?? this.share,
     spec: spec ?? this.spec,
     registeredAt: registeredAt,
+    setParentId: setParentId, // [OCR 추가]
   );
 
   Map<String, Object?> toJson() => {
@@ -140,6 +147,7 @@ class PurchaseData {
     'share': share,
     if (spec != null) 'spec': spec!.toJson(),
     if (registeredAt != null) 'registeredAt': registeredAt,
+    if (setParentId.isNotEmpty) 'setParentId': setParentId, // [OCR 추가]
   };
 
   factory PurchaseData.fromJson(Map<String, Object?> json) => PurchaseData(
@@ -156,6 +164,7 @@ class PurchaseData {
         ? ProductSpec.fromJson(Map<String, Object?>.from(json['spec']! as Map))
         : null,
     registeredAt: json['registeredAt'] as String?,
+    setParentId: json['setParentId'] as String? ?? '', // [OCR 추가]
   );
 }
 
@@ -280,8 +289,25 @@ class ReceiptLineDraft {
     this.selected = true,
     this.itemId = '',
     this.spec,
-  });
+    this.ocrProduct, // [OCR 추가]
+    this.ocrAmount, // [OCR 추가]
+    this.ocrQuantity, // [OCR 추가]
+    this.ocrAmountIsUnitPrice = false, // [OCR 추가]
+    this.ocrInputAmount, // [OCR 추가]
+    this.ocrNotice = '', // [OCR 추가]
+    this.setParentId = '', // [OCR 추가]
+    this.receiptPhotoIndex = 0, // [OCR 추가]
+  }); // [OCR 수정]
 
+  // [OCR 추가] 검토 중 사진 피드백과 입력 방식 유지에만 사용하며 저장·동기화 필드는 늘리지 않는다.
+  int receiptPhotoIndex; // [OCR 추가] 검토 사진과 박스 연결에만 사용하며 구매 기록에는 저장하지 않는다.
+  ReceiptOcrCandidate? ocrProduct; // [OCR 추가]
+  ReceiptOcrCandidate? ocrAmount; // [OCR 추가]
+  ReceiptOcrCandidate? ocrQuantity; // [OCR 추가]
+  bool ocrAmountIsUnitPrice; // [OCR 추가]
+  int? ocrInputAmount; // [OCR 추가]
+  String ocrNotice; // [OCR 추가]
+  String setParentId; // [OCR 추가] 검토에서는 기준 항목 ID를 사용하고 저장 시 구매 기록 ID로 변환한다.
   final String id;
   String title;
   int quantity;
@@ -289,6 +315,14 @@ class ReceiptLineDraft {
   bool selected;
   String itemId;
   ProductSpec? spec;
+
+  /// [OCR 추가] 기존 저장 모델과 같은 규격 기준의 개당 가격을 계산한다. 미확정 수량은 표시하지 않는다.
+  double? get unitPrice {
+    // [OCR 추가]
+    final count = quantity * (spec?.packCount ?? 1); // [OCR 추가]
+    if (count < 1 || total < 0) return null; // [OCR 추가]
+    return total / count; // [OCR 추가]
+  } // [OCR 추가]
 }
 
 class ReceiptDraft {
@@ -299,7 +333,22 @@ class ReceiptDraft {
     required this.lines,
     this.condition = '',
     this.share = false,
+    this.ocrResult, // [OCR 추가]
+    this.ocrPages = const [], // [OCR 추가]
   });
+
+  // [OCR 추가] OCR 좌표는 검토 중에만 유지한다. PurchaseData로 변환하지 않는다.
+  ReceiptOcrResult? ocrResult; // [OCR 추가]
+  final List<ReceiptOcrResult> // [OCR 추가]
+  ocrPages; // [OCR 추가] 여러 장의 사진/좌표는 합치지 않고 검토 동안만 보관한다.
+
+  /// [OCR 추가] 한 장 초안은 기존 사진을, 여러 장 초안은 해당 장의 사진을 반환한다.
+  ReceiptOcrResult? ocrForPage(int index) {
+    // [OCR 추가]
+    if (ocrPages.isEmpty) return index == 0 ? ocrResult : null; // [OCR 추가]
+    if (index < 0 || index >= ocrPages.length) return null; // [OCR 추가]
+    return ocrPages[index]; // [OCR 추가]
+  } // [OCR 추가]
 
   final String id;
   String store;
@@ -440,6 +489,12 @@ class PriceComparison {
 }
 
 PriceComparison comparePrices(PurchaseData base, PurchaseData other) {
+  if (base.setParentId.isNotEmpty || other.setParentId.isNotEmpty) {
+    // [OCR 추가]
+    return const PriceComparison(
+      issue: '세트 구성품은 단독 상품 가격과 비교하지 않습니다.',
+    ); // [OCR 추가]
+  } // [OCR 추가]
   final baseSpec = base.spec;
   final otherSpec = other.spec;
   if (baseSpec == null ||

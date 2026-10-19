@@ -1,0 +1,775 @@
+run,id,kind,expected,actual,correct,error,seconds
+mlkit-base-psm3,kyobo-first-original-quantity-00,quantity,1,,False,,0.085635
+mlkit-base-psm3,kyobo-first-original-amount-00,amount,9600,"9,600",True,,0.071525
+mlkit-base-psm3,kyobo-first-original-name-00,name,포스트잇/670-5AN-5/알뜰팩,포스트잇/670-5AN-5/알뜰팩,True,,0.064762
+mlkit-base-psm3,kyobo-first-original-quantity-01,quantity,1,,False,,0.056854
+mlkit-base-psm3,kyobo-first-original-amount-01,amount,1300,"1,300",True,,0.070639
+mlkit-base-psm3,kyobo-first-original-name-01,name,[JR] 스티커미니/101-FOOD.01,[JR] 스티커미니/101-F00D.01,False,,0.062742
+mlkit-base-psm3,kyobo-first-original-quantity-02,quantity,1,,False,,0.064115
+mlkit-base-psm3,kyobo-first-original-amount-02,amount,1300,"1.300
+1",False,,0.06508
+mlkit-base-psm3,kyobo-first-original-name-02,name,[JR] 스티커미니/112/FOOD.04,[JR] 스트티커미니/112/F00D.04,False,,0.049669
+mlkit-base-psm3,kyobo-first-original-quantity-03,quantity,1,,False,,0.080413
+mlkit-base-psm3,kyobo-first-original-amount-03,amount,1300,"1,300",True,,0.06249
+mlkit-base-psm3,kyobo-first-original-name-03,name,[JR] 스티커미니/120-FOOD.05,[JR] 스티커미니/120-F000. 05,False,,0.048823
+mlkit-base-psm3,kyobo-first-original-quantity-04,quantity,1,,False,,0.068703
+mlkit-base-psm3,kyobo-first-original-amount-04,amount,1300,"1,300",True,,0.076415
+mlkit-base-psm3,kyobo-first-original-name-04,name,[JR] 스티커미니 132-FOOD.07,[JR] 스티커미니 132-F00D.07,False,,0.050208
+mlkit-base-psm3,kyobo-first-original-quantity-05,quantity,1,,False,,0.076477
+mlkit-base-psm3,kyobo-first-original-amount-05,amount,3500,"3,500",True,,0.108488
+mlkit-base-psm3,kyobo-first-original-name-05,name,[JR] 스티커 CEREAL 301/SWEET CAKE,L.R] 스트커 CEREAL 301/SAEET CAKE,False,,0.180932
+mlkit-base-psm3,kyobo-first-original-quantity-06,quantity,1,,False,,0.03578
+mlkit-base-psm3,kyobo-first-original-amount-06,amount,3500,"3,500",True,,0.063353
+mlkit-base-psm3,kyobo-first-original-name-06,name,[JR] 스티커 CEREAL 303/LEAVES,(.R] 스티커 CEREAL 303/LEAVES,False,,0.069361
+mlkit-base-psm3,kyobo-first-original-quantity-07,quantity,1,,False,,0.065344
+mlkit-base-psm3,kyobo-first-original-amount-07,amount,3500,"3,500",True,,0.064157
+mlkit-base-psm3,kyobo-first-original-name-07,name,[JR] 스티커/CEREAL 304-CATS,[JR] 스티커/CEREAL 304-0ATS,False,,0.045916
+mlkit-base-psm3,kyobo-second-original-quantity-00,quantity,1,,False,,0.055165
+mlkit-base-psm3,kyobo-second-original-amount-00,amount,4000,4.000,True,,0.049909
+mlkit-base-psm3,kyobo-second-original-name-00,name,[JR] 스티커 CEREAL 312-DONETS,[JR] 스트커 CEREAL 312-00NETS,False,,0.05934
+mlkit-base-psm3,kyobo-second-original-quantity-01,quantity,1,,False,,0.026304
+mlkit-base-psm3,kyobo-second-original-amount-01,amount,3100,"3,100",True,,0.054115
+mlkit-base-psm3,kyobo-second-original-name-01,name,수첩식 포스트잇/형광,수첩식 포스트잇/형광,True,,0.046771
+mlkit-base-psm3,kyobo-second-original-quantity-02,quantity,1,,False,,0.061239
+mlkit-base-psm3,kyobo-second-original-amount-02,amount,3100,"3,100",True,,0.082906
+mlkit-base-psm3,kyobo-second-original-name-02,name,수첩식 포스트잇/파스텔,수접식 포스트잇/파스텔,False,,0.041554
+mlkit-base-psm3,kyobo-second-original-quantity-03,quantity,1,,False,,0.025865
+mlkit-base-psm3,kyobo-second-original-amount-03,amount,2500,2.500,True,,0.053226
+mlkit-base-psm3,kyobo-second-original-name-03,name,[JR] 스티커/1167/STREET FOOD,[JR] 스티커/1167/STREET FOOD,True,,0.052175
+mlkit-base-psm3,kyobo-second-original-quantity-04,quantity,1,,False,,0.032389
+mlkit-base-psm3,kyobo-second-original-amount-04,amount,2500,2.500,True,,0.045372
+mlkit-base-psm3,kyobo-second-original-name-04,name,[JR] 스티커/1177/OLD BAKERY,[JR] 스티커/1177/OLD BAKERY,True,,0.055374
+mlkit-base-psm3,kyobo-second-original-quantity-05,quantity,1,,False,,0.047341
+mlkit-base-psm3,kyobo-second-original-amount-05,amount,2500,"2,500",True,,0.054895
+mlkit-base-psm3,kyobo-second-original-name-05,name,[JR] 스티커/1173/FOOD TRIP #8,[JR] 스E커/1173/F000 TRIP #8,False,,0.056235
+mlkit-base-psm3,kyobo-second-original-quantity-06,quantity,1,,False,,0.046517
+mlkit-base-psm3,kyobo-second-original-amount-06,amount,4900,"4,900",True,,0.05297
+mlkit-base-psm3,kyobo-second-original-name-06,name,[MW] 81763/페인팅 스티커/스윗츠,[MA] 81763/페인팅 스티커/스윗츠,False,,0.058502
+mlkit-base-psm3,kyobo-second-original-quantity-07,quantity,1,,False,,0.187649
+mlkit-base-psm3,kyobo-second-original-amount-07,amount,4900,4.900,True,,0.055012
+mlkit-base-psm3,kyobo-second-original-name-07,name,[MW] 81764/페인팅 스티커/커피,[Mu] 81764/페인팅 스티커/커피,False,,0.048357
+mlkit-base-psm3,kyobo-second-original-quantity-08,quantity,1,,False,,0.029038
+mlkit-base-psm3,kyobo-second-original-amount-08,amount,2500,2.500,True,,0.048431
+mlkit-base-psm3,kyobo-second-original-name-08,name,[JR] 스티커 1204-LET’S BAKE!,[JR] 스티커 1204-LET'S BAKE!,True,,0.067933
+mlkit-base-psm3,kyobo-second-original-quantity-09,quantity,1,1,True,,0.061769
+mlkit-base-psm3,kyobo-second-original-amount-09,amount,2500,2.500,True,,0.055259
+mlkit-base-psm3,kyobo-second-original-name-09,name,[JR] 스티커/1202-LUNCH BOX,[JR] 스티커 1202-LUNCH B0X,False,,0.046466
+mlkit-base-psm3,kyobo-second-original-quantity-10,quantity,1,,False,,0.052087
+mlkit-base-psm3,kyobo-second-original-amount-10,amount,16800,"16,800",True,,0.047649
+mlkit-base-psm3,kyobo-second-original-name-10,name,프리즘 220 라인 밴드 노트/크림,리즘 220 라인 밴드 노트/크림,False,,0.055159
+mlkit-base-psm3,kyobo-second-corrected-quantity-00,quantity,1,,False,,0.029188
+mlkit-base-psm3,kyobo-second-corrected-amount-00,amount,4000,"4,000",True,,0.051569
+mlkit-base-psm3,kyobo-second-corrected-quantity-01,quantity,1,,False,,0.059029
+mlkit-base-psm3,kyobo-second-corrected-amount-01,amount,3100,"3,100",True,,0.067194
+mlkit-base-psm3,kyobo-second-corrected-quantity-02,quantity,1,,False,,0.045145
+mlkit-base-psm3,kyobo-second-corrected-amount-02,amount,3100,"3,100",True,,0.047524
+mlkit-base-psm3,kyobo-second-corrected-quantity-03,quantity,1,,False,,0.043422
+mlkit-base-psm3,kyobo-second-corrected-amount-03,amount,2500,"2,500",True,,0.084875
+mlkit-base-psm3,kyobo-second-corrected-quantity-04,quantity,1,,False,,0.032583
+mlkit-base-psm3,kyobo-second-corrected-amount-04,amount,2500,2.500,True,,0.065592
+mlkit-base-psm3,kyobo-second-corrected-quantity-05,quantity,1,1,True,,0.061651
+mlkit-base-psm3,kyobo-second-corrected-amount-05,amount,2500,2.500,True,,0.052756
+mlkit-base-psm3,kyobo-second-corrected-quantity-06,quantity,1,,False,,0.047104
+mlkit-base-psm3,kyobo-second-corrected-amount-06,amount,4900,"4,900",True,,0.050893
+mlkit-base-psm3,kyobo-second-corrected-quantity-07,quantity,1,,False,,0.061429
+mlkit-base-psm3,kyobo-second-corrected-amount-07,amount,4900,4.900,True,,0.064921
+mlkit-base-psm3,kyobo-second-corrected-quantity-08,quantity,1,,False,,0.045281
+mlkit-base-psm3,kyobo-second-corrected-amount-08,amount,2500,2.500,True,,0.052943
+mlkit-base-psm3,kyobo-second-corrected-quantity-09,quantity,1,,False,,0.04214
+mlkit-base-psm3,kyobo-second-corrected-amount-09,amount,2500,2.500,True,,0.049696
+mlkit-base-psm3,kyobo-second-corrected-quantity-10,quantity,1,,False,,0.066484
+mlkit-base-psm3,kyobo-second-corrected-amount-10,amount,16800,"16,800",True,,0.058397
+mlkit-base-psm3,samseon-original-quantity-00,quantity,1,,False,,0.046441
+mlkit-base-psm3,samseon-original-amount-00,amount,12000,"12, 000",True,,0.066761
+mlkit-base-psm3,samseon-original-name-00,name,삼선짜장,삼선파잠,False,,0.038029
+mlkit-base-psm3,samseon-original-quantity-01,quantity,1,,False,,0.061773
+mlkit-base-psm3,samseon-original-amount-01,amount,2000,2. 000,True,,0.057511
+mlkit-base-psm3,samseon-original-name-01,name,제로펩시,세로펩시,False,,0.043003
+mlkit-base-psm3,traders-original-quantity-00,quantity,3,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.004287
+mlkit-base-psm3,traders-original-amount-00,amount,80940,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001129
+mlkit-base-psm3,traders-original-quantity-01,quantity,2,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000721
+mlkit-base-psm3,traders-original-amount-01,amount,33760,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.0009
+mlkit-base-psm3,traders-original-quantity-02,quantity,2,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001061
+mlkit-base-psm3,traders-original-amount-02,amount,37960,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001189
+mlkit-base-psm3,traders-original-quantity-03,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000616
+mlkit-base-psm3,traders-original-amount-03,amount,12980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000651
+mlkit-base-psm3,traders-original-quantity-04,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000829
+mlkit-base-psm3,traders-original-amount-04,amount,17980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000669
+mlkit-base-psm3,traders-original-quantity-05,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000808
+mlkit-base-psm3,traders-original-amount-05,amount,36980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000965
+mlkit-base-psm3,traders-original-quantity-06,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000614
+mlkit-base-psm3,traders-original-amount-06,amount,13980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000893
+mlkit-base-psm3,traders-original-quantity-07,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000773
+mlkit-base-psm3,traders-original-amount-07,amount,13480,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000665
+mlkit-base-psm3,traders-original-quantity-08,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001012
+mlkit-base-psm3,traders-original-amount-08,amount,11980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001092
+mlkit-base-psm3,traders-original-quantity-09,quantity,2,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000797
+mlkit-base-psm3,traders-original-amount-09,amount,11760,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001077
+mlkit-base-psm3,traders-original-quantity-10,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000599
+mlkit-base-psm3,traders-original-amount-10,amount,8880,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001027
+mlkit-base-psm3,traders-original-quantity-11,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001052
+mlkit-base-psm3,traders-original-amount-11,amount,12980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000997
+mlkit-base-psm3,traders-original-quantity-12,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001128
+mlkit-base-psm3,traders-original-amount-12,amount,14980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001194
+mlkit-base-psm3,traders-original-quantity-13,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.001064
+mlkit-base-psm3,traders-original-amount-13,amount,19980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000899
+mlkit-base-psm3,traders-original-quantity-14,quantity,1,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000793
+mlkit-base-psm3,traders-original-amount-14,amount,9980,,False,"PlatformException(TextRecognizerError, com.google.mlkit.common.MlKitException: InputImage width and height should be at least 32!, null, null)",0.000691
+mlkit-base-psm3,traders-recreated-quantity-00,quantity,3,3,True,,0.064303
+mlkit-base-psm3,traders-recreated-amount-00,amount,80940,"80,940",True,,0.06685
+mlkit-base-psm3,traders-recreated-quantity-01,quantity,2,2,True,,0.082025
+mlkit-base-psm3,traders-recreated-amount-01,amount,33760,"33, 760",True,,0.070724
+mlkit-base-psm3,traders-recreated-quantity-02,quantity,2,2,True,,0.074707
+mlkit-base-psm3,traders-recreated-amount-02,amount,37960,"37,960",True,,0.054561
+mlkit-base-psm3,traders-recreated-quantity-03,quantity,1,,False,,0.041291
+mlkit-base-psm3,traders-recreated-amount-03,amount,12980,"12, 980",True,,0.060758
+mlkit-base-psm3,traders-recreated-quantity-04,quantity,1,,False,,0.045209
+mlkit-base-psm3,traders-recreated-amount-04,amount,17980,"17, 980",True,,0.070037
+mlkit-base-psm3,traders-recreated-quantity-05,quantity,1,,False,,0.045009
+mlkit-base-psm3,traders-recreated-amount-05,amount,36980,"36,980",True,,0.051913
+mlkit-base-psm3,traders-recreated-quantity-06,quantity,1,,False,,0.040384
+mlkit-base-psm3,traders-recreated-amount-06,amount,13980,"13, 980",True,,0.055231
+mlkit-base-psm3,traders-recreated-quantity-07,quantity,1,,False,,0.036815
+mlkit-base-psm3,traders-recreated-amount-07,amount,13480,"13, 480",True,,0.073509
+mlkit-base-psm3,traders-recreated-quantity-08,quantity,1,1,True,,0.066844
+mlkit-base-psm3,traders-recreated-amount-08,amount,11980,"11,980",True,,0.053767
+mlkit-base-psm3,traders-recreated-quantity-09,quantity,2,2,True,,0.051067
+mlkit-base-psm3,traders-recreated-amount-09,amount,11760,"11, 760",True,,0.075509
+mlkit-base-psm3,traders-recreated-quantity-10,quantity,1,,False,,0.048136
+mlkit-base-psm3,traders-recreated-amount-10,amount,8880,"8,880",True,,0.19307
+mlkit-base-psm3,traders-recreated-quantity-11,quantity,1,1,True,,0.064437
+mlkit-base-psm3,traders-recreated-amount-11,amount,12980,"12, 980",True,,0.075714
+mlkit-base-psm3,traders-recreated-quantity-12,quantity,1,,False,,0.037471
+mlkit-base-psm3,traders-recreated-amount-12,amount,14980,"14,980",True,,0.055972
+mlkit-base-psm3,traders-recreated-quantity-13,quantity,1,,False,,0.039305
+mlkit-base-psm3,traders-recreated-amount-13,amount,19980,19.980,True,,0.067953
+mlkit-base-psm3,traders-recreated-quantity-14,quantity,1,,False,,0.045497
+mlkit-base-psm3,traders-recreated-amount-14,amount,9980,"9
+9.980",False,,0.068661
+mlkit-base-psm3,samseon-pepsi-saved-row-quantity-00,quantity,1,,False,,0.053925
+mlkit-base-psm3,samseon-pepsi-saved-row-amount-00,amount,2000,"2, 000",True,,0.052039
+mlkit-base-psm3,blank,blank,,,True,,0.063204
+mlkit-padding-psm3,traders-original-quantity-00-padded,quantity,3,3,True,,0.962106
+mlkit-padding-psm3,traders-original-amount-00-padded,amount,80940,"80,940",True,,0.125805
+mlkit-padding-psm3,traders-original-quantity-01-padded,quantity,2,2,True,,0.075099
+mlkit-padding-psm3,traders-original-amount-01-padded,amount,33760,"33, 760",True,,0.057452
+mlkit-padding-psm3,traders-original-quantity-02-padded,quantity,2,,False,,0.060617
+mlkit-padding-psm3,traders-original-amount-02-padded,amount,37960,37. 960,True,,0.053938
+mlkit-padding-psm3,traders-original-quantity-03-padded,quantity,1,,False,,0.036425
+mlkit-padding-psm3,traders-original-amount-03-padded,amount,12980,"12,980",True,,0.05552
+mlkit-padding-psm3,traders-original-quantity-04-padded,quantity,1,,False,,0.051702
+mlkit-padding-psm3,traders-original-amount-04-padded,amount,17980,"17,980",True,,0.05641
+mlkit-padding-psm3,traders-original-quantity-05-padded,quantity,1,,False,,0.027926
+mlkit-padding-psm3,traders-original-amount-05-padded,amount,36980,"36, 980",True,,0.199407
+mlkit-padding-psm3,traders-original-quantity-06-padded,quantity,1,,False,,0.032511
+mlkit-padding-psm3,traders-original-amount-06-padded,amount,13980,086 EL,False,,0.052166
+mlkit-padding-psm3,traders-original-quantity-07-padded,quantity,1,,False,,0.031204
+mlkit-padding-psm3,traders-original-amount-07-padded,amount,13480,"13,480",True,,0.050142
+mlkit-padding-psm3,traders-original-quantity-08-padded,quantity,1,,False,,0.036905
+mlkit-padding-psm3,traders-original-amount-08-padded,amount,11980,"11,980",True,,0.051048
+mlkit-padding-psm3,traders-original-quantity-09-padded,quantity,2,,False,,0.04664
+mlkit-padding-psm3,traders-original-amount-09-padded,amount,11760,"11, /60",False,,0.058461
+mlkit-padding-psm3,traders-original-quantity-10-padded,quantity,1,,False,,0.029106
+mlkit-padding-psm3,traders-original-amount-10-padded,amount,8880,"8, 880",True,,0.052556
+mlkit-padding-psm3,traders-original-quantity-11-padded,quantity,1,,False,,0.029649
+mlkit-padding-psm3,traders-original-amount-11-padded,amount,12980,"12, 980",True,,0.052472
+mlkit-padding-psm3,traders-original-quantity-12-padded,quantity,1,,False,,0.030939
+mlkit-padding-psm3,traders-original-amount-12-padded,amount,14980,"14, 980",True,,0.058901
+mlkit-padding-psm3,traders-original-quantity-13-padded,quantity,1,,False,,0.057028
+mlkit-padding-psm3,traders-original-amount-13-padded,amount,19980,"19, 980",True,,0.060008
+mlkit-padding-psm3,traders-original-quantity-14-padded,quantity,1,,False,,0.04025
+mlkit-padding-psm3,traders-original-amount-14-padded,amount,9980,,False,,0.18564
+paddle-base-psm3,kyobo-first-original-quantity-00,quantity,1,1,True,,0.02941
+paddle-base-psm3,kyobo-first-original-amount-00,amount,9600,"9,600",True,,0.025052
+paddle-base-psm3,kyobo-first-original-name-00,name,포스트잇/670-5AN-5/알뜰팩,포:스트잇/670-5AN-5/알뜰팩,True,,0.062181
+paddle-base-psm3,kyobo-first-original-quantity-01,quantity,1,1,True,,0.014137
+paddle-base-psm3,kyobo-first-original-amount-01,amount,1300,"1,300",True,,0.033417
+paddle-base-psm3,kyobo-first-original-name-01,name,[JR] 스티커미니/101-FOOD.01,"[JR]
+스티커미니/101-F00D.01",False,,0.0737
+paddle-base-psm3,kyobo-first-original-quantity-02,quantity,1,1,True,,0.020149
+paddle-base-psm3,kyobo-first-original-amount-02,amount,1300,"1,300",True,,0.03046
+paddle-base-psm3,kyobo-first-original-name-02,name,[JR] 스티커미니/112/FOOD.04,"[JR]
+스티커미니/112/F00D.04",False,,0.073937
+paddle-base-psm3,kyobo-first-original-quantity-03,quantity,1,1,True,,0.022845
+paddle-base-psm3,kyobo-first-original-amount-03,amount,1300,1.300,True,,0.027833
+paddle-base-psm3,kyobo-first-original-name-03,name,[JR] 스티커미니/120-FOOD.05,"[.JR]
+스티커미니/120-F00D.
+05",False,,0.078538
+paddle-base-psm3,kyobo-first-original-quantity-04,quantity,1,1,True,,0.018376
+paddle-base-psm3,kyobo-first-original-amount-04,amount,1300,"1,300",True,,0.035396
+paddle-base-psm3,kyobo-first-original-name-04,name,[JR] 스티커미니 132-FOOD.07,"[JR]
+스티커미니
+132-F00D.07",False,,0.068726
+paddle-base-psm3,kyobo-first-original-quantity-05,quantity,1,1,True,,0.024148
+paddle-base-psm3,kyobo-first-original-amount-05,amount,3500,"3,500",True,,0.030686
+paddle-base-psm3,kyobo-first-original-name-05,name,[JR] 스티커 CEREAL 301/SWEET CAKE,"[.JR]
+스티커
+CEREAL
+301/SWEET
+CAKE",True,,0.098122
+paddle-base-psm3,kyobo-first-original-quantity-06,quantity,1,1,True,,0.013851
+paddle-base-psm3,kyobo-first-original-amount-06,amount,3500,"3,500",True,,0.032313
+paddle-base-psm3,kyobo-first-original-name-06,name,[JR] 스티커 CEREAL 303/LEAVES,"[JR]
+스티커
+CEREAL
+303/LEAVES",True,,0.083764
+paddle-base-psm3,kyobo-first-original-quantity-07,quantity,1,1,True,,0.026788
+paddle-base-psm3,kyobo-first-original-amount-07,amount,3500,"3,500",True,,0.034487
+paddle-base-psm3,kyobo-first-original-name-07,name,[JR] 스티커/CEREAL 304-CATS,"[.JR]
+스티커/CEREAL
+304-CATS",True,,0.071106
+paddle-base-psm3,kyobo-second-original-quantity-00,quantity,1,1,True,,0.019524
+paddle-base-psm3,kyobo-second-original-amount-00,amount,4000,"4,000",True,,0.024854
+paddle-base-psm3,kyobo-second-original-name-00,name,[JR] 스티커 CEREAL 312-DONETS,[.JR]스티|커 CEREAL 312-DONETS,True,,0.086038
+paddle-base-psm3,kyobo-second-original-quantity-01,quantity,1,1,True,,0.019699
+paddle-base-psm3,kyobo-second-original-amount-01,amount,3100,"3,100",True,,0.045975
+paddle-base-psm3,kyobo-second-original-name-01,name,수첩식 포스트잇/형광,-수=첩식 포스트잇/형광,True,,0.067189
+paddle-base-psm3,kyobo-second-original-quantity-02,quantity,1,1,True,,0.019113
+paddle-base-psm3,kyobo-second-original-amount-02,amount,3100,"3,100",True,,0.036295
+paddle-base-psm3,kyobo-second-original-name-02,name,수첩식 포스트잇/파스텔,수:첩·식 포스트잇/파스텔,True,,0.063595
+paddle-base-psm3,kyobo-second-original-quantity-03,quantity,1,1,True,,0.020033
+paddle-base-psm3,kyobo-second-original-amount-03,amount,2500,"2,500",True,,0.033533
+paddle-base-psm3,kyobo-second-original-name-03,name,[JR] 스티커/1167/STREET FOOD,"[JR]
+스티커/1167/STREET
+F00D",False,,0.089755
+paddle-base-psm3,kyobo-second-original-quantity-04,quantity,1,1,True,,0.013561
+paddle-base-psm3,kyobo-second-original-amount-04,amount,2500,"2,500",True,,0.031492
+paddle-base-psm3,kyobo-second-original-name-04,name,[JR] 스티커/1177/OLD BAKERY,"[.JR]
+스티커/1177/0LD
+BAKERY",False,,0.076991
+paddle-base-psm3,kyobo-second-original-quantity-05,quantity,1,1,True,,0.014801
+paddle-base-psm3,kyobo-second-original-amount-05,amount,2500,"2,500",True,,0.030111
+paddle-base-psm3,kyobo-second-original-name-05,name,[JR] 스티커/1173/FOOD TRIP #8,"TRIP #8
+[JR]≤
+스티커/1173/F00D",False,,0.086076
+paddle-base-psm3,kyobo-second-original-quantity-06,quantity,1,1,True,,0.024875
+paddle-base-psm3,kyobo-second-original-amount-06,amount,4900,"4,900",True,,0.029513
+paddle-base-psm3,kyobo-second-original-name-06,name,[MW] 81763/페인팅 스티커/스윗츠,"[MW]81763/페인
+!스티커/스윗츠",False,,0.101351
+paddle-base-psm3,kyobo-second-original-quantity-07,quantity,1,1,True,,0.015309
+paddle-base-psm3,kyobo-second-original-amount-07,amount,4900,"4,900",True,,0.034505
+paddle-base-psm3,kyobo-second-original-name-07,name,[MW] 81764/페인팅 스티커/커피,"스티커/커피
+81764/페인팀
+[MW]",False,,0.074679
+paddle-base-psm3,kyobo-second-original-quantity-08,quantity,1,1,True,,0.025048
+paddle-base-psm3,kyobo-second-original-amount-08,amount,2500,"2,500",True,,0.034003
+paddle-base-psm3,kyobo-second-original-name-08,name,[JR] 스티커 1204-LET’S BAKE!,[.JR] 스E커 1204-LET'S BAKE!,False,,0.068859
+paddle-base-psm3,kyobo-second-original-quantity-09,quantity,1,1,True,,0.021578
+paddle-base-psm3,kyobo-second-original-amount-09,amount,2500,"2,500",True,,0.030388
+paddle-base-psm3,kyobo-second-original-name-09,name,[JR] 스티커/1202-LUNCH BOX,[.JR] 스티|커 1202-LUNCH B0X,False,,0.075128
+paddle-base-psm3,kyobo-second-original-quantity-10,quantity,1,1,True,,0.032103
+paddle-base-psm3,kyobo-second-original-amount-10,amount,16800,"16,800",True,,0.028616
+paddle-base-psm3,kyobo-second-original-name-10,name,프리즘 220 라인 밴드 노트/크림,끄리즘 220 라인 밴드 노트/크림,False,,0.077778
+paddle-base-psm3,kyobo-second-corrected-quantity-00,quantity,1,1,True,,0.019976
+paddle-base-psm3,kyobo-second-corrected-amount-00,amount,4000,"4,000",True,,0.029894
+paddle-base-psm3,kyobo-second-corrected-quantity-01,quantity,1,1,True,,0.010257
+paddle-base-psm3,kyobo-second-corrected-amount-01,amount,3100,"3,100",True,,0.022299
+paddle-base-psm3,kyobo-second-corrected-quantity-02,quantity,1,1,True,,0.018659
+paddle-base-psm3,kyobo-second-corrected-amount-02,amount,3100,"3,100",True,,0.042001
+paddle-base-psm3,kyobo-second-corrected-quantity-03,quantity,1,1,True,,0.023259
+paddle-base-psm3,kyobo-second-corrected-amount-03,amount,2500,"2,500",True,,0.023446
+paddle-base-psm3,kyobo-second-corrected-quantity-04,quantity,1,1,True,,0.01405
+paddle-base-psm3,kyobo-second-corrected-amount-04,amount,2500,"2,500",True,,0.029758
+paddle-base-psm3,kyobo-second-corrected-quantity-05,quantity,1,1,True,,0.016691
+paddle-base-psm3,kyobo-second-corrected-amount-05,amount,2500,"2,500",True,,0.025598
+paddle-base-psm3,kyobo-second-corrected-quantity-06,quantity,1,,False,,0.005437
+paddle-base-psm3,kyobo-second-corrected-amount-06,amount,4900,"4,900",True,,0.031577
+paddle-base-psm3,kyobo-second-corrected-quantity-07,quantity,1,1,True,,0.016845
+paddle-base-psm3,kyobo-second-corrected-amount-07,amount,4900,"4,900",True,,0.024895
+paddle-base-psm3,kyobo-second-corrected-quantity-08,quantity,1,1,True,,0.018975
+paddle-base-psm3,kyobo-second-corrected-amount-08,amount,2500,"2,500",True,,0.028343
+paddle-base-psm3,kyobo-second-corrected-quantity-09,quantity,1,1,True,,0.01622
+paddle-base-psm3,kyobo-second-corrected-amount-09,amount,2500,"2,500",True,,0.037212
+paddle-base-psm3,kyobo-second-corrected-quantity-10,quantity,1,1,True,,0.020757
+paddle-base-psm3,kyobo-second-corrected-amount-10,amount,16800,"16,800",True,,0.031085
+paddle-base-psm3,samseon-original-quantity-00,quantity,1,1,True,,0.017142
+paddle-base-psm3,samseon-original-amount-00,amount,12000,"12,000",True,,0.035441
+paddle-base-psm3,samseon-original-name-00,name,삼선짜장,삼선파장,False,,0.03142
+paddle-base-psm3,samseon-original-quantity-01,quantity,1,1,True,,0.014106
+paddle-base-psm3,samseon-original-amount-01,amount,2000,"2,000",True,,0.036503
+paddle-base-psm3,samseon-original-name-01,name,제로펩시,제로펩시,True,,0.038888
+paddle-base-psm3,traders-original-quantity-00,quantity,3,,False,,0.00524
+paddle-base-psm3,traders-original-amount-00,amount,80940,"80,940",True,,0.02272
+paddle-base-psm3,traders-original-quantity-01,quantity,2,,False,,0.019425
+paddle-base-psm3,traders-original-amount-01,amount,33760,"33,760",True,,0.027401
+paddle-base-psm3,traders-original-quantity-02,quantity,2,,False,,0.007824
+paddle-base-psm3,traders-original-amount-02,amount,37960,"37,960",True,,0.031397
+paddle-base-psm3,traders-original-quantity-03,quantity,1,,False,,0.005404
+paddle-base-psm3,traders-original-amount-03,amount,12980,"12,980",True,,0.021452
+paddle-base-psm3,traders-original-quantity-04,quantity,1,,False,,0.008712
+paddle-base-psm3,traders-original-amount-04,amount,17980,"17,980",True,,0.015425
+paddle-base-psm3,traders-original-quantity-05,quantity,1,,False,,0.010711
+paddle-base-psm3,traders-original-amount-05,amount,36980,"36,980",True,,0.030602
+paddle-base-psm3,traders-original-quantity-06,quantity,1,,False,,0.004874
+paddle-base-psm3,traders-original-amount-06,amount,13980,3.9,False,,0.026844
+paddle-base-psm3,traders-original-quantity-07,quantity,1,,False,,0.00662
+paddle-base-psm3,traders-original-amount-07,amount,13480,4비,False,,0.028381
+paddle-base-psm3,traders-original-quantity-08,quantity,1,,False,,0.006978
+paddle-base-psm3,traders-original-amount-08,amount,11980,,False,,0.005893
+paddle-base-psm3,traders-original-quantity-09,quantity,2,,False,,0.004341
+paddle-base-psm3,traders-original-amount-09,amount,11760,"11,760",True,,0.036898
+paddle-base-psm3,traders-original-quantity-10,quantity,1,,False,,0.011259
+paddle-base-psm3,traders-original-amount-10,amount,8880,"8,880",True,,0.029191
+paddle-base-psm3,traders-original-quantity-11,quantity,1,,False,,0.008563
+paddle-base-psm3,traders-original-amount-11,amount,12980,"12,980",True,,0.027766
+paddle-base-psm3,traders-original-quantity-12,quantity,1,,False,,0.0059
+paddle-base-psm3,traders-original-amount-12,amount,14980,"14,980",True,,0.020065
+paddle-base-psm3,traders-original-quantity-13,quantity,1,,False,,0.007259
+paddle-base-psm3,traders-original-amount-13,amount,19980,"9
+980",False,,0.026848
+paddle-base-psm3,traders-original-quantity-14,quantity,1,,False,,0.00527
+paddle-base-psm3,traders-original-amount-14,amount,9980,"9,980",True,,0.024362
+paddle-base-psm3,traders-recreated-quantity-00,quantity,3,3,True,,0.014966
+paddle-base-psm3,traders-recreated-amount-00,amount,80940,"80,940",True,,0.029186
+paddle-base-psm3,traders-recreated-quantity-01,quantity,2,2,True,,0.02016
+paddle-base-psm3,traders-recreated-amount-01,amount,33760,"33,760",True,,0.021675
+paddle-base-psm3,traders-recreated-quantity-02,quantity,2,2,True,,0.01096
+paddle-base-psm3,traders-recreated-amount-02,amount,37960,"37, 960",True,,0.019038
+paddle-base-psm3,traders-recreated-quantity-03,quantity,1,1,True,,0.012633
+paddle-base-psm3,traders-recreated-amount-03,amount,12980,"12, 980",True,,0.026901
+paddle-base-psm3,traders-recreated-quantity-04,quantity,1,,False,,0.005632
+paddle-base-psm3,traders-recreated-amount-04,amount,17980,"17, 980",True,,0.015137
+paddle-base-psm3,traders-recreated-quantity-05,quantity,1,,False,,0.005801
+paddle-base-psm3,traders-recreated-amount-05,amount,36980,"36, 980",True,,0.026167
+paddle-base-psm3,traders-recreated-quantity-06,quantity,1,,False,,0.005007
+paddle-base-psm3,traders-recreated-amount-06,amount,13980,"13, 980",True,,0.020342
+paddle-base-psm3,traders-recreated-quantity-07,quantity,1,,False,,0.006882
+paddle-base-psm3,traders-recreated-amount-07,amount,13480,"13,480",True,,0.02372
+paddle-base-psm3,traders-recreated-quantity-08,quantity,1,,False,,0.020745
+paddle-base-psm3,traders-recreated-amount-08,amount,11980,"11, 980",True,,0.021263
+paddle-base-psm3,traders-recreated-quantity-09,quantity,2,2,True,,0.010264
+paddle-base-psm3,traders-recreated-amount-09,amount,11760,"11,760",True,,0.025928
+paddle-base-psm3,traders-recreated-quantity-10,quantity,1,,False,,0.004523
+paddle-base-psm3,traders-recreated-amount-10,amount,8880,"8,880",True,,0.016099
+paddle-base-psm3,traders-recreated-quantity-11,quantity,1,,False,,0.004603
+paddle-base-psm3,traders-recreated-amount-11,amount,12980,"12, 980",True,,0.039521
+paddle-base-psm3,traders-recreated-quantity-12,quantity,1,,False,,0.007511
+paddle-base-psm3,traders-recreated-amount-12,amount,14980,"14, 980",True,,0.014898
+paddle-base-psm3,traders-recreated-quantity-13,quantity,1,,False,,0.004221
+paddle-base-psm3,traders-recreated-amount-13,amount,19980,"19, 980",True,,0.030124
+paddle-base-psm3,traders-recreated-quantity-14,quantity,1,,False,,0.018125
+paddle-base-psm3,traders-recreated-amount-14,amount,9980,"9, 980",True,,0.018113
+paddle-base-psm3,samseon-pepsi-saved-row-quantity-00,quantity,1,,False,,0.005234
+paddle-base-psm3,samseon-pepsi-saved-row-amount-00,amount,2000,"2,000",True,,0.018777
+paddle-base-psm3,blank,blank,,,True,,0.006224
+paddle-padding-psm3,traders-original-quantity-00-padded,quantity,3,3,True,,0.497754
+paddle-padding-psm3,traders-original-amount-00-padded,amount,80940,"80,940",True,,0.053309
+paddle-padding-psm3,traders-original-quantity-01-padded,quantity,2,2,True,,0.049675
+paddle-padding-psm3,traders-original-amount-01-padded,amount,33760,"33,760",True,,0.031804
+paddle-padding-psm3,traders-original-quantity-02-padded,quantity,2,2,True,,0.043053
+paddle-padding-psm3,traders-original-amount-02-padded,amount,37960,"37,960",True,,0.052195
+paddle-padding-psm3,traders-original-quantity-03-padded,quantity,1,1,True,,0.012176
+paddle-padding-psm3,traders-original-amount-03-padded,amount,12980,"12,980",True,,0.022678
+paddle-padding-psm3,traders-original-quantity-04-padded,quantity,1,1,True,,0.023759
+paddle-padding-psm3,traders-original-amount-04-padded,amount,17980,"17,980",True,,0.032672
+paddle-padding-psm3,traders-original-quantity-05-padded,quantity,1,일,False,,0.014304
+paddle-padding-psm3,traders-original-amount-05-padded,amount,36980,"36,980",True,,0.022279
+paddle-padding-psm3,traders-original-quantity-06-padded,quantity,1,—,False,,0.023981
+paddle-padding-psm3,traders-original-amount-06-padded,amount,13980,,False,,0.009147
+paddle-padding-psm3,traders-original-quantity-07-padded,quantity,1,H,False,,0.016064
+paddle-padding-psm3,traders-original-amount-07-padded,amount,13480,"13,480",True,,0.022377
+paddle-padding-psm3,traders-original-quantity-08-padded,quantity,1,어,False,,0.016905
+paddle-padding-psm3,traders-original-amount-08-padded,amount,11980,,False,,0.010107
+paddle-padding-psm3,traders-original-quantity-09-padded,quantity,2,≥,False,,0.022659
+paddle-padding-psm3,traders-original-amount-09-padded,amount,11760,"T1,760",False,,0.023472
+paddle-padding-psm3,traders-original-quantity-10-padded,quantity,1,에,False,,0.018873
+paddle-padding-psm3,traders-original-amount-10-padded,amount,8880,8. 880,True,,0.041529
+paddle-padding-psm3,traders-original-quantity-11-padded,quantity,1,©,False,,0.012059
+paddle-padding-psm3,traders-original-amount-11-padded,amount,12980,"12, 980",True,,0.030674
+paddle-padding-psm3,traders-original-quantity-12-padded,quantity,1,*,False,,0.018116
+paddle-padding-psm3,traders-original-amount-12-padded,amount,14980,"14,980",True,,0.017497
+paddle-padding-psm3,traders-original-quantity-13-padded,quantity,1,!,False,,0.019759
+paddle-padding-psm3,traders-original-amount-13-padded,amount,19980,"19,980",True,,0.023385
+paddle-padding-psm3,traders-original-quantity-14-padded,quantity,1,¶,False,,0.019421
+paddle-padding-psm3,traders-original-amount-14-padded,amount,9980,"9,980",True,,0.017162
+tesseract-base-psm10,kyobo-first-original-quantity-00,quantity,1,1,True,,0.793684
+tesseract-base-psm10,kyobo-first-original-quantity-01,quantity,1,,False,,0.027441
+tesseract-base-psm10,kyobo-first-original-quantity-02,quantity,1,,False,,0.023901
+tesseract-base-psm10,kyobo-first-original-quantity-03,quantity,1,,False,,0.00947
+tesseract-base-psm10,kyobo-first-original-quantity-04,quantity,1,,False,,0.010121
+tesseract-base-psm10,kyobo-first-original-quantity-05,quantity,1,,False,,0.016202
+tesseract-base-psm10,kyobo-first-original-quantity-06,quantity,1,,False,,0.010148
+tesseract-base-psm10,kyobo-first-original-quantity-07,quantity,1,,False,,0.010391
+tesseract-base-psm10,kyobo-second-original-quantity-00,quantity,1,,False,,0.008479
+tesseract-base-psm10,kyobo-second-original-quantity-01,quantity,1,,False,,0.013009
+tesseract-base-psm10,kyobo-second-original-quantity-02,quantity,1,,False,,0.021471
+tesseract-base-psm10,kyobo-second-original-quantity-03,quantity,1,,False,,0.018719
+tesseract-base-psm10,kyobo-second-original-quantity-04,quantity,1,1,True,,0.009079
+tesseract-base-psm10,kyobo-second-original-quantity-05,quantity,1,,False,,0.021465
+tesseract-base-psm10,kyobo-second-original-quantity-06,quantity,1,,False,,0.022853
+tesseract-base-psm10,kyobo-second-original-quantity-07,quantity,1,1,True,,0.009889
+tesseract-base-psm10,kyobo-second-original-quantity-08,quantity,1,,False,,0.010451
+tesseract-base-psm10,kyobo-second-original-quantity-09,quantity,1,,False,,0.009889
+tesseract-base-psm10,kyobo-second-original-quantity-10,quantity,1,,False,,0.009064
+tesseract-base-psm10,kyobo-second-corrected-quantity-00,quantity,1,,False,,0.008673
+tesseract-base-psm10,kyobo-second-corrected-quantity-01,quantity,1,,False,,0.008646
+tesseract-base-psm10,kyobo-second-corrected-quantity-02,quantity,1,,False,,0.020009
+tesseract-base-psm10,kyobo-second-corrected-quantity-03,quantity,1,1,True,,0.014588
+tesseract-base-psm10,kyobo-second-corrected-quantity-04,quantity,1,,False,,0.008756
+tesseract-base-psm10,kyobo-second-corrected-quantity-05,quantity,1,,False,,0.021556
+tesseract-base-psm10,kyobo-second-corrected-quantity-06,quantity,1,,False,,0.022159
+tesseract-base-psm10,kyobo-second-corrected-quantity-07,quantity,1,1,True,,0.008815
+tesseract-base-psm10,kyobo-second-corrected-quantity-08,quantity,1,,False,,0.007803
+tesseract-base-psm10,kyobo-second-corrected-quantity-09,quantity,1,,False,,0.008703
+tesseract-base-psm10,kyobo-second-corrected-quantity-10,quantity,1,,False,,0.008713
+tesseract-base-psm10,samseon-original-quantity-00,quantity,1,,False,,0.016054
+tesseract-base-psm10,samseon-original-quantity-01,quantity,1,,False,,0.017085
+tesseract-base-psm10,traders-original-quantity-00,quantity,3,,False,,0.015941
+tesseract-base-psm10,traders-original-quantity-01,quantity,2,07,False,,0.01387
+tesseract-base-psm10,traders-original-quantity-02,quantity,2,2,True,,0.015988
+tesseract-base-psm10,traders-original-quantity-03,quantity,1,,False,,0.013239
+tesseract-base-psm10,traders-original-quantity-04,quantity,1,1,True,,0.012421
+tesseract-base-psm10,traders-original-quantity-05,quantity,1,,False,,0.021276
+tesseract-base-psm10,traders-original-quantity-06,quantity,1,,False,,0.015875
+tesseract-base-psm10,traders-original-quantity-07,quantity,1,,False,,0.014013
+tesseract-base-psm10,traders-original-quantity-08,quantity,1,,False,,0.013515
+tesseract-base-psm10,traders-original-quantity-09,quantity,2,,False,,0.012266
+tesseract-base-psm10,traders-original-quantity-10,quantity,1,1,True,,0.012218
+tesseract-base-psm10,traders-original-quantity-11,quantity,1,,False,,0.014111
+tesseract-base-psm10,traders-original-quantity-12,quantity,1,1,True,,0.014229
+tesseract-base-psm10,traders-original-quantity-13,quantity,1,1,True,,0.014016
+tesseract-base-psm10,traders-original-quantity-14,quantity,1,,False,,0.012593
+tesseract-base-psm10,traders-recreated-quantity-00,quantity,3,3,True,,0.009041
+tesseract-base-psm10,traders-recreated-quantity-01,quantity,2,2,True,,0.008327
+tesseract-base-psm10,traders-recreated-quantity-02,quantity,2,2,True,,0.008424
+tesseract-base-psm10,traders-recreated-quantity-03,quantity,1,1,True,,0.007823
+tesseract-base-psm10,traders-recreated-quantity-04,quantity,1,1,True,,0.007673
+tesseract-base-psm10,traders-recreated-quantity-05,quantity,1,1,True,,0.008119
+tesseract-base-psm10,traders-recreated-quantity-06,quantity,1,1,True,,0.007687
+tesseract-base-psm10,traders-recreated-quantity-07,quantity,1,1,True,,0.007417
+tesseract-base-psm10,traders-recreated-quantity-08,quantity,1,1,True,,0.00797
+tesseract-base-psm10,traders-recreated-quantity-09,quantity,2,2,True,,0.008335
+tesseract-base-psm10,traders-recreated-quantity-10,quantity,1,1,True,,0.007277
+tesseract-base-psm10,traders-recreated-quantity-11,quantity,1,1,True,,0.009813
+tesseract-base-psm10,traders-recreated-quantity-12,quantity,1,1,True,,0.00761
+tesseract-base-psm10,traders-recreated-quantity-13,quantity,1,1,True,,0.007548
+tesseract-base-psm10,traders-recreated-quantity-14,quantity,1,1,True,,0.009799
+tesseract-base-psm10,samseon-pepsi-saved-row-quantity-00,quantity,1,,False,,0.014647
+tesseract-base-psm3,kyobo-first-original-quantity-00,quantity,1,,False,,0.01007
+tesseract-base-psm3,kyobo-first-original-amount-00,amount,9600,,False,,0.009585
+tesseract-base-psm3,kyobo-first-original-name-00,name,포스트잇/670-5AN-5/알뜰팩,포스트잇/670-5싸-5/알뜰팩,False,,0.097684
+tesseract-base-psm3,kyobo-first-original-quantity-01,quantity,1,,False,,0.006125
+tesseract-base-psm3,kyobo-first-original-amount-01,amount,1300,,False,,0.00736
+tesseract-base-psm3,kyobo-first-original-name-01,name,[JR] 스티커미니/101-FOOD.01,[JR] 스티커미니/101+ㅠ000.01,False,,0.103448
+tesseract-base-psm3,kyobo-first-original-quantity-02,quantity,1,,False,,0.006074
+tesseract-base-psm3,kyobo-first-original-amount-02,amount,1300,,False,,0.008279
+tesseract-base-psm3,kyobo-first-original-name-02,name,[JR] 스티커미니/112/FOOD.04,[JR] 스티커미니/112/『7000.04,False,,0.103752
+tesseract-base-psm3,kyobo-first-original-quantity-03,quantity,1,,False,,0.007233
+tesseract-base-psm3,kyobo-first-original-amount-03,amount,1300,"1,300",True,,0.023214
+tesseract-base-psm3,kyobo-first-original-name-03,name,[JR] 스티커미니/120-FOOD.05,"[JR] 스티커미니/120-+7000., 05",False,,0.106325
+tesseract-base-psm3,kyobo-first-original-quantity-04,quantity,1,,False,,0.005788
+tesseract-base-psm3,kyobo-first-original-amount-04,amount,1300,"1,500",False,,0.023826
+tesseract-base-psm3,kyobo-first-original-name-04,name,[JR] 스티커미니 132-FOOD.07,(JAJ 스티커미니 132-FO0D.07,False,,0.100485
+tesseract-base-psm3,kyobo-first-original-quantity-05,quantity,1,,False,,0.006231
+tesseract-base-psm3,kyobo-first-original-amount-05,amount,3500,500,False,,0.019097
+tesseract-base-psm3,kyobo-first-original-name-05,name,[JR] 스티커 CEREAL 301/SWEET CAKE,[JR] 스티커 CEREAL 301/SWEET CAKE,True,,0.154887
+tesseract-base-psm3,kyobo-first-original-quantity-06,quantity,1,,False,,0.005924
+tesseract-base-psm3,kyobo-first-original-amount-06,amount,3500,,False,,0.00703
+tesseract-base-psm3,kyobo-first-original-name-06,name,[JR] 스티커 CEREAL 303/LEAVES,[JR] 수티커 CEREAL 303/LEAVES,False,,0.116558
+tesseract-base-psm3,kyobo-first-original-quantity-07,quantity,1,,False,,0.007111
+tesseract-base-psm3,kyobo-first-original-amount-07,amount,3500,"3,000",False,,0.032636
+tesseract-base-psm3,kyobo-first-original-name-07,name,[JR] 스티커/CEREAL 304-CATS,[JR] 스티커/대60 304-CATS,False,,0.109718
+tesseract-base-psm3,kyobo-second-original-quantity-00,quantity,1,,False,,0.006931
+tesseract-base-psm3,kyobo-second-original-amount-00,amount,4000,"4,000",True,,0.027567
+tesseract-base-psm3,kyobo-second-original-name-00,name,[JR] 스티커 CEREAL 312-DONETS,[JR] 스티켜 CEREAL 312-DONETS,False,,0.124099
+tesseract-base-psm3,kyobo-second-original-quantity-01,quantity,1,,False,,0.005586
+tesseract-base-psm3,kyobo-second-original-amount-01,amount,3100,"5,100",False,,0.023733
+tesseract-base-psm3,kyobo-second-original-name-01,name,수첩식 포스트잇/형광,수접식 포스트잇/행광,False,,0.060984
+tesseract-base-psm3,kyobo-second-original-quantity-02,quantity,1,,False,,0.005464
+tesseract-base-psm3,kyobo-second-original-amount-02,amount,3100,,False,,0.006721
+tesseract-base-psm3,kyobo-second-original-name-02,name,수첩식 포스트잇/파스텔,SHA 포스트잇/파스텔,False,,0.101755
+tesseract-base-psm3,kyobo-second-original-quantity-03,quantity,1,,False,,0.005775
+tesseract-base-psm3,kyobo-second-original-amount-03,amount,2500,,False,,0.007195
+tesseract-base-psm3,kyobo-second-original-name-03,name,[JR] 스티커/1167/STREET FOOD,[JR] 소트켜|) 16(/51161 FOOD,False,,0.142104
+tesseract-base-psm3,kyobo-second-original-quantity-04,quantity,1,,False,,0.005977
+tesseract-base-psm3,kyobo-second-original-amount-04,amount,2500,,False,,0.00761
+tesseract-base-psm3,kyobo-second-original-name-04,name,[JR] 스티커/1177/OLD BAKERY,(JR) 스티커/11///미0 BAKERY,False,,0.119355
+tesseract-base-psm3,kyobo-second-original-quantity-05,quantity,1,,False,,0.007259
+tesseract-base-psm3,kyobo-second-original-amount-05,amount,2500,,False,,0.007695
+tesseract-base-psm3,kyobo-second-original-name-05,name,[JR] 스티커/1173/FOOD TRIP #8,PIRI 스트케/11.5[1000 IRIE 00,False,,0.13872
+tesseract-base-psm3,kyobo-second-original-quantity-06,quantity,1,,False,,0.006034
+tesseract-base-psm3,kyobo-second-original-amount-06,amount,4900,4.900,True,,0.038629
+tesseract-base-psm3,kyobo-second-original-name-06,name,[MW] 81763/페인팅 스티커/스윗츠,[MW] 81/65/페인팅 AEIA/SRS,False,,0.139516
+tesseract-base-psm3,kyobo-second-original-quantity-07,quantity,1,,False,,0.005841
+tesseract-base-psm3,kyobo-second-original-amount-07,amount,4900,,False,,0.007134
+tesseract-base-psm3,kyobo-second-original-name-07,name,[MW] 81764/페인팅 스티커/커피,[MW] 8176《/페인팅 스티커/커피,False,,0.123331
+tesseract-base-psm3,kyobo-second-original-quantity-08,quantity,1,,False,,0.005879
+tesseract-base-psm3,kyobo-second-original-amount-08,amount,2500,,False,,0.00746
+tesseract-base-psm3,kyobo-second-original-name-08,name,[JR] 스티커 1204-LET’S BAKE!,rip) 스티커 1204-LET'S BAKE!,False,,0.11226
+tesseract-base-psm3,kyobo-second-original-quantity-09,quantity,1,,False,,0.005701
+tesseract-base-psm3,kyobo-second-original-amount-09,amount,2500,,False,,0.007269
+tesseract-base-psm3,kyobo-second-original-name-09,name,[JR] 스티커/1202-LUNCH BOX,"CIR] 스티커 1202-LUNCH BOX
+
+oo,   반마 un a oe",False,,0.168076
+tesseract-base-psm3,kyobo-second-original-quantity-10,quantity,1,,False,,0.006102
+tesseract-base-psm3,kyobo-second-original-amount-10,amount,16800,,False,,0.007669
+tesseract-base-psm3,kyobo-second-original-name-10,name,프리즘 220 라인 밴드 노트/크림,plz 220 라인 밴드 노트/크림,False,,0.13972
+tesseract-base-psm3,kyobo-second-corrected-quantity-00,quantity,1,,False,,0.00726
+tesseract-base-psm3,kyobo-second-corrected-amount-00,amount,4000,"4,000)",False,,0.03243
+tesseract-base-psm3,kyobo-second-corrected-quantity-01,quantity,1,,False,,0.005733
+tesseract-base-psm3,kyobo-second-corrected-amount-01,amount,3100,5 100),False,,0.033308
+tesseract-base-psm3,kyobo-second-corrected-quantity-02,quantity,1,,False,,0.006395
+tesseract-base-psm3,kyobo-second-corrected-amount-02,amount,3100,,False,,0.008714
+tesseract-base-psm3,kyobo-second-corrected-quantity-03,quantity,1,,False,,0.005563
+tesseract-base-psm3,kyobo-second-corrected-amount-03,amount,2500,as e\\\),False,,0.042707
+tesseract-base-psm3,kyobo-second-corrected-quantity-04,quantity,1,,False,,0.005788
+tesseract-base-psm3,kyobo-second-corrected-amount-04,amount,2500,,False,,0.007515
+tesseract-base-psm3,kyobo-second-corrected-quantity-05,quantity,1,,False,,0.006247
+tesseract-base-psm3,kyobo-second-corrected-amount-05,amount,2500,"2,000)",False,,0.034067
+tesseract-base-psm3,kyobo-second-corrected-quantity-06,quantity,1,,False,,0.005825
+tesseract-base-psm3,kyobo-second-corrected-amount-06,amount,4900,,False,,0.006511
+tesseract-base-psm3,kyobo-second-corrected-quantity-07,quantity,1,,False,,0.006469
+tesseract-base-psm3,kyobo-second-corrected-amount-07,amount,4900,,False,,0.007321
+tesseract-base-psm3,kyobo-second-corrected-quantity-08,quantity,1,,False,,0.00588
+tesseract-base-psm3,kyobo-second-corrected-amount-08,amount,2500,"2,900)",False,,0.028155
+tesseract-base-psm3,kyobo-second-corrected-quantity-09,quantity,1,,False,,0.005667
+tesseract-base-psm3,kyobo-second-corrected-amount-09,amount,2500,,False,,0.007072
+tesseract-base-psm3,kyobo-second-corrected-quantity-10,quantity,1,,False,,0.005931
+tesseract-base-psm3,kyobo-second-corrected-amount-10,amount,16800,,False,,0.007493
+tesseract-base-psm3,samseon-original-quantity-00,quantity,1,,False,,0.008187
+tesseract-base-psm3,samseon-original-amount-00,amount,12000,"12, 000",True,,0.029104
+tesseract-base-psm3,samseon-original-name-00,name,삼선짜장,,False,,0.006928
+tesseract-base-psm3,samseon-original-quantity-01,quantity,1,,False,,0.005446
+tesseract-base-psm3,samseon-original-amount-01,amount,2000,"2, 000",True,,0.026263
+tesseract-base-psm3,samseon-original-name-01,name,제로펩시,Al = Al,False,,0.042817
+tesseract-base-psm3,traders-original-quantity-00,quantity,3,,False,,0.005687
+tesseract-base-psm3,traders-original-amount-00,amount,80940,,False,,0.005503
+tesseract-base-psm3,traders-original-quantity-01,quantity,2,,False,,0.005211
+tesseract-base-psm3,traders-original-amount-01,amount,33760,,False,,0.005138
+tesseract-base-psm3,traders-original-quantity-02,quantity,2,,False,,0.005042
+tesseract-base-psm3,traders-original-amount-02,amount,37960,,False,,0.005472
+tesseract-base-psm3,traders-original-quantity-03,quantity,1,,False,,0.007881
+tesseract-base-psm3,traders-original-amount-03,amount,12980,,False,,0.005429
+tesseract-base-psm3,traders-original-quantity-04,quantity,1,,False,,0.00495
+tesseract-base-psm3,traders-original-amount-04,amount,17980,,False,,0.00513
+tesseract-base-psm3,traders-original-quantity-05,quantity,1,,False,,0.006458
+tesseract-base-psm3,traders-original-amount-05,amount,36980,,False,,0.006029
+tesseract-base-psm3,traders-original-quantity-06,quantity,1,,False,,0.005952
+tesseract-base-psm3,traders-original-amount-06,amount,13980,,False,,0.005862
+tesseract-base-psm3,traders-original-quantity-07,quantity,1,,False,,0.006437
+tesseract-base-psm3,traders-original-amount-07,amount,13480,,False,,0.005792
+tesseract-base-psm3,traders-original-quantity-08,quantity,1,,False,,0.00551
+tesseract-base-psm3,traders-original-amount-08,amount,11980,,False,,0.007931
+tesseract-base-psm3,traders-original-quantity-09,quantity,2,,False,,0.005705
+tesseract-base-psm3,traders-original-amount-09,amount,11760,,False,,0.005302
+tesseract-base-psm3,traders-original-quantity-10,quantity,1,,False,,0.006557
+tesseract-base-psm3,traders-original-amount-10,amount,8880,,False,,0.005661
+tesseract-base-psm3,traders-original-quantity-11,quantity,1,,False,,0.005012
+tesseract-base-psm3,traders-original-amount-11,amount,12980,,False,,0.00566
+tesseract-base-psm3,traders-original-quantity-12,quantity,1,,False,,0.005115
+tesseract-base-psm3,traders-original-amount-12,amount,14980,,False,,0.005417
+tesseract-base-psm3,traders-original-quantity-13,quantity,1,,False,,0.005266
+tesseract-base-psm3,traders-original-amount-13,amount,19980,,False,,0.005533
+tesseract-base-psm3,traders-original-quantity-14,quantity,1,,False,,0.005228
+tesseract-base-psm3,traders-original-amount-14,amount,9980,,False,,0.005799
+tesseract-base-psm3,traders-recreated-quantity-00,quantity,3,,False,,0.006684
+tesseract-base-psm3,traders-recreated-amount-00,amount,80940,"80,940",True,,0.015573
+tesseract-base-psm3,traders-recreated-quantity-01,quantity,2,,False,,0.006331
+tesseract-base-psm3,traders-recreated-amount-01,amount,33760,"33, 760",True,,0.018566
+tesseract-base-psm3,traders-recreated-quantity-02,quantity,2,,False,,0.005847
+tesseract-base-psm3,traders-recreated-amount-02,amount,37960,"37, 960",True,,0.021488
+tesseract-base-psm3,traders-recreated-quantity-03,quantity,1,,False,,0.005463
+tesseract-base-psm3,traders-recreated-amount-03,amount,12980,"12,980",True,,0.013625
+tesseract-base-psm3,traders-recreated-quantity-04,quantity,1,,False,,0.005605
+tesseract-base-psm3,traders-recreated-amount-04,amount,17980,"17, 980",True,,0.014801
+tesseract-base-psm3,traders-recreated-quantity-05,quantity,1,,False,,0.00538
+tesseract-base-psm3,traders-recreated-amount-05,amount,36980,"36, 980",True,,0.014436
+tesseract-base-psm3,traders-recreated-quantity-06,quantity,1,,False,,0.006962
+tesseract-base-psm3,traders-recreated-amount-06,amount,13980,"13, 980",True,,0.018657
+tesseract-base-psm3,traders-recreated-quantity-07,quantity,1,,False,,0.005552
+tesseract-base-psm3,traders-recreated-amount-07,amount,13480,"13, 480",True,,0.015611
+tesseract-base-psm3,traders-recreated-quantity-08,quantity,1,,False,,0.006489
+tesseract-base-psm3,traders-recreated-amount-08,amount,11980,,False,,0.007544
+tesseract-base-psm3,traders-recreated-quantity-09,quantity,2,,False,,0.005933
+tesseract-base-psm3,traders-recreated-amount-09,amount,11760,"11, 760",True,,0.016457
+tesseract-base-psm3,traders-recreated-quantity-10,quantity,1,,False,,0.005471
+tesseract-base-psm3,traders-recreated-amount-10,amount,8880,"8, 880",True,,0.01818
+tesseract-base-psm3,traders-recreated-quantity-11,quantity,1,,False,,0.006482
+tesseract-base-psm3,traders-recreated-amount-11,amount,12980,"12, 980",True,,0.018092
+tesseract-base-psm3,traders-recreated-quantity-12,quantity,1,,False,,0.005526
+tesseract-base-psm3,traders-recreated-amount-12,amount,14980,"14, 980",True,,0.014013
+tesseract-base-psm3,traders-recreated-quantity-13,quantity,1,,False,,0.005687
+tesseract-base-psm3,traders-recreated-amount-13,amount,19980,"19,980",True,,0.013705
+tesseract-base-psm3,traders-recreated-quantity-14,quantity,1,,False,,0.007355
+tesseract-base-psm3,traders-recreated-amount-14,amount,9980,"9, 980",True,,0.015859
+tesseract-base-psm3,samseon-pepsi-saved-row-quantity-00,quantity,1,,False,,0.005453
+tesseract-base-psm3,samseon-pepsi-saved-row-amount-00,amount,2000,2.000,True,,0.022078
+tesseract-base-psm3,blank,blank,,,True,,0.006231
+tesseract-base-psm7,kyobo-first-original-quantity-00,quantity,1,],False,,0.230417
+tesseract-base-psm7,kyobo-first-original-amount-00,amount,9600,,False,,0.017453
+tesseract-base-psm7,kyobo-first-original-name-00,name,포스트잇/670-5AN-5/알뜰팩,포스트잇/670-5싸-5/알뜰팩,False,,0.14978
+tesseract-base-psm7,kyobo-first-original-quantity-01,quantity,1,le,False,,0.033526
+tesseract-base-psm7,kyobo-first-original-amount-01,amount,1300,ㅣ 00,False,,0.045375
+tesseract-base-psm7,kyobo-first-original-name-01,name,[JR] 스티커미니/101-FOOD.01,[JR] AElAOILI/101-FO0D.01,False,,0.156081
+tesseract-base-psm7,kyobo-first-original-quantity-02,quantity,1,,False,,0.005781
+tesseract-base-psm7,kyobo-first-original-amount-02,amount,1300,,False,,0.006952
+tesseract-base-psm7,kyobo-first-original-name-02,name,[JR] 스티커미니/112/FOOD.04,"[JR] 스티커미니/112/77000,04",False,,0.122486
+tesseract-base-psm7,kyobo-first-original-quantity-03,quantity,1,|,False,,0.022198
+tesseract-base-psm7,kyobo-first-original-amount-03,amount,1300,"1,300",True,,0.025948
+tesseract-base-psm7,kyobo-first-original-name-03,name,[JR] 스티커미니/120-FOOD.05,"[JR] 스티커미니/120-+7000., 05",False,,0.103079
+tesseract-base-psm7,kyobo-first-original-quantity-04,quantity,1,|,False,,0.008478
+tesseract-base-psm7,kyobo-first-original-amount-04,amount,1300,"1,500",False,,0.022792
+tesseract-base-psm7,kyobo-first-original-name-04,name,[JR] 스티커미니 132-FOOD.07,(JAJ 스티커미니 132-FO0D.07,False,,0.101716
+tesseract-base-psm7,kyobo-first-original-quantity-05,quantity,1,,False,,0.005578
+tesseract-base-psm7,kyobo-first-original-amount-05,amount,3500,,False,,0.006623
+tesseract-base-psm7,kyobo-first-original-name-05,name,[JR] 스티커 CEREAL 301/SWEET CAKE,[JR] 스티커 CEREAL 301/SWEET CAKE,True,,0.163848
+tesseract-base-psm7,kyobo-first-original-quantity-06,quantity,1,ㅣ,False,,0.008109
+tesseract-base-psm7,kyobo-first-original-amount-06,amount,3500,,False,,0.006876
+tesseract-base-psm7,kyobo-first-original-name-06,name,[JR] 스티커 CEREAL 303/LEAVES,[JR] 수티커 CEREAL 303/LEAVES,False,,0.111829
+tesseract-base-psm7,kyobo-first-original-quantity-07,quantity,1,|,False,,0.009113
+tesseract-base-psm7,kyobo-first-original-amount-07,amount,3500,"3,000",False,,0.028293
+tesseract-base-psm7,kyobo-first-original-name-07,name,[JR] 스티커/CEREAL 304-CATS,[JR] 스티커/대60 304-CATS,False,,0.120048
+tesseract-base-psm7,kyobo-second-original-quantity-00,quantity,1,|,False,,0.008813
+tesseract-base-psm7,kyobo-second-original-amount-00,amount,4000,"4,000",True,,0.025737
+tesseract-base-psm7,kyobo-second-original-name-00,name,[JR] 스티커 CEREAL 312-DONETS,[JR] 스티켜 CEREAL 312-DONETS,False,,0.118212
+tesseract-base-psm7,kyobo-second-original-quantity-01,quantity,1,|,False,,0.008881
+tesseract-base-psm7,kyobo-second-original-amount-01,amount,3100,"5,100",False,,0.027051
+tesseract-base-psm7,kyobo-second-original-name-01,name,수첩식 포스트잇/형광,Ly 』수접식 BSEa/ Se,False,,0.112062
+tesseract-base-psm7,kyobo-second-original-quantity-02,quantity,1,Ar,False,,0.020998
+tesseract-base-psm7,kyobo-second-original-amount-02,amount,3100,,False,,0.007805
+tesseract-base-psm7,kyobo-second-original-name-02,name,수첩식 포스트잇/파스텔,| 추접식 포출트잇/파스틸,False,,0.121549
+tesseract-base-psm7,kyobo-second-original-quantity-03,quantity,1,해일,False,,0.022957
+tesseract-base-psm7,kyobo-second-original-amount-03,amount,2500,| 420,False,,0.044836
+tesseract-base-psm7,kyobo-second-original-name-03,name,[JR] 스티커/1167/STREET FOOD,Rd SSE 6775 REET 000,False,,0.178288
+tesseract-base-psm7,kyobo-second-original-quantity-04,quantity,1,|,False,,0.008639
+tesseract-base-psm7,kyobo-second-original-amount-04,amount,2500,,False,,0.007203
+tesseract-base-psm7,kyobo-second-original-name-04,name,[JR] 스티커/1177/OLD BAKERY,(JR) 스티커/11///미0 BAKERY,False,,0.112558
+tesseract-base-psm7,kyobo-second-original-quantity-05,quantity,1,i,False,,0.0209
+tesseract-base-psm7,kyobo-second-original-amount-05,amount,2500,2000,False,,0.04717
+tesseract-base-psm7,kyobo-second-original-name-05,name,[JR] 스티커/1173/FOOD TRIP #8,PIRI 스트케/11.5[1000 IRIE 00       ㆍ,False,,0.159479
+tesseract-base-psm7,kyobo-second-original-quantity-06,quantity,1,,False,,0.006031
+tesseract-base-psm7,kyobo-second-original-amount-06,amount,4900,4.900,True,,0.033469
+tesseract-base-psm7,kyobo-second-original-name-06,name,[MW] 81763/페인팅 스티커/스윗츠,[비1] 81765/페인팅 스티커/술첫주     ee,False,,0.175948
+tesseract-base-psm7,kyobo-second-original-quantity-07,quantity,1,|,False,,0.009374
+tesseract-base-psm7,kyobo-second-original-amount-07,amount,4900,4.900,True,,0.032715
+tesseract-base-psm7,kyobo-second-original-name-07,name,[MW] 81764/페인팅 스티커/커피,[Mu] 8176《/페인팅 스티커/커피          oe,False,,0.155049
+tesseract-base-psm7,kyobo-second-original-quantity-08,quantity,1,|,False,,0.008262
+tesseract-base-psm7,kyobo-second-original-amount-08,amount,2500,,False,,0.008346
+tesseract-base-psm7,kyobo-second-original-name-08,name,[JR] 스티커 1204-LET’S BAKE!,rip) 스티커 1204-LET'S BAKE!       aa,False,,0.138001
+tesseract-base-psm7,kyobo-second-original-quantity-09,quantity,1,|,False,,0.008103
+tesseract-base-psm7,kyobo-second-original-amount-09,amount,2500,,False,,0.006671
+tesseract-base-psm7,kyobo-second-original-name-09,name,[JR] 스티커/1202-LUNCH BOX,CIR] 스티커 1202-LUNCH BOX     a,False,,0.138104
+tesseract-base-psm7,kyobo-second-original-quantity-10,quantity,1,|,False,,0.008801
+tesseract-base-psm7,kyobo-second-original-amount-10,amount,16800,16.800,True,,0.028208
+tesseract-base-psm7,kyobo-second-original-name-10,name,프리즘 220 라인 밴드 노트/크림,plz 220 라인 밴드 노트/크림     a,False,,0.144949
+tesseract-base-psm7,kyobo-second-corrected-quantity-00,quantity,1,|,False,,0.008486
+tesseract-base-psm7,kyobo-second-corrected-amount-00,amount,4000,"4,000)",False,,0.028088
+tesseract-base-psm7,kyobo-second-corrected-quantity-01,quantity,1,|,False,,0.014527
+tesseract-base-psm7,kyobo-second-corrected-amount-01,amount,3100,5 100),False,,0.039404
+tesseract-base-psm7,kyobo-second-corrected-quantity-02,quantity,1,Al,False,,0.02139
+tesseract-base-psm7,kyobo-second-corrected-amount-02,amount,3100,OPAL |,False,,0.036481
+tesseract-base-psm7,kyobo-second-corrected-quantity-03,quantity,1,,False,,0.006381
+tesseract-base-psm7,kyobo-second-corrected-amount-03,amount,2500,as e\\\),False,,0.042708
+tesseract-base-psm7,kyobo-second-corrected-quantity-04,quantity,1,ㅣ,False,,0.00997
+tesseract-base-psm7,kyobo-second-corrected-amount-04,amount,2500,2 2000,False,,0.041994
+tesseract-base-psm7,kyobo-second-corrected-quantity-05,quantity,1,,False,,0.005538
+tesseract-base-psm7,kyobo-second-corrected-amount-05,amount,2500,2000,False,,0.038249
+tesseract-base-psm7,kyobo-second-corrected-quantity-06,quantity,1,,False,,0.00678
+tesseract-base-psm7,kyobo-second-corrected-amount-06,amount,4900,4900,True,,0.045291
+tesseract-base-psm7,kyobo-second-corrected-quantity-07,quantity,1,|,False,,0.009691
+tesseract-base-psm7,kyobo-second-corrected-amount-07,amount,4900,4.900,True,,0.034574
+tesseract-base-psm7,kyobo-second-corrected-quantity-08,quantity,1,|,False,,0.008538
+tesseract-base-psm7,kyobo-second-corrected-amount-08,amount,2500,"2,900)",False,,0.026433
+tesseract-base-psm7,kyobo-second-corrected-quantity-09,quantity,1,1,True,,0.00918
+tesseract-base-psm7,kyobo-second-corrected-amount-09,amount,2500,2.500,True,,0.025386
+tesseract-base-psm7,kyobo-second-corrected-quantity-10,quantity,1,|,False,,0.008673
+tesseract-base-psm7,kyobo-second-corrected-amount-10,amount,16800,,False,,0.006812
+tesseract-base-psm7,samseon-original-quantity-00,quantity,1,ae,False,,0.015739
+tesseract-base-psm7,samseon-original-amount-00,amount,12000,"12, 000",True,,0.032085
+tesseract-base-psm7,samseon-original-name-00,name,삼선짜장,삼선짜장,True,,0.050841
+tesseract-base-psm7,samseon-original-quantity-01,quantity,1,|,False,,0.012319
+tesseract-base-psm7,samseon-original-amount-01,amount,2000,"2, 000",True,,0.026399
+tesseract-base-psm7,samseon-original-name-01,name,제로펩시,Al = Al,False,,0.038743
+tesseract-base-psm7,traders-original-quantity-00,quantity,3,a,False,,0.013306
+tesseract-base-psm7,traders-original-amount-00,amount,80940,"80,940",True,,0.020899
+tesseract-base-psm7,traders-original-quantity-01,quantity,2,<,False,,0.01317
+tesseract-base-psm7,traders-original-amount-01,amount,33760,"33, 760",True,,0.016044
+tesseract-base-psm7,traders-original-quantity-02,quantity,2,2,True,,0.013678
+tesseract-base-psm7,traders-original-amount-02,amount,37960,"37, 960.",False,,0.018015
+tesseract-base-psm7,traders-original-quantity-03,quantity,1,1,True,,0.015984
+tesseract-base-psm7,traders-original-amount-03,amount,12980,,False,,0.005245
+tesseract-base-psm7,traders-original-quantity-04,quantity,1,1,True,,0.01164
+tesseract-base-psm7,traders-original-amount-04,amount,17980,"17, 980",True,,0.019022
+tesseract-base-psm7,traders-original-quantity-05,quantity,1,+,False,,0.012526
+tesseract-base-psm7,traders-original-amount-05,amount,36980,"(29, 390",False,,0.026988
+tesseract-base-psm7,traders-original-quantity-06,quantity,1,,False,,0.011181
+tesseract-base-psm7,traders-original-amount-06,amount,13980,"12, 390",False,,0.027568
+tesseract-base-psm7,traders-original-quantity-07,quantity,1,내,False,,0.014693
+tesseract-base-psm7,traders-original-amount-07,amount,13480,"12, 400",False,,0.027696
+tesseract-base-psm7,traders-original-quantity-08,quantity,1,oa,False,,0.015668
+tesseract-base-psm7,traders-original-amount-08,amount,11980,| 1. 984,False,,0.027267
+tesseract-base-psm7,traders-original-quantity-09,quantity,2,ie,False,,0.014396
+tesseract-base-psm7,traders-original-amount-09,amount,11760,"11, 7840",False,,0.02965
+tesseract-base-psm7,traders-original-quantity-10,quantity,1,1),False,,0.012
+tesseract-base-psm7,traders-original-amount-10,amount,8880,"5, 880",False,,0.017342
+tesseract-base-psm7,traders-original-quantity-11,quantity,1,SP,False,,0.011212
+tesseract-base-psm7,traders-original-amount-11,amount,12980,"12, 980",True,,0.017491
+tesseract-base-psm7,traders-original-quantity-12,quantity,1,Tha,False,,0.012747
+tesseract-base-psm7,traders-original-amount-12,amount,14980,"14,980",True,,0.016275
+tesseract-base-psm7,traders-original-quantity-13,quantity,1,ihe,False,,0.014262
+tesseract-base-psm7,traders-original-amount-13,amount,19980,"19,980",True,,0.020873
+tesseract-base-psm7,traders-original-quantity-14,quantity,1,|,False,,0.01114
+tesseract-base-psm7,traders-original-amount-14,amount,9980,"9,980",True,,0.017145
+tesseract-base-psm7,traders-recreated-quantity-00,quantity,3,3,True,,0.007511
+tesseract-base-psm7,traders-recreated-amount-00,amount,80940,"80,940",True,,0.015109
+tesseract-base-psm7,traders-recreated-quantity-01,quantity,2,2,True,,0.008094
+tesseract-base-psm7,traders-recreated-amount-01,amount,33760,"33, 760",True,,0.018753
+tesseract-base-psm7,traders-recreated-quantity-02,quantity,2,2,True,,0.007396
+tesseract-base-psm7,traders-recreated-amount-02,amount,37960,"37, 960",True,,0.0213
+tesseract-base-psm7,traders-recreated-quantity-03,quantity,1,1,True,,0.006855
+tesseract-base-psm7,traders-recreated-amount-03,amount,12980,"12,980",True,,0.013809
+tesseract-base-psm7,traders-recreated-quantity-04,quantity,1,1,True,,0.00709
+tesseract-base-psm7,traders-recreated-amount-04,amount,17980,"17, 980",True,,0.017544
+tesseract-base-psm7,traders-recreated-quantity-05,quantity,1,1,True,,0.006968
+tesseract-base-psm7,traders-recreated-amount-05,amount,36980,"36, 980",True,,0.015401
+tesseract-base-psm7,traders-recreated-quantity-06,quantity,1,1,True,,0.006653
+tesseract-base-psm7,traders-recreated-amount-06,amount,13980,"13, 980",True,,0.018726
+tesseract-base-psm7,traders-recreated-quantity-07,quantity,1,1,True,,0.006649
+tesseract-base-psm7,traders-recreated-amount-07,amount,13480,"13, 480",True,,0.014582
+tesseract-base-psm7,traders-recreated-quantity-08,quantity,1,1,True,,0.00725
+tesseract-base-psm7,traders-recreated-amount-08,amount,11980,"11, 980",True,,0.013665
+tesseract-base-psm7,traders-recreated-quantity-09,quantity,2,2,True,,0.008164
+tesseract-base-psm7,traders-recreated-amount-09,amount,11760,"11, 760",True,,0.013992
+tesseract-base-psm7,traders-recreated-quantity-10,quantity,1,1,True,,0.008243
+tesseract-base-psm7,traders-recreated-amount-10,amount,8880,"8, 880",True,,0.016863
+tesseract-base-psm7,traders-recreated-quantity-11,quantity,1,1,True,,0.008702
+tesseract-base-psm7,traders-recreated-amount-11,amount,12980,"12, 980",True,,0.018586
+tesseract-base-psm7,traders-recreated-quantity-12,quantity,1,1,True,,0.007598
+tesseract-base-psm7,traders-recreated-amount-12,amount,14980,"14, 980",True,,0.015864
+tesseract-base-psm7,traders-recreated-quantity-13,quantity,1,1,True,,0.006862
+tesseract-base-psm7,traders-recreated-amount-13,amount,19980,"19,980",True,,0.014896
+tesseract-base-psm7,traders-recreated-quantity-14,quantity,1,1,True,,0.00745
+tesseract-base-psm7,traders-recreated-amount-14,amount,9980,"9, 980",True,,0.01605
+tesseract-base-psm7,samseon-pepsi-saved-row-quantity-00,quantity,1,oy,False,,0.013934
+tesseract-base-psm7,samseon-pepsi-saved-row-amount-00,amount,2000,2.000,True,,0.020564
+tesseract-base-psm7,blank,blank,,,True,,0.015292
+tesseract-padding-psm3,traders-original-quantity-00-padded,quantity,3,,False,,0.218563
+tesseract-padding-psm3,traders-original-amount-00-padded,amount,80940,,False,,0.013265
+tesseract-padding-psm3,traders-original-quantity-01-padded,quantity,2,,False,,0.009583
+tesseract-padding-psm3,traders-original-amount-01-padded,amount,33760,,False,,0.009434
+tesseract-padding-psm3,traders-original-quantity-02-padded,quantity,2,,False,,0.008083
+tesseract-padding-psm3,traders-original-amount-02-padded,amount,37960,,False,,0.015737
+tesseract-padding-psm3,traders-original-quantity-03-padded,quantity,1,,False,,0.010526
+tesseract-padding-psm3,traders-original-amount-03-padded,amount,12980,,False,,0.012411
+tesseract-padding-psm3,traders-original-quantity-04-padded,quantity,1,,False,,0.01072
+tesseract-padding-psm3,traders-original-amount-04-padded,amount,17980,,False,,0.007823
+tesseract-padding-psm3,traders-original-quantity-05-padded,quantity,1,,False,,0.01025
+tesseract-padding-psm3,traders-original-amount-05-padded,amount,36980,,False,,0.009372
+tesseract-padding-psm3,traders-original-quantity-06-padded,quantity,1,,False,,0.006941
+tesseract-padding-psm3,traders-original-amount-06-padded,amount,13980,13908,False,,0.026275
+tesseract-padding-psm3,traders-original-quantity-07-padded,quantity,1,,False,,0.008676
+tesseract-padding-psm3,traders-original-amount-07-padded,amount,13480,13/480),False,,0.020115
+tesseract-padding-psm3,traders-original-quantity-08-padded,quantity,1,,False,,0.009443
+tesseract-padding-psm3,traders-original-amount-08-padded,amount,11980,마뜨,False,,0.03767
+tesseract-padding-psm3,traders-original-quantity-09-padded,quantity,2,,False,,0.00812
+tesseract-padding-psm3,traders-original-amount-09-padded,amount,11760,"11, 780",False,,0.022506
+tesseract-padding-psm3,traders-original-quantity-10-padded,quantity,1,,False,,0.005246
+tesseract-padding-psm3,traders-original-amount-10-padded,amount,8880,,False,,0.004918
+tesseract-padding-psm3,traders-original-quantity-11-padded,quantity,1,,False,,0.00491
+tesseract-padding-psm3,traders-original-amount-11-padded,amount,12980,,False,,0.005335
+tesseract-padding-psm3,traders-original-quantity-12-padded,quantity,1,,False,,0.005218
+tesseract-padding-psm3,traders-original-amount-12-padded,amount,14980,14.980,True,,0.012302
+tesseract-padding-psm3,traders-original-quantity-13-padded,quantity,1,,False,,0.005338
+tesseract-padding-psm3,traders-original-amount-13-padded,amount,19980,19980,True,,0.016466
+tesseract-padding-psm3,traders-original-quantity-14-padded,quantity,1,,False,,0.005887
+tesseract-padding-psm3,traders-original-amount-14-padded,amount,9980,,False,,0.00512

@@ -1,0 +1,74 @@
+[
+  {
+    "engine": "mlkit",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 15,
+    "empty": 13,
+    "errors": 0
+  },
+  {
+    "engine": "mlkit",
+    "kind": "amount",
+    "correct": 12,
+    "total": 15,
+    "empty": 1,
+    "errors": 0
+  },
+  {
+    "engine": "mlkit",
+    "kind": "row",
+    "correct": null,
+    "total": 15,
+    "empty": 2,
+    "errors": 0
+  },
+  {
+    "engine": "paddle",
+    "kind": "quantity",
+    "correct": 7,
+    "total": 15,
+    "empty": 0,
+    "errors": 0
+  },
+  {
+    "engine": "paddle",
+    "kind": "amount",
+    "correct": 12,
+    "total": 15,
+    "empty": 2,
+    "errors": 0
+  },
+  {
+    "engine": "paddle",
+    "kind": "row",
+    "correct": null,
+    "total": 15,
+    "empty": 0,
+    "errors": 0
+  },
+  {
+    "engine": "tesseract-auto",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 15,
+    "empty": 15,
+    "errors": 0
+  },
+  {
+    "engine": "tesseract-auto",
+    "kind": "amount",
+    "correct": 2,
+    "total": 15,
+    "empty": 9,
+    "errors": 0
+  },
+  {
+    "engine": "tesseract-auto",
+    "kind": "row",
+    "correct": null,
+    "total": 15,
+    "empty": 9,
+    "errors": 0
+  }
+]

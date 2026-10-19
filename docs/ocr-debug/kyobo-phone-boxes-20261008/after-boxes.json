@@ -1,0 +1,26 @@
+{
+  "device": "SM-A336N",
+  "apk_sha256": "ef8af56f4d65f7dcce9b222ead003999e1e778753ce727bcc818aa27ac371c1e",
+  "source": "수정 APK 설치 후 같은 사진·자동 모서리 보정으로 실제 OCR을 다시 실행한 후보 화면. 구매 기록 미저장.",
+  "visible_candidates": [
+    {
+      "text": "1",
+      "display_bounds": "[683,776][712,827]"
+    },
+    {
+      "text": "[JR] 스티커미니/101-F00D.01",
+      "display_bounds": "[116,827][645,869]"
+    },
+    {
+      "text": "1",
+      "display_bounds": "[683,873][712,922]"
+    }
+  ],
+  "quantity_101_display_count": 1,
+  "quantity_101_display_bounds": [
+    683,
+    873,
+    712,
+    922
+  ]
+}

@@ -1,0 +1,265 @@
+00:00 +0: loading /home/jhshin/mobile/how-much-ocr/app/test/recovery_code_test.dart
+00:00 +0: /home/jhshin/mobile/how-much-ocr/app/test/recovery_code_test.dart: 복구 코드의 소문자·공백을 정규화하고 잘못된 입력을 거부한다
+00:00 +1: /home/jhshin/mobile/how-much-ocr/app/test/recovery_code_test.dart: 보안 저장소에는 세션만 남기고 재시작·만료·재연결·로그아웃을 처리한다
+00:00 +2: /home/jhshin/mobile/how-much-ocr/app/test/recovery_code_test.dart: 이전 세션의 늦은 401은 새 세션을 만료시키지 않는다
+00:00 +3: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 별도 작업자의 수량·금액은 동시 시작하고 각 첫 성공에서 종료한다: false
+00:00 +4: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 별도 작업자의 수량·금액은 동시 시작하고 각 첫 성공에서 종료한다: true
+00:00 +5: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 자동 영역 반복은 누락된 수량을 복구하고 각 영역 첫 성공 직후 멈춘다
+00:00 +6: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 자동 영역 반복은 누락된 수량·금액을 복구하고 각 영역 첫 성공 직후 멈춘다
+00:00 +7: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 금액 폭이 달라도 우측 끝을 기준으로 누락된 수량 열을 다시 읽는다
+00:00 +8: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 수량 5회 실패는 다음 칫솔의 1을 가져오지 않고 다음 상품 인식을 계속한다
+00:00 +9: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 자동 재인식 실패 시 기존 숫자를 새 결과로 복구하지 않는다
+00:00 +10: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 유효 수량만 성공으로 세고 단가는 읽힌 수량과 곱해 개당 가격을 유지한다
+00:00 +11: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 첫 성공 뒤 다른 결과를 읽지 않고 확정한다
+00:00 +12: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 한 번 읽히면 즉시 확정하고 나머지 시도는 하지 않는다
+00:00 +13: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 자동 선택 취소 중 늦은 응답은 반영하지 않고 다음 영역 호출도 중단한다
+00:00 +14: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 진행 박스 좌표는 미세 조정/행 경계 제한 후 실제 인식에 전달한 영역과 같다
+00:00 +15: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:01 +16: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:01 +17: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:01 +18: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:01 +19: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:01 +20: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:01 +21: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +22: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +23: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +24: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +25: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +26: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +27: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +28: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:02 +29: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +30: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +31: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +32: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +33: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +34: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +35: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +36: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +37: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +38: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +39: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +40: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +41: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +42: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +43: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +44: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +45: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +46: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +47: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +48: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +49: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +50: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +51: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +52: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +53: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +54: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +55: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +56: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:03 +57: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +58: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +59: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +60: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +61: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +62: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +63: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +64: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +65: /home/jhshin/mobile/how-much-ocr/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +66: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:05 +67: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:05 +68: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:05 +69: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:05 +70: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:05 +71: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:05 +72: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:05 +73: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +74: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +75: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +76: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +77: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +78: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +79: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +80: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +81: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +82: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +83: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +84: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +85: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +86: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +87: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +88: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +89: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +90: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +91: /home/jhshin/mobile/how-much-ocr/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:06 +92: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +93: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +94: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:07 +95: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:07 +96: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:07 +97: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:07 +98: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +99: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +100: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +101: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +102: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +103: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +104: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +105: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +106: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +107: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +108: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +109: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +110: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +111: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +112: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +113: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +114: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +115: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:08 +116: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:09 +117: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:09 +118: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:09 +119: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:09 +120: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +121: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +122: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +123: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +124: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +125: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +126: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +127: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:10 +128: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +129: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +130: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +131: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +132: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +133: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +134: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +135: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +136: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +137: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +138: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +139: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +140: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +141: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +142: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:11 +143: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +144: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +145: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +146: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +147: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +148: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +149: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +150: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +151: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +152: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +153: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +154: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +155: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +156: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +157: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +158: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +159: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +160: /home/jhshin/mobile/how-much-ocr/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:12 +161: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +162: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +163: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +164: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +165: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +166: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +167: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +168: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:13 +169: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: false
+00:14 +170: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +171: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +172: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +173: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +174: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +175: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +176: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +177: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +178: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +179: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +180: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +181: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +182: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +183: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +184: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +185: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +186: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:14 +187: /home/jhshin/mobile/how-much-ocr/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:15 +188: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: true
+00:15 +189: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: true
+00:15 +190: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: true
+00:15 +191: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 앨범 한 장은 즉시 보정·선택으로 진행하고 취소 시 한 장 모드를 유지한다: true
+00:15 +192: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +193: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +194: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +195: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +196: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +197: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +198: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +199: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +200: /home/jhshin/mobile/how-much-ocr/app/test/receipt_kyobo_accumulation_test.dart: 교보 101 실측 좌표 재생: 처음 박스와 수량 버튼은 겹친 1을 하나만 표시한다
+00:15 +201: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:15 +202: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:15 +203: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:15 +204: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:15 +205: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:15 +206: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:15 +207: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +208: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +209: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +210: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +211: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +212: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +213: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +214: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +215: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +216: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +217: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:16 +218: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +219: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +220: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +221: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +222: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +223: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +224: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +225: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +226: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +227: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +228: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +229: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:17 +230: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +231: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +232: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +233: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +234: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +235: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +236: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +237: /home/jhshin/mobile/how-much-ocr/app/test/receipt_set_test.dart: 길게 누른 항목 드롭은 세트 구성품 등록·이동·해제하며 취소 드롭은 그대로다
+00:18 +238: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:19 +239: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:19 +240: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:20 +241: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:20 +242: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:21 +243: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:21 +244: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:21 +245: /home/jhshin/mobile/how-much-ocr/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 선택 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:21 +246: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:21 +247: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +248: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +249: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +250: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +251: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +252: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +253: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +254: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:22 +254 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:23 +255 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:23 +256 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:24 +257 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:24 +258 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_seed_region_test.dart: 교보 포스트잇 수량 영역 적용은 금액 박스를 보이고 취소는 수량 단계 유지: false
+00:25 +259 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_pages_test.dart: 검토 사진별 박스 분리, 다른 장 항목 수정은 원래 사진을 열고 취소는 항목 보존
+00:26 +260 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_seed_region_test.dart: 교보 포스트잇 수량 영역 적용은 금액 박스를 보이고 취소는 수량 단계 유지: true
+00:26 +261 ~1: /home/jhshin/mobile/how-much-ocr/app/test/receipt_seed_region_test.dart: 교보 포스트잇 수량 영역 적용은 금액 박스를 보이고 취소는 수량 단계 유지: true
+00:27 +262 ~1: All tests passed!

@@ -1,0 +1,722 @@
+[
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 6,
+    "total": 8
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 8,
+    "total": 8
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 8,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 9,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 2
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 8,
+    "total": 15
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 7,
+    "total": 15
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 9,
+    "total": 15
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "engine": "mlkit",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "amount",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 6,
+    "total": 8
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 7,
+    "total": 8
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 9,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 10,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 2
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 1,
+    "total": 2
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "engine": "mlkit",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 7,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 8,
+    "total": 8
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 3,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 12,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "engine": "paddle",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "amount",
+    "correct": 1,
+    "total": 1
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 8,
+    "total": 8
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 11,
+    "total": 11
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 2
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 10,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "engine": "paddle",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 8
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 11,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 11,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 1
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "whole",
+    "photo": "samseon-pepsi-saved-row",
+    "kind": "amount",
+    "correct": 1,
+    "total": 1
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 8
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 1,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 2,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 1,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 14,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-auto",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 0,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "quantity",
+    "correct": 4,
+    "total": 8
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "kyobo-first-original",
+    "kind": "amount",
+    "correct": 4,
+    "total": 8
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "kyobo-second-original",
+    "kind": "amount",
+    "correct": 3,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "kyobo-second-corrected",
+    "kind": "amount",
+    "correct": 0,
+    "total": 11
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "quantity",
+    "correct": 0,
+    "total": 2
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "samseon-original",
+    "kind": "amount",
+    "correct": 2,
+    "total": 2
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "quantity",
+    "correct": 5,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "traders-original",
+    "kind": "amount",
+    "correct": 5,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "quantity",
+    "correct": 15,
+    "total": 15
+  },
+  {
+    "engine": "tesseract-line",
+    "context": "row",
+    "photo": "traders-recreated",
+    "kind": "amount",
+    "correct": 1,
+    "total": 15
+  }
+]
