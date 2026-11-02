@@ -313,9 +313,7 @@ void main() {
       // [OCR 추가]
       // [OCR 추가]
       final before = await File(path).readAsBytes(); // [OCR 추가]
-      final draft = await OcrService(
-        engine: 'mlkit',
-      ).recognizePath(path); // [OCR 추가]
+      final draft = await OcrService().recognizePath(path); // [OCR 추가]
       expect(draft.ocrResult!.products.single.text, '스너글 섬유유연제'); // [OCR 추가]
       expect(draft.ocrResult!.numbers.single.number, 37960); // [OCR 추가]
       expect(closes, 1); // [OCR 수정] 전체·병합 재인식을 한 세션으로 처리한다. // [OCR 추가]
@@ -323,9 +321,7 @@ void main() {
       expect(await File(croppedPaths.single).exists(), isFalse); // [OCR 추가]
       expect(await File(path).readAsBytes(), before); // [OCR 추가]
       fail = true; // [OCR 추가]
-      final fallback = await OcrService(
-        engine: 'mlkit',
-      ).recognizePath(path); // [OCR 추가]
+      final fallback = await OcrService().recognizePath(path); // [OCR 추가]
       expect(
         // [OCR 추가]
         fallback.ocrResult!.products.single.text, // [OCR 추가]

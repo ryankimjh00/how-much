@@ -2680,6 +2680,10 @@ class _ReceiptReviewScreenState extends State<ReceiptReviewScreen> {
       line.title = edited.title; // [OCR 추가]
       line.quantity = edited.quantity; // [OCR 수정]
       line.total = edited.total; // [OCR 수정]
+      // [OCR 수정] 이 편집창에서 구성품을 개별 확정하면 기준 상품과 별개의 구매 항목으로 취급한다.
+      // 현재 항목의 부모 ID만 지우므로 기준 상품과 다른 구성품의 관계·선택 상태는 바뀌지 않는다.
+      // 취소한 경우에는 위에서 이미 반환하므로 기존 세트 관계도 그대로 유지된다.
+      line.setParentId = ''; // [OCR 수정]
       line.selected = edited.selected; // [OCR 수정]
       line.itemId = edited.itemId; // [OCR 수정]
       line.spec = edited.spec; // [OCR 수정]

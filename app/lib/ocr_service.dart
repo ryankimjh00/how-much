@@ -13,9 +13,6 @@ import 'receipt_ocr.dart'; // [OCR 추가]
 import 'receipt_column_scan.dart'; // [OCR 추가]
 
 class OcrService {
-  /// [OCR 추가] engine을 생략하면 플랫폼 기본값을 쓰며, 독립 비교·회귀 시험은 엔진을 명시한다.
-  OcrService({String? engine}) : _engine = engine;
-  final String? _engine;
   final ImagePicker _picker = ImagePicker();
 
   Future<ReceiptDraft?> pickFromGallery({
@@ -85,7 +82,7 @@ class OcrService {
   }) async {
     // [OCR 수정] 한 장의 전체·보정·병합 OCR은 같은 인식기를 사용한다.
     // 호출 지역 변수로 소유하여 다른 사진의 동시 인식과 종료가 서로 간섭하지 않는다.
-    final recognizer = ReceiptTextRecognizer(engine: _engine);
+    final recognizer = ReceiptTextRecognizer();
     try {
       return await _recognizeReceiptDraft(
         path,
@@ -251,18 +248,12 @@ class OcrService {
         'receipt-session-',
       ); // [OCR 추가]
       final quantitySession = parallelQuantity
-          ? ReceiptRegionSession._(
-              photo,
-              directory,
-              fileName: 'quantity.png',
-              engine: _engine,
-            )
+          ? ReceiptRegionSession._(photo, directory, fileName: 'quantity.png')
           : null; // [OCR 추가]
       session = ReceiptRegionSession._(
         photo,
         directory,
         quantitySession: quantitySession,
-        engine: _engine, // [OCR 추가] 수량·금액 세션에도 동일 엔진을 전달한다.
       ); // [OCR 수정]
       return await work(session); // [OCR 추가]
     } finally {
@@ -347,9 +338,8 @@ class OcrService {
     if (recognizer != null) {
       return recognizer.processImage(InputImage.fromFilePath(path));
     }
-    final ownedRecognizer = ReceiptTextRecognizer(
-      engine: _engine,
-    ); // [OCR 수정] 전체·부분 OCR에 같은 선택 엔진을 쓴다.
+    final ownedRecognizer =
+        ReceiptTextRecognizer(); // [OCR 수정] 전체·부분 OCR은 ML Kit를 사용한다.
     try {
       final result = await ownedRecognizer.processImage(
         InputImage.fromFilePath(path),
@@ -368,9 +358,9 @@ class ReceiptRegionSession {
     this._directory, {
     String fileName = 'region.png',
     this.quantitySession,
-    String? engine, // [OCR 추가]
   }) : _fileName = fileName,
-       _recognizer = ReceiptTextRecognizer(engine: engine); // [OCR 수정]
+       _recognizer =
+           ReceiptTextRecognizer(); // [OCR 수정] 수량·금액도 같은 ML Kit 경로를 사용한다.
   /// [OCR 추가] 같은 사진을 공유하는 별도 수량 작업자다. 각 작업자 내부는 순차 호출한다.
   final ReceiptRegionSession? quantitySession; // [OCR 추가]
   final String _fileName; // [OCR 추가]
@@ -402,7 +392,7 @@ class ReceiptRegionSession {
     ); // [OCR 추가]
   } // [OCR 추가]
 
-  /// [OCR 추가] 기존 부분 인식과 같은 가로 글씨 제외 기준을 적용한다.
+  /// [OCR 수정] 기존 부분 인식과 같이 세로 글씨를 제외하고 가로 글씨만 반환한다.
   Future<String> recognizeRegion(ui.Rect bounds) async {
     final recognized = await _read(bounds); // [OCR 추가]
     return receiptHorizontalText(

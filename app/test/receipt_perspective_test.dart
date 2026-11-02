@@ -40,7 +40,7 @@ void main() {
     await tester.runAsync(() async {
       // [OCR 추가]
       final bytes = await File(path).readAsBytes(); // [OCR 추가]
-      final draft = await OcrService(engine: 'mlkit').recognizePath(
+      final draft = await OcrService().recognizePath(
         '/does-not-exist-original.jpg',
         photoBytes: bytes,
       ); // [OCR 추가]

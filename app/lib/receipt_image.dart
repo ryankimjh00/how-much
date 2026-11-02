@@ -1,6 +1,32 @@
+import 'dart:io'; // [OCR 추가]
 import 'dart:math' as math; // [OCR 추가]
 import 'dart:typed_data'; // [OCR 추가]
 import 'dart:ui' as ui; // [OCR 추가]
+
+/// [OCR 추가] 화면에 표시할 사진의 바이트와 픽셀 크기를 함께 읽는다.
+/// photoBytes가 있으면 그것을 사용하고, 없을 때만 path의 파일을 연다.
+/// 보정된 사진이 전달됐는데 원본 파일을 다시 읽으면 표시 사진과 OCR 좌표가 어긋날 수 있기 때문이다.
+/// 여기서는 확대·회전·보정을 하지 않는다. 파일이 없거나 사진이 손상됐으면 오류를 화면에 전달한다.
+Future<({Uint8List bytes, ui.Size size})> loadReceiptPhoto(
+  String path, {
+  Uint8List? photoBytes,
+}) async {
+  final bytes = photoBytes ?? await File(path).readAsBytes();
+  final codec = await ui.instantiateImageCodec(bytes);
+  ui.Image? image;
+  try {
+    image = (await codec.getNextFrame()).image;
+    return (
+      bytes: bytes,
+      size: ui.Size(image.width.toDouble(), image.height.toDouble()),
+    );
+  } finally {
+    // [OCR 추가] 크기를 확인하려고 만든 이미지와 디코더는 성공·실패 모두 정리한다.
+    // 반환값에는 사진 바이트와 크기만 담기므로 임시 이미지를 해제해도 화면에서 사용할 수 있다.
+    image?.dispose();
+    codec.dispose();
+  }
+}
 
 /// [OCR 추가] 긴 가로 글줄 세 개 이상이 일치할 때만 작은 기울기(라디안)를 반환한다.
 double estimateReceiptTilt(Iterable<List<ui.Offset>> lines) {

@@ -118,13 +118,13 @@ void main() {
             // [OCR 추가]
             await expectLater(
               // [OCR 추가]
-              OcrService(engine: 'mlkit').recognizePath(path), // [OCR 추가]
+              OcrService().recognizePath(path), // [OCR 추가]
               throwsA(isA<PlatformException>()), // [OCR 추가]
             ); // [OCR 추가]
           } else {
             // [OCR 추가]
             // [OCR 추가]
-            final result = (await OcrService(engine: 'mlkit').recognizePath(
+            final result = (await OcrService().recognizePath(
               // [OCR 추가]
               path, // [OCR 추가]
             )).ocrResult!; // [OCR 추가]
@@ -210,133 +210,129 @@ void main() {
     // [OCR 추가]
     'OCR_COMPARISON_OUTPUT', // [OCR 추가]
   ); // [OCR 추가]
-  testWidgets(
-    '실제 사진 전처리 비교 자료 생성: 이 테스트 자체는 네이티브 OCR을 실행하지 않는다',
-    (
+  testWidgets('실제 사진 전처리 비교 자료 생성: 이 테스트 자체는 네이티브 OCR을 실행하지 않는다', (
+    // [OCR 추가]
+    tester, // [OCR 추가]
+  ) async {
+    // [OCR 추가]
+    // [OCR 추가]
+    await tester.runAsync(() async {
       // [OCR 추가]
-      tester, // [OCR 추가]
-    ) async {
       // [OCR 추가]
-      // [OCR 추가]
-      await tester.runAsync(() async {
+      final bytes = await File(originalPath).readAsBytes(); // [OCR 추가]
+      final output = await Directory(
+        // [OCR 추가]
+        outputPath, // [OCR 추가]
+      ).create(recursive: true); // [OCR 추가]
+      final first = await prepareReceiptPhoto(bytes); // [OCR 추가]
+      await File(
+        // [OCR 추가]
+        '${output.path}/first.png', // [OCR 추가]
+      ).writeAsBytes(first.bytes); // [OCR 추가]
+      final lines = <List<ui.Offset>>[]; // [OCR 추가]
+      if (linesPath.isNotEmpty) {
         // [OCR 추가]
         // [OCR 추가]
-        final bytes = await File(originalPath).readAsBytes(); // [OCR 추가]
-        final output = await Directory(
-          // [OCR 추가]
-          outputPath, // [OCR 추가]
-        ).create(recursive: true); // [OCR 추가]
-        final first = await prepareReceiptPhoto(bytes); // [OCR 추가]
-        await File(
-          // [OCR 추가]
-          '${output.path}/first.png', // [OCR 추가]
-        ).writeAsBytes(first.bytes); // [OCR 추가]
-        final lines = <List<ui.Offset>>[]; // [OCR 추가]
-        if (linesPath.isNotEmpty) {
+        for (final row in await File(linesPath).readAsLines()) {
           // [OCR 추가]
           // [OCR 추가]
-          for (final row in await File(linesPath).readAsLines()) {
+          final fields = row.split('\t'); // [OCR 추가]
+          if (fields.length < 3 || fields[2].isEmpty) continue; // [OCR 추가]
+          lines.add([
             // [OCR 추가]
-            // [OCR 추가]
-            final fields = row.split('\t'); // [OCR 추가]
-            if (fields.length < 3 || fields[2].isEmpty) continue; // [OCR 추가]
-            lines.add([
-              // [OCR 추가]
-              for (final point in fields[2].split(';')) // [OCR 추가]
-                ui.Offset(
-                  // [OCR 추가]
-                  double.parse(point.split(',')[0]), // [OCR 추가]
-                  double.parse(point.split(',')[1]), // [OCR 추가]
-                ), // [OCR 추가]
-            ]); // [OCR 추가]
-          } // [OCR 추가]
+            for (final point in fields[2].split(';')) // [OCR 추가]
+              ui.Offset(
+                // [OCR 추가]
+                double.parse(point.split(',')[0]), // [OCR 추가]
+                double.parse(point.split(',')[1]), // [OCR 추가]
+              ), // [OCR 추가]
+          ]); // [OCR 추가]
         } // [OCR 추가]
-        final angle = estimateReceiptTilt(lines); // [OCR 추가]
-        final finalPhoto = await prepareReceiptPhoto(
+      } // [OCR 추가]
+      final angle = estimateReceiptTilt(lines); // [OCR 추가]
+      final finalPhoto = await prepareReceiptPhoto(
+        // [OCR 추가]
+        bytes, // [OCR 추가]
+        angle: angle, // [OCR 추가]
+      ); // [OCR 추가]
+      await File(
+        // [OCR 추가]
+        '${output.path}/final.png', // [OCR 추가]
+      ).writeAsBytes(finalPhoto.bytes); // [OCR 추가]
+      // 실제 최종 OCR 좌표로 첫 상품명과 금액만 표시한 비교 자료를 만든다. // [OCR 추가]
+      if (finalLinesPath.isNotEmpty) {
+        // [OCR 추가]
+        final regions = <ui.Rect>[]; // [OCR 추가]
+        for (final row in await File(finalLinesPath).readAsLines()) {
           // [OCR 추가]
-          bytes, // [OCR 추가]
-          angle: angle, // [OCR 추가]
-        ); // [OCR 추가]
-        await File(
-          // [OCR 추가]
-          '${output.path}/final.png', // [OCR 추가]
-        ).writeAsBytes(finalPhoto.bytes); // [OCR 추가]
-        // 실제 최종 OCR 좌표로 첫 상품명과 금액만 표시한 비교 자료를 만든다. // [OCR 추가]
-        if (finalLinesPath.isNotEmpty) {
-          // [OCR 추가]
-          final regions = <ui.Rect>[]; // [OCR 추가]
-          for (final row in await File(finalLinesPath).readAsLines()) {
+          final fields = row.split('\t'); // [OCR 추가]
+          if (!fields.first.contains('퍼실') && fields.first != '80,940') {
             // [OCR 추가]
-            final fields = row.split('\t'); // [OCR 추가]
-            if (!fields.first.contains('퍼실') && fields.first != '80,940') {
-              // [OCR 추가]
-              continue; // [OCR 추가]
-            } // [OCR 추가]
-            final values = fields[1]
-                .substring('Rect.fromLTRB('.length, fields[1].length - 1)
-                .split(',')
-                .map(double.parse)
-                .toList(); // [OCR 추가]
-            regions.add(
-              ui.Rect.fromLTRB(values[0], values[1], values[2], values[3]),
-            ); // [OCR 추가]
+            continue; // [OCR 추가]
           } // [OCR 추가]
-          expect(regions, hasLength(2)); // [OCR 추가]
-          final codec = await ui.instantiateImageCodec(
-            finalPhoto.bytes,
+          final values = fields[1]
+              .substring('Rect.fromLTRB('.length, fields[1].length - 1)
+              .split(',')
+              .map(double.parse)
+              .toList(); // [OCR 추가]
+          regions.add(
+            ui.Rect.fromLTRB(values[0], values[1], values[2], values[3]),
           ); // [OCR 추가]
-          final image = (await codec.getNextFrame()).image; // [OCR 추가]
-          codec.dispose(); // [OCR 추가]
-          final recorder = ui.PictureRecorder(); // [OCR 추가]
-          final canvas = ui.Canvas(recorder)
-            ..drawImage(image, ui.Offset.zero, ui.Paint()); // [OCR 추가]
-          final paint = ui.Paint()
-            ..color = const ui.Color(0xff4caf50)
-            ..style = ui.PaintingStyle.stroke
-            ..strokeWidth = 1; // [OCR 추가]
-          for (final region in regions) {
-            // [OCR 추가]
-            expect(
-              region.left >= 0 &&
-                  region.top >= 0 &&
-                  region.right <= image.width &&
-                  region.bottom <= image.height,
-              isTrue,
-            ); // [OCR 추가]
-            canvas.drawRect(region, paint); // [OCR 추가]
-          } // [OCR 추가]
-          final picture = recorder.endRecording(); // [OCR 추가]
-          ui.Image? rendered; // [OCR 추가]
-          try {
-            // [OCR 추가]
-            rendered = await picture.toImage(
-              image.width,
-              image.height,
-            ); // [OCR 추가]
-            final data = (await rendered.toByteData(
-              format: ui.ImageByteFormat.png,
-            ))!; // [OCR 추가]
-            await File('${output.path}/final-ocr-boxes.png').writeAsBytes(
-              data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
-            ); // [OCR 추가]
-          } finally {
-            // [OCR 추가]
-            rendered?.dispose(); // [OCR 추가]
-            picture.dispose(); // [OCR 추가]
-            image.dispose(); // [OCR 추가]
-          } // [OCR 추가]
         } // [OCR 추가]
-        await File('${output.path}/preprocessing.txt').writeAsString(
-          // [OCR 추가]
-          'first=${first.size}\nangleDegrees=${angle * 180 / math.pi}\nfinal=${finalPhoto.size}\n', // [OCR 추가]
+        expect(regions, hasLength(2)); // [OCR 추가]
+        final codec = await ui.instantiateImageCodec(
+          finalPhoto.bytes,
         ); // [OCR 추가]
-        expect(
+        final image = (await codec.getNextFrame()).image; // [OCR 추가]
+        codec.dispose(); // [OCR 추가]
+        final recorder = ui.PictureRecorder(); // [OCR 추가]
+        final canvas = ui.Canvas(recorder)
+          ..drawImage(image, ui.Offset.zero, ui.Paint()); // [OCR 추가]
+        final paint = ui.Paint()
+          ..color = const ui.Color(0xff4caf50)
+          ..style = ui.PaintingStyle.stroke
+          ..strokeWidth = 1; // [OCR 추가]
+        for (final region in regions) {
           // [OCR 추가]
-          await File(originalPath).readAsBytes(), // [OCR 추가]
-          orderedEquals(bytes), // [OCR 추가]
-        ); // [OCR 추가]
-      }); // [OCR 추가]
-    },
-    skip: originalPath.isEmpty || outputPath.isEmpty,
-  ); // [OCR 추가]
+          expect(
+            region.left >= 0 &&
+                region.top >= 0 &&
+                region.right <= image.width &&
+                region.bottom <= image.height,
+            isTrue,
+          ); // [OCR 추가]
+          canvas.drawRect(region, paint); // [OCR 추가]
+        } // [OCR 추가]
+        final picture = recorder.endRecording(); // [OCR 추가]
+        ui.Image? rendered; // [OCR 추가]
+        try {
+          // [OCR 추가]
+          rendered = await picture.toImage(
+            image.width,
+            image.height,
+          ); // [OCR 추가]
+          final data = (await rendered.toByteData(
+            format: ui.ImageByteFormat.png,
+          ))!; // [OCR 추가]
+          await File('${output.path}/final-ocr-boxes.png').writeAsBytes(
+            data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+          ); // [OCR 추가]
+        } finally {
+          // [OCR 추가]
+          rendered?.dispose(); // [OCR 추가]
+          picture.dispose(); // [OCR 추가]
+          image.dispose(); // [OCR 추가]
+        } // [OCR 추가]
+      } // [OCR 추가]
+      await File('${output.path}/preprocessing.txt').writeAsString(
+        // [OCR 추가]
+        'first=${first.size}\nangleDegrees=${angle * 180 / math.pi}\nfinal=${finalPhoto.size}\n', // [OCR 추가]
+      ); // [OCR 추가]
+      expect(
+        // [OCR 추가]
+        await File(originalPath).readAsBytes(), // [OCR 추가]
+        orderedEquals(bytes), // [OCR 추가]
+      ); // [OCR 추가]
+    }); // [OCR 추가]
+  }, skip: originalPath.isEmpty || outputPath.isEmpty); // [OCR 추가]
 } // [OCR 추가]

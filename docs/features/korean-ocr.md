@@ -52,7 +52,7 @@ Flutter의 OCR 회귀 검사는 플랫폼 호출의 한국어 옵션, 검토 초
 다양한 필체·조명·영수증 표본으로 정확도를 확인한다.
 
 ## 9. 결정된 사항
-- 사진은 iOS의 ML Kit Text Recognition v2 한국어 모델, Android의 기존 Paddle로 기기 내 처리하며 외부 서버에 보내지 않는다.
+- 사진은 Android·iOS 모두 ML Kit Text Recognition v2 한국어 모델로 기기 내 처리하며 외부 서버에 보내지 않는다.
 - iOS 촬영·앨범·메모·영수증이 사용하는 공통 Korean recognizer는 유지한다.
 - 테스트 사진은 RunnerTests에만 포함하고 운영 앱에 넣지 않는다.
 - 패키지·Gradle 캐시는 내장 디스크에, Xcode 빌드 캐시는 `app/build/ios-local/`에 두고 기존 전역 설정을 유지한다.

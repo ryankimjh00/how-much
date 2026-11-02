@@ -1,4 +1,5 @@
-// [OCR 추가] 저장된 Android Paddle 실제 응답 재생이다. 새 사진 재인식 시험과 구분한다.
+// [OCR 수정] 아래 JSONL 파일의 글자·좌표를 읽어, 수량이 누락돼도 뒤 상품을 유지하는지 검증한다.
+// OCR 엔진을 실행하지 않으며 실제 사진 인식 정확도는 평가하지 않는다.
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -7,7 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:how_much/receipt_automatic.dart';
 import 'package:how_much/ocr_service.dart';
 import 'package:how_much/receipt_ocr.dart';
-import 'package:how_much/receipt_text_recognizer.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'receipt_recognizer_response.dart';
 
 ReceiptOcrResult tradersSource() {
   final responses = File(
@@ -29,16 +31,18 @@ ReceiptOcrResult tradersSource() {
       },
   ];
   return receiptOcrFromRecognizedText(
-    receiptRecognizedTextFromNative({
-      'text': recorded['text'],
-      'lines': [
-        for (final token in tokens)
-          {
-            ...token,
-            'elements': [token],
-          },
-      ],
-    }),
+    RecognizedText.fromJson(
+      mlkitResponseFromRecorded({
+        'text': recorded['text'],
+        'lines': [
+          for (final token in tokens)
+            {
+              ...token,
+              'elements': [token],
+            },
+        ],
+      }),
+    ),
     '/recorded-traders.png',
   );
 }

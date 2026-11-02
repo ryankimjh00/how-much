@@ -1,8 +1,7 @@
+import 'receipt_image.dart'; // [OCR 추가]
 import 'receipt_region_retry.dart'; // [OCR 추가]
-import 'dart:io'; // [OCR 추가]
 import 'dart:math' as math; // [OCR 추가]
 import 'dart:typed_data'; // [OCR 추가]
-import 'dart:ui' as ui; // [OCR 추가]
 import 'package:flutter/material.dart'; // [OCR 추가]
 import 'app_theme.dart'; // [OCR 추가]
 import 'design_widgets.dart'; // [OCR 추가]
@@ -93,26 +92,16 @@ class _ReceiptRegionScreenState extends State<ReceiptRegionScreen> {
     try {
       // [OCR 추가]
       // [OCR 추가]
-      final bytes = // [OCR 추가]
-          widget.photoBytes ?? // [OCR 추가]
-          await File(widget.photoPath).readAsBytes(); // [OCR 수정]
-      final codec = await ui.instantiateImageCodec(bytes); // [OCR 추가]
-      late final Size size; // [OCR 추가]
-      try {
-        // [OCR 추가]
-        // [OCR 추가]
-        final frame = await codec.getNextFrame(); // [OCR 추가]
-        size = Size(
-          // [OCR 추가]
-          frame.image.width.toDouble(), // [OCR 추가]
-          frame.image.height.toDouble(), // [OCR 추가]
-        ); // [OCR 추가]
-        frame.image.dispose(); // [OCR 추가]
-      } finally {
-        // [OCR 추가]
-        codec.dispose(); // [OCR 추가]
-      } // [OCR 추가]
+      // [OCR 수정] 전달받은 표시 사진의 크기를 사용해야 이동·크기 조절한 박스가 OCR 좌표와 맞는다.
+      // 읽기 실패 처리는 아래 catch에서 이 화면의 기존 안내 방식으로 처리한다.
+      final photo = await loadReceiptPhoto(
+        // [OCR 수정]
+        widget.photoPath,
+        photoBytes: widget.photoBytes,
+      );
       if (!mounted) return; // [OCR 추가]
+      final bytes = photo.bytes; // [OCR 수정]
+      final size = photo.size; // [OCR 수정]
       setState(() {
         // [OCR 추가]
         _bytes = bytes; // [OCR 추가]
