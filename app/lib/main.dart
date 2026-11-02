@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 import 'app.dart';
 import 'app_store.dart';
 import 'cloud_service.dart';
