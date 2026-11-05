@@ -1,3 +1,5 @@
+import 'receipt_stitch.dart'; // [OCR 추가]
+import 'receipt_stitch_screen.dart'; // [OCR 추가]
 import 'receipt_region_retry.dart'; // [OCR 추가]
 import 'receipt_perspective_screen.dart'; // [OCR 추가]
 import 'dart:io'; // [OCR 추가]
@@ -747,7 +749,9 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   bool _previewPausedForReceipt =
       false; // [OCR 추가] 보정·OCR·선택·검토 동안 촬영 미리보기를 멈춘다.
   String _cameraError = '';
+  bool _stitchingPhotos = false; // [OCR 추가] 연결 중에는 원본 사진 목록을 변경하지 않는다.
   String get _busyLabel {
+    if (_stitchingPhotos) return '영수증 사진을 이어붙이고 있어요';
     // [OCR 추가]
     if (_collectingPhotos) return '사진을 추가하고 있어요'; // [OCR 추가]
     if (widget.memo) return '메모를 읽고 있어요'; // [OCR 추가]
@@ -973,6 +977,53 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
     } // [OCR 추가]
   } // [OCR 추가]
 
+  // [OCR 추가] 보정과 연결은 임시 사진으로만 처리한다. 취소·실패 시 모은 사진을 보존한다.
+  Future<void> _finishStitchedParts() async {
+    if (_busy || _receiptParts.length < 2) return;
+    final session = _multiSession;
+    final account = widget.store.cloud.accountId;
+    final pages = List<ReceiptPhotoPage>.of(_receiptParts);
+    bool isCurrent() =>
+        mounted &&
+        session == _multiSession &&
+        account == widget.store.cloud.accountId;
+    setState(() => _stitchingPhotos = true);
+    try {
+      await _recognize(() async {
+        await _setReceiptPreviewPaused(true);
+        if (!isCurrent()) return null;
+        final correctedPhotos = <Uint8List>[];
+        for (final page in pages) {
+          final original = await File(page.path).readAsBytes();
+          if (!isCurrent()) return null;
+          final corrected = await _correctReceiptPhoto(original);
+          if (corrected == null || !isCurrent()) return null;
+          correctedPhotos.add(corrected);
+        }
+        final joined = await stitchReceiptPhotos(
+          correctedPhotos,
+          isCurrent: isCurrent,
+        );
+        if (joined == null || !mounted || !isCurrent()) return null;
+        final approved = await Navigator.push<Uint8List>(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ReceiptStitchPreviewScreen(bytes: joined),
+          ),
+        );
+        if (approved == null || !isCurrent()) return null;
+        // 미리 본 연결 사진 자체를 OCR에 전달해 검토 사진과 좌표가 일치하게 한다.
+        return _ocr.recognizePath(
+          pages.first.path,
+          allowManualRegions: true,
+          photoBytes: approved,
+        );
+      });
+    } finally {
+      if (mounted) setState(() => _stitchingPhotos = false);
+    }
+  }
+
   Future<void> _finishParts() async {
     // [OCR 추가]
     // [OCR 추가]
@@ -1164,6 +1215,13 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
             : () => _startReceipt(multi: true),
         child: const Text('새 영수증'),
       ),
+      if (_receiptParts.length >= 2)
+        TextButton(
+          // [OCR 추가] 장별 인식은 유지하고 연결 인식은 별도로 선택한다.
+          key: const ValueKey('receipt-stitch-parts'),
+          onPressed: _busy ? null : _finishStitchedParts,
+          child: const Text('이어붙여 인식'),
+        ),
       TextButton(
         // [OCR 추가]
         key: const ValueKey('receipt-finish-parts'), // [OCR 추가]
