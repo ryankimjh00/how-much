@@ -2,13 +2,36 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 import 'package:dartcv4/dartcv.dart' as cv;
 import 'receipt_stitch_match.dart';
+import 'receipt_stitch_alignment.dart';
 
 const _featureWidth = 1000;
 const _outputWidth = 1600;
 
-/// [OCR 추가] 영상 무늬를 양방향으로 대조하고 RANSAC으로 원근 관계를 구한다.
-/// UI isolate 밖에서 호출한다. 글자를 읽거나 OCR 결과를 비교하지 않는다.
-Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
+/// [OCR 추가] 원본 인접 사진 두 장과, 둘째 사진부터 이미 연결한 결과를 전달한다.
+/// tailOriginX는 tail 안에 보존된 둘째 원본의 가로 원점이며 세로 원점은 항상 0이다.
+typedef ReceiptStitchInput = ({
+  Uint8List first,
+  Uint8List second,
+  Uint8List? tail,
+  int tailOriginX,
+});
+
+/// [OCR 수정] 원본 쌍의 대응 좌표로 다음 연결 결과를 배치한다. 원본 파일은 변경하지 않는다.
+/// 별도 isolate에서 호출하며, 사진과 가로 원점을 함께 반환해 다음 단계의 좌표를 보존한다.
+({Uint8List bytes, int originX}) stitchReceiptStep(ReceiptStitchInput photos) {
+  try {
+    return _stitchReceiptStep(photos, useAkaze: true);
+  } on FormatException {
+    // [OCR 추가] AKAZE로 정합·공백 검증에 실패하면 기존 SIFT로 한 번 더 시도한다.
+    // 두 방식 모두 검증에 실패하면 사진을 억지로 연결하지 않고 호출 화면에 실패를 알린다.
+    return _stitchReceiptStep(photos, useAkaze: false);
+  }
+}
+
+({Uint8List bytes, int originX}) _stitchReceiptStep(
+  ReceiptStitchInput photos, {
+  required bool useAkaze,
+}) {
   final releases = <void Function()>[];
   T own<T extends cv.CvObject>(T resource) {
     releases.add(resource.dispose);
@@ -35,17 +58,27 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
     final white = own(cv.Scalar.all(255));
     final maskA = own(cv.Mat.zeros(a.rows, a.cols, cv.MatType.CV_8UC1));
     final maskB = own(cv.Mat.zeros(b.rows, b.cols, cv.MatType.CV_8UC1));
-    // 모은 사진이 길어져도 바로 앞 부분과 새 사진 위쪽을 맞춘다. 종이 밖 배경은 제외한다.
+    // [OCR 수정] 연결 결과가 아닌 인접 원본의 아래·위 부분을 대조한다. 종이 밖 배경은 제외한다.
     final firstStart = math.max(0, a.rows - (b.rows * 1.2).ceil());
     final firstArea = own(cv.Rect(60, firstStart, 880, a.rows - firstStart));
     final secondArea = own(cv.Rect(60, 0, 880, (b.rows * .8).round()));
     own(maskA.region(firstArea)).setTo(white);
     own(maskB.region(secondArea)).setTo(white);
-    final detector = own(cv.SIFT.create(nfeatures: 4000));
-    final (keyA, descriptorA) = detector.detectAndCompute(grayA, maskA);
+    late final (cv.VecKeyPoint, cv.Mat) featuresA;
+    late final (cv.VecKeyPoint, cv.Mat) featuresB;
+    if (useAkaze) {
+      final detector = own(cv.AKAZE.empty());
+      featuresA = detector.detectAndCompute(grayA, maskA);
+      featuresB = detector.detectAndCompute(grayB, maskB);
+    } else {
+      final detector = own(cv.SIFT.create(nfeatures: 4000));
+      featuresA = detector.detectAndCompute(grayA, maskA);
+      featuresB = detector.detectAndCompute(grayB, maskB);
+    }
+    final (keyA, descriptorA) = featuresA;
+    final (keyB, descriptorB) = featuresB;
     releases.add(keyA.dispose);
     own(descriptorA);
-    final (keyB, descriptorB) = detector.detectAndCompute(grayB, maskB);
     releases.add(keyB.dispose);
     own(descriptorB);
     if (descriptorA.rows < 2 || descriptorB.rows < 2) {
@@ -53,7 +86,9 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
         '겹치는 글자 무늬를 충분히 찾지 못했어요. 더 겹쳐 촬영하거나 장별로 인식해주세요.',
       );
     }
-    final matcher = own(cv.BFMatcher.create());
+    final matcher = own(
+      cv.BFMatcher.create(type: useAkaze ? cv.NORM_HAMMING : cv.NORM_L2),
+    );
     final forward = matcher.knnMatch(descriptorB, descriptorA, 2);
     releases.add(forward.dispose);
     final reverse = matcher.knnMatch(descriptorA, descriptorB, 2);
@@ -124,12 +159,19 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
       for (var i = 0; i < pointsA.length; i++)
         if (inlierMask.data[i] != 0) i,
     ];
+    // [OCR 수정] 최소 정합 근거가 있으면 부분 보정의 지지를 먼저 구한다.
+    // 전체 변환의 비율이 부족하다는 이유만으로 보정 가능한 사진을 미리 거부하지 않는다.
+    ReceiptStitchAlignment? alignment;
+    if (inliers.length >= 20) {
+      alignment = ReceiptStitchAlignment.fromMatches(matrix, pointsA, pointsB);
+    }
     if (!_validInliers(
       matrix,
       pointsA,
       pointsB,
       inliers,
       math.min(a.rows, b.rows),
+      alignment: alignment,
     )) {
       throw const FormatException('겹침의 위치가 불확실해요. 사진 경계를 확인하거나 장별로 인식해주세요.');
     }
@@ -143,12 +185,46 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
     if (corners == null) {
       throw const FormatException('사진이 뒤집히거나 중복된 것으로 보여요. 위에서 아래 순서인지 확인해주세요.');
     }
-    final left = math.min(0, corners.map((p) => p.x).reduce(math.min)).floor();
+    // [OCR 수정] 정합과 절단 위치는 원본 쌍에서 구하고 출력 범위는 누적 사진까지 포함한다.
+    // 누적 사진 안의 둘째 원본은 너비 1600px·세로 원점 0을 유지한다.
+    cv.Mat? tail;
+    var extentCorners = corners;
+    if (photos.tail != null) {
+      tail = own(cv.imdecode(photos.tail!, cv.IMREAD_COLOR));
+      if (tail.isEmpty ||
+          photos.tailOriginX < 0 ||
+          photos.tailOriginX + _outputWidth > tail.cols ||
+          tail.rows < second.rows ||
+          tail.rows > 16000 ||
+          tail.cols * tail.rows > 24000000) {
+        throw const FormatException('이전 연결 사진의 좌표를 확인하지 못했어요.');
+      }
+      extentCorners = <ReceiptStitchPoint>[];
+      for (final point in [
+        (x: 0.0, y: 0.0),
+        (x: tail.cols.toDouble(), y: 0.0),
+        (x: tail.cols.toDouble(), y: tail.rows.toDouble()),
+        (x: 0.0, y: tail.rows.toDouble()),
+      ]) {
+        final projected = projectReceiptStitchPoint(
+          matrix,
+          (point.x - photos.tailOriginX) * _featureWidth / _outputWidth,
+          point.y * _featureWidth / _outputWidth,
+        );
+        if (projected == null) {
+          throw const FormatException('이어붙일 사진의 원근 변화가 너무 커요.');
+        }
+        extentCorners.add(projected);
+      }
+    }
+    final left = math
+        .min(0, extentCorners.map((p) => p.x).reduce(math.min))
+        .floor();
     final right = math
-        .max(a.cols.toDouble(), corners.map((p) => p.x).reduce(math.max))
+        .max(a.cols.toDouble(), extentCorners.map((p) => p.x).reduce(math.max))
         .ceil();
     final bottom = math
-        .max(a.rows.toDouble(), corners.map((p) => p.y).reduce(math.max))
+        .max(a.rows.toDouble(), extentCorners.map((p) => p.y).reduce(math.max))
         .ceil();
     const scale = _outputWidth / _featureWidth;
     final offset = (-left * scale).ceil();
@@ -199,6 +275,23 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
         bottom,
       ), flags: cv.INTER_NEAREST),
     );
+    // [OCR 추가] 전체 원근변환 뒤에도 남는 작은 오차만 주변 대응점의 지지로 보정한다.
+    // 그림은 흰색, 픽셀 존재 마스크는 검정색으로 채워 사진 밖을 공백으로 오인하지 않는다.
+    if (alignment != null) {
+      applyReceiptStitchAlignment(
+        smallB,
+        alignment,
+        scale: 1,
+        firstOffset: -left.toDouble(),
+      );
+      applyReceiptStitchAlignment(
+        coverage,
+        alignment,
+        scale: 1,
+        firstOffset: -left.toDouble(),
+        isMask: true,
+      );
+    }
     final inkA = own(
       cv.adaptiveThreshold(
         smallA,
@@ -225,15 +318,24 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
     final dataA = inkA.data;
     final dataB = inkB.data;
     final dataMask = coverage.data;
+    final comparisonWidths = List<int>.filled(bottom, 0);
     for (var y = 0; y < a.rows; y++) {
-      var pixels = 0;
-      for (var x = 50 - left; x < 950 - left; x++) {
-        final index = y * inkA.cols + x;
+      final rowStart = y * inkA.cols;
+      // [OCR 수정] 누적 캔버스 폭을 새 사진이 전부 덮을 필요는 없다.
+      // 첫 사진 안쪽에서 실제로 겹치는 구간만 검사해 흰 여백·사진 외곽이 공백 선택을 막지 않게 한다.
+      final overlap = findReceiptStitchOverlap(
+        dataMask,
+        start: rowStart - left,
+        end: rowStart + a.cols - left,
+        minimumWidth: (a.cols * .3).ceil(),
+      );
+      if (overlap == null) continue;
+      for (var index = overlap.start; index < overlap.end; index++) {
         if (dataA[index] != 0) rowsA[y]++;
         if (dataB[index] != 0) rowsB[y]++;
-        if (dataMask[index] != 0) pixels++;
       }
-      covered[y] = pixels >= 895;
+      covered[y] = true;
+      comparisonWidths[y] = overlap.end - overlap.start;
     }
     final start = math.max(0, math.max(corners[0].y, corners[1].y).ceil());
     final end = math.min(a.rows, math.min(corners[2].y, corners[3].y).floor());
@@ -243,7 +345,8 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
       covered: covered,
       start: start,
       end: end,
-      comparisonWidth: 900,
+      comparisonWidth: a.cols,
+      comparisonWidths: comparisonWidths,
     );
     if (cut == null) {
       throw const FormatException('글자를 자르지 않고 연결할 공백을 찾지 못했어요. 장별로 인식해주세요.');
@@ -259,6 +362,12 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
       matrix[7] / scale,
       matrix[8],
     ];
+    if (tail != null) {
+      // [OCR 수정] 누적 사진의 가로 여백을 빼서 원본 둘째 사진 좌표로 되돌린다.
+      outputMatrix[2] -= outputMatrix[0] * photos.tailOriginX;
+      outputMatrix[5] -= outputMatrix[3] * photos.tailOriginX;
+      outputMatrix[8] -= outputMatrix[6] * photos.tailOriginX;
+    }
     final transformB = own(
       cv.Mat.fromList(3, 3, cv.MatType.CV_64FC1, outputMatrix),
     );
@@ -282,12 +391,39 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
       ), borderValue: white),
     );
     final warped = own(
-      cv.warpPerspective(second, transformB, (
+      cv.warpPerspective(tail ?? second, transformB, (
         width,
         height,
       ), borderValue: white),
     );
-    final cutY = (cut * scale).round();
+    if (alignment != null) {
+      applyReceiptStitchAlignment(
+        warped,
+        alignment,
+        scale: scale,
+        firstOffset: offset.toDouble(),
+      );
+    }
+    final overlap = findReceiptStitchOverlap(
+      dataMask,
+      start: cut * inkA.cols - left,
+      end: cut * inkA.cols + a.cols - left,
+      minimumWidth: (a.cols * .3).ceil(),
+    )!;
+    // [OCR 추가] 축소 영상에서 고른 경계는 출력 해상도에서도 빈 한 행인지 다시 확인한다.
+    final cutY = verifyReceiptStitchCut(
+      joined,
+      warped,
+      center: (cut * scale).round(),
+      left:
+          ((overlap.start - cut * inkA.cols + left) * scale + offset).ceil() +
+          2,
+      right:
+          ((overlap.end - cut * inkA.cols + left) * scale + offset).floor() - 2,
+    );
+    if (cutY == null) {
+      throw const FormatException('글자를 자르지 않을 공백을 출력 사진에서 확인하지 못했어요.');
+    }
     final lowerArea = own(cv.Rect(0, cutY, width, height - cutY));
     final lowerSource = own(warped.region(lowerArea));
     final lowerDestination = own(joined.region(lowerArea));
@@ -295,7 +431,7 @@ Uint8List stitchReceiptPhotoPair(({Uint8List first, Uint8List second}) photos) {
     lowerSource.copyTo(lowerDestination);
     final (success, bytes) = cv.imencode('.png', joined);
     if (!success) throw const FormatException('이어붙인 사진을 만들지 못했어요.');
-    return bytes;
+    return (bytes: bytes, originX: offset);
   } finally {
     // 성공·실패 모두 네이티브 메모리를 즉시 해제한다. 여러 장 처리에서 GC를 기다리지 않는다.
     for (final release in releases.reversed) {
@@ -325,9 +461,11 @@ bool _validInliers(
   List<ReceiptStitchPoint> a,
   List<ReceiptStitchPoint> b,
   List<int> inliers,
-  int shorterHeight,
-) {
-  if (inliers.length < 20 || inliers.length / a.length < .35) return false;
+  int shorterHeight, {
+  ReceiptStitchAlignment? alignment,
+}) {
+  // [OCR 수정] 최소20개·전체 변환 오차·양쪽 분포 검사는 부분 보정 여부와 관계없이 유지한다.
+  if (inliers.length < 20) return false;
   final errors = <double>[];
   for (final index in inliers) {
     final projected = projectReceiptStitchPoint(matrix, b[index].x, b[index].y);
@@ -341,14 +479,19 @@ bool _validInliers(
   }
   errors.sort();
   if (errors[errors.length ~/ 2] > 2.5) return false;
-  // 같은 숫자 한 곳만 맞춘 결과를 거부한다. 양쪽 사진에서 가로·세로로 퍼져 있어야 한다.
+  // [OCR 수정] 전체 변환을 지지하는 점은 양쪽 사진에 충분히 퍼져 있어야 한다.
   for (final points in [a, b]) {
-    final xs = inliers.map((i) => points[i].x);
-    final ys = inliers.map((i) => points[i].y);
-    if (xs.reduce(math.max) - xs.reduce(math.min) < 300 ||
-        ys.reduce(math.max) - ys.reduce(math.min) < shorterHeight * .1) {
+    final selected = [for (final index in inliers) points[index]];
+    if (!hasReceiptStitchPointSpread(selected, shorterHeight: shorterHeight)) {
       return false;
     }
   }
-  return true;
+  if (inliers.length / a.length >= .35) return true;
+  // [OCR 추가] 전체 변환의 비율이 부족하면 부분 보정 후에도 기존 비율·오차 기준을 만족해야 한다.
+  // 이후 격자 접힘 검사와 최종 출력의 빈 한 행 검사까지 통과해야 실제로 연결한다.
+  return alignment?.hasReliableSupport(
+        matchCount: a.length,
+        shorterHeight: shorterHeight,
+      ) ??
+      false;
 }

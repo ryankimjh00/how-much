@@ -3,6 +3,23 @@ import 'dart:math' as math;
 /// [OCR 추가] OCR 좌표와 독립된 사진 정합용 점이다.
 typedef ReceiptStitchPoint = ({double x, double y});
 
+/// [OCR 수정] 비교 영상에서 일치점의 가로 300px·세로 8% 분포를 확인한다.
+/// points와 shorterHeight는 너비 1000px로 맞춘 비교 영상 좌표를 사용한다.
+bool hasReceiptStitchPointSpread(
+  List<ReceiptStitchPoint> points, {
+  required int shorterHeight,
+}) {
+  if (points.length < 2 || shorterHeight <= 0) return false;
+  final xs = points.map((point) => point.x);
+  final ys = points.map((point) => point.y);
+  if (points.any((point) => !point.x.isFinite || !point.y.isFinite)) {
+    return false;
+  }
+  // 영수증의 좁은 겹침에서도 분포를 인정하되 한 행 부근에 몰린 점은 계속 거부한다.
+  return xs.reduce(math.max) - xs.reduce(math.min) >= 300 &&
+      ys.reduce(math.max) - ys.reduce(math.min) >= shorterHeight * .08;
+}
+
 /// [OCR 추가] 둘째 사진의 점을 첫째 사진 좌표로 옮긴다. 무한대로 향하는 변환은 거부한다.
 ReceiptStitchPoint? projectReceiptStitchPoint(
   List<double> matrix,
@@ -64,8 +81,36 @@ List<ReceiptStitchPoint>? validateReceiptStitchProjection(
   return corners;
 }
 
-/// [OCR 추가] 두 사진에 모두 실제 픽셀이 있고, 양쪽 모두 글자 없는 경계만 고른다.
-/// 잉크가 많은 줄의 점수를 낮춰 억지로 잘라 붙이지 않는다.
+/// [OCR 수정] 같은 행에서 두 사진이 실제로 겹치는 범위를 반환한다.
+/// start/end는 마스크 배열의 행 구간이며 end는 포함하지 않는다. 사진 밖 여백은 검사하지 않는다.
+({int start, int end})? findReceiptStitchOverlap(
+  List<int> coverage, {
+  required int start,
+  required int end,
+  required int minimumWidth,
+}) {
+  if (start < 0 || end > coverage.length || start >= end || minimumWidth <= 0) {
+    return null;
+  }
+  while (start < end && coverage[start] == 0) {
+    start++;
+  }
+  while (end > start && coverage[end - 1] == 0) {
+    end--;
+  }
+  // 영상 테두리의 보간·밝기 경계를 글자로 판단하지 않도록 공통 영역의 가장자리만 제외한다.
+  final inset = math.max(8, ((end - start) * .05).ceil());
+  start += inset;
+  end -= inset;
+  if (end - start < minimumWidth) return null;
+  for (var index = start; index < end; index++) {
+    if (coverage[index] == 0) return null;
+  }
+  return (start: start, end: end);
+}
+
+/// [OCR 수정] 두 사진의 실제 겹침에서 양쪽 모두 한 행이 비어 있는 경계를 고른다.
+/// 잉크가 많은 줄의 점수를 낮춰 억지로 잘라 붙이지 않는다. 행별 비교 폭을 넘기면 잉크 한도도 그 폭에 맞춘다.
 int? findReceiptStitchCut({
   required List<int> firstInk,
   required List<int> secondInk,
@@ -73,28 +118,31 @@ int? findReceiptStitchCut({
   required int start,
   required int end,
   required int comparisonWidth,
+  List<int>? comparisonWidths,
 }) {
   if (firstInk.length != secondInk.length ||
       firstInk.length != covered.length ||
-      end <= start) {
+      end <= start ||
+      (comparisonWidths != null &&
+          comparisonWidths.length != firstInk.length)) {
     return null;
   }
   final margin = ((end - start) * .2).ceil();
-  final limit = math.max(2, (comparisonWidth * .004).floor());
   int? best;
   var bestCost = 1 << 30;
   for (var y = start + margin; y < end - margin; y++) {
-    if (y < 2 || y + 2 >= firstInk.length) continue;
-    var cost = 0;
-    var safe = true;
-    for (var row = y - 2; row <= y + 2; row++) {
-      if (!covered[row] || firstInk[row] > limit || secondInk[row] > limit) {
-        safe = false;
-        break;
-      }
-      cost += firstInk[row] + secondInk[row];
+    if (y < 0 || y >= firstInk.length) continue;
+    // [OCR 수정] 글자 사이 한 행으로 절단할 수 있으므로 앞뒤 행까지 비도록 요구하지 않는다.
+    // 행별 실제 비교 폭에 맞춘 작은 잡음 허용량과 양쪽의 픽셀 존재 검사는 유지한다.
+    final width = comparisonWidths?[y] ?? comparisonWidth;
+    final limit = math.max(2, (width * .004).floor());
+    if (width <= 0 ||
+        !covered[y] ||
+        firstInk[y] > limit ||
+        secondInk[y] > limit) {
+      continue;
     }
-    if (!safe) continue;
+    final cost = firstInk[y] + secondInk[y];
     if (cost < bestCost ||
         (cost == bestCost &&
             (y - (start + end) / 2).abs() <

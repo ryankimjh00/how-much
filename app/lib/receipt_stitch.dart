@@ -11,15 +11,21 @@ Future<Uint8List?> stitchReceiptPhotos(
     throw const FormatException('이어붙일 사진을 2~10장 선택해주세요.');
   }
   if (!isCurrent()) return null;
-  var joined = photos.first;
-  for (var i = 1; i < photos.length; i++) {
+  // [OCR 수정] 아래쪽부터 붙이되, 특징 대조는 항상 이웃한 원본 두 장으로 한다.
+  // 이미 늘어나거나 여백이 생긴 누적 사진을 다시 대조하면 같은 무늬를 놓칠 수 있다.
+  Uint8List? joined;
+  var originX = 0;
+  for (var i = photos.length - 2; i >= 0; i--) {
     if (!isCurrent()) return null;
-    final result = await compute(stitchReceiptPhotoPair, (
-      first: joined,
-      second: photos[i],
+    final result = await compute(stitchReceiptStep, (
+      first: photos[i],
+      second: photos[i + 1],
+      tail: joined,
+      tailOriginX: originX,
     ));
     if (!isCurrent()) return null;
-    joined = result;
+    joined = result.bytes;
+    originX = result.originX;
   }
   return joined;
 }
