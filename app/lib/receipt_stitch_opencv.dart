@@ -3,33 +3,24 @@ import 'dart:typed_data';
 import 'package:dartcv4/dartcv.dart' as cv;
 import 'receipt_stitch_match.dart';
 import 'receipt_stitch_alignment.dart';
+import 'receipt_stitch_layout.dart';
 
 const _featureWidth = 1000;
 const _outputWidth = 1600;
 
-/// [OCR 추가] 원본 인접 사진 두 장과, 둘째 사진부터 이미 연결한 결과를 전달한다.
-/// tailOriginX는 tail 안에 보존된 둘째 원본의 가로 원점이며 세로 원점은 항상 0이다.
-typedef ReceiptStitchInput = ({
-  Uint8List first,
-  Uint8List second,
-  Uint8List? tail,
-  int tailOriginX,
-});
-
-/// [OCR 수정] 원본 쌍의 대응 좌표로 다음 연결 결과를 배치한다. 원본 파일은 변경하지 않는다.
-/// 별도 isolate에서 호출하며, 사진과 가로 원점을 함께 반환해 다음 단계의 좌표를 보존한다.
-({Uint8List bytes, int originX}) stitchReceiptStep(ReceiptStitchInput photos) {
+/// [OCR 수정] 원본 인접 두 사진의 대응점과 절단 위치만 계산한다. 누적 이미지는 입력하지 않는다.
+ReceiptStitchPairPlan planReceiptStitchPair(
+  ({Uint8List first, Uint8List second}) photos,
+) {
   try {
-    return _stitchReceiptStep(photos, useAkaze: true);
+    return _planReceiptStitchPair(photos, useAkaze: true);
   } on FormatException {
-    // [OCR 추가] AKAZE로 정합·공백 검증에 실패하면 기존 SIFT로 한 번 더 시도한다.
-    // 두 방식 모두 검증에 실패하면 사진을 억지로 연결하지 않고 호출 화면에 실패를 알린다.
-    return _stitchReceiptStep(photos, useAkaze: false);
+    return _planReceiptStitchPair(photos, useAkaze: false);
   }
 }
 
-({Uint8List bytes, int originX}) _stitchReceiptStep(
-  ReceiptStitchInput photos, {
+ReceiptStitchPairPlan _planReceiptStitchPair(
+  ({Uint8List first, Uint8List second}) photos, {
   required bool useAkaze,
 }) {
   final releases = <void Function()>[];
@@ -39,8 +30,8 @@ typedef ReceiptStitchInput = ({
   }
 
   try {
-    final first = own(_decodeReceipt(photos.first));
-    final second = own(_decodeReceipt(photos.second));
+    final first = own(decodeReceiptStitchPhoto(photos.first));
+    final second = own(decodeReceiptStitchPhoto(photos.second));
     final a = own(
       cv.resize(first, (
         _featureWidth,
@@ -185,46 +176,12 @@ typedef ReceiptStitchInput = ({
     if (corners == null) {
       throw const FormatException('사진이 뒤집히거나 중복된 것으로 보여요. 위에서 아래 순서인지 확인해주세요.');
     }
-    // [OCR 수정] 정합과 절단 위치는 원본 쌍에서 구하고 출력 범위는 누적 사진까지 포함한다.
-    // 누적 사진 안의 둘째 원본은 너비 1600px·세로 원점 0을 유지한다.
-    cv.Mat? tail;
-    var extentCorners = corners;
-    if (photos.tail != null) {
-      tail = own(cv.imdecode(photos.tail!, cv.IMREAD_COLOR));
-      if (tail.isEmpty ||
-          photos.tailOriginX < 0 ||
-          photos.tailOriginX + _outputWidth > tail.cols ||
-          tail.rows < second.rows ||
-          tail.rows > 16000 ||
-          tail.cols * tail.rows > 24000000) {
-        throw const FormatException('이전 연결 사진의 좌표를 확인하지 못했어요.');
-      }
-      extentCorners = <ReceiptStitchPoint>[];
-      for (final point in [
-        (x: 0.0, y: 0.0),
-        (x: tail.cols.toDouble(), y: 0.0),
-        (x: tail.cols.toDouble(), y: tail.rows.toDouble()),
-        (x: 0.0, y: tail.rows.toDouble()),
-      ]) {
-        final projected = projectReceiptStitchPoint(
-          matrix,
-          (point.x - photos.tailOriginX) * _featureWidth / _outputWidth,
-          point.y * _featureWidth / _outputWidth,
-        );
-        if (projected == null) {
-          throw const FormatException('이어붙일 사진의 원근 변화가 너무 커요.');
-        }
-        extentCorners.add(projected);
-      }
-    }
-    final left = math
-        .min(0, extentCorners.map((p) => p.x).reduce(math.min))
-        .floor();
+    final left = math.min(0, corners.map((p) => p.x).reduce(math.min)).floor();
     final right = math
-        .max(a.cols.toDouble(), extentCorners.map((p) => p.x).reduce(math.max))
+        .max(a.cols.toDouble(), corners.map((p) => p.x).reduce(math.max))
         .ceil();
     final bottom = math
-        .max(a.rows.toDouble(), extentCorners.map((p) => p.y).reduce(math.max))
+        .max(a.rows.toDouble(), corners.map((p) => p.y).reduce(math.max))
         .ceil();
     const scale = _outputWidth / _featureWidth;
     final offset = (-left * scale).ceil();
@@ -362,12 +319,6 @@ typedef ReceiptStitchInput = ({
       matrix[7] / scale,
       matrix[8],
     ];
-    if (tail != null) {
-      // [OCR 수정] 누적 사진의 가로 여백을 빼서 원본 둘째 사진 좌표로 되돌린다.
-      outputMatrix[2] -= outputMatrix[0] * photos.tailOriginX;
-      outputMatrix[5] -= outputMatrix[3] * photos.tailOriginX;
-      outputMatrix[8] -= outputMatrix[6] * photos.tailOriginX;
-    }
     final transformB = own(
       cv.Mat.fromList(3, 3, cv.MatType.CV_64FC1, outputMatrix),
     );
@@ -391,7 +342,7 @@ typedef ReceiptStitchInput = ({
       ), borderValue: white),
     );
     final warped = own(
-      cv.warpPerspective(tail ?? second, transformB, (
+      cv.warpPerspective(second, transformB, (
         width,
         height,
       ), borderValue: white),
@@ -424,14 +375,27 @@ typedef ReceiptStitchInput = ({
     if (cutY == null) {
       throw const FormatException('글자를 자르지 않을 공백을 출력 사진에서 확인하지 못했어요.');
     }
-    final lowerArea = own(cv.Rect(0, cutY, width, height - cutY));
-    final lowerSource = own(warped.region(lowerArea));
-    final lowerDestination = own(joined.region(lowerArea));
-    // 한쪽 사진만 복사한다. 겹친 글자를 혼합하지 않는다.
-    lowerSource.copyTo(lowerDestination);
-    final (success, bytes) = cv.imencode('.png', joined);
-    if (!success) throw const FormatException('이어붙인 사진을 만들지 못했어요.');
-    return (bytes: bytes, originX: offset);
+    final inverse = invertReceiptStitchMatrix(matrix);
+    final body = estimateReceiptStitchBodyScale(
+      [for (final i in inliers) pointsA[i]],
+      [for (final i in inliers) pointsB[i]],
+    );
+    if (inverse == null || body == null) {
+      throw const FormatException('사진 사이의 일정한 배율을 구하지 못했어요.');
+    }
+    return ReceiptStitchPairPlan(
+      matrix: matrix,
+      inverse: inverse,
+      alignment: alignment,
+      firstHeight: first.rows,
+      secondHeight: second.rows,
+      cutY: cutY,
+      bodyScale: body.scale,
+      bodyTranslateX: body.translateX * scale,
+      checkLeft: (overlap.start - cut * inkA.cols + left) * scale,
+      checkRight: (overlap.end - cut * inkA.cols + left) * scale,
+      corners: corners,
+    );
   } finally {
     // 성공·실패 모두 네이티브 메모리를 즉시 해제한다. 여러 장 처리에서 GC를 기다리지 않는다.
     for (final release in releases.reversed) {
@@ -440,7 +404,8 @@ typedef ReceiptStitchInput = ({
   }
 }
 
-cv.Mat _decodeReceipt(Uint8List bytes) {
+/// [OCR 추가] 너비1600px 원본을 반환한다. 호출자가 Mat을 해제하며 파일은 수정하지 않는다.
+cv.Mat decodeReceiptStitchPhoto(Uint8List bytes) {
   final decoded = cv.imdecode(bytes, cv.IMREAD_COLOR);
   try {
     if (decoded.isEmpty || decoded.cols == 0) {

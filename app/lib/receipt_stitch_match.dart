@@ -153,3 +153,48 @@ int? findReceiptStitchCut({
   }
   return best;
 }
+
+/// [OCR 추가] 사진 전체에 적용할 일정한 배율을 구한다. 높이에 따른 원근 축소는 포함하지 않는다.
+({double scale, double translateX})? estimateReceiptStitchBodyScale(
+  List<ReceiptStitchPoint> first,
+  List<ReceiptStitchPoint> second,
+) {
+  if (first.length != second.length || first.length < 2) return null;
+  double mean(List<ReceiptStitchPoint> points, bool horizontal) =>
+      points.map((p) => horizontal ? p.x : p.y).reduce((a, b) => a + b) /
+      points.length;
+  final ax = mean(first, true), ay = mean(first, false);
+  final bx = mean(second, true), by = mean(second, false);
+  var numerator = 0.0;
+  var denominator = 0.0;
+  for (var i = 0; i < first.length; i++) {
+    numerator +=
+        (first[i].x - ax) * (second[i].x - bx) +
+        (first[i].y - ay) * (second[i].y - by);
+    denominator +=
+        math.pow(second[i].x - bx, 2) + math.pow(second[i].y - by, 2);
+  }
+  if (denominator <= 1e-8) return null;
+  final scale = numerator / denominator;
+  if (!scale.isFinite || scale < .6 || scale > 1.6) return null;
+  return (scale: scale, translateX: ax - scale * bx);
+}
+
+/// [OCR 추가] 연결부에서 출력 픽셀이 읽을 원본 좌표를 구하기 위한 역변환이다.
+List<double>? invertReceiptStitchMatrix(List<double> m) {
+  if (m.length != 9 || m.any((v) => !v.isFinite)) return null;
+  final inverse = [
+    m[4] * m[8] - m[5] * m[7],
+    m[2] * m[7] - m[1] * m[8],
+    m[1] * m[5] - m[2] * m[4],
+    m[5] * m[6] - m[3] * m[8],
+    m[0] * m[8] - m[2] * m[6],
+    m[2] * m[3] - m[0] * m[5],
+    m[3] * m[7] - m[4] * m[6],
+    m[1] * m[6] - m[0] * m[7],
+    m[0] * m[4] - m[1] * m[3],
+  ];
+  final determinant = m[0] * inverse[0] + m[1] * inverse[3] + m[2] * inverse[6];
+  if (determinant.abs() < 1e-10 || inverse[8].abs() < 1e-10) return null;
+  return [for (final value in inverse) value / inverse[8]];
+}
