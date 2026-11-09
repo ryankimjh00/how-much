@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -82,5 +84,46 @@ void main() {
     );
 
     expect(calls.last.method, 'vision#closeTextRecognizer');
+  });
+
+  test('앱의 임시 메모 사진은 인식 성공과 실패 모두 삭제한다', () async {
+    final directory = await Directory.systemTemp.createTemp('memo-cleanup-');
+    addTearDown(() => directory.delete(recursive: true));
+    var failRecognition = false;
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'vision#closeTextRecognizer') return null;
+      if (failRecognition) throw PlatformException(code: 'recognition_failed');
+      return {'text': '우유 2개', 'blocks': []};
+    });
+
+    final photo = await File('${directory.path}/memo.jpg').writeAsBytes([1, 2]);
+    final lines = await OcrService().recognizeMemoPath(
+      photo.path,
+      deleteAfterReading: true,
+    );
+    expect(lines.single.title, '우유');
+    expect(await photo.exists(), isFalse);
+
+    await photo.writeAsBytes([1, 2]);
+    failRecognition = true;
+    await expectLater(
+      OcrService().recognizeMemoPath(photo.path, deleteAfterReading: true),
+      throwsA(isA<PlatformException>()),
+    );
+    expect(await photo.exists(), isFalse);
+  });
+
+  test('외부에서 전달한 메모 사진은 기본 동작에서 삭제하지 않는다', () async {
+    final directory = await Directory.systemTemp.createTemp('memo-original-');
+    addTearDown(() => directory.delete(recursive: true));
+    messenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'vision#closeTextRecognizer') return null;
+      return {'text': '계란', 'blocks': []};
+    });
+    final photo = await File('${directory.path}/memo.jpg').writeAsBytes([1, 2]);
+
+    await OcrService().recognizeMemoPath(photo.path);
+
+    expect(await photo.readAsBytes(), [1, 2]);
   });
 }

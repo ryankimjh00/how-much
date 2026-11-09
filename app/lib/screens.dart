@@ -809,7 +809,9 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
         enableAudio: false,
       );
       await controller.initialize();
-      if (!mounted || session != _cameraSession) return controller.dispose();
+      if (!mounted || session != _cameraSession) {
+        return await controller.dispose();
+      }
       await _camera?.dispose();
       setState(() {
         _camera = controller;
@@ -862,7 +864,10 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
     } // [OCR 추가]
     if (widget.memo) {
       await _recognizeMemo(
-        () async => _ocr.recognizeMemoPath((await camera.takePicture()).path),
+        () async => _ocr.recognizeMemoPath(
+          (await camera.takePicture()).path,
+          deleteAfterReading: true,
+        ),
       );
       return;
     }
@@ -2019,7 +2024,7 @@ class _MemoImportScreenState extends State<MemoImportScreen> {
   Future<void> _edit(MemoLineDraft line) async {
     final title = TextEditingController(text: line.title);
     final quantity = TextEditingController(text: '${line.quantity}');
-    final saved = await showDialog<bool>(
+    final dialogRoute = DialogRoute<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('메모 품목 수정'),
@@ -2051,12 +2056,18 @@ class _MemoImportScreenState extends State<MemoImportScreen> {
         ],
       ),
     );
+    final saved = await Navigator.of(
+      context,
+      rootNavigator: true,
+    ).push(dialogRoute);
     if (saved == true && mounted) {
       setState(() {
         line.title = title.text;
         line.quantity = int.tryParse(quantity.text) ?? 0;
       });
     }
+    // 닫힘 애니메이션 동안 남아 있는 입력 위젯이 해제된 컨트롤러를 읽지 않게 한다.
+    await dialogRoute.completed;
     title.dispose();
     quantity.dispose();
   }

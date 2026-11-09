@@ -40,6 +40,35 @@ void main() {
     expect(store.shoppingItems.single.title, '우유');
   });
 
+  testWidgets('메모 수정창을 닫으며 키보드가 사라져도 입력 상태 오류가 없다', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetViewInsets);
+    final store = await createStore();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: MemoImportScreen(
+          store: store,
+          initialLines: [MemoLineDraft(title: '우유')],
+        ),
+      ),
+    );
+    await tester.tap(find.byTooltip('품목 수정'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField).first, '저지방 우유');
+    tester.view.viewInsets = const FakeViewPadding(bottom: 250);
+    await tester.pump();
+    await tester.tap(find.text('적용'));
+    await tester.pump(const Duration(milliseconds: 50));
+    tester.view.viewInsets = const FakeViewPadding();
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('저지방 우유'), findsOneWidget);
+  });
+
   testWidgets('메모 검토에서 선택한 상품만 장보기에 저장한다', (tester) async {
     final store = await createStore();
     await tester.pumpWidget(

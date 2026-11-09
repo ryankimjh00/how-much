@@ -1,0 +1,66 @@
+[
+  {
+    "stage": 1,
+    "file": "how-much_mp1.zip",
+    "bytes": 11326611,
+    "sha256": "404ef43d242cf43d98c4b240c067021d7a25f055628f961b43838533afb81d3f",
+    "sourceCommit": "d9e9ce4ab4f0343616a5151e739cff20c244ecdb",
+    "screenshots": [
+      "mp1_01_empty.png",
+      "mp1_02_add.png",
+      "mp1_03_list.png",
+      "mp1_04_completed.png"
+    ]
+  },
+  {
+    "stage": 2,
+    "file": "how-much_mp2.zip",
+    "bytes": 11809587,
+    "sha256": "a1405482c734094eb7e26157900ca55a26a8a9b3bf16178dba976540c3945ef6",
+    "sourceCommit": "d9e9ce4ab4f0343616a5151e739cff20c244ecdb",
+    "screenshots": [
+      "mp2_01_edit.png",
+      "mp2_02_edited.png",
+      "mp2_03_delete_confirmation.png",
+      "mp2_04_deleted.png",
+      "mp2_05_filter_completed.png",
+      "mp2_06_filter_active.png",
+      "mp2_07_filter_all.png",
+      "mp2_08_before_restart.png",
+      "mp2_09_after_restart.png"
+    ]
+  },
+  {
+    "stage": 3,
+    "file": "how-much_mp3.zip",
+    "bytes": 11432873,
+    "sha256": "c1e2dd23e2e89efbd7aa0693f90ace0e81d077ac38d0083c7d9e95cd056b19fe",
+    "sourceCommit": "d9e9ce4ab4f0343616a5151e739cff20c244ecdb",
+    "screenshots": [
+      "mp3_01_client_a_added.png",
+      "mp3_02_client_b_synced.png",
+      "mp3_03_offline_pending.png",
+      "mp3_04_online_uploaded.png",
+      "mp3_05_client_b_refreshed.png"
+    ],
+    "limitations": [
+      "custom backend acceptance pending",
+      "one emulator with two isolated clients",
+      "backend console screenshot missing"
+    ]
+  },
+  {
+    "stage": 4,
+    "file": "how-much_mp4.zip",
+    "bytes": 11261914,
+    "sha256": "6f9bfb0afff7d522c5e5ae7208c8f47cc40ebc6d4385e19bc6f5a18ca524f264",
+    "sourceCommit": "d9e9ce4ab4f0343616a5151e739cff20c244ecdb",
+    "screenshots": [
+      "mp4_01_capture_or_select.png",
+      "mp4_02_candidates.png",
+      "mp4_03_selected.png",
+      "mp4_04_edited.png",
+      "mp4_05_imported_offline.png"
+    ]
+  }
+]

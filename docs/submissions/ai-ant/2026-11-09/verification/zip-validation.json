@@ -1,0 +1,42 @@
+[
+  {
+    "stage": 1,
+    "bytes": 11326611,
+    "files": 206,
+    "zipSha256": "404ef43d242cf43d98c4b240c067021d7a25f055628f961b43838533afb81d3f",
+    "appSourceSha256": "796cd44fcd89065262642cb30ee8edd90af34e2f7fe2db2560ee139aed2e3d32",
+    "sourceHashMethod": "SHA256 of sorted app/ path + NUL + file bytes",
+    "productionSourceMatchesPr": true,
+    "credentialPatternFindings": []
+  },
+  {
+    "stage": 2,
+    "bytes": 11809587,
+    "files": 212,
+    "zipSha256": "a1405482c734094eb7e26157900ca55a26a8a9b3bf16178dba976540c3945ef6",
+    "appSourceSha256": "796cd44fcd89065262642cb30ee8edd90af34e2f7fe2db2560ee139aed2e3d32",
+    "sourceHashMethod": "SHA256 of sorted app/ path + NUL + file bytes",
+    "productionSourceMatchesPr": true,
+    "credentialPatternFindings": []
+  },
+  {
+    "stage": 3,
+    "bytes": 11432873,
+    "files": 224,
+    "zipSha256": "c1e2dd23e2e89efbd7aa0693f90ace0e81d077ac38d0083c7d9e95cd056b19fe",
+    "appSourceSha256": "b59670260af0e2ce30632a2a601da741e5fdadb7ff73b12a62a021031ca92813",
+    "sourceHashMethod": "SHA256 of sorted app/ path + NUL + file bytes",
+    "productionSourceMatchesPr": true,
+    "credentialPatternFindings": []
+  },
+  {
+    "stage": 4,
+    "bytes": 11261914,
+    "files": 209,
+    "zipSha256": "6f9bfb0afff7d522c5e5ae7208c8f47cc40ebc6d4385e19bc6f5a18ca524f264",
+    "appSourceSha256": "796cd44fcd89065262642cb30ee8edd90af34e2f7fe2db2560ee139aed2e3d32",
+    "sourceHashMethod": "SHA256 of sorted app/ path + NUL + file bytes",
+    "productionSourceMatchesPr": true,
+    "credentialPatternFindings": []
+  }
+]

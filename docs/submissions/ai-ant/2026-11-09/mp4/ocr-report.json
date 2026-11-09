@@ -1,0 +1,29 @@
+{
+  "phase": "ocr",
+  "input": "저장소의 손글씨 장보기 회귀 표본 사진 JPG, 720×1280px",
+  "physicalPaperPhoto": true,
+  "instructorProvidedFixture": false,
+  "previousHandwrittenFailuresResolved": false,
+  "recognizedTitles": [
+    "장보기",
+    "우유",
+    "계란",
+    "두부",
+    "김치",
+    "망파",
+    "대파",
+    "바나나",
+    "닭가슴살",
+    "된장",
+    "고추장",
+    "화장지"
+  ],
+  "processingMilliseconds": [
+    214,
+    78,
+    58
+  ],
+  "temporaryPhotoDeleted": true,
+  "platform": "BE4B.251210.005",
+  "offlineTestRequested": true
+}

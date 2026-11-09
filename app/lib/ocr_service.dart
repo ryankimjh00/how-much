@@ -62,15 +62,28 @@ class OcrService {
       maxWidth: 2400,
     );
     if (image == null) return null;
-    return recognizeMemoPath(image.path);
+    return recognizeMemoPath(image.path, deleteAfterReading: true);
   }
 
-  Future<List<MemoLineDraft>> recognizeMemoPath(String path) async {
-    final lines = parseMemoText(await _recognizeText(path));
-    if (lines.isEmpty) {
-      throw const FormatException('메모에서 상품을 찾지 못했어요. 다시 촬영하거나 직접 입력해주세요.');
+  /// 사진을 항목 후보로 읽는다. 앱이 만든 임시 사진만 삭제 옵션을 사용한다.
+  Future<List<MemoLineDraft>> recognizeMemoPath(
+    String path, {
+    bool deleteAfterReading = false,
+  }) async {
+    try {
+      final lines = parseMemoText(await _recognizeText(path));
+      if (lines.isEmpty) {
+        throw const FormatException('메모에서 상품을 찾지 못했어요. 다시 촬영하거나 직접 입력해주세요.');
+      }
+      return lines;
+    } finally {
+      // 촬영·앨범 선택으로 생긴 앱의 임시 사진은 인식 실패 때도 남기지 않는다.
+      // 외부에서 전달한 사진과 사용자의 앨범 원본은 호출자가 소유한다.
+      if (deleteAfterReading) {
+        final photo = File(path);
+        if (await photo.exists()) await photo.delete();
+      }
     }
-    return lines;
   }
 
   /// [OCR 수정] 사진을 인식해 기존 검토 초안과 임시 OCR 원문·좌표를 함께 반환한다.

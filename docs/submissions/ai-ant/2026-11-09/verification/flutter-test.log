@@ -1,0 +1,341 @@
+00:00 +0: loading <repository>/app/test/receipt_amount_test.dart
+00:00 +0: <repository>/app/test/app_store_test.dart: 부분 구매를 완료분과 잔여분으로 나누고 재실행 시 복원한다
+00:00 +1: <repository>/app/test/app_store_test.dart: 존재하지 않는 구매일은 저장하지 않는다
+00:00 +2: <repository>/app/test/app_store_test.dart: 구매 기록 수정 시 0개 묶음을 거부하고 원래 가격을 보존한다
+00:00 +3: <repository>/app/test/receipt_amount_test.dart: 단가/총액 어느 입력 방식이든 수량 3의 결제금액·개당 가격이 일치한다
+00:00 +4: <repository>/app/test/receipt_amount_test.dart: 총액의 수량 누락·잘못된 수량·음수·곱셈 한도 초과를 거부한다
+00:00 +5: <repository>/app/test/receipt_amount_test.dart: develop 저장·재실행·모의 동기화 왕복, 서버 실패 후 수량·총액 보존
+00:00 +6: <repository>/app/test/receipt_amount_test.dart: 수량 0을 저장하려 하면 기존 기록과 로컬 스냅샷을 바꾸지 않는다
+00:00 +7: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:00 +8: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +9: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +10: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +11: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +12: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +13: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +14: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +15: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +16: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +17: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +18: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +19: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +20: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +21: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +22: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +23: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +24: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +25: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +26: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +27: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +28: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +29: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +30: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +31: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +32: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +33: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +34: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +35: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +36: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +37: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +38: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +39: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +40: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:01 +41: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:02 +42: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:02 +43: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:02 +44: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:02 +44 ~1: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:02 +45 ~1: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:02 +46 ~1: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:02 +47 ~1: <repository>/app/test/receipt_amount_test.dart: 금액은 기본 수량 1개로 진행하며 수량 후보를 길게 눌러 수정·취소한다
+00:03 +48 ~1: <repository>/app/test/receipt_review_test.dart: 펜 편집 수량 삼각형은 취소 시 복원하고 확인 시 항목을 체크한다
+00:03 +49 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +50 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +51 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +52 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +53 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +54 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +55 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:04 +56 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +57 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +58 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +59 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +60 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +61 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +62 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 병렬 인식 중 수량·금액 박스와 문구를 함께 표시하고 취소 시 지운다
+00:05 +63 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:05 +64 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:05 +65 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:05 +66 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:05 +67 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +68 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +69 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +70 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +71 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +72 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +73 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +74 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +75 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +76 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +77 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +78 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +79 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +80 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +81 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +82 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +83 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +84 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +85 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +86 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +87 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +88 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +89 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +90 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +91 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:06 +92 ~1: <repository>/app/test/receipt_review_test.dart: 검토 체크는 상품명·금액 박스만 숨기며 사진과 목록 스크롤은 분리된다
+00:07 +93 ~1: <repository>/app/test/receipt_amount_test.dart: 단가 검토: 수량 수정은 단가 유지, 총액 직접 수정은 전환, 취소·범위 초과는 원본 보존
+00:07 +94 ~1: <repository>/app/test/receipt_amount_test.dart: 단가 검토: 수량 수정은 단가 유지, 총액 직접 수정은 전환, 취소·범위 초과는 원본 보존
+00:08 +95 ~1: <repository>/app/test/receipt_amount_test.dart: 단가 검토: 수량 수정은 단가 유지, 총액 직접 수정은 전환, 취소·범위 초과는 원본 보존
+00:08 +96 ~1: <repository>/app/test/receipt_amount_test.dart: 단가 검토: 수량 수정은 단가 유지, 총액 직접 수정은 전환, 취소·범위 초과는 원본 보존
+00:08 +97 ~1: <repository>/app/test/receipt_amount_test.dart: 단가 검토: 수량 수정은 단가 유지, 총액 직접 수정은 전환, 취소·범위 초과는 원본 보존
+00:08 +98 ~1: <repository>/app/test/receipt_amount_test.dart: 단가 검토: 수량 수정은 단가 유지, 총액 직접 수정은 전환, 취소·범위 초과는 원본 보존
+00:08 +99 ~1: <repository>/app/test/receipt_amount_test.dart: 단가 검토: 수량 수정은 단가 유지, 총액 직접 수정은 전환, 취소·범위 초과는 원본 보존
+00:08 +100 ~1: <repository>/app/test/receipt_automatic_retry_test.dart: 끝까지 자동 선택의 실제 버튼 연결과 중복 방지·화면 취소: cancel
+00:08 +101 ~1: <repository>/app/test/receipt_region_session_test.dart: 사진 세션의 픽셀·좌표·인식기 재사용과 정리: success
+00:08 +102 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:08 +103 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +104 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +105 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +106 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +107 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +108 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +109 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +110 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +111 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +112 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +113 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +114 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +115 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +116 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +117 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +118 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +119 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +120 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +121 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +122 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +123 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +124 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +125 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +126 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:09 +127 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:10 +128 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:11 +129 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:12 +130 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:12 +131 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:12 +132 ~1: <repository>/app/test/receipt_set_test.dart: 구성품 수정은 취소 시 세트를 유지하고 확정 시 분리한다: false
+00:12 +133 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:12 +134 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:13 +135 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:14 +136 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:14 +137 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:14 +138 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:15 +139 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:15 +140 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:15 +141 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:15 +142 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:15 +143 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:16 +144 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:16 +145 ~1: <repository>/app/test/receipt_stitch_test.dart: 별도 각도·배율의 합성 두 장을 원근 정합하고 끝부분도 보존한다
+00:16 +146 ~1: <repository>/app/test/receipt_camera_preview_test.dart: 보정·OCR 미리보기 정지와 촬영 복귀: selection-cancel
+00:16 +147 ~1: <repository>/app/test/receipt_pages_test.dart: 여러 장 추가는 유지하고 한 장 전환은 이전 목록과 분리한다: true
+00:17 +148 ~1: <repository>/app/test/receipt_photo_gestures_test.dart: fresh 제스처 이식: 검토 사진 드래그·휠·핀치와 목록 잠금·종료 해제
+00:17 +149 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:18 +150 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:18 +151 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:18 +152 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:18 +153 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:18 +154 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:19 +155 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:19 +156 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:19 +157 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:19 +158 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:19 +159 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:19 +160 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:19 +161 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:20 +162 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:20 +163 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:20 +164 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:20 +165 ~1: <repository>/app/test/receipt_stitch_test.dart: 옆 여백이 넓어진 누적 사진에도 다음 장의 내용 영역을 이어붙인다
+00:22 +166 ~1: <repository>/app/test/receipt_pages_test.dart: 장마다 첫 상품·수량·금액을 새로 선택하고 마지막 장 뒤에만 검토한다
+00:22 +167 ~1: <repository>/app/test/receipt_pages_test.dart: 장마다 첫 상품·수량·금액을 새로 선택하고 마지막 장 뒤에만 검토한다
+00:24 +168 ~1: <repository>/app/test/receipt_pages_test.dart: 장마다 첫 상품·수량·금액을 새로 선택하고 마지막 장 뒤에만 검토한다
+00:24 +169 ~1: <repository>/app/test/receipt_selection_test.dart: 합성 사진: 박스·버튼 동기화, 이름 수정 취소·적용, 화면 취소 시 원본 유지
+00:24 +170 ~1: <repository>/app/test/receipt_seed_region_test.dart: 교보 포스트잇 수량 영역 적용은 금액 박스를 보이고 취소는 수량 단계 유지: false
+00:24 +171 ~1: <repository>/app/test/receipt_seed_region_test.dart: 교보 포스트잇 수량 영역 적용은 금액 박스를 보이고 취소는 수량 단계 유지: false
+00:24 +172 ~1: <repository>/app/test/receipt_seed_region_test.dart: 교보 포스트잇 수량 영역 적용은 금액 박스를 보이고 취소는 수량 단계 유지: false
+00:24 +173 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:26 +174 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:26 +175 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:26 +176 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:27 +177 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:27 +178 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:27 +179 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:27 +180 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +181 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +182 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +183 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +184 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +185 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +186 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +187 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +188 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +189 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +190 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +191 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +192 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +193 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +194 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +195 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +196 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:28 +197 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:29 +198 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:29 +199 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +200 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +201 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +202 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +203 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +204 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +205 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +206 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +207 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +208 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +209 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +210 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +211 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +212 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +213 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +214 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +215 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +216 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +217 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +218 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +219 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +220 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +221 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +222 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +223 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +224 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:30 +225 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +226 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +227 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +228 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +229 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +230 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +231 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +232 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +233 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +234 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +235 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:31 +236 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +237 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +238 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +239 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +240 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +241 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +242 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +243 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +244 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:32 +245 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:33 +246 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:33 +247 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:33 +248 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +249 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +250 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +251 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +252 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +253 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +254 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +255 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +256 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +257 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +258 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +259 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +260 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +261 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +262 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:34 +263 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:35 +264 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:35 +265 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:35 +266 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:35 +267 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:35 +268 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:35 +269 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:36 +270 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:36 +271 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:36 +272 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +273 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +274 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +275 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +276 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +277 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +278 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +279 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:37 +280 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:38 +281 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:38 +282 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:38 +283 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:38 +284 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:38 +285 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:39 +286 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:39 +287 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:40 +288 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:40 +289 ~1: <repository>/app/test/receipt_stitch_test.dart: 합성 네 장을 연결해 처음과 끝의 내용 및 전체 길이를 유지한다
+00:40 +290 ~1: <repository>/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:40 +291 ~1: <repository>/app/test/receipt_date_region_test.dart: 검토 날짜 영역은 적용 후 복원되며 취소·잘못된 입력은 날짜를 바꾸지 않는다
+00:41 +292 ~1: <repository>/app/test/account_flow_test.dart: 코드 발급 중 화면 닫기를 막고 보관 확인 후 기기 기록을 연결한다
+00:41 +293 ~1: <repository>/app/test/account_flow_test.dart: 코드 발급 중 화면 닫기를 막고 보관 확인 후 기기 기록을 연결한다
+00:41 +294 ~1: <repository>/app/test/account_flow_test.dart: 코드 발급 중 화면 닫기를 막고 보관 확인 후 기기 기록을 연결한다
+00:41 +295 ~1: <repository>/app/test/account_flow_test.dart: 코드 발급 중 화면 닫기를 막고 보관 확인 후 기기 기록을 연결한다
+00:41 +296 ~1: <repository>/app/test/account_flow_test.dart: 코드 발급 중 화면 닫기를 막고 보관 확인 후 기기 기록을 연결한다
+00:41 +297 ~1: <repository>/app/test/account_flow_test.dart: 코드 발급 중 화면 닫기를 막고 보관 확인 후 기기 기록을 연결한다
+00:41 +298 ~1: <repository>/app/test/account_flow_test.dart: 코드 발급 중 화면 닫기를 막고 보관 확인 후 기기 기록을 연결한다
+00:41 +299 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:42 +300 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:42 +301 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:42 +302 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:42 +303 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:42 +304 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:42 +305 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:43 +306 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:43 +307 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:43 +308 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:43 +309 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:43 +310 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:43 +311 ~1: <repository>/app/test/receipt_stitch_test.dart: 빈 사진·다른 무늬·동일 사진의 중복을 성공시키지 않는다
+00:43 +312 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +313 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +314 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +315 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +316 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +317 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +318 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +319 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +320 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +321 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +322 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +323 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +324 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:43 +325 ~1: <repository>/app/test/receipt_automatic_test.dart: 첫 수량을 다른 줄로 바꿔도 선택한 금액과 실행 버튼을 유지한다
+00:44 +326 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:44 +327 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:44 +328 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:44 +329 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:45 +330 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:45 +331 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:45 +332 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:45 +333 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:46 +334 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:46 +335 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:46 +336 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:47 +337 ~1: <repository>/app/test/receipt_region_test.dart: 후보가 없어도 상품명·금액·수량 영역을 직접 지정해 검토에 좌표와 값을 전달한다
+00:47 +338 ~1: All tests passed!
