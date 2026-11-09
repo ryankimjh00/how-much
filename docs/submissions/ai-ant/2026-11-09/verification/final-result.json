@@ -1,0 +1,38 @@
+{
+  "sourceCommit": "d9e9ce4ab4f0343616a5151e739cff20c244ecdb",
+  "submittedStages": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "status": "검토 대기",
+  "practiceNote": {
+    "date": "2026-11-09",
+    "start": "13:30",
+    "end": "14:08",
+    "minutes": 38,
+    "saved": true,
+    "scope": "최초 MP1·MP2·MP4 제출 준비. 이후 MP3 검증 시간은 이 노트에 포함하지 않음."
+  },
+  "validation": {
+    "flutter": "3.47.5",
+    "dart": "3.13.4",
+    "analyze": "passed",
+    "testsPassed": 338,
+    "testsSkipped": 1,
+    "changedDartFormat": "passed",
+    "nativeAndroidFlows": [
+      "capture",
+      "restore",
+      "ocr",
+      "sync"
+    ],
+    "iosBuild": "not_run"
+  },
+  "stage3Limitations": [
+    "Firebase/Supabase 대신 자체 FastAPI/PostgreSQL 서버: 대체 인정 미확정",
+    "한 에뮬레이터에서 분리한 A/B 클라이언트 순차 실행",
+    "백엔드 관리 콘솔 캡처 없음"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "phase": "sync",
+  "backend": "FastAPI/PostgreSQL over HTTPS",
+  "physicalEmulators": 1,
+  "independentClients": 2,
+  "nativeSecureStorage": true,
+  "nativeLocalStorage": true,
+  "clientBInitiallyEmpty": true,
+  "clientAAdditionReflectedOnB": true,
+  "offlinePendingPreserved": true,
+  "onlinePendingCleared": true,
+  "offlineAdditionReflectedOnB": true,
+  "networkControl": "host adb airplane mode and Wi-Fi",
+  "twoDeviceRequirementVerified": false
+}
