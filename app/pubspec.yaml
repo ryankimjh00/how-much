@@ -42,6 +42,7 @@ dependencies:
   crypto: ^3.0.7
   flutter_svg: ^2.3.0
   flutter_secure_storage: ^11.2.0
+  dartcv4: 2.3.1 # [OCR 추가] 특징점·원근 정합만 사용한다. OCR 엔진은 ML Kit를 유지한다.
 
 dev_dependencies:
   flutter_test:
@@ -117,3 +118,15 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# [OCR 추가] 영상 정합에 필요한 모듈만 포함하고 빌드 동시 작업 수를 제한한다.
+hooks:
+  user_defines:
+    dartcv4:
+      parallel_jobs: 4
+      include_modules:
+        - imgcodecs
+        - imgproc
+        - features2d
+        - calib3d
+        - flann
