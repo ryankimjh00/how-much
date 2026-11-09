@@ -124,6 +124,9 @@ hooks:
   user_defines:
     dartcv4:
       parallel_jobs: 4
+      macos:
+        # Xcode 생성기의 명령줄 도구 서명 오류를 피하고 실제 C++ 컴파일로 검사한다.
+        generator: Ninja
       include_modules:
         - imgcodecs
         - imgproc
