@@ -26,7 +26,7 @@ FastAPI, PostgreSQL, Flutter 인증 교체, 전용 namespace와 PVC 2Gi 배포. 
 | 자동 검사 | 완료 | 서버 5개·Flutter 27개, ruff·flutter analyze |
 | 빌드 | 완료 | Android debug·iOS signed release |
 | 실제 클러스터 | 완료 | HTTPS 인증·복원·계정 분리·충돌·DB 재시작 보존 |
-| DB PVC | 완료 | Longhorn 단일 복제 2Gi, 초기 약 46MiB 사용 |
+| DB PVC | 완료 | #25: worker-ryzen, Local PV 2Gi, 기존 Longhorn PVC 보존 |
 | 수동 백업 | 완료 | pg_dump와 별도 로컬 DB에 3개 테이블 복원 확인 |
 | 아이폰 설치·실행 | 완료 | 김종현의 iPhone, 1.5.1(18), 기존 앱 업데이트 |
 | 아이폰 자동 통합 테스트 | 보류 | 무선 VM Service 연결 미확인. 별도 Keychain 영역의 테스트 코드와 USB 실행 절차 제공 |
@@ -40,7 +40,7 @@ FastAPI, PostgreSQL, Flutter 인증 교체, 전용 namespace와 PVC 2Gi 배포. 
 자동 백업과 복구 코드 교체·폐기 정책.
 
 ## 9. 결정된 사항
-- PostgreSQL 한 인스턴스, `longhorn-kr-single` PVC 2Gi.
+- PostgreSQL 한 인스턴스, `worker-ryzen`의 `howmuch-local` PVC 2Gi. 기존 Longhorn PVC는 이전 시점 복구용으로 보존한다.
 - `https://howmuch.monithub.org`와 전용 Gateway·인증서. 기존 공용 Gateway는 유지한다.
 - 해시만 서버에 보관하고, 기기의 세션과 복구 코드는 Keychain/Keystore에 저장한다. [다시 보기·기존 계정 제약](sync-recovery.md)을 따른다.
 - 세션 만료·서버 실패·충돌 때도 로컬 기록을 보존한다.
@@ -51,8 +51,9 @@ FastAPI, PostgreSQL, Flutter 인증 교체, 전용 namespace와 PVC 2Gi 배포. 
 자동 백업 저장 위치·주기와 복구 코드 교체 정책.
 
 ## 11. 임시 구현 / 주의사항
-DB 한 인스턴스·볼륨 한 복제는 고가용성이 아니다. 계정당 최대 1,000행·200KB, 세션 365일·최근 20개 제한. API 한 프로세스 요청 제한과 365일짜리 Harbor pull robot은 확장·만료 전에 재검토한다. 과거 Firebase 이메일·복구 코드 계정은 자동 이관하지 않는다. Android 운영 서명과 두 실기기 검증도 후속이다.
+DB 한 인스턴스·Ryzen 로컬 SSD는 고가용성이 아니다. Local PV의 2Gi는 하드 quota가 아니며 노드 장애 시 논리 백업 복원이 필요하다. 계정당 최대 1,000행·200KB, 세션 365일·최근 20개 제한. API 한 프로세스 요청 제한과 365일짜리 Harbor pull robot은 확장·만료 전에 재검토한다. 과거 Firebase 이메일·복구 코드 계정은 자동 이관하지 않는다. Android 운영 서명과 두 실기기 검증도 후속이다.
 
 ## 12. 변경 이력
 - 2026-10-05: 클러스터 구현·배포·Swagger·32개 자동 테스트 완료.
 - 2026-10-05: DB 재시작 보존·수동 백업 복원, 아이폰 1.5.1(18) 설치·실행 확인. Mac 공간 부족은 Flutter 빌드 캐시 정리로 해소.
+- 2026-11-17: PostgreSQL Ryzen 이전 완료. 사전·최종 논리 복원, 3개 테이블의 행 수·데이터 지문 일치(accounts 4, sessions 2, shared_prices 0), StatefulSet 재기동 후 보존, API 제한 역할 연결과 공개 `/ready`를 검증했다. [Issue #25](https://github.com/ryankimjh00/how-much/issues/25), PR 생성 없음. [이전·복구 절차](../../deploy/README.md#2026-11-17-ryzen-이전).

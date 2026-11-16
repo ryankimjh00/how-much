@@ -12,7 +12,7 @@
 | iOS 서명·설치 | 완료 | 팀 2263MJ8YV6, 아이폰 1.5.1(18) 업데이트·실행 |
 | iOS 27 호환성 | 완료 | UIScene 전환, iOS 27.0.1 아이폰에 1.5.2(19) 유선 업데이트·재실행·기존 저장값 보존 |
 | 클러스터 DB·API | 완료 | PostgreSQL 17, PVC 2Gi, HTTPS·Swagger·DB 재시작 보존 검증 |
-| DB 가용성 | 재검토 필요 | 단일 DB·Longhorn 복제 1개, worker-kr-1 장애 시 수동 전환 |
+| DB 가용성 | 재검토 필요 | #25: 단일 DB·Ryzen 로컬 SSD. 노드 장애 시 새 볼륨에 최신 논리 백업 복원. 기존 Longhorn PVC는 이전 시점 데이터만 보존 |
 | 수동 백업 복원 | 완료 | 실제 pg_dump를 별도 로컬 DB에 복원, 3개 테이블 확인 |
 | 아이폰 자동 통합 테스트 | 보류 | 무선 VM Service 연결 미확인. USB로 Keychain 검사 필요 |
 | 자동 백업 | 미시작 | 저장 위치·주기·복원 훈련 결정. Retain은 백업 아님 |

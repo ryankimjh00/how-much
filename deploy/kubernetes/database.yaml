@@ -10,6 +10,47 @@ spec:
     requests:
       storage: 2Gi
 ---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: howmuch-local
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: howmuch-postgres-ryzen
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes: [ReadWriteOnce]
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: howmuch-local
+  local:
+    path: /data/k8s/howmuch/postgres
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values: [worker-ryzen]
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-ryzen
+  namespace: howmuch
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: howmuch-local
+  volumeName: howmuch-postgres-ryzen
+  resources:
+    requests:
+      storage: 2Gi
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -40,7 +81,12 @@ spec:
     spec:
       automountServiceAccountToken: false
       nodeSelector:
-        kubernetes.io/hostname: worker-kr-1
+        kubernetes.io/hostname: worker-ryzen
+      tolerations:
+        - key: monithub.io/dedicated
+          operator: Equal
+          value: ci-ml
+          effect: NoSchedule
       securityContext:
         runAsUser: 70
         runAsGroup: 70
@@ -95,7 +141,7 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: postgres-data
+            claimName: postgres-data-ryzen
         - name: init
           secret:
             secretName: database
