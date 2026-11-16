@@ -15,6 +15,25 @@ void main() {
     expect(parseMemoText('7}971\n7} 971\n- 971\n!!!'), isEmpty);
   });
 
+  test('메모 제목과 목록 번호는 제외하고 상품명의 숫자는 유지한다', () {
+    final lines = parseMemoText('장보기\n장보기 목록\n1. 우유 2개\n2) 두부\n3M 테이프');
+
+    expect(lines.map((line) => line.title), ['우유', '두부', '3M 테이프']);
+    expect(lines.map((line) => line.quantity), [2, 1, 1]);
+  });
+
+  test('쉼표나 소수가 있는 수량의 일부를 임의로 떼지 않는다', () {
+    final lines = parseMemoText('양파 1,123개\n우유 1.5개\n계란 x1,123\n사과 2개');
+
+    expect(lines.map((line) => line.title), [
+      '양파 1,123개',
+      '우유 1.5개',
+      '계란 x1,123',
+      '사과',
+    ]);
+    expect(lines.map((line) => line.quantity), [1, 1, 1, 2]);
+  });
+
   test('상품명에 붙은 숫자는 유지하고 명시한 수량만 분리한다', () {
     final lines = parseMemoText(
       '비타민 B12\n3M 테이프\n우유2개\n계란 x3\n두부 2\n사과 X2개\n바나나 × 4개\n양파 1971개',

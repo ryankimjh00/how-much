@@ -9,6 +9,7 @@ import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart
 import 'package:image_picker/image_picker.dart';
 
 import 'models.dart';
+import 'memo_text_recognizer.dart';
 import 'receipt_ocr.dart'; // [OCR 추가]
 import 'receipt_column_scan.dart'; // [OCR 추가]
 
@@ -66,7 +67,7 @@ class OcrService {
   }
 
   Future<List<MemoLineDraft>> recognizeMemoPath(String path) async {
-    final lines = parseMemoText(await _recognizeText(path));
+    final lines = parseMemoText(await MemoTextRecognizer().processImage(path));
     if (lines.isEmpty) {
       throw const FormatException('메모에서 상품을 찾지 못했어요. 다시 촬영하거나 직접 입력해주세요.');
     }
@@ -324,10 +325,6 @@ class OcrService {
       receiptOcrFromRecognizedText(recognized, ''),
       crop, // [OCR 추가]
     ); // [OCR 추가]
-  } // [OCR 추가]
-
-  Future<String> _recognizeText(String path) async {
-    return (await _recognize(path)).text; // [OCR 수정]
   } // [OCR 추가]
 
   Future<RecognizedText> _recognize(
