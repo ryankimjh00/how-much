@@ -2,8 +2,29 @@ import Flutter
 import UIKit
 import XCTest
 import google_mlkit_text_recognition
+@testable import Runner
 
 class RunnerTests: XCTestCase {
+
+  func testMemoVisionRecognitionAndInvalidPhoto() throws {
+    let imageURL = try XCTUnwrap(
+      Bundle(for: RunnerTests.self).url(forResource: "handwritten-memo", withExtension: "jpg")
+    )
+    let text = try MemoTextRecognizer.recognize(path: imageURL.path)
+      .components(separatedBy: .whitespacesAndNewlines).joined()
+    // 기존 iOS ML Kit가 놓친 두부를 포함해 개선된 항목을 검사한다. 양파 오인식은 미해결이다.
+    for item in ["우유", "계란", "두부", "김치", "대파", "바나나", "닭가슴살", "된장", "고추장", "화장지"] {
+      XCTAssertTrue(text.contains(item), "인식하지 못한 상품: \(item)")
+    }
+    XCTAssertThrowsError(try MemoTextRecognizer.recognize(path: "/missing-memo.jpg"))
+  }
+
+  func testMemoVisionRejectsInvalidRequest() {
+    let recognizer = MemoTextRecognizer()
+    recognizer.handle(FlutterMethodCall(methodName: "recognize", arguments: [:])) { result in
+      XCTAssertEqual((result as? FlutterError)?.code, "invalid_image")
+    }
+  }
 
   func testKoreanHandwrittenMemoRecognition() throws {
     let imageURL = try XCTUnwrap(

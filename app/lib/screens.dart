@@ -1236,10 +1236,17 @@ class _ReceiptCaptureScreenState extends State<ReceiptCaptureScreen>
   Future<void> _recognizeMemo(
     Future<List<MemoLineDraft>?> Function() action,
   ) async {
+    if (_busy) return;
+    final account = widget.store.cloud.accountId;
     setState(() => _busy = true);
     try {
       final lines = await action();
-      if (lines == null || !mounted) return;
+      // 촬영 중 계정이 바뀌면 이전 계정의 메모 초안을 새 계정에 열지 않는다.
+      if (lines == null ||
+          !mounted ||
+          account != widget.store.cloud.accountId) {
+        return;
+      }
       final saved = await Navigator.push<bool>(
         context,
         MaterialPageRoute(
@@ -2101,7 +2108,7 @@ class _MemoImportScreenState extends State<MemoImportScreen> {
           padding: const EdgeInsets.all(20),
           children: [
             Text(
-              _lines.isEmpty ? '무엇을 살까요?' : '잘 읽었어요!',
+              _lines.isEmpty ? '무엇을 살까요?' : '메모를 확인해주세요',
               style: Theme.of(
                 context,
               ).textTheme.headlineLarge?.copyWith(fontSize: 27),

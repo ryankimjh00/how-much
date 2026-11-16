@@ -457,16 +457,21 @@ class MemoLineDraft {
 List<MemoLineDraft> parseMemoText(String text) {
   final result = <MemoLineDraft>[];
   final quantityWithUnit = RegExp(
-    r'\s*(?:x|×)?\s*(\d+)\s*개\s*$',
+    r'\s*(?:x|×)?\s*([\d,.]+)\s*개\s*$',
     caseSensitive: false,
   );
   final separatedQuantity = RegExp(
-    r'(?:\s+(?:x|×)?\s*|(?:x|×)\s*)(\d+)\s*$',
+    r'(?:\s+(?:x|×)?\s*|(?:x|×)\s*)([\d,.]+)\s*$',
     caseSensitive: false,
   );
   for (var raw in const LineSplitter().convert(text)) {
     var line = raw.trim().replaceFirst(RegExp(r'^[\-•*✓☐☑\s]+'), '').trim();
+    line = line.replaceFirst(RegExp(r'^\d{1,2}[.)]\s+'), '');
     if (line.isEmpty) continue;
+    // 메모 제목과 목록 번호를 상품으로 저장하지 않는다.
+    if (const ['장보기', '장보기 목록', '장보기 메모', '구매 목록'].contains(line)) {
+      continue;
+    }
     // 제품명의 B12 같은 숫자를 수량으로 떼지 않고, 표시가 있는 수량만 분리한다.
     final match =
         quantityWithUnit.firstMatch(line) ?? separatedQuantity.firstMatch(line);
